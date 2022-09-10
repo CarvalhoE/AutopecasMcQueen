@@ -145,8 +145,17 @@ main {
 }
 
 .aba{
-  background-color: #666;
-  width:120px;
+  background-color: #343a40;
+  width:200px;
+	height:40px;
+	border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-style: none;
+  color: #fff;
+}
+.aba-active{
+  background-color: #ffb367;
+  width:200px;
 	height:40px;
 	border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -155,8 +164,36 @@ main {
 }
 .table-top{
   box-shadow: #343a40 1px 1px 10px 0px;
-  border-top: 2px solid rgb(255, 183, 50);
+  border-top: 2px solid #ffb367;
 }
+
 .table-container{
   padding: 50px;
+}
+
+.extras{
+  margin: 5px;
+}
+
+.extras i{
+  font-size: 20px;
+  padding: 5px;
+}
+
+.extra-n{
+  width:100px;
+  border-style: none;
+	height:40px;
+  border-radius: 5px;
+  background-color: #ffb367;
+  color: #fff;
+}
+
+.extra-d{
+  width:45px;
+  border-style: none;
+	height:40px;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: #fff;
 }
