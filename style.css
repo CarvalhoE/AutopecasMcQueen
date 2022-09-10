@@ -1,6 +1,7 @@
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  margin: 0px;
 }
 
 html {
@@ -117,7 +118,6 @@ main {
 .header{
   background-color: #343a40;
   color: #fff;
-  width: 100%;
 }
 
 .header h1{
@@ -142,4 +142,25 @@ main {
 .container{
   padding:0;
   margin: 0;
+}
+
+.aba{
+  background-color: #666;
+  width:120px;
+	height:40px;
+	border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-style: none;
+  color: #fff;
+}
+
+.table{
+  
+}
+.table-top{
+  box-shadow: #343a40 1px 1px 10px 0px;
+  border-top: 2px solid rgb(255, 183, 50);
+}
+.table-container{
+  padding: 50px;
 }
