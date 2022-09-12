@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+
 const connection = mysql.createConnection({
     host: 'lrocode.mysql.dbaas.com.br',
     port: '3306',
@@ -6,6 +7,7 @@ const connection = mysql.createConnection({
     password: 'WTyL8lCfO#',
     database: 'lrocode'
 });
+
 connection.connect((error)=>{
     if(error){
         console.log(error);
