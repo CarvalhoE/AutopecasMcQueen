@@ -197,3 +197,22 @@ main {
   background-color: #343a40;
   color: #fff;
 }
+
+.extra-m{
+  text-align: center;
+  width:140px;
+  margin-left: 100px;
+  border-style: none;
+	height:40px;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: #fff;
+}
+::-webkit-calendar-picker-indicator{
+  background-color: #ffb367 !important;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+

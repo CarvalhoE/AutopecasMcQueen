@@ -5,19 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.101.0">
+  <meta name="author" content="Carvalho">
   <title>Autopeças McQueen</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
-
   <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles for this template -->
+  <!-- Styles -->
   <link href="style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
+
   <div class="menu-lateral">
     <nav class="d-flex flex-nowrap" id="menu">
       <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 250px; ">
@@ -30,10 +28,9 @@
         <div class="dropdown">
           <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong>Carvalho</strong>
           </a>
-  
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a class="dropdown-item" href="/vendas.html">Nova venda...</a></li>
             <li><a class="dropdown-item" href="/Configuracoes.html">Perfil</a></li>
@@ -123,10 +120,22 @@
 
       <div class="table-container">
         <div>
-          <button class="aba-active" id="btn1">Recebimentos</button>
-          <button class="aba" id="btn2">Pagamentos</button>
-          <button class="aba" id="btn3">Transferências</button>
-          <button class="aba" id="btn4">Recibos</button>
+          <button class="aba-active" id="btn1">
+            <i class="fa fa-credit-card-alt"></i>
+            Recebimentos
+          </button>
+          <button class="aba" id="btn2">
+            <i class="fa fa-credit-card"></i>
+            Pagamentos
+          </button>
+          <button class="aba" id="btn3">
+            <i class="fa fa-bank"></i>
+            Transferências
+          </button>
+          <button class="aba" id="btn4">
+            <i class="fa fa-file-text-o"></i>
+            Recibos
+          </button>
         </div>
 
         <div class="table-top">
@@ -146,6 +155,7 @@
             <button class="extra-d">
               <i class="fa fa-search"></i>
             </button>
+            <input type="month" id="month" class="extra-m">
           </div>
 
           <table class="table">
@@ -195,11 +205,9 @@
             </tbody>
           </table>
         </div>
-        
       </div>
     </div>
   </main>
-
   <!-- Scripts -->
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
