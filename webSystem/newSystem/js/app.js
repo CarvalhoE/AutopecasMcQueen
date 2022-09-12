@@ -14,9 +14,20 @@ app.get('/', (req, res)=>{
         res.send('Conexão OK!');
 });
 
-app.get('/products', (req, res)=>{
-    let cmd_selectAll = "SELECT * FROM PRODUTO;";
-    db.query(cmd_selectAll,(err, rows)=>{
-        res.status(200).json(rows);
-    });
-});
+app.get('/produtos', (req, res) => {
+    db.connect(function(err) {
+        db.query("SELECT * FROM Produto", function (err, result) {
+          if (err) throw err;
+          res.status(200).json(result);
+        });
+    })
+})
+
+app.get('/categorias', (req, res) => {
+    db.connect(function(err) {
+        db.query("SELECT * FROM Categoria", function (err, result) {
+          if (err) throw err;
+          res.status(200).json(result);
+        });
+    })
+})
