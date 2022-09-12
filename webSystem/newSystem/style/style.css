@@ -290,3 +290,9 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+
+.containerLogin{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
