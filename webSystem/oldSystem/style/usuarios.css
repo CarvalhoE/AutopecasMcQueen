@@ -1,0 +1,118 @@
+/* margin: topo | direita | inferior | esquerda */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    font-size: 26pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
+}
+/* Página de Vendas */
+
+#searchbox {
+    margin-top: 10px;
+    width: 920px;
+    line-height: 46px;
+    display: flex;
+    justify-content: center;
+}
+
+input, select, option {
+    border: 1px solid #cdcdda;
+    border-radius: 5px 0px 0px 5px;
+    padding-left: 10px; 
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16pt;
+    color: #000;
+    width: 920px;
+    height: 30px;
+}
+
+input:focus {
+    outline: 0;
+}
+
+i {
+    color: black;
+    background-color: #267CA0;
+    font-size: 20pt;
+    margin-left: -7px;
+    text-align: center;
+    width: 40px;
+    height: 32px;
+    justify-content: center;
+    border-radius: 0px 5px 5px 0px;
+}
+
+i::before {
+    line-height: 32px;
+}
+
+#input-boxes {
+    display: flex;
+}
+
+select, option, .dateSelector {
+    width: 290px;
+}
+
+label {
+    color: #727272;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16pt;
+    width: 190px;
+}
+
+.allInputs {
+    display: flex;
+    width: 290px;
+    flex-wrap: wrap;
+    margin: 20px 10px 10px 10px;
+}
+
+#content {
+    border: 1px solid #727272;
+    border-radius: 30px;
+    width: max-content;
+    height: auto;
+}
+
+table, th, td {
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid black;
+    color: #AEAEAE;
+    border: none;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    font-size: 16pt;
+    font-weight: 600;
+}
+
+td {
+    font-size: 16pt;
+}
+
+.idUsuario {
+    width: 120px;
+    text-align: right;
+}
+
+td.idUsuario {
+    color: #86C5FF;
+}
+
+.nomeCliente {
+    width: max-content;
+    text-align: left;
+}
+
+.valorPedido {
+    text-align: right;
+}

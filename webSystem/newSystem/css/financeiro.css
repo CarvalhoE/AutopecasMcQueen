@@ -1,0 +1,19 @@
+body {
+    background: #9796f0;
+    background: -webkit-linear-gradient(to right, #9796f0, #fbc7d4);
+    background: linear-gradient(to right, #9796f0, #fbc7d4);
+    width: 100%;
+}
+
+.selected, .selected i, .selected a {
+    background-color: red;
+    color: #fff;
+}
+
+.nav-link {
+    color: #555;
+}
+
+.nav-link:hover {
+    background: #f5f5f5;
+}

@@ -1,0 +1,76 @@
+/*Menu Lateral*/
+header {
+    background: gradient(90deg, #383735 0%, #686a6c 100%);
+    display: flex;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+}
+
+#logo {
+    width: 125px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+#vertical-bar {
+    background: #555;
+    height: 1000px;
+    width: 170px;
+    position: fixed;
+}
+
+ul {
+    margin-top: 30px;
+}
+
+li {
+    text-align: center;
+    line-height: 50px;
+    font-size: 12pt;
+    height: 50px;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+li:hover {
+    background-color: #636363;
+}
+
+#usuario {
+    margin-top: 30px;
+    height: 54px;
+    padding-top: 3px;
+}
+
+#userFirstLetter {
+    margin: auto;
+    color: #383735;
+    background-color: #d9d9d9;
+    width: 50px;
+    height: 50px;
+    border-radius: 300px;
+    text-align: center;
+    line-height: 50px;
+}
+
+#usuario:hover {
+    background-color: #686868;
+}
+/*Fim Menu Lateral*/
+
+main {
+    margin: 0px 12px 0px auto;
+    width: 86%;
+    padding-top: 10px;
+}
+
+#title {
+    color: #000;
+    background-color: #cecece;
+    padding-left: 10px;
+    border-radius: 5px;
+}

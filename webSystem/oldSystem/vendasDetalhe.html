@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido | Autopeças</title>
+    <link rel="stylesheet" href="./style/vendasDetalhe.css">
+    <link rel="stylesheet" href="./style/vertical-bar.css">
+    <script src="https://kit.fontawesome.com/602933bdc2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <div id="vertical-bar">
+            <img src="./src/logo-escura.png" alt="logo autopeças" id="logo">
+
+            <ul>
+                <a href="./main-menu.html">
+                    <li>DASHBOARD</li>
+                </a>
+                <a href="./vendas.html">
+                    <li>VENDAS</li>
+                </a>
+                <a href="./produtos.html">
+                    <li>PRODUTOS</li>
+                </a>
+                <a href="./usuarios.html">
+                    <li>USUÁRIOS</li>
+                </a>
+            </ul>
+            <div id="usuario">
+                <h1 id="userFirstLetter">P</h1>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="cabecalho">
+            <h1 id="title">PEDIDO #00001</h1>
+            <select name="statusPedido" id="statusPedido">
+                <option value="1">Pagamento Efetuado</option>
+                <option value="2">Pedido Pendente</option>
+                <option value="3">Pedido Em Separação</option>
+                <option value="4">Pedido Em Expedição</option>
+                <option value="5">Pedido Enviado</option>
+                <option value="6">Pedido Concluido</option>
+                <option value="7">Pedido Cancelado</option>
+            </select>
+            <button type="button">Alterar Status</button>
+        </div>
+        <div id="superior">
+            <div class="caixa">
+                <label>Dados do Pedido</label>
+                <div class="container" id="dadosPedido">
+                    <ul>
+                        <li>Cliente: Freddie Mercury</li>
+                        <li>E-mail: freddie.mercus@gmail.com</li>
+                        <li>Telefone: (11)94002-8922</li>
+                        <li>CPF/CNPJ: 984.xxx.xxx-62</li>
+                        <li>Status: Pagamento Efetuado</li>
+                        <li>Data do Pedido: 23/09/2020 16:43:30</li>
+                        <li>Valor Total: R$ 250,02</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="caixa">
+                <label>Nota Fiscal</label>
+                <div class="container" id="notaFiscal">
+                    <div class="line">
+                        <label>Chave de Acesso NF: </label>
+                        <input type="text" id="chaveAcesso">
+                    </div>
+                    <div class="line">
+                        <label>Número: </label>
+                        <input type="text">
+                        <label>Série: </label>
+                        <input type="text">
+                    </div>
+                    <div class="line">
+                        <label>Data: </label>
+                        <input type="date">
+                        <label>CFOP: </label>
+                        <input type="text">
+                    </div>
+                    <div class="line">
+                        <label>Inscrição Estadual: </label>
+                        <input type="text">
+                    </div>
+                    <button type="button" id="salvar" class="button">Salvar</button>
+                    <button type="button" id="cancelar" class="button">Cancelar</button>
+                    <input type="checkbox">
+                </div> <label>NF de Serviço?</label>
+            </div>
+        </div>
+
+        <label>Código de Rastreio</label>
+        <div class="container" id="codigoRastreio">
+            <input type="text">
+            <button type="button">Salvar</button>
+        </div>
+
+        <label>Dados Para Envio</label>
+        <div class="container" id="dadosEnvio">
+            <ul>
+                <li>CEP: 03301-064</li>
+                <li>Endereço: Rua Cruzeiro do Sul, 123</li>
+                <li>Tipo e Prazo: Retirada em Loja</li>
+                <li>Valor do Envio: R$ 0,00</li>
+                <li>Peso dos Itens: 20 Kg</li>
+                <li>Status: Pagamento Efetuado</li>
+            </ul>
+        </div>
+
+        <label>Nota Fiscal</label>
+        <div class="container" id="cadastraNotaFiscal">
+            <button type="button">Cadastrar NF</button>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usuarios | Autopeças</title>
+    <link rel="stylesheet" href="./style/usuarios.css">
+    <link rel="stylesheet" href="./style/vertical-bar.css">
+    <script src="https://kit.fontawesome.com/602933bdc2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <div id="vertical-bar">
+            <img src="./src/logo-escura.png" alt="logo autopeças" id="logo">
+
+            <ul>
+                <a href="./main-menu.html">
+                    <li>DASHBOARD</li>
+                </a>
+                <a href="./vendas.html">
+                    <li>VENDAS</li>
+                </a>
+                <a href="./produtos.html">
+                    <li>PRODUTOS</li>
+                </a>
+                <a href="./usuarios.html">
+                    <li>USUÁRIOS</li>
+                </a>
+            </ul>
+            <div id="usuario">
+                <h1 id="userFirstLetter">P</h1>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 id="title">USUÁRIOS DO SISTEMA</h1>
+
+        <div id="searchbox" class="pesquisa">
+            <input type="text" placeholder="Pesquisar por nome...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div id="input-boxes">
+            <div class="allInputs">
+                <label for="status">Habilitado</label>
+                <select name="status" id="status">
+                    <option value=""></option>
+                    <option value="1">Sim</option>
+                    <option value="2">Não</option>
+
+                </select>
+            </div>
+
+            <div class="allInputs">
+                <label for="status">Departamento</label>
+                <select name="status" id="status">
+                    <option value=""></option>
+                    <option name="1" id="">Estoque</option>
+                    <option name="2" id="">Gerência</option>
+                    <option name="3" id="">RH</option>
+                    <option name="4" id="">Vendas</option>
+                </select>
+            </div>
+
+            <div class="allInputs">
+                <label for="status">Perfil</label>
+                <select name="status" id="status">
+                    <option value=""></option>
+                    <option name="1" id="">Vendedor</option>
+                    <option name="2" id="">Estoquista</option>
+                    <option name="3" id="">Gerente</option>
+                    <option name="4" id="">Treinamento</option>
+                    <option name="4" id="">RH</option>
+                </select>
+            </div>
+
+
+        </div>
+
+        <div id="content">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Usuário</th>
+                    <th>Departamento</th>
+                    <th>Cargo</th>
+                    <th>Perfil</th>
+                    <th>Habilitado</th>
+                    <th>Data de Contratação</th>
+                </tr>
+                <tr>
+                    <td>0001</td>
+                    <td>Lukas Reis</td>
+                    <td>Gerente</td>
+                    <td>Gestor</td>
+                    <td>Gerencial</tde>
+                    <td>Sim</td>
+                    <td>01/01/2021</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>0002</td>
+                    <td>Breno Carvalho</td>
+                    <td>RH</td>
+                    <td>RH</td>
+                    <td>RH</tde>
+                    <td>Sim</td>
+                    <td>01/01/2021</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>0003</td>
+                    <td>Guilherme Fernandes</td>
+                    <td>Vendas</td>
+                    <td>Treinamento</td>
+                    <td>Vendedor</tde>
+                    <td>Não</td>
+                    <td>01/01/2021</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>0004</td>
+                    <td>Thiago Barbosa</td>
+                    <td>Vendas</td>
+                    <td>Vendedor</td>
+                    <td>Vendedor</tde>
+                    <td>Sim</td>
+                    <td>01/01/2021</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>0005</td>
+                    <td>Augustus Almeida</td>
+                    <td>Vendas</td>
+                    <td>Vendedor</td>
+                    <td>Vendedor</tde>
+                    <td>Sim</td>
+                    <td>01/01/2021</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

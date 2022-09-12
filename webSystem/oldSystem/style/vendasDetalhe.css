@@ -1,0 +1,99 @@
+/* margin: topo | direita | inferior | esquerda */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    font-size: 26pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
+}
+
+select, option {
+    border: 1px solid #cdcdda;
+    border-radius: 5px 0px 0px 5px;
+    padding-left: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16pt;
+    color: #000;
+    width: 920px;
+    height: 30px;
+}
+
+select, option {
+    width: 290px;
+}
+
+.caixa {
+    margin-right: 20px;
+}
+
+.container {
+    border: 1px solid #00000033;
+    border-radius: 5px;
+}
+
+#superior {
+    display: flex;
+}
+
+label {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 15px;
+    color: #5a5a5a;
+}
+
+main ul {
+    margin: 10px 0px 10px 0px;
+}
+
+main li {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: #444;
+    height: 30px;
+    line-height: 30px;
+}
+
+main li:hover {
+    background: none;
+}
+
+#dadosPedido {
+    width: 700px;
+}
+
+#notaFiscal {
+    width: 600px;
+    padding: 10px;
+}
+
+#notaFiscal input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #00000033;
+}
+
+.line {
+    height: 40px;
+    line-height: 40px;
+    margin: auto;
+}
+
+.button {
+    font-family: 'Courier New', Courier, monospace;
+    width: 110px;
+    height: 30px;
+    font-size: 15pt;
+    border: none;
+    border-radius: 10px;
+}
+
+#salvar {
+    background-color: #267ca0;
+}
+
+#cancelar {
+    background-color: #E54949;
+}
