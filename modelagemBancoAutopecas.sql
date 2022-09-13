@@ -9,6 +9,7 @@ Drop Table if exists Departamento;
 Drop Table if exists Perfil;
 Drop Table if exists FormaPagamento;
 Drop Table if exists PedidoStatus;
+Drop Table if exists NotaFiscal;
 
 Create Table Categoria
 (
