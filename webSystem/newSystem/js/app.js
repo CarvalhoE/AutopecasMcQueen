@@ -18,38 +18,15 @@ app.get('/', (req, res) => {
     res.send('Conexão OK!');
 });
 
-app.get('/produtos', (req, res) => {
-    db.connect(function (err) {
-        db.query("SELECT * FROM Produto", function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result);
-        });
-    })
-})
 
-app.get('/departamentos', (req, res) => {
-    db.connect(function (err) {
-        db.query("SELECT * FROM Departamento", function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result);
-        });
-    })
-})
+const departamentoController = require('./controllers/departamentoController')
+const produtoController = require('./controllers/produtoController')
 
-app.post('/criaProduto', (req, res) => {
-    let data = req.body;
-    let insertCommand = "Insert Into Produto (NM_Produto, VL_Preco, DS_Marca, ID_Categoria) Values (?,?,?,1)";
-    let bodyData = [data.productName, data.productPrice, data.productBrand]
+//Departamentos
+app.get('/departamentos', departamentoController.findAll);
 
-    db.query(insertCommand, bodyData, (error, result) => {
-        if (error) {
-            res.status(400).send({
-                message: error
-            })
-        } else {
-            res.status(201).json({
-                message: "Produto criado com sucesso!"
-            })
-        }
-    });
-});
+//Produto
+app.get('/produtos', produtoController.findAll);
+app.post('/produtos', produtoController.insert);
+app.put('/produtos', produtoController.update);
+app.delete('/produtos', produtoController.delete);

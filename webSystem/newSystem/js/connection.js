@@ -1,19 +1,13 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-const connection = mysql.createConnection({
+
+
+const connection = mysql.createPool({
     host: 'lrocode.mysql.dbaas.com.br',
     port: '3306',
     user: 'lrocode',
     password: 'WTyL8lCfO#',
     database: 'lrocode'
-});
-
-connection.connect((error)=>{
-    if(error){
-        console.log(error);
-    }else{
-        console.log("Conectado! :)");
-    }
 });
 
 module.exports = connection;
