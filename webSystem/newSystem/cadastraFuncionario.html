@@ -10,7 +10,7 @@
   <title>Autopeças McQueen</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
-  <link rel="icon" type="image/png" href="./image/logo.png"/>
+  <link rel="icon" type="image/png" href="./image/logo.png" />
   <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="./style/style.css" rel="stylesheet">
@@ -29,7 +29,9 @@
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
           data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4" alt="" width="32" height="32" class="rounded-circle me-2">
+          <img
+            src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4"
+            alt="" width="32" height="32" class="rounded-circle me-2">
           <strong>Carvalho</strong>
         </a>
 
@@ -111,14 +113,43 @@
       </ul>
     </div>
   </nav>
-  
+
   <main>
     <div class="header">
-      <h1>Configurações</h1>
+      <h1>Cadastro de Funcionarios</h1>
     </div>
 
-    <div>
-      <a href="./cadastraFuncionario.html"><button>Cadastrar Funcionário</button></a>
+    <div class="container-cF">
+      <div class="col-md-5">
+        <div class="form-area">
+          <form role="form">
+            <br style="clear:both">
+            <h3 style="margin-bottom: 25px; text-align: center;">
+              Formulário de Cadastro
+            </h3>
+            <div class="form-group">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+            </div>
+            <div class="form-group">
+
+              <select id="departamento" name="departamento" class="form-control">
+                <option value="">dept1</option>
+                <option value="">cargo2</option>
+                <option value="">cargo3</option>
+                <option value="">cargo4</option>
+              </select>
+
+              <select id="cargo" name="cargo" class="form-control">
+                <option value="">cargo1</option>
+                <option value="">cargo2</option>
+                <option value="">cargo3</option>
+                <option value="">cargo4</option>
+              </select>
+
+              <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Cadastrar</button>
+          </form>
+        </div>
+      </div>
     </div>
 
   </main>

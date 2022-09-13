@@ -27,18 +27,13 @@ app.get('/produtos', (req, res) => {
     })
 })
 
-app.get('/categorias', (req, res) => {
+app.get('/departamentos', (req, res) => {
     db.connect(function (err) {
-        db.query("SELECT * FROM Categoria", function (err, result) {
+        db.query("SELECT * FROM Departamento", function (err, result) {
             if (err) throw err;
             res.status(200).json(result);
         });
     })
-})
-
-app.post('/login', (req, res) => {
-    console.log(req.body.username)
-    console.log(req.body.password)
 })
 
 app.post('/criaProduto', (req, res) => {
