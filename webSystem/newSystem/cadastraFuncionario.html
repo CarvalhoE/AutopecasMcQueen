@@ -122,31 +122,44 @@
     <div class="container-cF">
       <div class="col-md-5">
         <div class="form-area">
-          <form role="form">
+          <form role="form" class="form-cadastro">
             <br style="clear:both">
             <h3 style="margin-bottom: 25px; text-align: center;">
-              Formulário de Cadastro
+              Formulário de Cadastro de Funcionario
             </h3>
             <div class="form-group">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo" required>
+              <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+              <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+              <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" required>
+              <input type="text" class="form-control" id="nasc" name="nasc" placeholder="Data de Nascimento" required>
             </div>
             <div class="form-group">
-
+              <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" required>
+              <input type="text" class="form-control" id="numero" name="numero" placeholder="Número" required>
+              <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" required>
+              <input type="text" class="form-control" id="cep" name="bairro" placeholder="CEP" required>
+              <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" required>
+              <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade" required>
+              <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+            </div>
+            <div class="form-group">
               <select id="departamento" name="departamento" class="form-control">
-                <option value="">dept1</option>
-                <option value="">cargo2</option>
-                <option value="">cargo3</option>
-                <option value="">cargo4</option>
+                <option value="comercial">Comercial</option>
+                <option value="financeiro">Financeiro</option>
+                <option value="financeiro">RH</option>
               </select>
-
               <select id="cargo" name="cargo" class="form-control">
-                <option value="">cargo1</option>
-                <option value="">cargo2</option>
-                <option value="">cargo3</option>
-                <option value="">cargo4</option>
+                <option value="">Vendedor</option>
+                <option value="">Gerente</option>
+                <option value="">Estoquista</option>
+                <option value="">Auxiliar de Contas a pagar</option>
+                <option value="">Auxiliar de Compras</option>
+                <option value="">Analista de Recrutamento e Seleção</option>
               </select>
 
-              <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Cadastrar</button>
+            </div>
+            <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Cadastrar</button>
           </form>
         </div>
       </div>
