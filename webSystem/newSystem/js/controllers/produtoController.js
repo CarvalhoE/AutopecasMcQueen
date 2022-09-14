@@ -14,7 +14,7 @@ module.exports = {
     async insert(req, res) {
         let data = {
             "NM_Produto": req.body.nomeProduto,
-            // "DS_Descricao": req.body.descricaoProduto,
+            "DS_Descricao": req.body.descricaoProduto,
             "VL_Preco": req.body.valorProduto,
             "DS_marca": req.body.marcaProduto,
             "ID_Categoria": req.body.categoriaProduto
@@ -33,7 +33,7 @@ module.exports = {
         let id = req.path;
         let data = {
             "NM_Produto": req.body.nomeProduto,
-            // "DS_Descricao": req.body.descricaoProduto,
+            "DS_Descricao": req.body.descricaoProduto,
             "VL_Preco": req.body.valorProduto,
             "DS_Marca": req.body.marcaProduto,
             "ID_Categoria": req.body.categoriaProduto

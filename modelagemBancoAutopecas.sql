@@ -88,10 +88,11 @@ Create Table Funcionario
    ,DS_Email			VarChar(64)		Null
    ,DT_Nascimento		Date			Not Null
    ,NR_Codigo	 		VarChar(14)		Not Null
+   ,DS_Login         VarChar(14)    Not Null
    ,NR_Senha	 		VarChar(14)		Not Null
    ,ID_Departamento		Int				Not Null
    ,ID_Cargo			Int				Not Null
-   ,ID_Perfil			Int				Not Null
+   ,ID_Perfil			Int				Not Null 
    ,FL_Habilitado		Char(1)			Not Null
    ,DT_Admissao 		Date	 		Not Null
    ,DT_Demissao 		Date	 		Not Null

@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 
 const departamentoController = require('./controllers/departamentoController')
 const produtoController = require('./controllers/produtoController')
+const funcionarioController = require('./controllers/funcionarioController')
 
 //Departamentos
 app.get('/departamentos', departamentoController.findAll);
@@ -30,3 +31,6 @@ app.get('/produtos', produtoController.findAll);
 app.post('/produtos', produtoController.insert);
 app.put('/produtos', produtoController.update);
 app.delete('/produtos', produtoController.delete);
+
+//Funcionários
+app.get('/funcionarios', funcionarioController.login);
