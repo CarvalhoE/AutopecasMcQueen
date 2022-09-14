@@ -4,8 +4,10 @@ Drop Table if exists Estoque;
 Drop Table if exists Produto;
 Drop Table if exists Categoria;
 Drop Table if exists Cliente;
+Drop Table if exists FuncionarioEndereco;
 Drop Table if exists Funcionario;
 Drop Table if exists Departamento;
+Drop Table if exists Cargo;
 Drop Table if exists Perfil;
 Drop Table if exists FormaPagamento;
 Drop Table if exists PedidoStatus;
@@ -61,14 +63,14 @@ Create Table Cliente
 Create Table Departamento
 (
 	ID_Departamento 	Int 			auto_increment
-   ,DS_Departamento 	VarChar(32) 	Not Null
+   ,DS_Departamento 	VarChar(40) 	Not Null
    ,Constraint PK_ID_Departamento Primary Key (ID_Departamento)
 );
 
 Create Table Cargo
 (
 	ID_Cargo		 	Int 			auto_increment
-   ,DS_Cargo 			VarChar(32) 	Not Null
+   ,DS_Cargo 			VarChar(40) 	Not Null
    ,Constraint PK_ID_Cargo Primary Key (ID_Cargo)
 );
 
@@ -83,12 +85,12 @@ Create Table Funcionario
 (
 	ID_Funcionario		Int				auto_increment
    ,NM_Nome		 		VarChar(100)	Not Null
-   ,NR_CPF				VarChar(11)		Not Null
+   ,NR_CPF				VarChar(11)		Not Null	Unique
    ,NR_Telefone			VarChar(11)		Null
    ,DS_Email			VarChar(64)		Null
    ,DT_Nascimento		Date			Not Null
    ,NR_Codigo	 		VarChar(14)		Not Null
-   ,DS_Login         VarChar(14)    Not Null
+   ,DS_Login         	VarChar(14)    	Not Null	Unique
    ,NR_Senha	 		VarChar(14)		Not Null
    ,ID_Departamento		Int				Not Null
    ,ID_Cargo			Int				Not Null
@@ -128,7 +130,7 @@ Create Table FormaPagamento
 Create Table PedidoStatus
 (
 	ID_PedidoStatus Int				auto_increment
-   ,DS_Status	 	VarChar(16)		Not Null
+   ,DS_Status	 	VarChar(40)		Not Null
    ,Constraint PK_ID_PedidoStatus Primary Key (ID_PedidoStatus)
 );
 
@@ -155,7 +157,7 @@ Create Table Pedido
    ,Constraint FK_ID_NotaFiscal_NotaFiscal 		Foreign Key (ID_NotaFiscal) 	References NotaFiscal (ID_NotaFiscal)
    ,Constraint FK_ID_PedidoStatus_PedidoStatus 	Foreign Key (ID_PedidoStatus) 	References PedidoStatus (ID_PedidoStatus)
    ,Constraint FK_ID_Cliente_Cliente 			Foreign Key (ID_Cliente) 		References Cliente (ID_Cliente)
-   ,Constraint FK_ID_Funcionario_Funcionario 	Foreign Key (ID_Vendedor) 		References Funcionario (ID_Funcionario)
+   ,Constraint FK_ID_Funcionario2_Funcionario 	Foreign Key (ID_Funcionario) 	References Funcionario (ID_Funcionario)
    ,Constraint FK_ID_FormaPagamento 			Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
 );
 
