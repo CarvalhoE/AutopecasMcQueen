@@ -51,8 +51,10 @@ Create Table Cliente
    ,NM_Nome		 	VarChar(64)		Not Null
    ,NR_CPF		 	VarChar(14)		Not Null
    ,DS_Email	 	VarChar(32)		Not Null
+   ,NR_Telefone	VarChar(11)		Null
+   ,DT_Nascimento	Date			   Not Null
    ,DS_CEP		 	VarChar(8)		Not Null
-   ,DS_Endereco	 	VarChar(64)		Not Null
+   ,DS_Endereco	VarChar(64)		Not Null
    ,DS_UF		 	VarChar(2)		Not Null
    ,DS_Cidade	 	VarChar(16)		Not Null
    ,DS_Numero	 	VarChar(8)		Not Null
@@ -109,7 +111,7 @@ Create Table FuncionarioEndereco
 (
 	ID_FuncionarioEndereco		Int				auto_increment
    ,ID_Funcionario				Int 			Not Null
-   ,DS_Logradouro		 		VarChar(126)	Null
+   ,DS_Logradouro		 		VarChar(100)	Null
    ,DS_Numero		 			VarChar(5)		Null
    ,DS_Complemento		 		VarChar(40)		Null
    ,DS_CEP		 				VarChar(8)		Null
