@@ -248,7 +248,6 @@ main {
 }
 
 .form-group{
-  display: flex;
   width: 1024px;
   padding-bottom: 10px;
 }
@@ -324,18 +323,19 @@ p{
 }
 
 .container-cF{
+  margin: 20px;
   border-radius: 5px;
-  padding: 20px;
+  box-shadow: #343a40 1px 1px 10px 1px;
+  width: 1100px;
 }
-.form-cadastro{
-  box-shadow: #343a40 1px 1px 10px 0px;
-  border-radius: 5px;
-  height: 360px;
-  width: 1024px;
-}
+
 
 .form-control{
   margin-top: 10px;
   margin-right: 10px;
   margin-left:10px;
+}
+
+.form-label{
+  margin-left: 14px;
 }
