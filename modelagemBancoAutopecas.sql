@@ -187,6 +187,8 @@ Create Table Pedido
 (
 	ID_Pedido 				Int 			auto_increment
    ,VL_Valor	 			Numeric(12,2) 	Not Null
+   ,PC_Desconto				Numeric(5,2)	Null
+   ,VL_Final				Numeric(12,2)	Not Null
    ,DT_Pedido 				DateTime	 	Not Null
    ,DT_Efetivacao			DateTime		Null
    ,ID_PedidoStatus 		Int 			Not Null
