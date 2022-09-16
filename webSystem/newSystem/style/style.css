@@ -225,23 +225,22 @@ main {
 .container-rel{
   box-shadow: #343a40 1px 1px 10px 0px;
   border-radius: 5px;
-  width: 400px;
+  float: left;
   height: auto;
   margin: 50px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .container-conf{
   box-shadow: #343a40 1px 1px 10px 0px;
   border-radius: 5px;
-  width: 400px;
+  width: auto;
+  float: left;
   height: auto;
   margin: 50px;
-  display: flex;
-  justify-content: center;
 }
-
+.container-conf a {
+  text-decoration: none;
+}
 
 #submit{
   margin-top: 10px;
