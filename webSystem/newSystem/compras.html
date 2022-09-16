@@ -47,6 +47,14 @@
         <li class="nav-item">
           <a href="./index.html" class="nav-link text-white" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-home"></i>
+            </svg>
+            Home
+          </a>
+      </li>
+        <li class="nav-item">
+          <a href="./financeiro.html" class="nav-link text-white" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-dollar"></i>
             </svg>
             Financeiro
@@ -92,14 +100,14 @@
             Relatórios
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="./nfe.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-file"></i>
             </svg>
             NF-e
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="./configuracoes.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
@@ -121,7 +129,7 @@
 
       <div class="table-container">
         <div>
-          <button class="aba" id="btnCompras">
+          <button class="aba-active" id="btnCompras">
             <i class="fa fa-credit-card-alt"></i>
             Compras
           </button>
@@ -133,61 +141,52 @@
               <i class="fa fa-plus-square"> Novo</i>
             </button>
             <button class="extra-d">
-              <i class="fa fa-trash"></i>
-            </button>
-            <button class="extra-d">
               <i class="fa fa-pencil-square-o"></i>
             </button>
-            <button class="extra-d">
-              <i class="fa fa-usd"></i>
-            </button>
+            <input type="text" class="extra-s" placeholder="Pesquisa por COD">
             <input type="month" id="month" class="extra-m">
           </div>
 
           <table class="table">
             <thead>
               <tr>
-                <th scope="col"><input type="checkbox"></th>
+                <td scope="row"><input type="checkbox"></td>
                 <th scope="col">Cod</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Vendedor</th>
-                <th scope="col">Conta</th>
-                <th scope="col">Data</th>
+                <th scope="col">Funcionario</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Data da Compra</th>
+                <th scope="col">Forma de Pagamento</th>
                 <th scope="col">Situação</th>
                 <th scope="col">Valor</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
+                <td scope="row"><input type="checkbox"></td>
+                <td><a href="">Cod</a></td>
                 <td>Otto</td>
                 <td>@mdo</td>
                 <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>Antilope</td>
                 <td>Otto</td>
                 <td>@mdo</td>
               </tr>
               <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
+                <td scope="row"><input type="checkbox"></td>
+                <td><a href="">Cod</a></td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>Dinheiro</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <td scope="row"><input type="checkbox"></td>
+                <td><a href="">Cod</a></td>
                 <td>Otto</td>
                 <td>@mdo</td>
                 <td>Otto</td>
-                <td>@mdo</td>
                 <td>@mdo</td>
                 <td>Otto</td>
                 <td>@mdo</td>

@@ -142,6 +142,13 @@ main {
 .container{
   padding:0;
   margin: 0;
+  float: left;
+}
+.container-cadastroC{
+  padding:0;
+  margin: 0;
+  float: left;
+  width: 780px;
 }
 
 .aba{
@@ -160,8 +167,9 @@ main {
 }
 .aba-active{
   background-color: #ffb367;
-  width:200px;
+  width: auto;
 	height:40px;
+  padding: 10px;
 	border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-style: none;
@@ -178,7 +186,7 @@ main {
 }
 
 .extras{
-  margin: 5px;
+  padding: 5px;
 }
 
 .extras i{
@@ -194,7 +202,6 @@ main {
   background-color: #ffb367;
   color: #fff;
 }
-
 .extra-d{
   width:45px;
   border-style: none;
@@ -204,10 +211,19 @@ main {
   color: #fff;
 }
 
+.extra-s{
+  width: auto;
+  border-style: none;
+	height:42px;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: #fff;
+  outline: none;
+}
 .extra-m{
   text-align: center;
   width:140px;
-  margin-left: 100px;
+  float: right;
   border-style: none;
 	height:40px;
   border-radius: 5px;

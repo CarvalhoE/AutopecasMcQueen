@@ -47,6 +47,14 @@
         <li class="nav-item">
           <a href="./index.html" class="nav-link text-white" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-home"></i>
+            </svg>
+            Home
+          </a>
+      </li>
+        <li class="nav-item">
+          <a href="./financeiro.html" class="nav-link text-white" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-dollar"></i>
             </svg>
             Financeiro
@@ -69,7 +77,7 @@
           </a>
         </li>
         <li>
-          <a href="./clientes.html" class="nav-link text-white">
+          <a href="./clientes.html" class="nav-link active text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-user"></i>
             </svg>
@@ -92,16 +100,16 @@
             Relatórios
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="./nfe.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-file"></i>
             </svg>
             NF-e
           </a>
-        </li>
+        </li> -->
         <li>
-          <a href="./configuracoes.html" class="nav-link active">
+          <a href="./configuracoes.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-cog"></i>
             </svg>
@@ -117,10 +125,7 @@
       <h1>Cadastro de Clientes</h1>
     </div>
 
-    <div class="container" style="margin-left: auto; margin-right: auto;">
-        <h3 style="margin-bottom: 25px; text-align: center;">
-          Formulário de Cadastro de Clientes
-        </h3>
+    <div class="container-cadastroC" style="margin-left: auto; margin-right: auto;">
         <form>
           <!-- 2 column grid layout with text inputs for the first and last names -->
           <div class="row mb-4">
@@ -138,71 +143,25 @@
             </div>
             <div class="col">
               <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
+                <label class="form-label" for="form6Example2">Data de Nascimento</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
                 <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Telefone</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
-                <label class="form-label" for="form6Example2">Data de Nascimento</label>
-              </div>
-            </div>
-          </div>
-  
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
                 <input type="email" id="form6Example1" class="form-control" style="width: 520px;" />
                 <label class="form-label" for="form6Example1">E-mail</label>
               </div>
             </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example4" class="form-control" style="width: 760px;" required/>
-                <label class="form-label" for="form6Example4">Endereço</label>
-              </div>
-            </div>
           </div>
-          
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="number" id="form6Example2" class="form-control" required/>
-                <label class="form-label" for="form6Example2">Número</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" required/>
-                <label class="form-label" for="form6Example2">Bairro</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" required/>
-                <label class="form-label" for="form6Example2">Cidade</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" required/>
-                <label class="form-label" for="form6Example2">Estado</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="number" id="form6Example2" class="form-control" required/>
-                <label class="form-label" for="form6Example2">CEP</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" required/>
-                <label class="form-label" for="form6Example2">UF</label>
-              </div>
-            </div>
-          </div>        
           <!-- Submit button -->
           <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
         </form>
