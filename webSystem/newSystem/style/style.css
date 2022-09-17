@@ -1,7 +1,13 @@
+/* Configuração Geral*/
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   margin: 0px;
+}
+
+a{
+  outline: none;
+  text-decoration: none;
 }
 
 html {
@@ -16,6 +22,26 @@ main {
   overflow-y: hidden;
 }
 
+p{
+  padding: 0;
+  margin: 0;
+}
+
+.divider:after,.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+/* Menu Lateral */
 .dropdown-toggle { outline: 0; }
 
 .btn-toggle {
@@ -78,14 +104,6 @@ main {
   }
 }
 
-.b-example-divider {
-  height: 3rem;
-  background-color: rgba(0, 0, 0, .1);
-  border: solid rgba(0, 0, 0, .15);
-  border-width: 1px 0;
-  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-}
-
 .b-example-vr {
   flex-shrink: 0;
   width: 1.5rem;
@@ -115,15 +133,6 @@ main {
   -webkit-overflow-scrolling: touch;
 }
 
-.header{
-  background-color: #343a40;
-  color: #fff;
-}
-
-.header h1{
-  padding: 2vh;
-}
-
 #menu{
   float: left;
   height: 100vh;
@@ -138,19 +147,46 @@ main {
   margin-left: auto;
   margin-right: auto;
 }
+/* Header */
+
+.header{
+  background-color: #343a40;
+  color: #fff;
+}
+
+.header h1{
+  padding: 2vh;
+}
+/*Container Geral*/
 
 .container{
   padding:0;
   margin: 0;
   float: left;
 }
-.container-cadastroC{
-  padding:0;
-  margin: 0;
-  float: left;
-  width: 780px;
+
+/* Formularios de cadastro */
+.form-outline{
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
+.container-cadastroC{
+  margin: 50px;
+  border-radius: 5px;
+  width: 1024px;
+  box-shadow: #343a40 1px 1px 10px 0px;
+}
+
+#submit{
+  margin-top: 10px;
+}
+
+.col{
+  padding: 5px;
+}
+
+/*Conteudos e Tabelas*/
 .aba{
   background-color: #343a40;
   width: auto;
@@ -165,6 +201,7 @@ main {
 .aba:hover{
     background-color: #ffb367;
 }
+
 .aba-active{
   background-color: #ffb367;
   width: auto;
@@ -175,6 +212,7 @@ main {
   border-style: none;
   color: #fff;
 }
+
 .table-top{
   box-shadow: #343a40 1px 1px 10px 0px;
   border-top: 2px solid #ffb367;
@@ -182,7 +220,7 @@ main {
 
 .table-container{
   padding: 50px;
-  width: auto;
+  width: 1024px;
 }
 
 .extras{
@@ -202,6 +240,7 @@ main {
   background-color: #ffb367;
   color: #fff;
 }
+
 .extra-d{
   width:45px;
   border-style: none;
@@ -220,6 +259,7 @@ main {
   color: #fff;
   outline: none;
 }
+
 .extra-m{
   text-align: center;
   width:140px;
@@ -230,6 +270,7 @@ main {
   background-color: #343a40;
   color: #fff;
 }
+
 ::-webkit-calendar-picker-indicator{
   background-color: #ffb367 !important;
   border-radius: 5px;
@@ -238,38 +279,13 @@ main {
   cursor: pointer;
 }
 
+/* Pagina de Relatórios*/
 .container-rel{
   box-shadow: #343a40 1px 1px 10px 0px;
   border-radius: 5px;
   float: left;
   height: auto;
   margin: 50px;
-}
-
-.container-conf{
-  box-shadow: #343a40 1px 1px 10px 0px;
-  border-radius: 5px;
-  width: auto;
-  float: left;
-  height: auto;
-  margin: 50px;
-}
-.container-conf a {
-  text-decoration: none;
-}
-
-#submit{
-  margin-top: 10px;
-}
-
-.form-group{
-  width: 1024px;
-  padding-bottom: 10px;
-}
-
-p{
-  padding: 0;
-  margin: 0;
 }
 
 .abaRD{
@@ -302,6 +318,26 @@ p{
   background-color: #ffb367;
 }
 
+/* Pagina de Configurações*/
+.container-conf{
+  box-shadow: #343a40 1px 1px 10px 0px;
+  border-radius: 5px;
+  width: auto;
+  float: left;
+  height: auto;
+  margin: 50px;
+}
+
+.container-conf a {
+  text-decoration: none;
+}
+
+.form-group{
+  width: 1024px;
+  padding-bottom: 10px;
+}
+
+/*Pagina NF
 .abaNF{
   box-shadow: #343a40 1px 1px 10px 0px;
   margin: 20px;
@@ -316,41 +352,59 @@ p{
 .abaNF:hover{
   background-color: #ffb367;
 }
+*/
 
-.divider:after,.divider:before {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #eee;
-}
-.h-custom {
-  height: calc(100% - 73px);
-}
-@media (max-width: 450px) {
-  .h-custom {
-    height: 100%;
-  }
-}
+/*Pagina Login*/
 .containerLogin{
   margin: 0;
   display: flex;
   justify-content: center;
 }
 
-.container-cF{
-  margin: 20px;
-  border-radius: 5px;
-  box-shadow: #343a40 1px 1px 10px 1px;
-  width: 1100px;
+
+/* Página de Perfil */
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+.profile{
+  font-family: 'Lato', 'sans-serif';
+}
+.profile{
+  height: 321px;
+  width: 265px;
+  margin-top: 2px;
+  padding:1px;
+  display: inline-block;
+}
+.divider{
+  border-top:1px solid rgba(0,0,0,0.1);
+}
+.emphasis{
+  border-top: 1px solid transparent;
 }
 
-
-.form-control{
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left:10px;
+.emphasis h2{
+  margin-bottom:0;
 }
-
-.form-label{
-  margin-left: 14px;
+span.tags{
+  background: #1abc9c;
+  border-radius: 2px;
+  color: #f5f5f5;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+.profile strong,span,div{
+    text-transform: initial;
+}
+.profile-box{
+  margin: 50px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  box-shadow: #343a40 1px 1px 10px 0px;
+  border-radius: 16px;
+  width: 250px;
+}
+.profile-divider{
+  margin: 10px;
+  width: 240px;
 }

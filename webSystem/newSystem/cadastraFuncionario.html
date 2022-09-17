@@ -41,7 +41,7 @@
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item" href="#">Sair</a></li>
+          <li><a class="dropdown-item" href="./">Sair</a></li>
         </ul>
       </div>
       <hr>
@@ -127,25 +127,24 @@
       <h1>Cadastro de Funcionarios</h1>
     </div>
 
-    <div class="container" style="margin-left: auto; margin-right: auto;">
-      <h3 style="margin-bottom: 25px; text-align: center;">
-        Formulário de Cadastro de Funcionario
-      </h3>
+    <div class="container-cadastroC">
+
       <form>
-        <!-- 2 column grid layout with text inputs for the first and last names -->
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" style="width: 760px;" required/>
+              <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
               <label class="form-label" for="form6Example1">Nome Completo</label>
             </div>
           </div>
           <div class="col">
-            <div class="form-outline" style="width: 140px;">
-              <input type="text" id="form6Example1" class="form-control" required/>
+            <div class="form-outline" >
+              <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;"required/>
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
           </div>
+        </div>
+        <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
@@ -156,6 +155,18 @@
             <div class="form-outline">
               <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
               <label class="form-label" for="form6Example2">Data de Nascimento</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
+              <label class="form-label" for="form6Example2">Login</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
+              <label class="form-label" for="form6Example2">Senha</label>
             </div>
           </div>
         </div>
@@ -169,22 +180,10 @@
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" required/>
-              <label class="form-label" for="form6Example2">Login</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" required/>
-              <label class="form-label" for="form6Example2">Senha</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Text input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="form6Example4" class="form-control" style="width: 760px;" required/>
+              <input type="text" id="form6Example4" class="form-control" style="width: 760px;" required/>
           <label class="form-label" for="form6Example4">Endereço</label>
+            </div>
+          </div>
         </div>
         
         <div class="row mb-4">
@@ -220,7 +219,7 @@
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" required/>
+              <input type="text" id="form6Example2" class="form-control" style="width: 50px;"required/>
               <label class="form-label" for="form6Example2">UF</label>
             </div>
           </div>
@@ -229,7 +228,7 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <select id="departamento" name="departamento" class="form-control">
+              <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
                 <option value="comercial">Comercial</option>
                 <option value="financeiro">Financeiro</option>
                 <option value="financeiro">RH</option>
@@ -239,7 +238,7 @@
           </div>
           <div class="col">
             <div class="form-outline">
-              <select id="cargo" name="cargo" class="form-control">
+              <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
                 <option value="">Vendedor</option>
                 <option value="">Gerente</option>
                 <option value="">Estoquista</option>
@@ -251,8 +250,6 @@
             </div>
           </div>
         </div>
-      
-        <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
       </form>
     </div>
