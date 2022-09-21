@@ -1,0 +1,2 @@
+-- Iniciar pelo index.html
+-- Teste feito pelo Lukas no dia 21/09 as 02:31
