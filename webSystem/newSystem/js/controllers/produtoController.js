@@ -5,8 +5,7 @@ module.exports = {
         try {
             let response = await db.query('SELECT * FROM Produto');
             res.json(response);
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error);
         }
     },
@@ -23,8 +22,7 @@ module.exports = {
         try {
             let response = await db.query("Insert Into Produto Set ?", [data]);
             res.json(response);
-        } 
-        catch (ex) {
+        } catch (ex) {
             console.log(ex.message);
         }
     },
@@ -42,8 +40,7 @@ module.exports = {
         try {
             let response = await db.query("Update Produto Set ? Where ID_Produto = ?", [data, id]);
             res.json(response);
-        } 
-        catch (ex) {
+        } catch (ex) {
             console.log(ex.message);
         }
     },
@@ -54,8 +51,7 @@ module.exports = {
         try {
             let response = await db.query("Delete Produto Where ID_Produto = ?", [id]);
             res.send("Produto excluido com sucesso");
-        } 
-        catch (ex) {
+        } catch (ex) {
             console.log(ex.message);
         }
     }

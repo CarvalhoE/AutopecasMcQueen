@@ -17,8 +17,8 @@ module.exports = {
             "ID_Departamento": req.body.departamentoFuncionario,
             "ID_Cargo": req.body.cargoFuncionario
         }
-        
-        let dataEndereco={
+
+        let dataEndereco = {
             "DS_Logradouro": req.body.logradouroFuncionario,
             "DS_Numero": req.body.numeroFuncionario,
             "DS_Complemento": req.body.complementoFuncionario,
@@ -27,14 +27,14 @@ module.exports = {
             "DS_Cidade": req.body.cidadeFuncionario,
             "DS_UF": req.body.ufFuncionario
         }
-    
+
         try {
             let response = await db.query("Insert Into Funcionario Set ?", [data]);
             res.json(response);
 
-            let response2= await db.query("Insert Into FuncionarioEndereco Set ?",[dataEndereco]);
+            let response2 = await db.query("Insert Into FuncionarioEndereco Set ?", [dataEndereco]);
             res.json(response2);
-        }catch (ex) {
+        } catch (ex) {
             console.log(ex.message);
         }
     }

@@ -10,18 +10,20 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.listen(port, () => {
-    console.log(`Projeto executando na porta ${port}`);
-});
-
 app.get('/', (req, res) => {
     res.send('Conexão OK!');
 });
 
+app.listen(port, () => {
+    console.log(`Projeto executando na porta ${port}`);
+});
 
-const departamentoController = require('./controllers/departamentoController')
-const produtoController = require('./controllers/produtoController')
-const funcionarioController = require('./controllers/funcionarioController')
+// <------------------> \\
+
+const departamentoController = require('./controllers/departamentoController');
+const produtoController = require('./controllers/produtoController');
+const funcionarioController = require('./controllers/funcionarioController');
+const clienteController = require('./controllers/clienteController');
 
 //Departamentos
 app.get('/departamentos', departamentoController.findAll);
@@ -34,3 +36,6 @@ app.delete('/produtos', produtoController.delete);
 
 //Funcionários
 app.get('/funcionarios', funcionarioController.login);
+
+//clientes
+app.get('/clientes', clienteController.findAll);

@@ -5,12 +5,11 @@ module.exports = {
         try {
             let response = await db.query('SELECT * FROM Funcionario');
             res.json(response);
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error);
         }
     },
-    
+
     async login(req, res) {
         let login = req.params.login;
         let password = req.params.password;
@@ -19,9 +18,8 @@ module.exports = {
             let response = await db.query('Select * From Funcionario Where DS_Login = ? and NR_Senha = ?', [login, password]);
 
             if (response == null)
-            res.json(response);
-        }
-        catch (error) {
+                res.json(response);
+        } catch (error) {
             console.log(error);
         }
     },
