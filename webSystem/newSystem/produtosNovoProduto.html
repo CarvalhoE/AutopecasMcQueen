@@ -53,7 +53,7 @@
           </a>
       </li>
         <li class="nav-item">
-          <a href="./financeiro.html" class="nav-link text-white" aria-current="page">
+          <a href="./financeiro.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-dollar"></i>
             </svg>
@@ -85,7 +85,7 @@
           </a>
         </li>
         <li>
-          <a href="./produtos.html" class="nav-link active">
+          <a href="./produtos.html" class="nav-link active text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-inbox"></i>
             </svg>
@@ -122,78 +122,61 @@
   
   <main>
     <div class="header">
-      <h1>Produtos</h1>
+      <h1>Produtos - Novo Produto</h1>
     </div>
+    <div class="container-cadastroC">
+        <form>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">Descrição</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline" >
+                <input type="number" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px; margin-left: -5px;"required/>
+                <label class="form-label" for="form6Example1">Valor</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required/>
+                <label class="form-label" for="form6Example2">Data</label>
+              </div>
+            </div>
 
-    <div class="container">
-
-      <div class="table-container">
-        <div>
-          <button class="aba-active" id="btnCompras">
-            <i class="fa fa-archive"></i>
-            Produtos
-          </button>
-        </div>
-
-        <div class="table-top">
-          <div class="extras">
-            <a href="./produtosNovoProduto.html">
-              <button class="extra-n">
-                <i class="fa fa-plus-square"> Novo</i>
-              </button>
-            </a>
-            
-            <button class="extra-d">
-              <i class="fa fa-pencil-square-o"></i>
-            </button>
-            <input type="text" class="extra-s" placeholder="Pesquisa por SKU">
+            <div class="col">
+                <div class="form-outline">
+                  <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
+                    <option value="1">Efetivado</option>
+                    <option value="2">Cancelado</option>
+                    <option value="3">Pendente</option>
+                    <option value="4">Em Atraso</option>
+                    <option value="5">Estornado</option>
+                  </select>
+                  <label class="form-label" for="form6Example1">Situação</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
+                    <option value="">Debito</option>
+                    <option value="">Credito</option>
+                  </select>
+                  <label class="form-label" for="form6Example1">Tipo de Pagamento</label>
+                </div>
+              </div>
           </div>
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col"><input type="checkbox"></th>
-                <th scope="col">SKU</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Valor Unitario</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Disponivel</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td scope="col"><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td scope="col"><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td scope="col"><input type="checkbox"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
+          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
+          <a href="./vendas.html">
+            <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+          </a>
+        </form>
+    </div>
   </main>
 
   <!-- Scripts -->
