@@ -1,19 +1,19 @@
-async function connect() {
-    if (global.connection && global.connection.state !== "disconnected")
-        return global.connection;
+const mysql = require('mysql2')
 
-    const mysql = require('mysql2/promise');
+const connection = mysql.createConnection({
+    host: 'lrocode.mysql.dbaas.com.br',
+    port: '3306',
+    database: 'lrocode',
+    user: 'lrocode',
+    password: 'WTyL8lCfO#'
+});
 
-    const connection = mysql.createPool({
-        host: 'lrocode.mysql.dbaas.com.br',
-        port: '3306',
-        user: 'lrocode',
-        password: 'WTyL8lCfO#',
-        database: 'lrocode'
-    });
+connection.connect(function(error) {
+    if (error) {
+        throw error;
+    } else {
+        console.log('MySQL conectado com sucesso!')
+    }
+})
 
-    global.connection = connection;
-    return connection;
-}
-
-module.exports = connect;
+module.exports = connection;
