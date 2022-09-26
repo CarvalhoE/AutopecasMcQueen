@@ -27,7 +27,10 @@ router.post('/login', function (request, response, next) {
           if (data[i].NR_Senha == user_password) {
             request.session.user_id = data[i].ID_Funcionario;
 
-            response.redirect('../views/index2');
+            response.redirect('/');
+
+            user_email_address = null;
+            user_password = null;
           } else {
             response.send('Senha incorreta!')
           }
