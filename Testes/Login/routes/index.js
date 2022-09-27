@@ -41,6 +41,13 @@ router.get('/home', function (req, res, next) {
   }
 });
 
+router.get('/teste', function (req, res, next) {
+    db.query('Select * From Funcionario', function (err, rows, fields) {
+        req.session.users = rows;
+        res.render('user/teste', {title: 'Lukas', values: req.session.users});
+    });
+});
+
 router.get('/logout', function (req, res) {
   req.flash('sucess', 'Faça seu login novamente');
   req.session.destroy();

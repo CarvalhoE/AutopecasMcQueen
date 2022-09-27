@@ -9,9 +9,13 @@
 </head>
 
 <body>
-    <select name="usuarios" id="users">
-        <option value="1">Lukas</option>
-        <option value="2">Yasmin</option>
+    <select id="users">
+        <%
+        for ( var i = 0; i < values.length; i++ )
+        {
+            %><option value="<%=values[i].ID_Funcionario%>"><%= values[i].DS_Login%></option><%
+        }
+        %>
     </select>
 </body>
 
