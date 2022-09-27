@@ -17,6 +17,21 @@
         }
         %>
     </select>
+
+    <table style="border: solid 1px black;">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Login</th>
+        </tr>
+        <%for (var i = 0; i < values.length; i++) {%>
+            <tr>
+                <td><%=values[i].ID_Funcionario%></td>
+                <td><%=values[i].NM_Nome%></td>
+                <td><%=values[i].DS_Login%></td>
+            </tr>
+        <% } %>
+    </table>
 </body>
 
 </html>
