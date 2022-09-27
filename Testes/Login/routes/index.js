@@ -5,52 +5,46 @@ var db = require('../database');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', {
-    title: 'Express',
-    session: req.session
+  res.render('user/login', {title: 'Login',session: req.session});
+});
+
+router.get('/login', function (req, res, next) {
+  res.render('user/login', {title: 'Login',session: req.session});
+});
+
+router.post('/authentication', function (req, res, next) {
+  var loginUser = req.body.user_login;
+  var senhaUser = req.body.user_password;
+
+  db.query('Select * From Funcionario Where DS_Login = ? And NR_Senha = ?', [loginUser, senhaUser], function (err, rows, fields) {
+    if (err) throw err;
+
+    if (rows.length <= 0) {
+      req.flash('error', 'Usuário/Senha inválido!');
+      res.redirect('user/login')
+    } else {
+      req.session.loggedin = true;
+      req.session.name = rows[0].NM_Nome;
+      req.session.user_id = rows[0].ID_Funcionario;
+
+      res.redirect('/home');
+    }
   });
 });
 
-router.post('/login', function (request, response, next) {
-  var user_email_address = request.body.user_email_address;
-  var user_password = request.body.user_password;
-
-  if (user_email_address && user_password) {
-    query = `
-    Select * From Funcionario
-      Where DS_Login = "${user_email_address}"
-    `;
-
-    db.query(query, function (error, data) {
-      if (data.length > 0) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].NR_Senha == user_password) {
-            request.session.user_id = data[i].ID_Funcionario;
-
-            response.redirect('/');
-
-            user_email_address = null;
-            user_password = null;
-          } else {
-            response.send('Senha incorreta!')
-          }
-        }
-      } else {
-        response.send(`Usuário Incorreto!`);
-      }
-    });
-
+router.get('/home', function (req, res, next) {
+  if (req.session.loggedin) {
+    res.render('user/home', {title: 'Lukas', name: req.session.name});
   } else {
-    response.send('Informe seu usuário e senha!');
-    response.end();
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
   }
+});
 
-})
-
-router.get('/logout', function (request, response, next) {
-  request.session.destroy();
-
-  response.redirect('/');
+router.get('/logout', function (req, res) {
+  req.flash('sucess', 'Faça seu login novamente');
+  req.session.destroy();
+  res.redirect('/login');
 });
 
 module.exports = router;
