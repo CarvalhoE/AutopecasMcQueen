@@ -77,6 +77,14 @@
           </a>
         </li>
         <li>
+          <a href="./fornecedores.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-truck"></i>
+            </svg>
+            Fornecedores
+          </a>
+        </li>
+        <li>
           <a href="./clientes.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-user"></i>
@@ -135,46 +143,56 @@
             </div>
             <div class="col">
               <div class="form-outline" >
-                <input type="number" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px; margin-left: -5px;"required/>
-                <label class="form-label" for="form6Example1">Valor</label>
+                <input type="number" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;"required/>
+                <label class="form-label" for="form6Example1">Valor Unitario</label>
               </div>
             </div>
-          </div>
-          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline" >
+                <input type="number" id="form6Example1" class="form-control" style="width: 80px; margin-left: 5px;"required/>
+                <label class="form-label" for="form6Example1">Quantidade</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline" >
+                <input type="text" id="form6Example1" class="form-control" style="width: 150px;"required/>
+                <label class="form-label" for="form6Example1">SKU</label>
+              </div>
+            </div>
             <div class="col">
               <div class="form-outline">
                 <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required/>
                 <label class="form-label" for="form6Example2">Data</label>
               </div>
             </div>
-
             <div class="col">
-                <div class="form-outline">
-                  <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
-                    <option value="1">Efetivado</option>
-                    <option value="2">Cancelado</option>
-                    <option value="3">Pendente</option>
-                    <option value="4">Em Atraso</option>
-                    <option value="5">Estornado</option>
-                  </select>
-                  <label class="form-label" for="form6Example1">Situação</label>
-                </div>
+              <div class="form-outline">
+                <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
+                  <option value="1">Efetivado</option>
+                  <option value="2">Cancelado</option>
+                  <option value="3">Pendente</option>
+                  <option value="4">Em Atraso</option>
+                  <option value="5">Estornado</option>
+                </select>
+                <label class="form-label" for="form6Example1">Situação</label>
               </div>
-              <div class="col">
-                <div class="form-outline">
-                  <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
-                    <option value="">Debito</option>
-                    <option value="">Credito</option>
-                  </select>
-                  <label class="form-label" for="form6Example1">Tipo de Pagamento</label>
-                </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
+                  <option value="">Debito</option>
+                  <option value="">Credito</option>
+                </select>
+                <label class="form-label" for="form6Example1">Tipo de Pagamento</label>
               </div>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
+              <a href="./produtos.html">
+                <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+              </a>
+            </div>
           </div>
-
-          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
-          <a href="./vendas.html">
-            <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
-          </a>
         </form>
     </div>
   </main>

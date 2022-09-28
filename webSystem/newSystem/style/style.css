@@ -374,6 +374,10 @@ p{
   display: flex;
   justify-content: center;
 }
+.box-login{
+  width: 75%;
+}
+
 
 
 /* Página de Perfil */

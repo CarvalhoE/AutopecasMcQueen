@@ -69,7 +69,7 @@
           </a>
         </li>
         <li>
-          <a href="./compras.html" class="nav-link active">
+          <a href="./compras.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-truck"></i>
             </svg>
@@ -77,13 +77,13 @@
           </a>
         </li>
         <li>
-          <a href="./fornecedores.html" class="nav-link text-white">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <i class="fa fa-truck"></i>
-            </svg>
-            Fornecedores
-          </a>
-        </li>
+            <a href="./fornecedores.html" class="nav-link active text-white">
+              <svg class="bi pe-none me-2" width="16" height="16">
+                <i class="fa fa-truck"></i>
+              </svg>
+              Fornecedores
+            </a>
+          </li>
         <li>
           <a href="./clientes.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
@@ -130,80 +130,90 @@
   
   <main>
     <div class="header">
-      <h1>Compras</h1>
+      <h1>Cadastro de Fornecedores</h1>
     </div>
 
-    <div class="container">
+    <div class="container-cadastroC" style="margin-left: auto; margin-right: auto;">
+        <form>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">Nome da Empresa</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline" >
+                <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">CNPJ/CPF</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 520px;" required/>
+                <label class="form-label" for="form6Example2">Endereço</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Bairro</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 100px;" required/>
+                <label class="form-label" for="form6Example2">Município</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 110px;" required/>
+                <label class="form-label" for="form6Example2">CEP</label>
+              </div>
+            </div>
 
-      <div class="table-container">
-        <div>
-          <button class="aba-active" id="btnCompras">
-            <i class="fa fa-credit-card-alt"></i>
-            Compras
-          </button>
-        </div>
-
-        <div class="table-top">
-            <div class="extras">
-              <a href="./comprasNovaCompra.html">
-                <button class="extra-n">
-                <i class="fa fa-plus-square"> Novo</i>
-              </button>
-            </a>
-            <button class="extra-d">
-              <i class="fa fa-pencil-square-o"></i>
-            </button>
-            <input type="text" class="extra-s" placeholder="Pesquisa por COD">
-            <input type="month" id="month" class="extra-m">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Telefone</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="email" id="form6Example1" class="form-control" style="width: 520px;" />
+                <label class="form-label" for="form6Example1">E-mail</label>
+              </div>
+            </div>
           </div>
 
-          <table class="table">
-            <thead>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <th scope="col">Cod</th>
-                <th scope="col">Funcionario</th>
-                <th scope="col">Fornecedor</th>
-                <th scope="col">Data da Compra</th>
-                <th scope="col">Forma de Pagamento</th>
-                <th scope="col">Situação</th>
-                <th scope="col">Valor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td><a href="">Cod</a></td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>Antilope</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td><a href="">Cod</a></td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>Dinheiro</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td><a href="">Cod</a></td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Banco</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Agência</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Nr. Conta</label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
+          <a href="./fornecedores.html">
+            <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+          </a>
+        </form>
       </div>
 
   </main>

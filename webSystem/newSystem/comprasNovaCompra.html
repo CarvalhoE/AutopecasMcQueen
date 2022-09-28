@@ -45,7 +45,7 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="./index.html" class="nav-link text-white" aria-current="page">
+          <a href="./index.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-home"></i>
             </svg>
@@ -53,7 +53,7 @@
           </a>
       </li>
         <li class="nav-item">
-          <a href="./financeiro.html" class="nav-link text-white" aria-current="page">
+          <a href="./financeiro.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-dollar"></i>
             </svg>
@@ -69,7 +69,7 @@
           </a>
         </li>
         <li>
-          <a href="./compras.html" class="nav-link text-white">
+          <a href="./compras.html" class="nav-link active text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-truck"></i>
             </svg>
@@ -77,15 +77,15 @@
           </a>
         </li>
         <li>
-          <a href="./fornecedores.html" class="nav-link text-white">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <i class="fa fa-truck"></i>
-            </svg>
-            Fornecedores
-          </a>
-        </li>
+            <a href="./fornecedores.html" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16">
+                <i class="fa fa-truck"></i>
+              </svg>
+              Fornecedores
+            </a>
+          </li>
         <li>
-          <a href="./clientes.html" class="nav-link active text-white">
+          <a href="./clientes.html" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <i class="fa fa-user"></i>
             </svg>
@@ -130,52 +130,110 @@
   
   <main>
     <div class="header">
-      <h1>Cadastro de Clientes</h1>
+      <h1>Compras - Nova compra</h1>
     </div>
-
-    <div class="container-cadastroC" style="margin-left: auto; margin-right: auto;">
+    <div class="container-cadastroC">
         <form>
           <div class="row mb-4">
+
             <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
-                <label class="form-label" for="form6Example1">Nome Completo</label>
-              </div>
+              <select id="departamento" name="Funcionario" class="form-control" style="width: 190px; margin-top:10px; margin-left: 20px;">
+                <option value="1">Funcionario</option>
+              </select>
+              <label class="form-label" for="form6Example1" style="margin-left: 20px;">Funcionario</label>
             </div>
+
             <div class="col">
-              <div class="form-outline" >
-                <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;" required/>
-                <label class="form-label" for="form6Example1">CPF</label>
-              </div>
+                <select id="departamento" name="Fornecedor" class="form-control" style="width: 190px; margin-top:10px; margin-left: 20px;">
+                  <option value="1">Fornecedor</option>
+                </select>
+                <label class="form-label" for="form6Example1" style="margin-left: 20px;">Fornecedor</label>
             </div>
           </div>
+          
+          <div class="row mb-4">
+            <div class="col">
+              <select id="departamento" name="vendedor" class="form-control" style="width: 500px; margin-left: 20px;">
+                <option value="1">SKU | Produto</option>
+              </select>
+              <label class="form-label" for="form6Example1" style="margin-left: 20px;">Produto</label>
+            </div>
+
+            <div class="col">
+              <select id="departamento" name="vendedor" class="form-control" style="width: 100px; ">
+                <option value="1">QTD</option>
+              </select>
+              <label class="form-label" for="form6Example1">Quantidade</label>
+            </div>
+
+            <div class=" col">
+              <input type="button" value="Adicionar produto" class="form-control" style="width:150px" id="addProduct">
+            </div>
+
+          </div>
+
+          <div class="row mb-4" style="width: 100%; margin-left: 10px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Valor Unitario</th>
+                  <th scope="col">QTD. Produto</th>
+                  <th scope="col">Valor Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mark</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Otto</td>
+                </tr>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Otto</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
-                <label class="form-label" for="form6Example2">Data de Nascimento</label>
+                <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required/>
+                <label class="form-label" for="form6Example2">Data</label>
               </div>
             </div>
+
             <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
-                <label class="form-label" for="form6Example2">Telefone</label>
+                <div class="form-outline">
+                  <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
+                    <option value="1">Pendente</option>
+                    <option value="2">Cancelado</option>
+                    <option value="4">Em Atraso</option>
+                    <option value="5">Estornado</option>
+                  </select>
+                  <label class="form-label" for="form6Example1">Situação</label>
+                </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="email" id="form6Example1" class="form-control" style="width: 520px;" />
-                <label class="form-label" for="form6Example1">E-mail</label>
-              </div>
-            </div>
           </div>
+
           <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
-          <a href="./clientes.html">
+          <a href="./compras.html">
             <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
           </a>
         </form>
-      </div>
-
+    </div>
   </main>
 
   <!-- Scripts -->

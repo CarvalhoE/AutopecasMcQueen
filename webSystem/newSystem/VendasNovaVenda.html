@@ -127,19 +127,91 @@
     <div class="container-cadastroC">
         <form>
           <div class="row mb-4">
+
             <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
-                <label class="form-label" for="form6Example1">Descrição</label>
-              </div>
+              <select id="departamento" name="vendedor" class="form-control" style="width: 100px; margin-top:10px; margin-left: 20px;">
+                <option value="1">Vendedor</option>
+              </select>
+              <label class="form-label" for="form6Example1" style="margin-left: 20px;">Vendedor</label>
             </div>
+
             <div class="col">
+              <select id="departamento" name="vendedor" class="form-control" style="width: 100px; margin-top:10px;">
+                <option value="1">Cliente</option>
+              </select>
+              <label class="form-label" for="form6Example1">Cliente</label>
+            </div>
+
+            <!-- <div class="col">
               <div class="form-outline" >
                 <input type="number" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px; margin-left: -5px;"required/>
                 <label class="form-label" for="form6Example1">Valor</label>
               </div>
-            </div>
+            </div> -->
+
           </div>
+          
+          <div class="row mb-4">
+
+            <div class="col">
+              <select id="departamento" name="vendedor" class="form-control" style="width: 500px; margin-left: 20px;">
+                <option value="1">SKU | Produto</option>
+              </select>
+              <label class="form-label" for="form6Example1" style="margin-left: 20px;">Produto</label>
+            </div>
+
+            <div class="col">
+              <select id="departamento" name="vendedor" class="form-control" style="width: 100px; ">
+                <option value="1">QTD</option>
+              </select>
+              <label class="form-label" for="form6Example1">Quantidade</label>
+            </div>
+
+            <div class=" col">
+              <input type="button" value="Adicionar produto" class="form-control" style="width:150px" id="addProduct">
+            </div>
+
+          </div>
+
+          <div class="row mb-4" style="width: 100%; margin-left: 10px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Valor Unitario</th>
+                  <th scope="col">QTD. Produto</th>
+                  <th scope="col">Valor Total por Produto</th>
+                  <th scope="col">Valor Total da venda</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mark</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Otto</td>
+                  <td>Otto</td>
+                </tr>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Otto</td>
+                  <td>Otto</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
