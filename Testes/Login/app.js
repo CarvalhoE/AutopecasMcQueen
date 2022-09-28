@@ -9,7 +9,9 @@ var session = require('express-session');
 const bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var userRouter = require('./routes/user');
+var financeiroRouter = require('./routes/financeiro');
+var configuracoesRouter = require('./routes/configuracoes');
+var homeRouter = require('./routes/home');
 
 var app = express();
 
@@ -35,13 +37,23 @@ app.use(session({
 app.use(flash());
 app.use(expressValidator());
 
-app.use('/', indexRouter);
-app.use('/user', userRouter);
+// app.use('/', indexRouter); Cópia de Segurança
+app.use(indexRouter);
+app.use(financeiroRouter);
+app.use(configuracoesRouter);
+app.use(homeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// // Controllers
+// const departamentoController = require('./routes/controllers/departamentoController');
+
+// //Departamentos
+// app.get('/departamentos', departamentoController.findAll);
+
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -1,19 +1,18 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <title>Autopeças McQueen</title>
-  <link rel="icon" type="image/png" href="../public/image/logo.png" />
+  <link rel="icon" type="image/png" href="../../public/image/logo.png"/>
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
-  <link href="../public/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../public/assets/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Styles -->
-  <link href="../public/assets/style.css" rel="stylesheet">
+  <link href="../../public/assets/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
 
   <div class="menu-lateral">
@@ -21,16 +20,14 @@
       <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 250px; ">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
           <svg class="bi pe-none me-2" width="40" height="32">
-            <img src="../public/image/logo.png" alt="Logo Autopeças" id="logo">
+            <img src="../../public/image/logo.png" alt="Logo Autopeças" id="logo">
           </svg>
         </a>
         <hr>
         <div class="dropdown">
           <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img
-              src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4"
-              alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong><%= name %></strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -39,21 +36,21 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="/logout">Sair</a></li>
+            <li><a class="dropdown-item" href="login.html">Sair</a></li>
           </ul>
         </div>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="/home" class="nav-link active" aria-current="page">
+            <a href="/home" class="nav-link text-white" aria-current="page">
               <svg class="bi pe-none me-2" width="16" height="16">
                 <i class="fa fa-home"></i>
               </svg>
               Home
             </a>
-          </li>
+        </li>
           <li class="nav-item">
-            <a href="/financeiro" class="nav-link text-white" aria-current="page">
+            <a href="/financeiro" class="nav-link active text-white" aria-current="page">
               <svg class="bi pe-none me-2" width="16" height="16">
                 <i class="fa fa-dollar"></i>
               </svg>
@@ -109,7 +106,7 @@
             </a>
           </li>
           <li>
-            <a href="/configuracoes" class="nav-link text-white">
+            <a href="./configuracoes.html" class="nav-link text-white">
               <svg class="bi pe-none me-2" width="16" height="16">
                 <i class="fa fa-cog"></i>
               </svg>
@@ -123,26 +120,85 @@
 
   <main>
     <div class="header">
-      <h1>Home</h1>
+      <h1>Financeiro</h1>
     </div>
 
     <div class="container">
 
-      <div class="text-center mt-3">
-        <% if (messages.error) { %>
-        <p style="color:red"><%- messages.error %></p>
-        <% } %>
+      <div class="table-container">
+        <div>
+          <button class="aba-active" id="btn1">
+            <i class="fa fa-credit-card-alt"></i>
+            Recebimentos
+          </button>
+          <a href="./financeiroPagamentos.html" style="outline: none;">
+            <button class="aba" id="btn2">
+              <i class="fa fa-credit-card"></i>
+              Pagamentos
+            </button>
+          </a>
+        </div>
 
-        <% if (messages.success) { %>
-        <p style="color:green"><%- messages.success %></p>
-        <% } %>
+        <div class="table-top">
+          <div class="extras">
+            <a href="./financeiroNovoRecebimento.html">
+              <button class="extra-n">
+                <i class="fa fa-plus-square"> Novo</i>
+              </button>
+            </a>
+            <button class="extra-d">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+            <input type="text" class="extra-s" placeholder="Pesquisa por COD">
+            <input type="month" id="month" class="extra-m">
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">Cod</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Data</th>
+                <th scope="col">Situação</th>
+                <th scope="col">Valor</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th scope="row"><input type="checkbox"></th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox"></th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox"></th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-
     </div>
   </main>
   <!-- Scripts -->
-  <script src="../public/assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../public/js/index.js"></script>
+  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../public/js/index.js"></script>
 </body>
 
 </html>
