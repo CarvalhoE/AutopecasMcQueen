@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Produtos</h1>
+    </div>
+
+    <div class="container">
+
+      <div class="table-container">
+        <div>
+          <button class="aba-active" id="btnCompras">
+            <i class="fa fa-archive"></i>
+            Produtos
+          </button>
+        </div>
+
+        <div class="table-top">
+          <div class="extras">
+            <a href="./produtosNovoProduto.html">
+              <button class="extra-n">
+                <i class="fa fa-plus-square"> Novo</i>
+              </button>
+            </a>
+
+            <button class="extra-d">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+            <input type="text" class="extra-s" placeholder="Pesquisa por SKU">
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">SKU</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Valor Unitario</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Disponivel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row"><input type="checkbox"></td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td scope="col"><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td scope="row"><input type="checkbox"></td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td scope="col"><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td scope="row"><input type="checkbox"></td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td scope="col"><input type="checkbox"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../public/js/index.js"></script>
+</body>
+
+</html>

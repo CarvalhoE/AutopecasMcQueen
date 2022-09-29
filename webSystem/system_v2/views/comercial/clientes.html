@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  
+  <%- include('_lateral-bar.ejs') %>
+  
+  <main>
+    <div class="header">
+      <h1>Clientes</h1>
+    </div>
+    <div class="table-container">
+      <div>
+        <button class="aba-active">
+          <i class="fa fa-users"></i>
+          Clientes
+        </button>
+      </div>
+      
+      <div class="table-top">
+        <div class="extras">
+          <a href="./cadastraCliente.html"><button class="extra-n" id="btnNovoCliente">
+            <i class="fa fa-plus-square"> Novo</i>
+          </button></a>
+          
+          <button class="extra-d">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button class="extra-d">
+            <i class="fa fa-pencil-square-o"></i>
+          </button>
+          <input type="text" class="extra-s" placeholder="Pesquisa por Nome">
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"><input type="checkbox"></th>
+              <th scope="col">Cod</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Contato</th>
+              <th scope="col">E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row"><input type="checkbox"></td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>
+            </tr>
+            <tr>
+              <td scope="row"><input type="checkbox"></td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>
+            </tr>
+            <tr>
+              <td scope="row"><input type="checkbox"></td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../public/js/index.js"></script>
+</body>
+
+</html>
