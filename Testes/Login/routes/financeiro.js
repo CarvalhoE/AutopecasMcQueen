@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/financeiro', function (req, res, next) {
     if (req.session.loggedin) {
-      res.render('user/finRecebimentos', {
+      res.render('financeiro/finRecebimentos', {
         name: req.session.name
       });
     } else {
