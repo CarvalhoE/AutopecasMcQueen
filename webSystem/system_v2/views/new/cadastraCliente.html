@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.101.0">
+  <title>Autopeças McQueen</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" type="image/png" href="./image/logo.png"/>
+  <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="./style/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <nav class="d-flex flex-nowrap" id="menu">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 250px; ">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg class="bi pe-none me-2" width="40" height="32">
+          <img src="./image/logo.png" alt="Logo Autopeças" id="logo">
+        </svg>
+      </a>
+      <hr>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>Carvalho</strong>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" href="./vendas.html">Nova venda...</a></li>
+          <li><a class="dropdown-item" href="./Configuracoes.html">Perfil</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="./login.html">Sair</a></li>
+        </ul>
+      </div>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="./index.html" class="nav-link text-white" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-home"></i>
+            </svg>
+            Home
+          </a>
+      </li>
+        <li class="nav-item">
+          <a href="./financeiro.html" class="nav-link text-white" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-dollar"></i>
+            </svg>
+            Financeiro
+          </a>
+        </li>
+        <li>
+          <a href="./vendas.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-shopping-cart"></i>
+            </svg>
+            Vendas
+          </a>
+        </li>
+        <li>
+          <a href="./compras.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-truck"></i>
+            </svg>
+            Compras
+          </a>
+        </li>
+        <li>
+          <a href="./fornecedores.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-truck"></i>
+            </svg>
+            Fornecedores
+          </a>
+        </li>
+        <li>
+          <a href="./clientes.html" class="nav-link active text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-user"></i>
+            </svg>
+            Clientes
+          </a>
+        </li>
+        <li>
+          <a href="./produtos.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-inbox"></i>
+            </svg>
+            Produtos
+          </a>
+        </li>
+        <li>
+          <a href="./relatorios.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-bar-chart"></i>
+            </svg>
+            Relatórios
+          </a>
+        </li>
+        <li>
+          <a href="./nfe.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-file"></i>
+            </svg>
+            NF-e
+          </a>
+        </li>
+        <li>
+          <a href="./configuracoes.html" class="nav-link text-white">
+            <svg class="bi pe-none me-2" width="16" height="16">
+              <i class="fa fa-cog"></i>
+            </svg>
+            Configurações
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <main>
+    <div class="header">
+      <h1>Cadastro de Clientes</h1>
+    </div>
+
+    <div class="container-cadastroC" style="margin-left: auto; margin-right: auto;">
+        <form>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">Nome Completo</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline" >
+                <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">CPF</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Data de Nascimento</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+                <label class="form-label" for="form6Example2">Telefone</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="email" id="form6Example1" class="form-control" style="width: 520px;" />
+                <label class="form-label" for="form6Example1">E-mail</label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
+          <a href="./clientes.html">
+            <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+          </a>
+        </form>
+      </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+
+</html>

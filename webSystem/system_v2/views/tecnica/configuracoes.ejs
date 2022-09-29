@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  
+  <%- include('_lateral-bar.ejs') %>
+  
+  <main>
+    <div class="header">
+      <h1>Configurações</h1>
+    </div>
+
+    <div class="container-conf">
+      <a href="/signup_user">
+        <button class="abaRV">
+          <p>Cadastrar Funcionário</p>
+          <i class="fa fa-plus-square"></i>
+        </button>
+      </a>
+      <a href="/perfil">
+        <button class="abaRV">
+          <p>Perfil de Usuário</p>
+          <i class="fa fa-user"></i>
+        </button>
+      </a>
+      
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../public/js/index.js"></script>
+</body>
+
+</html>

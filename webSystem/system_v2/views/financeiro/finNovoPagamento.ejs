@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  
+  <%- include('_lateral-bar.ejs') %>
+  
+  <main>
+    <div class="header">
+      <h1>Financeiro - Novo Pagamento</h1>
+    </div>
+    <div class="container-cadastroC">
+        <form>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">Descrição</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline" >
+                <input type="number" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px; margin-left: -5px;"required/>
+                <label class="form-label" for="form6Example1">Valor</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required/>
+                <label class="form-label" for="form6Example2">Data</label>
+              </div>
+            </div>
+
+            <div class="col">
+                <div class="form-outline">
+                  <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
+                    <option value="1">Efetivado</option>
+                    <option value="2">Cancelado</option>
+                    <option value="3">Pendente</option>
+                    <option value="4">Em Atraso</option>
+                    <option value="5">Estornado</option>
+                  </select>
+                  <label class="form-label" for="form6Example1">Situação</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                  <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
+                    <option value="">Debito</option>
+                    <option value="">Credito</option>
+                  </select>
+                  <label class="form-label" for="form6Example1">Tipo de Pagamento</label>
+                </div>
+              </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
+          <a href="./financeiroPagamentos.html">
+            <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+          </a>
+        </form>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../public/js/index.js"></script>
+</body>
+
+</html>
