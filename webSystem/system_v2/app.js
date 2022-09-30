@@ -1,24 +1,25 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var expressValidator = require('express-validator');
-var flash = require('express-flash');
-var session = require('express-session');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let expressValidator = require('express-validator');
+let flash = require('express-flash');
+let session = require('express-session');
 const bodyParser = require('body-parser');
 
-var indexRouter = require('./routes/index');
-var financeiroRouter = require('./routes/financeiro');
-var configuracoesRouter = require('./routes/configuracoes');
-var homeRouter = require('./routes/home');
+let indexRouter =       require('./routes/index');
+let homeRouter =        require('./routes/home');
+let comercialRouter =   require('./routes/comercial');
+let financeiroRouter =  require('./routes/financeiro');
+let tecnicaRouter =     require('./routes/tecnica');
 
-var app = express();
+let app = express();
 
 app.use('/public', express.static('public'));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [__dirname + '/views', __dirname + '/views/comercial', __dirname + '/views/financeiro', __dirname + '/views/tecnica']);
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -39,9 +40,10 @@ app.use(expressValidator());
 
 // app.use('/', indexRouter); Cópia de Segurança
 app.use(indexRouter);
-app.use(financeiroRouter);
-app.use(configuracoesRouter);
 app.use(homeRouter);
+app.use(comercialRouter);
+app.use(financeiroRouter);
+app.use(tecnicaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

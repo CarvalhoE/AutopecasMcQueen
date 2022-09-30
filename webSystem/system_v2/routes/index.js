@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-var db = require('../database');
+let db = require('../database');
 
 router.post('/authentication', function (req, res, next) {
-  var loginUser = req.body.user_login;
-  var senhaUser = req.body.user_password;
-
+  let loginUser = req.body.user_login;
+  let senhaUser = req.body.user_password;
+  
   db.query('Select * From Funcionario Where DS_Login = ? And NR_Senha = ?', [loginUser, senhaUser], function (err, rows, fields) {
     if (err) throw err;
 

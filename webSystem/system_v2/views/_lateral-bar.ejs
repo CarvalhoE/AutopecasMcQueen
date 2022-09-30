@@ -15,7 +15,7 @@
                     <strong><%= name %></strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="./vendas.html">Nova venda...</a></li>
+                    <li><a class="dropdown-item" href="/comercial/vendas">Nova venda</a></li>
                     <li><a class="dropdown-item" href="/Configuracoes">Perfil</a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -26,7 +26,7 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="/home" class="nav-link active" aria-current="page">
+                    <a href="/home" class="nav-link active" aria-current="page" id="navHome">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-home"></i>
                         </svg>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/financeiro/recebimentos" class="nav-link text-white" aria-current="page">
+                    <a href="/financeiro/recebimentos" class="nav-link text-white" aria-current="page" id="navFinanceiro>
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-dollar"></i>
                         </svg>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./vendas.html" class="nav-link text-white">
+                    <a href="/comercial/vendas" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-shopping-cart"></i>
                         </svg>
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./compras.html" class="nav-link text-white">
+                    <a href="/comercial/compras" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-truck"></i>
                         </svg>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./fornecedores.html" class="nav-link text-white">
+                    <a href="/tecnica/fornecedor" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-truck"></i>
                         </svg>
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./clientes.html" class="nav-link text-white">
+                    <a href="/comercial/clientes" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-user"></i>
                         </svg>
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./produtos.html" class="nav-link text-white">
+                    <a href="/tecnica/produtos" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-inbox"></i>
                         </svg>
@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./relatorios.html" class="nav-link text-white">
+                    <a href="/tecnica/relatorios" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-bar-chart"></i>
                         </svg>
@@ -90,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./nfe.html" class="nav-link text-white">
+                    <a href="/tecnica/notas" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-file"></i>
                         </svg>
@@ -98,7 +98,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/configuracoes" class="nav-link text-white">
+                    <a href="/tecnica/configuracoes" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-cog"></i>
                         </svg>
@@ -108,4 +108,20 @@
             </ul>
         </div>
     </nav>
-</div>
+<!-- </div>
+
+<script type="text/javascript">
+    $(function (){
+    
+        $('#nav ul li a').each(function(){
+            var path = window.location.href;
+            var current = path.substring(path.lastIndexOf('/')+1);
+            var url = $(this).attr('href');
+    
+            if(url == current){
+                $(this).addClass('active');
+            };
+        });         
+    });
+    
+</script> -->

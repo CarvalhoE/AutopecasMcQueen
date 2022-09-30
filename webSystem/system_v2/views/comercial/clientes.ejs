@@ -13,9 +13,9 @@
 </head>
 
 <body>
-  
+
   <%- include('_lateral-bar.ejs') %>
-  
+
   <main>
     <div class="header">
       <h1>Clientes</h1>
@@ -27,13 +27,13 @@
           Clientes
         </button>
       </div>
-      
+
       <div class="table-top">
         <div class="extras">
           <a href="./cadastraCliente.html"><button class="extra-n" id="btnNovoCliente">
-            <i class="fa fa-plus-square"> Novo</i>
-          </button></a>
-          
+              <i class="fa fa-plus-square"> Novo</i>
+            </button></a>
+
           <button class="extra-d">
             <i class="fa fa-trash"></i>
           </button>
@@ -54,27 +54,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row"><input type="checkbox"></td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td scope="row"><input type="checkbox"></td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td scope="row"><input type="checkbox"></td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
+            <% for (let i = 0; i < values.length; i++) { %>
+              <tr>
+                <td scope="row"><input type="checkbox"></td>
+                <td><%= values[i].ID_Funcionario %></td>
+                <td><%= values[i].NM_Nome %></td>
+                <td><%= values[i].NR_Telefone %></td>
+                <td><%= values[i].DS_Email %></td>
+              </tr>
+            <% } %>
           </tbody>
         </table>
       </div>
