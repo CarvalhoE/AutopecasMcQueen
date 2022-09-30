@@ -13,22 +13,24 @@
 </head>
 
 <body>
-  
+
   <%- include('_lateral-bar.ejs') %>
 
   <main>
     <div class="header">
-      <h1>Financeiro - Recebimentos</h1>
+      <h1>Financeiro</h1>
     </div>
 
     <div class="container">
 
       <div class="table-container">
         <div>
-          <button class="aba-active" id="btn1">
-            <i class="fa fa-credit-card-alt"></i>
-            Recebimentos
-          </button>
+          <a href="/financeiro/recebimentos" style="outline: none;">
+            <button class="aba-active" id="btn1" onclick="show('link1')">
+              <i class="fa fa-credit-card-alt"></i>
+              Recebimentos
+            </button>
+          </a>
           <a href="/financeiro/pagamentos" style="outline: none;">
             <button class="aba" id="btn2">
               <i class="fa fa-credit-card"></i>
@@ -37,7 +39,7 @@
           </a>
         </div>
 
-        <div class="table-top">
+        <div class="table-top dynamic_link" id="link1">
           <div class="extras">
             <a href="/financeiro/novoRecebimento">
               <button class="extra-n">
@@ -52,6 +54,11 @@
           </div>
 
           <table class="table">
+            <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
             <thead>
               <tr>
                 <th scope="col"><input type="checkbox"></th>
@@ -62,32 +69,18 @@
                 <th scope="col">Valor</th>
               </tr>
             </thead>
-
             <tbody>
+              <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td><%= values[i].ID_Cobranca %></td>
+                <td><%= values[i].DS_Descricao %></td>
+                <td><%= values[i].DT_Registro %></td>
+                <td><%= values[i].DS_SituacaoCobranca %></td>
+                <td><%= values[i].VL_Valor %></td>
               </tr>
-              <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
+              <% } %>
+              <% } %>
             </tbody>
           </table>
         </div>

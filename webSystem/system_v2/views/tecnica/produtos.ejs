@@ -46,6 +46,11 @@
           </div>
 
           <table class="table">
+            <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
             <thead>
               <tr>
                 <th scope="col"><input type="checkbox"></th>
@@ -58,33 +63,18 @@
               </tr>
             </thead>
             <tbody>
+              <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row"><input type="checkbox"></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td scope="col"><input type="checkbox"></td>
+                <td><a href="#"><%= values[i].NR_SKU %></a></td>
+                <td><%= values[i].DS_Descricao %></td>
+                <td><%= values[i].VL_Preco %></td>
+                <td><%= values[i].DS_Marca %></td>
+                <td><%= values[i].ID_Categoria %></td>
+                <td><%= values[i].FL_Disponivel %></td>
               </tr>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td scope="col"><input type="checkbox"></td>
-              </tr>
-              <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td scope="col"><input type="checkbox"></td>
-              </tr>
+              <% } %>
+              <% } %>
             </tbody>
           </table>
         </div>

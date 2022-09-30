@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  
+
   <%- include('_lateral-bar.ejs') %>
 
   <main class="cadastroFunc">
@@ -23,17 +23,19 @@
 
     <div class="container-cadastroC">
 
-      <form>
+      <form action="/cadastroUsuario" method="post">
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+              <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;"
+                name="nomeFuncionario" required />
               <label class="form-label" for="form6Example1">Nome Completo</label>
             </div>
           </div>
           <div class="col">
-            <div class="form-outline" >
-              <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px; margin-left: -5px;"required/>
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control"
+                style="width: 140px; margin-top: 10px; margin-left: -5px;" name="cpfFuncionario" required />
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
           </div>
@@ -41,25 +43,31 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 140px;" required/>
+              <input type="text" id="form6Example2" class="form-control" style="width: 140px;" name="telefoneFuncionario" />
               <label class="form-label" for="form6Example2">Telefone</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
+              <input type="date" id="form6Example2" class="form-control" style="width: 148px;" name="dtNascimentoFuncionario" required />
               <label class="form-label" for="form6Example2">Data de Nascimento</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
+              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" name="codigoFuncionario" required />
+              <label class="form-label" for="form6Example2">Código</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" name="loginFuncionario" required />
               <label class="form-label" for="form6Example2">Login</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" required/>
+              <input type="text" id="form6Example2" class="form-control" style="width: 148px;" name="senhaFuncionario" required />
               <label class="form-label" for="form6Example2">Senha</label>
             </div>
           </div>
@@ -68,14 +76,14 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="email" id="form6Example1" class="form-control" style="width: 520px;" />
+              <input type="email" id="form6Example1" class="form-control" style="width: 520px;" name="emailFuncionario" />
               <label class="form-label" for="form6Example1">E-mail</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example4" class="form-control" style="width: 760px;" required/>
-          <label class="form-label" for="form6Example4">Endereço</label>
+              <input type="text" id="form6Example4" class="form-control" style="width: 760px;" name="logradouroFuncionario" required />
+              <label class="form-label" for="form6Example4">Endereço</label>
             </div>
           </div>
         </div>
@@ -83,70 +91,94 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="number" id="form6Example2" class="form-control" required/>
+              <input type="number" id="form6Example2" class="form-control" name="numeroFuncionario" required />
               <label class="form-label" for="form6Example2">Número</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" required/>
-              <label class="form-label" for="form6Example2">Bairro</label>
+              <input type="text" id="form6Example2" class="form-control" name="complementoFuncionario" required />
+              <label class="form-label" for="form6Example2">Complemento</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" required/>
-              <label class="form-label" for="form6Example2">Cidade</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" required/>
-              <label class="form-label" for="form6Example2">Estado</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="number" id="form6Example2" class="form-control" required/>
+              <input type="number" id="form6Example2" class="form-control" name="cepFuncionario" required />
               <label class="form-label" for="form6Example2">CEP</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 50px;"required/>
+              <input type="text" id="form6Example2" class="form-control" name="bairroFuncionario" required />
+              <label class="form-label" for="form6Example2">Bairro</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example2" class="form-control" name="cidadeFuncionario" required />
+              <label class="form-label" for="form6Example2">Cidade</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example2" class="form-control" name="ufFuncionario" style="width: 50px;" required />
               <label class="form-label" for="form6Example2">UF</label>
             </div>
           </div>
         </div>
-        
+
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
-                <option value="comercial">Comercial</option>
-                <option value="financeiro">Financeiro</option>
-                <option value="financeiro">RH</option>
+              <select id="departamento" name="departamentoFuncionario" class="form-control" style="width: 100px;">
+                <% for (let i = 0; i < valuesDepto.length; i++) { %>
+                <option value="<%= valuesDepto[i].ID_Departamento %>"><%= valuesDepto[i].DS_Departamento %></option>
+                <% } %>
               </select>
               <label class="form-label" for="form6Example1">Departamento</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
-                <option value="">Vendedor</option>
-                <option value="">Gerente</option>
-                <option value="">Estoquista</option>
-                <option value="">Auxiliar de Contas a pagar</option>
-                <option value="">Auxiliar de Compras</option>
-                <option value="">Analista de Recrutamento e Seleção</option>
+              <select id="cargo" name="cargoFuncionario" class="form-control" style="width: 100px;">
+                <% for (let i = 0; i < valuesCargo.length; i++) { %>
+                <option value="<%= valuesCargo[i].ID_Cargo %>"><%= valuesCargo[i].DS_Cargo %></option>
+                <% } %>
               </select>
               <label class="form-label" for="form6Example1">Cargo</label>
             </div>
           </div>
+          <div class="col">
+            <div class="form-outline">
+              <select id="perfil" name="perfilFuncionario" class="form-control" style="width: 100px;">
+                <% for (let i = 0; i < valuesPerfil.length; i++) { %>
+                <option value="<%= valuesPerfil[i].ID_Perfil %>"><%= valuesCargo[i].DS_Perfil %></option>
+                <% } %>
+              </select>
+              <label class="form-label" for="form6Example1">Perfil</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <select id="funcionarioHabilitado" name="flHabilitadoFuncionario" class="form-control" style="width: 100px;">
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+              </select>
+              <label class="form-label" for="form6Example1">Habilitado</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="date" id="form6Example2" class="form-control" style="width: 148px;" name="dtAdmissaoFuncionario" required />
+              <label class="form-label" for="form6Example2">Data de Admissão</label>
+            </div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
-        <a href="./configuracoes.html">
-          <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+        <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar
+          cadastro</button>
+        <a href="/tecnica/configuracoes">
+          <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
         </a>
       </form>
     </div>

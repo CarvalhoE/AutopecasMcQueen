@@ -13,35 +13,35 @@
 </head>
 
 <body>
-  
+
   <%- include('_lateral-bar.ejs') %>
 
   <main>
     <div class="header">
-      <h1>Financeiro - Pagamentos</h1>
+      <h1>Financeiro</h1>
     </div>
 
     <div class="container">
-        <div class="table-container">
-            <div>
-                <a href="./financeiro.html">
-                    <button class="aba" id="btn1">
-                        <i class="fa fa-credit-card-alt"></i>
-                        Recebimentos
-                    </button>
-                </a>
-                
-                <a href="./financeiroPagamentos.html" >
-                    <button class="aba-active" id="btn2">
-                        <i class="fa fa-credit-card"></i>
-                        Pagamentos
-                    </button>
-                </a>
-            </div>
+      <div class="table-container">
+        <div>
+          <a href="/financeiro/recebimentos">
+            <button class="aba" id="btn1">
+              <i class="fa fa-credit-card-alt"></i>
+              Recebimentos
+            </button>
+          </a>
 
-        <div class="table-top">
+          <a href="/financeiro/pagamentos">
+            <button class="aba-active" id="btn2">
+              <i class="fa fa-credit-card"></i>
+              Pagamentos
+            </button>
+          </a>
+        </div>
+
+        <div class="table-top dynamic_link" id="link2">
           <div class="extras">
-            <a href="./financeiroNovoPagamento.html">
+            <a href="/financeiro/novoPagamento">
               <button class="extra-n">
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
@@ -54,6 +54,11 @@
           </div>
 
           <table class="table">
+            <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
             <thead>
               <tr>
                 <th scope="col"><input type="checkbox"></th>
@@ -64,32 +69,18 @@
                 <th scope="col">Valor</th>
               </tr>
             </thead>
-
             <tbody>
+              <% for (let i = 0; i < values.length; i++) { %>
               <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td scope="row"><input type="checkbox"></td>
+                <td><%= values[i].ID_Cobranca %></td>
+                <td><%= values[i].DS_Descricao %></td>
+                <td><%= values[i].DT_Registro %></td>
+                <td><%= values[i].DS_SituacaoCobranca %></td>
+                <td><%= values[i].VL_Valor %></td>
               </tr>
-              <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox"></th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
+              <% } %>
+              <% } %>
             </tbody>
           </table>
         </div>

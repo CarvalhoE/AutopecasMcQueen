@@ -13,9 +13,9 @@
 </head>
 
 <body>
-  
+
   <%- include('_lateral-bar.ejs') %>
-  
+
   <main>
     <div class="header">
       <h1>Fornecedores</h1>
@@ -27,13 +27,13 @@
           Fornecedores
         </button>
       </div>
-      
+
       <div class="table-top">
         <div class="extras">
           <a href="/tecnica/cadastraFornecedor"><button class="extra-n" id="btnNovoCliente">
-            <i class="fa fa-plus-square"> Novo </i>
-          </button></a>
-          
+              <i class="fa fa-plus-square"> Novo </i>
+            </button></a>
+
           <button class="extra-d">
             <i class="fa fa-trash"></i>
           </button>
@@ -44,6 +44,11 @@
         </div>
 
         <table class="table">
+          <% if (values.length <= 0) { %>
+          <tr>
+            <td>Não há registros para serem mostrados!</td>
+          </tr>
+          <% } else {%>
           <thead>
             <tr>
               <th scope="col"><input type="checkbox"></th>
@@ -54,27 +59,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row"><input type="checkbox"></td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td scope="row"><input type="checkbox"></td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td scope="row"><input type="checkbox"></td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
+            <% for (let i = 0; i < values.length; i++) { %>
+              <tr>
+                <td scope="row"><input type="checkbox"></td>
+                <td><%= values[i].ID_Fornecedor %></td>
+                <td><%= values[i].NM_Nome %></td>
+                <td><%= values[i].NR_Telefone %></td>
+                <td><%= values[i].DS_Email %></td>
+              </tr>
+              <% } %>
+              <% } %>
           </tbody>
         </table>
       </div>

@@ -26,7 +26,7 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="/home" class="nav-link active" aria-current="page" id="navHome">
+                    <a href="/home" class="nav-link text-white" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-home"></i>
                         </svg>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/financeiro/recebimentos" class="nav-link text-white" aria-current="page" id="navFinanceiro>
+                    <a href="/financeiro/recebimentos" class="nav-link text-white" aria-current="page" id="financc">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <i class="fa fa-dollar"></i>
                         </svg>
@@ -108,20 +108,18 @@
             </ul>
         </div>
     </nav>
-<!-- </div>
+</div>
 
+<!--Abas Ativas-->
 <script type="text/javascript">
-    $(function (){
-    
-        $('#nav ul li a').each(function(){
-            var path = window.location.href;
-            var current = path.substring(path.lastIndexOf('/')+1);
-            var url = $(this).attr('href');
-    
-            if(url == current){
-                $(this).addClass('active');
-            };
-        });         
-    });
-    
-</script> -->
+    const currentLocation = location.href;
+    const menuItem = document.querySelectorAll('a');
+    const menuLength = menuItem.length;
+
+    for(let i = 0; i<menuLength; i++){
+        if(menuItem[i].href === currentLocation){
+            menuItem[i].className = "nav-link text-white active"
+        }
+    }
+
+</script> 

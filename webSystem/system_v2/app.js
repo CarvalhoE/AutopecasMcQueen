@@ -32,7 +32,7 @@ app.use(session({
   secret: 'autopecas',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 990000 }
 }));
 
 app.use(flash());

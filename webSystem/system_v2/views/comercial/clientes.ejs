@@ -44,24 +44,30 @@
         </div>
 
         <table class="table">
-          <thead>
+            <% if (values.length <= 0) { %>
             <tr>
-              <th scope="col"><input type="checkbox"></th>
-              <th scope="col">Cod</th>
-              <th scope="col">Cliente</th>
-              <th scope="col">Contato</th>
-              <th scope="col">E-mail</th>
+              <td>Não há registros para serem mostrados!</td>
             </tr>
-          </thead>
-          <tbody>
-            <% for (let i = 0; i < values.length; i++) { %>
+            <% } else {%>
+            <thead>
               <tr>
-                <td scope="row"><input type="checkbox"></td>
-                <td><%= values[i].ID_Funcionario %></td>
-                <td><%= values[i].NM_Nome %></td>
-                <td><%= values[i].NR_Telefone %></td>
-                <td><%= values[i].DS_Email %></td>
+                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">Cod</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Contato</th>
+                <th scope="col">E-mail</th>
               </tr>
+            </thead>
+            <tbody>
+            <% for (let i = 0; i < values.length; i++) { %>
+            <tr>
+              <td scope="row"><input type="checkbox"></td>
+              <td><%= values[i].ID_Cliente %></td>
+              <td><%= values[i].NM_Nome %></td>
+              <td><%= values[i].NR_Telefone %></td>
+              <td><%= values[i].DS_Email %></td>
+            </tr>
+            <% } %>
             <% } %>
           </tbody>
         </table>
