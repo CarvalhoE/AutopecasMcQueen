@@ -26,12 +26,17 @@ Create Table Categoria
    ,Constraint PK_ID_Categoria Primary Key (ID_Categoria)
 );
 
+Insert Into Categoria (DS_Categoria) 
+	Values ('Acessório')
+          ,('Elétrica')
+          ,('Mecânica');
+
 Create Table Produto
 (
 	ID_Produto 		Int 			Auto_Increment
    ,NM_Produto 		VarChar(128) 	Not Null
    ,DS_Descricao	VarChar(256)	Not Null
-   ,IM_Foto			VarChar(256)	Null
+   ,IM_Foto			varChar(256)	Null
    ,NR_SKU			VarChar(14)		Not Null
    ,VL_Preco 		Numeric(10,2) 	Not Null
    ,FL_Disponivel	Char(1)			Not Null
@@ -41,6 +46,11 @@ Create Table Produto
    ,Constraint FK_ID_Categoria_Categoria 	Foreign Key (ID_Categoria) References Categoria (ID_Categoria)
    ,Constraint CK_FL_ProdutoDisponivel 		Check (FL_Disponivel In (0,1))
 );
+
+Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_Preco, FL_Disponivel, DS_Marca, ID_Categoria)
+	Values ('Cheirinho', 'Bom cheiro para carros', '34560002987564', '14.90', 1, 'CheiroBom', 1)
+          ,('Bateria', 'Bateria para carros', '345111298756416', '1200.00', 1, 'Moura', 2)
+          ,('Amortecedor', 'Amortecedor para carros', '34560002988468', '99.90', 0, 'Nike', 3);
 
 Create Table Estoque
 (
@@ -60,12 +70,24 @@ Create Table FormaPagamento
    ,Constraint PK_ID_FormaPagamento Primary Key (ID_FormaPagamento)
 );
 
+Insert Into	FormaPagamento (DS_FormaPagamento) 
+	Values ('Cartão de Crédito')
+	      ,('Cartão de Débito')
+          ,('Dinheiro')
+          ,('PIX');
+
 Create Table Departamento
 (
 	ID_Departamento 	Int 			auto_increment
    ,DS_Departamento 	VarChar(40) 	Not Null
    ,Constraint PK_ID_Departamento Primary Key (ID_Departamento)
 );
+
+Insert Into	Departamento (DS_Departamento) 
+	Values ('Financeiro')
+	      ,('RH')
+          ,('Operacional')
+          ,('Gestão');
 
 Create Table Cargo
 (
@@ -74,12 +96,26 @@ Create Table Cargo
    ,Constraint PK_ID_Cargo Primary Key (ID_Cargo)
 );
 
+Insert Into	Cargo (DS_Cargo)
+	Values ('Vendedor')
+		  ,('Gerente')
+          ,('Estoquista')
+          ,('Aux de Contas a Pagar')
+          ,('Aux de Compras')
+          ,('Analista de Recrutamento e Seleção');
+
 Create Table Perfil
 (
 	ID_Perfil 	Int 			auto_increment
    ,DS_Perfil 	VarChar(16) 	Not Null
    ,Constraint PK_ID_Perfil Primary Key (ID_Perfil)
 );
+
+Insert Into	Perfil (DS_Perfil)
+	Values ('Gerente')
+	      ,('Comercial')
+		  ,('Financeiro')
+		  ,('RH');
 
 Create Table Funcionario
 (
@@ -97,7 +133,7 @@ Create Table Funcionario
    ,ID_Perfil			Int				Not Null 
    ,FL_Habilitado		Char(1)			Not Null
    ,DT_Admissao 		Date	 		Not Null
-   ,DT_Demissao 		Date	 		Not Null
+   ,DT_Demissao 		Date	 		Null
    ,Constraint PK_ID_Funcionario 				Primary Key (ID_Funcionario)
    ,Constraint FK_ID_Departamento_Departamento 	Foreign Key (ID_Departamento) 	References Departamento (ID_Departamento)
    ,Constraint FK_ID_Cargo_Cargo			 	Foreign Key (ID_Cargo) 			References Cargo (ID_Cargo)
@@ -122,8 +158,18 @@ Create Table FuncionarioEndereco
 
 Create Table Fornecedor
 (
-	ID_Fornecedor 	Int 			auto_increment
-   ,NM_Nome 		VarChar(32) 	Not Null
+	ID_Fornecedor 		Int 			auto_increment
+   ,NM_Empresa 			VarChar(32) 	Not Null
+   ,NR_CNPJ 			VarChar(14) 	Not Null
+   ,DS_Logradouro		VarChar(100)	Null
+   ,DS_Bairro		 	VarChar(40)		Null
+   ,DS_Cidade		 	VarChar(40)		Null
+   ,DS_CEP		 		VarChar(8)		Null
+   ,NR_Telefone			VarChar(11)		Not Null
+   ,DS_Email			VarChar(64)		Not Null
+   ,NR_Banco			VarChar(5)		Null
+   ,NR_Agencia			VarChar(5)		Null
+   ,NR_Conta			VarChar(10)		Null
    ,Constraint PK_ID_Fornecedor	 	Primary Key (ID_Fornecedor)
 );
 
@@ -248,27 +294,7 @@ Create Table Cobranca
 
  -- Inserts
  
- Insert Into
-	Departamento (DS_Departamento) Values ('Financeiro');
-Insert Into
-	Departamento (DS_Departamento) Values ('RH');
-Insert Into
-	Departamento (DS_Departamento) Values ('Operacional');
-Insert Into
-	Departamento (DS_Departamento) Values ('Gestão');
-    
-Insert Into
-	Cargo (DS_Cargo) Values ('Vendedor');
-Insert Into
-	Cargo (DS_Cargo) Values ('Gerente');
-Insert Into
-	Cargo (DS_Cargo) Values ('EStoquista');
-Insert Into
-	Cargo (DS_Cargo) Values ('Aux de Contas a Pagar');
-Insert Into
-	Cargo (DS_Cargo) Values ('Aux de Compras');
-Insert Into
-	Cargo (DS_Cargo) Values ('Analista de Recrutamento e Seleção');
+
     
 Insert Into
 	PedidoStatus (DS_Status) Values ('Pedido Em Aberto');
@@ -278,15 +304,7 @@ Insert Into
 	PedidoStatus (DS_Status) Values ('Pagamento Rejeitado');
 Insert Into
 	PedidoStatus (DS_Status) Values ('Pedido Cancelado');
-    
-Insert Into
-	Perfil (DS_Perfil) Values ('Gerente');
-Insert Into
-	Perfil (DS_Perfil) Values ('Comercial');
-Insert Into
-	Perfil (DS_Perfil) Values ('Financeiro');
-Insert Into
-	Perfil (DS_Perfil) Values ('RH');
+
     
 Insert Into
 	TipoCobranca (DS_TipoCobranca) Values ('Débito');
@@ -303,3 +321,11 @@ Insert Into
 	SituacaoCobranca (DS_SituacaoCobranca) Values ('Em Atraso');
 Insert Into
 	SituacaoCobranca (DS_SituacaoCobranca) Values ('Estornado');
+    
+
+Insert Into
+	Funcionario (NM_Nome, NR_CPF, DT_Nascimento, NR_Codigo, DS_Login, NR_Senha, ID_Departamento, ID_Cargo, ID_Perfil, FL_Habilitado, DT_Admissao) Values
+				('Jose', '12345678912', '2000-12-01', '11234', 'admin', 'admin', 4, 2, 1, 1, '2022-01-01');
+Insert Into
+	FuncionarioEndereco (ID_Funcionario, DS_Logradouro, DS_Numero, DS_Complemento, DS_CEP, DS_Bairro, DS_Cidade, DS_UF) Values
+				(1, 'Rua Cruzeiro', '666', 'Cela 4, Pavilhão 8', '08161530', 'São Miguel', 'São Paulo', 'SP');
