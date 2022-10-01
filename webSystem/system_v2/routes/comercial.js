@@ -76,8 +76,30 @@ router.get('/comercial/VendasNovaVenda', function (req, res) {
 
 router.get('/comercial/compras', function (req, res) {
   if (req.session.loggedin) {
-    res.render('comercial/compras', {
-      name: req.session.name
+    let query = `Select C.ID_Compra
+                       ,F.NM_Nome as NM_Funcionario
+                       ,FO.NM_Nome as NM_Fornecedor
+                       ,C.DT_Compra
+                       ,FP.DS_FormaPagamento
+                       ,CS.DS_Situacao
+                       ,C.VL_ValorTotal
+                     From Compra as C
+                       Inner Join CompraSituacao as CS
+                       On C.ID_CompraSituacao = CS.ID_CompraSituacao
+                     Inner Join Funcionario as F
+                       On C.ID_Funcionario = F.ID_Funcionario
+                     Inner Join Fornecedor as FO
+                       On C.ID_Fornecedor = FO.ID_Fornecedor
+                     Inner Join FormaPagamento as FP
+                       On C.ID_FormaPagamento = FP.ID_FormaPagamento`
+    db.query(query, function (err, rows, fields) {
+      if (err) throw err;
+  
+        req.session.compras = rows;
+        res.render('comercial/compras', {
+          name: req.session.name,
+          values: req.session.compras
+        });
     });
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');

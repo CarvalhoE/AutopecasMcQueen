@@ -22,7 +22,20 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
 
 router.get('/tecnica/produtos', function (req, res, next) {
     if (req.session.loggedin) {
-        db.query('Select * From Produto', function (err, rows, fields) {
+        let query = `Select ID_Produto
+                           ,NR_SKU
+                           ,NM_Produto
+                           ,VL_Preco
+                           ,DS_Marca
+                           ,C.DS_Categoria
+                           ,Case
+                                 When 1 Then 'SIM'
+                                 Else 'NÃO'
+                            End as FL_Disponivel
+                        From Produto P
+                        Inner Join Categoria C
+                            On P.ID_Categoria = C.ID_Categoria`
+        db.query(query, function (err, rows, fields) {
             if (err) throw err;
 
             req.session.produtos = rows;
