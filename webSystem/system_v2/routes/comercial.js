@@ -78,7 +78,7 @@ router.get('/comercial/compras', function (req, res) {
   if (req.session.loggedin) {
     let query = `Select C.ID_Compra
                        ,F.NM_Nome as NM_Funcionario
-                       ,FO.NM_Nome as NM_Fornecedor
+                       ,FO.NM_Empresa
                        ,C.DT_Compra
                        ,FP.DS_FormaPagamento
                        ,CS.DS_Situacao
@@ -92,7 +92,7 @@ router.get('/comercial/compras', function (req, res) {
                        On C.ID_Fornecedor = FO.ID_Fornecedor
                      Inner Join FormaPagamento as FP
                        On C.ID_FormaPagamento = FP.ID_FormaPagamento`
-    db.query(query, function (err, rows, fields) {
+    db.query(query, function (err, rows, fields) { 
       if (err) throw err;
   
         req.session.compras = rows;
@@ -117,58 +117,5 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
     res.redirect('/login')
   }
 });
-
-//Data
-// router.get('/carregaClientes', function (req, res, next) {
-
-//   db.query('Select * From Funcionario', function (err, rows, fields) {
-//     if (err) throw err;
-
-//       req.session.clientes = rows;
-//       //res.render('/clientes',{values:require.session.users});
-//       console.log(rows)
-//       // res.redirect('/comercial/clientes');
-//   });
-// });
-
-// router.get('/comercial/clientes', function (req, res, next) {
-//   if (req.session.loggedin) {
-//     db.query('Select * From Funcionario Where DS_Login = ? And NR_Senha = ?', [loginUser, senhaUser], function (err, rows, fields) {
-//       if (err) throw err;
-
-//       if (rows.length <= 0) {
-//         req.flash('error', 'Usuário/Senha inválido!');
-//         res.redirect('/login')
-//       } else {
-//         req.session.loggedin = true;
-//         req.session.name = rows[0].NM_Nome;
-//         req.session.user_id = rows[0].ID_Funcionario;
-
-//         res.redirect('/home');
-//       }
-//     });
-//     res.render('comercial/clientes', {
-//       name: req.session.name,
-//       data:
-//     });
-//   } else {
-//     req.flash('sucess', 'É necessário estar logado para acessar esta página');
-//     res.redirect('/login')
-//   }
-// });
-
-//  router.get('/comercial/clientes', function (req, res, next) {
-//    db.query('Select * From Funcionario', function (err, data) {
-
-//      if (err) throw err;
-
-//      res.render('Funcionario', {
-//        sampleData: data
-//      })
-
-//    });
-
-//  });
-
 
 module.exports = router;
