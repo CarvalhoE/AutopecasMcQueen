@@ -18,7 +18,7 @@
 
   <main>
     <div class="header">
-      <h1>Compras</h1>
+      <h1>Funcionários</h1>
     </div>
 
     <div class="container">
@@ -27,17 +27,17 @@
         <div>
           <button class="aba-active" id="btnCompras">
             <i class="fa fa-credit-card-alt"></i>
-            Compras
+            Funcionários
           </button>
         </div>
 
         <div class="table-top">
           <div class="extras">
-            <a href="/comercial/comprasNovaCompra">
+            <!-- <a href="/comercial/comprasNovaCompra">
               <button class="extra-n">
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
-            </a>
+            </a> -->
             <button class="extra-d">
               <i class="fa fa-pencil-square-o"></i>
             </button>
@@ -55,25 +55,24 @@
               <tr>
                 <td scope="row"><input type="checkbox"></td>
                 <th scope="col">Cod</th>
-                <th scope="col">Funcionario</th>
-                <th scope="col">Fornecedor</th>
-                <th scope="col">Data da Compra</th>
-                <th scope="col">Forma de Pagamento</th>
-                <th scope="col">Situação</th>
-                <th scope="col">Valor</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-Mail</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Data de Admissão</th>
               </tr>
             </thead>
             <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row"><input type="checkbox"></td>
-                <td><a href="#"><%= values[i].ID_Compra %></a></td>
-                <td><%= values[i].NM_Funcionario %></td>
-                <td><%= values[i].NM_Empresa %></td>
-                <td><%= values[i].DT_Compra %></td>
-                <td><%= values[i].DS_FormaPagamento %></td>
-                <td><%= values[i].DS_Situacao %></td>
-                <td><%= values[i].VL_ValorTotal %></td>
+                <td><a href="#"><%= values[i].NR_Codigo %></a></td>
+                <td><%= values[i].NM_Nome %></td>
+                <td><%= values[i].DS_Email %></td>
+                <td><%= values[i].ID_Departamento %></td>
+                <td><%= values[i].ID_Cargo %></td>
+                <td><%= values[i].DT_Admissao %></td>
+                <td><%= values[i].DT_Demissao %></td>
               </tr>
               <% } %>
               <% } %>

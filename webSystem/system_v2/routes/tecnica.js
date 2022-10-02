@@ -20,6 +20,23 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
     }
 });
 
+router.get('/tecnica/funcionarios', function (req, res, next) {
+    if (req.session.loggedin) {
+        db.query(`Select * From Funcionario`, function (err, rows, fields) {
+            if (err) throw err;
+
+            req.session.fornecedores = rows;
+            res.render('tecnica/funcionarios', {
+                name: req.session.name,
+                values: req.session.fornecedores
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
 router.get('/tecnica/produtos', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Produto
@@ -43,6 +60,29 @@ router.get('/tecnica/produtos', function (req, res, next) {
             res.render('tecnica/produtos', {
                 name: req.session.name,
                 values: req.session.produtos
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+//Configurar Rota
+router.get('/tecnica/novoProduto', function (req, res, next) {
+    if (req.session.loggedin) {
+        db.query('Select * From Produto; Select * From Estoque; Select * From Funcionario;', function (err, rows, fields) {
+            if (err) throw err;
+
+            req.session.produto = rows[0];
+            req.session.estoque = rows[1];
+            req.session.funcionario = rows[2];
+
+            res.render('tecnica/novoProduto', {
+                name: req.session.name,
+                valuesProduto: req.session.produto,
+                valuesEstoque: req.session.estoque,
+                valuesFuncionario: req.session.funcionario
             });
         });
     } else {
