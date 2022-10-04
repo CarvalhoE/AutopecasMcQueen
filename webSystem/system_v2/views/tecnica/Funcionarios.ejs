@@ -45,7 +45,7 @@
             <input type="month" id="month" class="extra-m">
           </div>
 
-          <table class="table">
+          <table class="table" on>
             <% if (values.length <= 0) { %>
             <tr>
               <td>Não há registros para serem mostrados!</td>
@@ -65,14 +65,13 @@
             <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
-                <td scope="row"><input type="checkbox"></td>
+                <td scope="row"><input type="checkbox" class="ckbFuncionario" value="<%= values[i].NR_Codigo%>"></td>
                 <td><a href="#"><%= values[i].NR_Codigo %></a></td>
                 <td><%= values[i].NM_Nome %></td>
-                <td><%= values[i].DS_Email %></td>
-                <td><%= values[i].ID_Departamento %></td>
-                <td><%= values[i].ID_Cargo %></td>
+                <td><%= values[i].DS_Email ?? "Não Possui" %></td>
+                <td><%= values[i].DS_Departamento %></td>
+                <td><%= values[i].DS_Cargo %></td>
                 <td><%= values[i].DT_Admissao %></td>
-                <td><%= values[i].DT_Demissao %></td>
               </tr>
               <% } %>
               <% } %>
@@ -86,6 +85,7 @@
   <!-- Scripts -->
   <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../public/js/index.js"></script>
+  <script src="../../public/js/funcionarios.js"></script>
 </body>
 
 </html>

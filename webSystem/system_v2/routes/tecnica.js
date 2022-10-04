@@ -22,13 +22,24 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
 
 router.get('/tecnica/funcionarios', function (req, res, next) {
     if (req.session.loggedin) {
-        db.query(`Select * From Funcionario`, function (err, rows, fields) {
+        let query = `Select NR_Codigo
+                           ,NM_Nome
+                           ,DS_Email
+                           ,DS_Departamento
+                           ,DS_Cargo
+                           ,Date_Format(DT_Admissao, '%d/%m/%Y') as DT_Admissao
+                       From Funcionario F
+                       Inner Join Departamento D
+                           On F.ID_Departamento = D.ID_Departamento
+                       Inner Join Cargo C
+                           On F.ID_Cargo = C.ID_Cargo`
+        db.query(query, function (err, rows, fields) {
             if (err) throw err;
 
-            req.session.fornecedores = rows;
+            req.session.funcionarios = rows;
             res.render('tecnica/funcionarios', {
                 name: req.session.name,
-                values: req.session.fornecedores
+                values: req.session.funcionarios
             });
         });
     } else {
