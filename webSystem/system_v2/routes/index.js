@@ -11,17 +11,25 @@ router.post('/authentication', function (req, res, next) {
     if (err) throw err;
 
     if (rows.length <= 0) {
-      req.flash('error', 'Usuário/Senha inválido!');
+      req.flash('message', 'Usuário/Senha inválido!');
       res.redirect('/login')
     } else {
-      req.session.loggedin = true;
-      req.session.name = rows[0].NM_Nome;
-      req.session.user_id = rows[0].ID_Funcionario;
+      if(rows[0].FL_Habilitado == 1){
+        req.session.loggedin = true;
+        req.session.name = rows[0].NM_Nome;
+        req.session.user_id = rows[0].ID_Funcionario;
 
-      res.redirect('/home');
+        res.redirect('/home');
+      }else{
+        req.flash('message', 'Usuário Desabilitado');
+        req.flash('status', 'Error');
+        res.redirect('/login');
+      }
     }
   });
 });
+
+
 
 router.get('/logout', function (req, res) {
   req.flash('sucess', 'Faça seu login novamente');
@@ -43,9 +51,11 @@ router.get('/', function (req, res, next) {
 
 router.get('/login', function (req, res, next) {
   if (req.session.loggedin) {
-    res.redirect('/home');
+    res.redirect('/home'); 
   } else {
     res.render('login', {
+      message: req.flash('message'),
+      status: req.flash('status'),
       session: req.session
     });
   }

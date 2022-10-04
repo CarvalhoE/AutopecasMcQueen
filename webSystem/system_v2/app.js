@@ -6,6 +6,9 @@ let logger = require('morgan');
 let expressValidator = require('express-validator');
 let flash = require('express-flash');
 let session = require('express-session');
+
+const Swal = require('sweetalert2')
+
 const bodyParser = require('body-parser');
 
 let indexRouter =       require('./routes/index');
@@ -13,6 +16,7 @@ let homeRouter =        require('./routes/home');
 let comercialRouter =   require('./routes/comercial');
 let financeiroRouter =  require('./routes/financeiro');
 let tecnicaRouter =     require('./routes/tecnica');
+const { application } = require('express');
 
 let app = express();
 

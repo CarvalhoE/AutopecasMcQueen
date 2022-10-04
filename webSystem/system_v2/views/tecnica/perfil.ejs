@@ -29,15 +29,21 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <figure>
                   <img
-                    src="https://avatars.githubusercontent.com/u/78887321?s=400&u=74d5cf803a9cb6c34544bab85d696d19804947f1&v=4"
+                    src="https://www.w3schools.com/howto/img_avatar.png"
                     alt="" class="img-circle" style="width:50%; border-radius: 100px; margin-top: 10px;" id="user-img">
                 </figure>
-                <h5 style="text-align:center;"><strong id="user-name">Carvalho</strong></h5>
-                <p style="text-align:center;font-size: smaller;" id="user-frid">FBT000000213</p>
+                <h5 style="text-align:center;"><strong id="user-name"><%= name %></strong></h5>
+                <p style="text-align:center;font-size: smaller;" id="user-frid"><%= values.NR_Codigo %></p>
                 <p style="text-align:center;font-size: smaller;overflow-wrap: break-word;" id="user-email">
-                  Stackoverglesp@gmail.com </p>
-                <p style="text-align:center;font-size: smaller;"><strong>Status da conta: </strong><span class="tags"
-                    id="user-status">Ativa</span></p>
+                  <%= values.DS_Email %> </p>
+                <p style="text-align:center;font-size: smaller;"><strong>
+                  Status de conta: 
+                </strong><span class="tags"
+                    id="user-status"><% if(values.FL_habilitado == 1) {%> 
+                      Ativo
+                    <%}else{%>
+                      Inativo
+                    <%}%></span></p>
                 <hr class="profile-divider">
                 <p style="text-align:center;font-size: smaller;"><strong>Cargo/Função</strong></p>
                 <p style="text-align:center;font-size: smaller;" id="user-role">Software Engineer</p>

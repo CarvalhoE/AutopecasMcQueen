@@ -15,7 +15,7 @@ router.get('/comercial/clientes', function (req, res, next) {
         });
     });
   } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    req.flash('message', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
 });

@@ -152,7 +152,7 @@
             <div class="form-outline">
               <select id="perfil" name="perfilFuncionario" class="form-control" style="width: 100px;">
                 <% for (let i = 0; i < valuesPerfil.length; i++) { %>
-                <option value="<%= valuesPerfil[i].ID_Perfil %>"><%= valuesCargo[i].DS_Perfil %></option>
+                <option value="<%= valuesPerfil[i].ID_Perfil %>"><%= valuesPerfil[i].DS_Perfil %></option>
                 <% } %>
               </select>
               <label class="form-label" for="form6Example1">Perfil</label>
@@ -176,7 +176,7 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar
           cadastro</button>
-        <a href="/tecnica/configuracoes">
+        <a href="/tecnica/Funcionarios">
           <input value="Cancelar" class="btn btn-primary btn-block mb-4"
             style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
         </a>

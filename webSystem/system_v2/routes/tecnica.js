@@ -146,7 +146,7 @@ router.get('/tecnica/cadastraFornecedor', function (req, res, next) {
     }
 });
 
-router.get('/tecnica/signup_user', function (req, res, next) {
+router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
     if (req.session.loggedin) {
         db.query('Select * From Departamento; Select * From Cargo; Select * From Perfil;', function (err, rows, fields) {
             if (err) throw err;
@@ -170,8 +170,15 @@ router.get('/tecnica/signup_user', function (req, res, next) {
 
 router.get('/tecnica/perfil', function (req, res, next) {
     if (req.session.loggedin) {
-        res.render('tecnica/perfil', {
-            name: req.session.name
+        db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id}`, function(err, rows, fields){
+            if (err) throw err;
+
+            req.session.funcionario = rows[0]
+
+            res.render('tecnica/perfil', {
+                name: req.session.name,
+                values: req.session.funcionario
+            });
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
