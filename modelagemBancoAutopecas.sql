@@ -140,6 +140,10 @@ Create Table Funcionario
    ,Constraint FK_ID_Perfil_Perfil 				Foreign Key (ID_Perfil) 		References Perfil (ID_Perfil)
    ,Constraint CK_FL_Habilitado 				Check (FL_Habilitado In (0,1))
 );
+    
+Insert Into
+	Funcionario (NM_Nome, NR_CPF, DT_Nascimento, NR_Codigo, DS_Login, NR_Senha, ID_Departamento, ID_Cargo, ID_Perfil, FL_Habilitado, DT_Admissao) Values
+				('Jose', '12345678912', '2000-12-01', '11234', 'Joaquim', '1234', 4, 2, 1, 1, '2022-01-01');
 
 Create Table FuncionarioEndereco
 (
@@ -155,6 +159,10 @@ Create Table FuncionarioEndereco
    ,Constraint PK_ID_FuncionarioEndereco 		Primary Key (ID_FuncionarioEndereco)
    ,Constraint FK_ID_Funcionario_Funcionario 	Foreign Key (ID_Funcionario) 	References Funcionario (ID_Funcionario)
 );
+
+Insert Into
+	FuncionarioEndereco (ID_Funcionario, DS_Logradouro, DS_Numero, DS_Complemento, DS_CEP, DS_Bairro, DS_Cidade, DS_UF) Values
+				(1, 'Rua Cruzeiro', '666', 'Cela 4, Pavilhão 8', '08161530', 'São Miguel', 'São Paulo', 'SP');
 
 Create Table Fornecedor
 (
@@ -321,11 +329,3 @@ Insert Into
 	SituacaoCobranca (DS_SituacaoCobranca) Values ('Em Atraso');
 Insert Into
 	SituacaoCobranca (DS_SituacaoCobranca) Values ('Estornado');
-    
-
-Insert Into
-	Funcionario (NM_Nome, NR_CPF, DT_Nascimento, NR_Codigo, DS_Login, NR_Senha, ID_Departamento, ID_Cargo, ID_Perfil, FL_Habilitado, DT_Admissao) Values
-				('Jose', '12345678912', '2000-12-01', '11234', 'admin', 'admin', 4, 2, 1, 1, '2022-01-01');
-Insert Into
-	FuncionarioEndereco (ID_Funcionario, DS_Logradouro, DS_Numero, DS_Complemento, DS_CEP, DS_Bairro, DS_Cidade, DS_UF) Values
-				(1, 'Rua Cruzeiro', '666', 'Cela 4, Pavilhão 8', '08161530', 'São Miguel', 'São Paulo', 'SP');
