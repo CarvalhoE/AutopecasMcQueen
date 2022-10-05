@@ -7,8 +7,6 @@ let expressValidator = require('express-validator');
 let flash = require('express-flash');
 let session = require('express-session');
 
-const Swal = require('sweetalert2')
-
 const bodyParser = require('body-parser');
 
 let indexRouter =       require('./routes/index');

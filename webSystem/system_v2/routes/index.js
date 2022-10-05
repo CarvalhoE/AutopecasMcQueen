@@ -12,6 +12,8 @@ router.post('/authentication', function (req, res, next) {
 
     if (rows.length <= 0) {
       req.flash('message', 'Usuário/Senha inválido!');
+      req.flash('status', 'success');
+      console.log()
       res.redirect('/login')
     } else {
       if(rows[0].FL_Habilitado == 1){
@@ -22,7 +24,7 @@ router.post('/authentication', function (req, res, next) {
         res.redirect('/home');
       }else{
         req.flash('message', 'Usuário Desabilitado');
-        req.flash('status', 'Error');
+        req.flash('status', 'error');
         res.redirect('/login');
       }
     }
@@ -44,6 +46,8 @@ router.get('/', function (req, res, next) {
     });
   } else {
     res.render('login', {
+      message: req.flash('message'),
+      status: req.flash('status'),
       session: req.session
     });
   }
