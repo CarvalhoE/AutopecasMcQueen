@@ -12,7 +12,7 @@ router.post('/authentication', function (req, res, next) {
 
     if (rows.length <= 0) {
       req.flash('message', 'Usuário/Senha inválido!');
-      req.flash('status', 'success');
+      req.flash('status', 'error');
       console.log()
       res.redirect('/login')
     } else {

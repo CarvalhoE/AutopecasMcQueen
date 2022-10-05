@@ -33,13 +33,6 @@
           <a href="/tecnica/cadastraFornecedor"><button class="extra-n" id="btnNovoCliente">
               <i class="fa fa-plus-square"> Novo </i>
             </button></a>
-
-          <button class="extra-d">
-            <i class="fa fa-trash"></i>
-          </button>
-          <button class="extra-d">
-            <i class="fa fa-pencil-square-o"></i>
-          </button>
           <input type="text" class="extra-s" placeholder="Pesquisa por Nome">
         </div>
 
@@ -51,7 +44,7 @@
           <% } else {%>
           <thead>
             <tr>
-              <th scope="col"><input type="checkbox"></th>
+              <th scope="col">Ações</th>
               <th scope="col">Cod</th>
               <th scope="col">Fornecedor</th>
               <th scope="col">Contato</th>
@@ -61,7 +54,14 @@
           <tbody>
             <% for (let i = 0; i < values.length; i++) { %>
               <tr>
-                <td scope="row"><input type="checkbox"></td>
+                <td scope="row">
+                  <button class="extra-d" value="<%= values[i].ID_Fornecedor %>">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </button>
+                  <button class="extra-d" value="<%= values[i].ID_Fornecedor %>">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
                 <td><%= values[i].ID_Fornecedor %></td>
                 <td><%= values[i].NM_Empresa %></td>
                 <td><%= values[i].NR_Telefone %></td>

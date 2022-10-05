@@ -38,9 +38,7 @@
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
             </a>
-            <button class="extra-d">
-              <i class="fa fa-pencil-square-o"></i>
-            </button>
+            
             <input type="text" class="extra-s" placeholder="Pesquisa por COD">
             <input type="month" id="month" class="extra-m">
           </div> 
@@ -53,7 +51,7 @@
               <% } else {%>
                 <thead>
                   <tr>
-                  <th scope="col"><input type="checkbox"></th>
+                  <th scope="col">Ações</th>
                   <th scope="col">Cod</th>
                   <th scope="col">Cliente</th>
                   <th scope="col">Vendedor</th>
@@ -67,7 +65,11 @@
                 <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
                 <tr>
-                  <td scope="row"><input type="checkbox"></td>
+                  <td scope="row">
+                    <button class="extra-d" value="<%= values[i].ID_Pedido %>">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </td>
                   <td><a href="#"><%= values[i].ID_Pedido %></a></td>
                   <td><%= values[i].NM_Cliente %></td>
                   <td><%= values[i].NM_Vendedor %></td>

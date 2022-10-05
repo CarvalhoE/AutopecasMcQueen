@@ -79,7 +79,7 @@ router.get('/comercial/compras', function (req, res) {
     let query = `Select C.ID_Compra
                        ,F.NM_Nome as NM_Funcionario
                        ,FO.NM_Empresa
-                       ,C.DT_Compra
+                       ,Date_Format(DT_Compra, '%d/%m/%Y') as DT_Compra
                        ,FP.DS_FormaPagamento
                        ,CS.DS_Situacao
                        ,C.VL_ValorTotal

@@ -260,8 +260,9 @@ p{
   border-style: none;
 	height:40px;
   border-radius: 5px;
-  background-color: #343a40;
-  color: #fff;
+  color: #343a40;
+  font-size: 15pt;
+  border: 1px solid #343a4033;
 }
 
 .extra-s{

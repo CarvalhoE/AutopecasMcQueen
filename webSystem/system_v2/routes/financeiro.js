@@ -7,7 +7,7 @@ router.get('/financeiro/recebimentos', function (req, res) {
   if (req.session.loggedin) {
     let query = `Select ID_Cobranca
                        ,DS_Descricao
-                       ,DT_Registro
+                       ,Date_Format(DT_Registro, '%d/%m/%Y') as DT_Registro
                        ,DS_SituacaoCobranca
                        ,VL_Valor
                      From Cobranca C
@@ -33,7 +33,7 @@ router.get('/financeiro/pagamentos', function (req, res) {
   if (req.session.loggedin) {
     let query = `Select ID_Cobranca
                        ,DS_Descricao
-                       ,DT_Registro
+                       ,Date_Format(DT_Registro, '%d/%m/%Y') as DT_Registro
                        ,DS_SituacaoCobranca
                        ,VL_Valor
                      From Cobranca C

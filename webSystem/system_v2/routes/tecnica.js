@@ -22,7 +22,8 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
 
 router.get('/tecnica/funcionarios', function (req, res, next) {
     if (req.session.loggedin) {
-        let query = `Select NR_Codigo
+        let query = `Select ID_Funcionario
+                           ,NR_Codigo
                            ,NM_Nome
                            ,DS_Email
                            ,DS_Departamento

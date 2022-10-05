@@ -38,10 +38,6 @@
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
             </a>
-
-            <button class="extra-d">
-              <i class="fa fa-pencil-square-o"></i>
-            </button>
             <input type="text" class="extra-s" placeholder="Pesquisa por SKU">
           </div>
 
@@ -53,7 +49,7 @@
             <% } else {%>
             <thead>
               <tr>
-                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">Ações</th>
                 <th scope="col">SKU</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Valor Unitario</th>
@@ -65,10 +61,14 @@
             <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
-                <td scope="row"><input type="checkbox"></td>
+                <td scope="row">
+                  <button class="extra-d" value="<%= values[i].NR_SKU %>">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </button>
+                </td>
                 <td><a href="#"><%= values[i].NR_SKU %></a></td>
                 <td><%= values[i].NM_Produto %></td>
-                <td><%= values[i].VL_Preco %></td>
+                <td>R$ <%= values[i].VL_Preco %></td>
                 <td><%= values[i].DS_Marca %></td>
                 <td><%= values[i].DS_Categoria %></td>
                 <td><%= values[i].FL_Disponivel %></td>
