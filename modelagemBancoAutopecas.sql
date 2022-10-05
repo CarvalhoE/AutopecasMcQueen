@@ -49,7 +49,7 @@ Create Table Produto
 
 Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_Preco, FL_Disponivel, DS_Marca, ID_Categoria)
 	Values ('Cheirinho', 'Bom cheiro para carros', '34560002987564', '14.90', 1, 'CheiroBom', 1)
-          ,('Bateria', 'Bateria para carros', '345111298756416', '1200.00', 1, 'Moura', 2)
+          ,('Bateria', 'Bateria para carros', '34511129875641', '1200.00', 1, 'Moura', 2)
           ,('Amortecedor', 'Amortecedor para carros', '34560002988468', '99.90', 0, 'Nike', 3);
 
 Create Table Estoque
@@ -63,6 +63,11 @@ Create Table Estoque
    ,Constraint CK_FL_Disponivel 		Check (FL_Disponivel In (0,1))
 );
 
+Insert Into Estoque (ID_Produto, NR_Quantidade, FL_Disponivel, DT_UltimaAtualizacao)
+	Values (1, 38, 1, '2021-09-10')
+          ,(2, 200, 1, '2022-01-01')
+          ,(3, 0, 0, '2022-10-05');
+
 Create Table FormaPagamento
 (
 	ID_FormaPagamento 	Int 			auto_increment
@@ -74,6 +79,7 @@ Insert Into	FormaPagamento (DS_FormaPagamento)
 	Values ('Cartão de Crédito')
 	      ,('Cartão de Débito')
           ,('Dinheiro')
+          ,('Boleto')
           ,('PIX');
 
 Create Table Departamento
@@ -141,9 +147,9 @@ Create Table Funcionario
    ,Constraint CK_FL_Habilitado 				Check (FL_Habilitado In (0,1))
 );
     
-Insert Into
-	Funcionario (NM_Nome, NR_CPF, DT_Nascimento, NR_Codigo, DS_Login, NR_Senha, ID_Departamento, ID_Cargo, ID_Perfil, FL_Habilitado, DT_Admissao) Values
-				('Jose', '12345678912', '2000-12-01', '11234', 'Joaquim', '1234', 4, 2, 1, 1, '2022-01-01');
+Insert Into	Funcionario (NM_Nome, NR_CPF, DT_Nascimento, NR_Codigo, DS_Login, NR_Senha, ID_Departamento, ID_Cargo, ID_Perfil, FL_Habilitado, DT_Admissao, DT_Demissao) 
+	Values ('Jose', '12345678912', '2000-12-01', '11234', 'Joaquim', '1234', 4, 2, 1, 1, '2022-01-01', Null)
+		  ,('Lukas', '35824302863', '2003-04-09', '1182007', 'Lukas', '1234', 3, 1, 2, 0, '2021-03-01', '2021-10-28');
 
 Create Table FuncionarioEndereco
 (
@@ -160,9 +166,9 @@ Create Table FuncionarioEndereco
    ,Constraint FK_ID_Funcionario_Funcionario 	Foreign Key (ID_Funcionario) 	References Funcionario (ID_Funcionario)
 );
 
-Insert Into
-	FuncionarioEndereco (ID_Funcionario, DS_Logradouro, DS_Numero, DS_Complemento, DS_CEP, DS_Bairro, DS_Cidade, DS_UF) Values
-				(1, 'Rua Cruzeiro', '666', 'Cela 4, Pavilhão 8', '08161530', 'São Miguel', 'São Paulo', 'SP');
+Insert Into	FuncionarioEndereco (ID_Funcionario, DS_Logradouro, DS_Numero, DS_Complemento, DS_CEP, DS_Bairro, DS_Cidade, DS_UF)
+	Values (1, 'Rua Cruzeiro', '666', 'Cela 4, Pavilhão 8', '08161530', 'São Miguel', 'São Paulo', 'SP')
+		  ,(2, 'Rua Clemente', '804', 'Sem Complemento', '08190430', 'Vila Itaim', 'São Paulo', 'SP');
 
 Create Table Fornecedor
 (
@@ -181,6 +187,9 @@ Create Table Fornecedor
    ,Constraint PK_ID_Fornecedor	 	Primary Key (ID_Fornecedor)
 );
 
+Insert Into	Fornecedor (NM_Empresa, NR_CNPJ, NR_Telefone, DS_Email, NR_Banco, NR_Agencia, NR_Conta)
+	Values ('Super Latas Fornecedor LTDA.', '16595359000199', '1155555129', 'contato@superlatas.com.br', '305', '1274', '010355259');
+
 Create Table CompraSituacao
 (
 	ID_CompraSituacao 	Int 			auto_increment
@@ -188,10 +197,16 @@ Create Table CompraSituacao
    ,Constraint PK_ID_CompraSituacao	 	Primary Key (ID_CompraSituacao)
 );
 
+Insert Into CompraSituacao (DS_Situacao) 
+	Values ('Efetivada')
+	      ,('Cancelada')
+          ,('Finalizada')
+          ,('Pendente');
+
 Create Table Compra
 (
 	ID_Compra 				Int				auto_increment
-   ,VL_ValorTotal			Numeric(5,2)	Not Null
+   ,VL_ValorTotal			Numeric(16,2)	Not Null
    ,ID_CompraSituacao		Int				Not Null
    ,DT_Compra				DateTime		Not Null
    ,ID_Funcionario			Int				Not Null
@@ -204,6 +219,10 @@ Create Table Compra
    ,Constraint FK_ID_FormaPagamento2_FormaPagamento 	Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
 );
 
+Insert Into Compra (VL_ValorTotal, ID_CompraSituacao, DT_Compra, ID_Funcionario, ID_Fornecedor, ID_FormaPagamento) 
+	Values (300056.00, 3, '2022-02-25', 1, 1, 4)
+	      ,(500000.00, 2, '2021-09-15', 2, 1, 4);
+
 Create Table CompraDetalhe
 (
 	ID_CompraDetalhe 			Int				auto_increment
@@ -211,12 +230,17 @@ Create Table CompraDetalhe
    ,ID_Produto					int				Not Null
    ,NR_Quantidade 				Int 			Not Null
    ,VL_ValorUnitario			Numeric(5,2)	Not Null
-   ,VL_Total					Numeric(5,2)	Not Null
+   ,VL_Total					Numeric(16,2)	Not Null
    ,Constraint PK_ID_CompraDetalhe 				Primary Key (ID_CompraDetalhe)
    ,Constraint FK_ID_Compra_Compra 				Foreign Key (ID_Compra) References Compra (ID_Compra)
    ,Constraint FK_ID_CompraProduto_Produto 		Foreign Key (ID_Produto) References Produto (ID_Produto)
    ,Constraint CK_VL_Total 						Check (VL_Total >= VL_ValorUnitario)
 );
+
+Insert Into CompraDetalhe (ID_Compra, ID_Produto, NR_Quantidade, VL_ValorUnitario, VL_Total) 
+	Values (1, 1, 1000, 0.56, 560)
+	      ,(1, 2, 3000, 100.0, 300000)
+	      ,(2, 3, 10000, 50.0, 500000);
 
 Create Table Cliente
 (
@@ -230,12 +254,22 @@ Create Table Cliente
    ,Constraint PK_ID_Cliente Primary Key (ID_Cliente)
 );
 
+Insert Into Cliente (NM_Nome, NR_CPF, DS_Email, DT_Nascimento, DT_Cadastro) 
+	Values ('Karen Reis', '32095158830', 'karenreis@gmail.com', '1985-08-26', '2022-09-17')
+	      ,('Rodrigo Jose', '30264851870', 'rodrigojose@hotmail.com', '1982-10-28', '2022-10-05');
+
 Create Table PedidoStatus
 (
 	ID_PedidoStatus Int				auto_increment
    ,DS_Status	 	VarChar(40)		Not Null
    ,Constraint PK_ID_PedidoStatus Primary Key (ID_PedidoStatus)
 );
+
+Insert Into PedidoStatus (DS_Status) 
+	Values ('Pedido Em Aberto')
+	      ,('Pagamento Efetuado')
+          ,('Pagamento Rejeitado')
+          ,('Pedido Cancelado');
 
 Create Table Pedido
 (
@@ -280,6 +314,10 @@ Create Table TipoCobranca
    ,Constraint PK_ID_TipoCobranca		Primary Key (ID_TipoCobranca)	
 );
 
+Insert Into TipoCobranca (DS_TipoCobranca) 
+	Values ('Débito')
+		  ,('Crédito');
+
 Create Table SituacaoCobranca
 (
 	ID_SituacaoCobranca		int				auto_increment
@@ -287,45 +325,27 @@ Create Table SituacaoCobranca
    ,Constraint PK_ID_SituacaoCobranca		Primary Key (ID_SituacaoCobranca)	
 );
 
+Insert Into SituacaoCobranca (DS_SituacaoCobranca)
+	Values ('Efetivado')
+		  ,('Cancelado')
+          ,('Pendente')
+          ,('Em Atraso')
+          ,('Estornado');
+
 Create Table Cobranca
 (
 	ID_Cobranca				 	int				auto_increment
    ,DS_Descricao				VarChar(100)	Not Null
    ,DT_Registro					DateTime 		Not Null
    ,ID_TipoCobranca				int				Not Null
-   ,VL_Valor					Numeric(5,2)	Not Null
+   ,VL_Valor					Numeric(16,2)	Not Null
    ,ID_SituacaoCobranca			int				Not Null
    ,Constraint PK_ID_Cobranca							Primary Key (ID_Cobranca)
    ,Constraint FK_ID_TipoCobranca_TipoCobranca			foreign key (ID_TipoCobranca) References TipoCobranca (ID_TipoCobranca)
    ,Constraint FK_ID_SituacaoCobranca_SituacaoCobranca	foreign key (ID_SituacaoCobranca) References SituacaoCobranca (ID_SituacaoCobranca)
 );
 
- -- Inserts
- 
-
-    
-Insert Into
-	PedidoStatus (DS_Status) Values ('Pedido Em Aberto');
-Insert Into
-	PedidoStatus (DS_Status) Values ('Pagamento Efetuado');
-Insert Into
-	PedidoStatus (DS_Status) Values ('Pagamento Rejeitado');
-Insert Into
-	PedidoStatus (DS_Status) Values ('Pedido Cancelado');
-
-    
-Insert Into
-	TipoCobranca (DS_TipoCobranca) Values ('Débito');
-Insert Into
-	TipoCobranca (DS_TipoCobranca) Values ('Crédito');
-    
-Insert Into
-	SituacaoCobranca (DS_SituacaoCobranca) Values ('Efetivado');
-Insert Into
-	SituacaoCobranca (DS_SituacaoCobranca) Values ('Cancelado');
-Insert Into
-	SituacaoCobranca (DS_SituacaoCobranca) Values ('Pendente');
-Insert Into
-	SituacaoCobranca (DS_SituacaoCobranca) Values ('Em Atraso');
-Insert Into
-	SituacaoCobranca (DS_SituacaoCobranca) Values ('Estornado');
+Insert Into Cobranca (DS_Descricao, DT_Registro, ID_TipoCobranca, VL_Valor, ID_SituacaoCobranca)
+	Values ('Pagamento a colaboradores', '2022-09-10', 1, 2000.00, 1)
+		  ,('Reabastecimento de estoque', '2022-02-25', 1, 300056.00, 1)
+          ,('Estorno de compra de produto', '2022-10-01', 2, 350.00, 1);
