@@ -149,6 +149,7 @@ router.get('/tecnica/cadastraFornecedor', function (req, res, next) {
 
 router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
     if (req.session.loggedin) {
+        
         db.query('Select * From Departamento; Select * From Cargo; Select * From Perfil;', function (err, rows, fields) {
             if (err) throw err;
 
@@ -203,8 +204,18 @@ router.post('/cadastroUsuario', (req, res, next) => {
         "FL_Habilitado": req.body.flHabilitadoFuncionario,
         "DT_Admissao": req.body.dtAdmissaoFuncionario
     }
+    let id_Scope;
+    db.query('Insert Into Funcionario Set ?', [data], (err, ret) => {
+        if (err) throw err;
 
+        id_Scope = ret.insertId;
+
+        console.log('Last insert ID in employees:', id_Scope);
+    });
+
+    console.log(id_Scope);
     let dataEndereco = {
+        "ID_Funcionario": id_Scope,
         "DS_Logradouro": req.body.logradouroFuncionario,
         "DS_Numero": req.body.numeroFuncionario,
         "DS_Complemento": req.body.complementoFuncionario,
@@ -214,19 +225,11 @@ router.post('/cadastroUsuario', (req, res, next) => {
         "DS_UF": req.body.ufFuncionario
     }
 
-    let id_Scope;
-    db.query('Insert Into Funcionario Set ?', [data], (err, ret) => {
-        if (err) throw err;
-
-        id_Scope = ret.insertId;
-
-        console.log('Last insert ID in employees:', id_Scope);
-
-        res.redirect('/tecnica/configuracoes');
-    });
-
     db.query('Insert Into FuncionarioEndereco Set ?', [dataEndereco], (err, ret) => {
         if (err) throw err;
+        
+        req.flash('sucess', "Funcionário Inserido com sucesso!")
+        res.redirect('/tecnica/configuracoes');
     });
 });
 
