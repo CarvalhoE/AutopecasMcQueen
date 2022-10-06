@@ -7,12 +7,12 @@ router.get('/comercial/clientes', function (req, res, next) {
   if (req.session.loggedin) {
     db.query('Select * From Cliente', function (err, rows, fields) {
       if (err) throw err;
-  
-        req.session.clientes = rows;
-        res.render('comercial/clientes', {
-          name: req.session.name,
-          values: req.session.clientes
-        });
+
+      req.session.clientes = rows;
+      res.render('comercial/clientes', {
+        name: req.session.name,
+        values: req.session.clientes
+      });
     });
   } else {
     req.flash('message', 'É necessário estar logado para acessar esta página');
@@ -50,12 +50,12 @@ router.get('/comercial/vendas', function (req, res) {
                          On P.ID_Cliente = C.ID_Cliente`
     db.query(query, function (err, rows, fields) {
       if (err) throw err;
-  
-        req.session.vendas = rows;
-        res.render('comercial/vendas', {
-          name: req.session.name,
-          values: req.session.vendas
-        });
+
+      req.session.vendas = rows;
+      res.render('comercial/vendas', {
+        name: req.session.name,
+        values: req.session.vendas
+      });
     });
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -92,14 +92,14 @@ router.get('/comercial/compras', function (req, res) {
                        On C.ID_Fornecedor = FO.ID_Fornecedor
                      Inner Join FormaPagamento as FP
                        On C.ID_FormaPagamento = FP.ID_FormaPagamento`
-    db.query(query, function (err, rows, fields) { 
+    db.query(query, function (err, rows, fields) {
       if (err) throw err;
-  
-        req.session.compras = rows;
-        res.render('comercial/compras', {
-          name: req.session.name,
-          values: req.session.compras
-        });
+
+      req.session.compras = rows;
+      res.render('comercial/compras', {
+        name: req.session.name,
+        values: req.session.compras
+      });
     });
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -116,6 +116,24 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
+});
+
+router.post('/cadastrarCliente', (req, res, next) => {
+  let data = {
+    "NM_Nome": req.body.nome,
+    "NR_CPF": req.body.cpf,
+    "DS_Email": req.body.email,
+    "NR_Telefone": req.body.telefone,
+    "DT_Nascimento": req.body.nascimento,
+    "DT_Cadastro": Date.now
+  }
+
+  db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
+    if (err) throw err;
+
+    console.log(`Cliente ${ret.insertId} cadastrado com sucesso!`)
+    res.redirect('/comercial/clientes');
+  });
 });
 
 module.exports = router;

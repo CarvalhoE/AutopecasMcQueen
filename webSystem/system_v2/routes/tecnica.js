@@ -220,7 +220,7 @@ router.post('/cadastroUsuario', (req, res, next) => {
 
         id_Scope = ret.insertId;
 
-        console.log('Last insert ID in employees:', res.insertID);
+        console.log('Last insert ID in employees:', id_Scope);
 
         res.redirect('/tecnica/configuracoes');
     });
