@@ -3,6 +3,7 @@ let router = express.Router();
 
 let db = require('../database');
 
+//Clientes
 router.get('/comercial/clientes', function (req, res, next) {
   if (req.session.loggedin) {
     db.query('Select * From Cliente', function (err, rows, fields) {
@@ -26,11 +27,86 @@ router.get('/comercial/cadastraCliente', function (req, res) {
       name: req.session.name
     });
   } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    req.flash('message', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
 });
 
+router.get('/comercial/alteraCliente', function(req, res, next){
+  if (req.session.loggedin) {
+    res.render('comercial/alteraCliente', {
+      name: req.session.name
+    });
+  } else {
+    req.flash('message', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+//Alterar (Pendente) - Clientes
+router.post('/comercial/cadastraCliente/(:id)', (req, res, next) => {
+  if (err) throw err;
+
+  let id = req.body.ID_Cliente
+
+  let data = {
+    "NM_Nome": req.body.nome,
+    "NR_CPF": req.body.cpf,
+    "DS_Email": req.body.email,
+    "NR_Telefone": req.body.telefone,
+    "DT_Nascimento": req.body.nascimento,
+    "DT_Cadastro": Date.now
+  }
+
+  db.query(`Update Cliente Set ? Where ID_Cliente = ?`, [data], id, (err, ret) => {
+    if (err) {
+    req.flash('error', err)
+    res.redirect('/comercial/clientes')
+  }else{
+    req.flash('success', 'Cliente alterado com sucesso! id = ' + id)
+    res.redirect('/comercial/clientes')
+    }
+  });
+    
+});
+
+//Cadastrar (Concluido) - Clientes
+router.post('/cadastrarCliente', (req, res, next) => {
+  let data = {
+    "NM_Nome": req.body.nome,
+    "NR_CPF": req.body.cpf,
+    "DS_Email": req.body.email,
+    "NR_Telefone": req.body.telefone,
+    "DT_Nascimento": req.body.nascimento,
+    "DT_Cadastro": Date.now
+  }
+
+  db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
+    if (err) throw err;
+
+    console.log(`Cliente ${ret.insertId} cadastrado com sucesso!`)
+    res.redirect('/comercial/clientes');
+  });
+});
+
+//Deletar (Concluido) - Clientes
+router.post('/comercial/clientes/(:id)', function(req, res, next) {
+  
+  let id = req.body.ID_Cliente;
+
+  db.query(`Delete From Cliente Where ID_Cliente = ?`, id, (err, ret) => {
+    if (err) {
+      req.flash('error', err)
+      res.redirect('/comercial/clientes')
+    } else {
+      req.flash('success', 'Cliente deletado com sucesso! id = ' + id)
+      res.redirect('/comercial/clientes')
+    }
+  });
+});
+
+
+//Vendas
 router.get('/comercial/vendas', function (req, res) {
   if (req.session.loggedin) {
     let query = `Select P.ID_Pedido
@@ -118,22 +194,6 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
   }
 });
 
-router.post('/cadastrarCliente', (req, res, next) => {
-  let data = {
-    "NM_Nome": req.body.nome,
-    "NR_CPF": req.body.cpf,
-    "DS_Email": req.body.email,
-    "NR_Telefone": req.body.telefone,
-    "DT_Nascimento": req.body.nascimento,
-    "DT_Cadastro": Date.now
-  }
 
-  db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
-    if (err) throw err;
-
-    console.log(`Cliente ${ret.insertId} cadastrado com sucesso!`)
-    res.redirect('/comercial/clientes');
-  });
-});
 
 module.exports = router;

@@ -54,14 +54,20 @@
             <tbody>
             <% for (let i = 0; i < values.length; i++) { %>
             <tr>
-              <td scope="row">
-                <button class="extra-d" value="<%= values[i].ID_Cliente %>">
-                  <i class="fa fa-pencil-square-o"></i>
-                </button>
-                <button class="extra-d" value="<%= values[i].ID_Cliente %>">
-                  <i class="fa fa-trash"></i>
-                </button>
+              <td scope="row" style="display: flex;" >
+                <a href="/comercial/alteraCliente" style="margin-right: 5px;">
+                  <button type="submit" class="extra-d" name="ID_Cliente" value="<%= values[i].ID_Cliente %>">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </button>
+                </a>
+                
+                <form action="/comercial/clientes/<%= values[i].ID_Cliente %>" method="post">
+                  <button type="submit" class="extra-d" name="ID_Cliente" value="<%= values[i].ID_Cliente %>" onclick="return confirm('Vocêm tem certeza que deseja deletar este cliente ?')">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </form>
               </td>
+
               <td><%= values[i].ID_Cliente %></td>
               <td><%= values[i].NM_Nome %></td>
               <td><%= values[i].NR_Telefone %></td>
