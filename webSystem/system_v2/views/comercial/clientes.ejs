@@ -13,9 +13,7 @@
 </head>
 
 <body>
-
   <%- include('_lateral-bar.ejs') %>
-
   <main>
     <div class="header">
       <h1>Clientes</h1>
@@ -55,7 +53,7 @@
             <% for (let i = 0; i < values.length; i++) { %>
             <tr>
               <td scope="row" style="display: flex;" >
-                <a href="/comercial/alteraCliente" style="margin-right: 5px;">
+                <a href="/comercial/alteraCliente/<%= values[i].ID_Cliente %>" style="margin-right: 5px;">
                   <button type="submit" class="extra-d" name="ID_Cliente" value="<%= values[i].ID_Cliente %>">
                     <i class="fa fa-pencil-square-o"></i>
                   </button>
