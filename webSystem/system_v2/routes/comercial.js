@@ -36,14 +36,20 @@ router.get('/comercial/cadastraCliente', function (req, res) {
 router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
+    console.log(id)
+    
     db.query(`Select * From Cliente Where ID_Cliente = ${id}`, function (err, rows, fields) {
       if (err) throw err;
 
-      req.session.clientes = rows;
+      req.session.cliente = rows[0]
+    
       res.render('comercial/alteraCliente', {
-        name: req.session.name
+        name: req.session.name,
+        cliente: req.session.cliente,
+        id: id
       });
     });
+    
   } else {
     req.flash('message', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')

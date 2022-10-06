@@ -27,14 +27,14 @@
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;"
-                name="nome" required />
+                name="nome" value="<%= cliente.NM_Nome %>" required />
               <label class="form-label" for="form6Example1">Nome Completo</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;"
-                name="cpf" required />
+                name="cpf" value="<%= cliente.NR_CPF %>" readonly />
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
           </div>
@@ -42,20 +42,20 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="date" id="form6Example2" class="form-control" style="width: 140px;" name="nascimento" 
-                required />
+              <input type="text" id="form6Example2" class="form-control" style="width: 220px;" name="nascimento" 
+              value="<%= cliente.DT_Nascimento.toISOString() %>" readonly />
               <label class="form-label" for="form6Example2">Data de Nascimento</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 140px;" name="telefone" />
+              <input type="text" id="form6Example2" class="form-control" style="width: 140px;" name="telefone" value="<%= cliente.NR_Telefone %>" />
               <label class="form-label" for="form6Example2">Telefone</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="email" id="form6Example1" class="form-control" style="width: 520px;" name="email" required />
+              <input type="email" id="form6Example1" class="form-control" style="width: 520px;" name="email" value="<%= cliente.DS_Email %>"  required />
               <label class="form-label" for="form6Example1">E-mail</label>
             </div>
           </div>
