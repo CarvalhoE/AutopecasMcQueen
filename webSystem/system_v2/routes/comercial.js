@@ -32,11 +32,10 @@ router.get('/comercial/cadastraCliente', function (req, res) {
   }
 });
 
-//Alterar (Pendente) - Clientes
+//Alterar (Concluído) - Clientes
 router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
-    console.log(id)
     
     db.query(`Select * From Cliente Where ID_Cliente = ${id}`, function (err, rows, fields) {
       if (err) throw err;
@@ -213,7 +212,5 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
     res.redirect('/login')
   }
 });
-
-
 
 module.exports = router;

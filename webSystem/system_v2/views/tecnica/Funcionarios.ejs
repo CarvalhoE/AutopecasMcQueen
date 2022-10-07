@@ -64,9 +64,11 @@
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row">
-                  <button class="extra-d" value="<%= values[i].ID_Funcionario %>">
-                    <i class="fa fa-pencil-square-o"></i>
-                  </button>
+                  <a href="/tecnica/alteraFuncionario/<%= values[i].ID_Funcionario %>">
+                    <button class="extra-d" value="<%= values[i].ID_Funcionario %>">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </a>
                 </td>
                 <td><a href="#"><%= values[i].NR_Codigo %></a></td>
                 <td><%= values[i].NM_Nome %></td>
