@@ -161,6 +161,7 @@ router.get('/tecnica/perfil', function (req, res, next) {
 
 //Cadastrar Funcionario (problema no cadastro de tabela dependente)
 router.post('/cadastroUsuario', (req, res, next) => {
+
     let data = {
         "NM_Nome": req.body.nomeFuncionario,
         "NR_CPF": req.body.cpfFuncionario,
@@ -176,34 +177,32 @@ router.post('/cadastroUsuario', (req, res, next) => {
         "FL_Habilitado": req.body.flHabilitadoFuncionario,
         "DT_Admissao": req.body.dtAdmissaoFuncionario
     }
-    let id;
+    
     db.query('Insert Into Funcionario Set ?', [data], (err, result ,fields) => {
         if (err) throw err;
     });
 
-    // db.query('Select max(ID_Funcionario) From Funcionario;', (err, rows, fields) =>{
-    //     req.session.id = rows[0]
-    // });
-    // id = rows[0].id;
+    let query = `Insert Into FuncionarioEndereco Set 
+    ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
+    DS_Logradouro   = '${req.body.logradouroFuncionario}',
+    DS_Numero       = '${req.body.numeroFuncionario}',
+    DS_Complemento  = '${req.body.complementoFuncionario}',
+    DS_CEP          = '${req.body.cepFuncionario}',
+    DS_Bairro       = '${req.body.bairroFuncionario}',
+    DS_Cidade       = '${req.body.cidadeFuncionario}',
+    DS_UF           = '${req.body.ufFuncionario}'
+    `;
 
-    let dataEndereco = {
-        "ID_Funcionario": id,
-        "DS_Logradouro": req.body.logradouroFuncionario,
-        "DS_Numero": req.body.numeroFuncionario,
-        "DS_Complemento": req.body.complementoFuncionario,
-        "DS_CEP": req.body.cepFuncionario,
-        "DS_Bairro": req.body.bairroFuncionario,
-        "DS_Cidade": req.body.cidadeFuncionario,
-        "DS_UF": req.body.ufFuncionario
-    }
-
-    db.query('Insert Into FuncionarioEndereco Set ?', [dataEndereco], (err, ret) => {
+    db.query(query, (err, ret) => {
         if (err) throw err;
         
         req.flash('sucess', "Funcionário Inserido com sucesso!")
         res.redirect('/tecnica/funcionarios');
     });
 });
+
+
+
 //Funcionarios 
 router.get('/tecnica/funcionarios', function (req, res, next) {
     if (req.session.loggedin) {
@@ -281,15 +280,11 @@ router.post('/alteraFuncionario/(:id)', (req, res, next)=>{
             "FL_Habilitado": req.body.flHabilitadoFuncionario,
             "DT_Admissao": req.body.dtAdmissaoFuncionario
         }
-        let id_Scope;
         db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err, ret) => {
             if (err) throw err;
-            id_Scope = ret.insertId;
-            console.log('Last insert ID in employees:', id_Scope);
         });
         // Não foi possivel alterar tabela parente.
         let dataEndereco = {
-            "ID_Funcionario": id_Scope,
             "DS_Logradouro": req.body.logradouroFuncionario,
             "DS_Numero": req.body.numeroFuncionario,
             "DS_Complemento": req.body.complementoFuncionario,
@@ -299,7 +294,7 @@ router.post('/alteraFuncionario/(:id)', (req, res, next)=>{
             "DS_UF": req.body.ufFuncionario
         }
     
-        db.query(`Update FuncionarioEndereco Set ?`, [dataEndereco], (err, ret) => {
+        db.query(`Update FuncionarioEndereco Set ? Where ID_Funcionario = ${id}`, [dataEndereco], (err, ret) => {
             if (err) throw err;
             
             req.flash('sucess', "Funcionário Inserido com sucesso!")
