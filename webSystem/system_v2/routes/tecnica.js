@@ -20,35 +20,6 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
     }
 });
 
-router.get('/tecnica/funcionarios', function (req, res, next) {
-    if (req.session.loggedin) {
-        let query = `Select ID_Funcionario
-                           ,NR_Codigo
-                           ,NM_Nome
-                           ,DS_Email
-                           ,DS_Departamento
-                           ,DS_Cargo
-                           ,Date_Format(DT_Admissao, '%d/%m/%Y') as DT_Admissao
-                       From Funcionario F
-                       Inner Join Departamento D
-                           On F.ID_Departamento = D.ID_Departamento
-                       Inner Join Cargo C
-                           On F.ID_Cargo = C.ID_Cargo`
-        db.query(query, function (err, rows, fields) {
-            if (err) throw err;
-
-            req.session.funcionarios = rows;
-            res.render('tecnica/funcionarios', {
-                name: req.session.name,
-                values: req.session.funcionarios
-            });
-        });
-    } else {
-        req.flash('sucess', 'É necessário estar logado para acessar esta página');
-        res.redirect('/login')
-    }
-});
-
 router.get('/tecnica/produtos', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Produto
@@ -188,6 +159,7 @@ router.get('/tecnica/perfil', function (req, res, next) {
     }
 });
 
+//Cadastrar Funcionario (problema no cadastro de tabela dependente)
 router.post('/cadastroUsuario', (req, res, next) => {
     let data = {
         "NM_Nome": req.body.nomeFuncionario,
@@ -204,18 +176,18 @@ router.post('/cadastroUsuario', (req, res, next) => {
         "FL_Habilitado": req.body.flHabilitadoFuncionario,
         "DT_Admissao": req.body.dtAdmissaoFuncionario
     }
-    let id_Scope;
-    db.query('Insert Into Funcionario Set ?', [data], (err, ret) => {
+    let id;
+    db.query('Insert Into Funcionario Set ?', [data], (err, result ,fields) => {
         if (err) throw err;
-
-        id_Scope = ret.insertId;
-
-        console.log('Last insert ID in employees:', id_Scope);
     });
 
-    console.log(id_Scope);
+    // db.query('Select max(ID_Funcionario) From Funcionario;', (err, rows, fields) =>{
+    //     req.session.id = rows[0]
+    // });
+    // id = rows[0].id;
+
     let dataEndereco = {
-        "ID_Funcionario": id_Scope,
+        "ID_Funcionario": id,
         "DS_Logradouro": req.body.logradouroFuncionario,
         "DS_Numero": req.body.numeroFuncionario,
         "DS_Complemento": req.body.complementoFuncionario,
@@ -229,8 +201,114 @@ router.post('/cadastroUsuario', (req, res, next) => {
         if (err) throw err;
         
         req.flash('sucess', "Funcionário Inserido com sucesso!")
-        res.redirect('/tecnica/configuracoes');
+        res.redirect('/tecnica/funcionarios');
     });
 });
+//Funcionarios 
+router.get('/tecnica/funcionarios', function (req, res, next) {
+    if (req.session.loggedin) {
+        let query = `Select ID_Funcionario
+                           ,NR_Codigo
+                           ,NM_Nome
+                           ,DS_Email
+                           ,DS_Departamento
+                           ,DS_Cargo
+                           ,Date_Format(DT_Admissao, '%d/%m/%Y') as DT_Admissao
+                       From Funcionario F
+                       Inner Join Departamento D
+                           On F.ID_Departamento = D.ID_Departamento
+                       Inner Join Cargo C
+                           On F.ID_Cargo = C.ID_Cargo`
+        db.query(query, function (err, rows, fields) {
+            if (err) throw err;
 
+            req.session.funcionarios = rows;
+            res.render('tecnica/funcionarios', {
+                name: req.session.name,
+                values: req.session.funcionarios
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+//Alterar Funcionario (Problema em alterar tabela dependente)
+router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
+    if (req.session.loggedin) {
+        let id = req.params.id
+        
+        db.query(`Select * From Departamento; Select * From Cargo; Select * From Perfil; Select * From Funcionario Where ID_Funcionario = ${id};`, function (err, rows, fields) {
+            if (err) throw err;
+
+            req.session.depto = rows[0];
+            req.session.cargo = rows[1];
+            req.session.perfil = rows[2];
+            req.session.funcionario = rows[3];
+
+            res.render('tecnica/alteraFuncionario', {
+                name: req.session.name,
+                valuesDepto: req.session.depto,
+                valuesCargo: req.session.cargo,
+                valuesPerfil: req.session.perfil,
+                funcionario: req.session.funcionario,
+                id: id
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.post('/alteraFuncionario/(:id)', (req, res, next)=>{
+    if(req.session.loggedin){
+        let id = req.params.id
+
+        let data = {
+            "NM_Nome": req.body.nomeFuncionario,
+            "NR_CPF": req.body.cpfFuncionario,
+            "NR_Telefone": req.body.telefoneFuncionario,
+            "DS_Email": req.body.emailFuncionario,
+            "DT_Nascimento": req.body.dtNascimentoFuncionario,
+            "NR_Codigo": req.body.codigoFuncionario,
+            "DS_Login": req.body.loginFuncionario,
+            "NR_Senha": req.body.senhaFuncionario,
+            "ID_Departamento": req.body.departamentoFuncionario,
+            "ID_Cargo": req.body.cargoFuncionario,
+            "ID_Perfil": req.body.perfilFuncionario,
+            "FL_Habilitado": req.body.flHabilitadoFuncionario,
+            "DT_Admissao": req.body.dtAdmissaoFuncionario
+        }
+        let id_Scope;
+        db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err, ret) => {
+            if (err) throw err;
+            id_Scope = ret.insertId;
+            console.log('Last insert ID in employees:', id_Scope);
+        });
+        // Não foi possivel alterar tabela parente.
+        let dataEndereco = {
+            "ID_Funcionario": id_Scope,
+            "DS_Logradouro": req.body.logradouroFuncionario,
+            "DS_Numero": req.body.numeroFuncionario,
+            "DS_Complemento": req.body.complementoFuncionario,
+            "DS_CEP": req.body.cepFuncionario,
+            "DS_Bairro": req.body.bairroFuncionario,
+            "DS_Cidade": req.body.cidadeFuncionario,
+            "DS_UF": req.body.ufFuncionario
+        }
+    
+        db.query(`Update FuncionarioEndereco Set ?`, [dataEndereco], (err, ret) => {
+            if (err) throw err;
+            
+            req.flash('sucess', "Funcionário Inserido com sucesso!")
+            res.redirect('/tecnica/funcionarios');
+        });
+
+    }else{
+        req.flash('message', 'é necessário estar logado para acessar esta página');
+        res.redirect('/login');
+    }
+});
 module.exports = router;
