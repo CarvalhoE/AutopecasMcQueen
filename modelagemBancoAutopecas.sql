@@ -148,7 +148,7 @@ Create Table Funcionario
 );
     
 Insert Into	Funcionario (NM_Nome, NR_CPF, DT_Nascimento, NR_Codigo, DS_Login, NR_Senha, ID_Departamento, ID_Cargo, ID_Perfil, FL_Habilitado, DT_Admissao, DT_Demissao) 
-	Values ('Jose', '12345678912', '2000-12-01', '11234', 'Joaquim', '1234', 4, 2, 1, 1, '2022-01-01', Null)
+	Values ('Joaquim', '12345678912', '2000-12-01', '11234', 'Joaquim', '1234', 4, 2, 1, 1, '2022-01-01', Null)
 		  ,('Lukas', '35824302863', '2003-04-09', '1182007', 'Lukas', '1234', 3, 1, 2, 0, '2021-03-01', '2021-10-28');
 
 Create Table FuncionarioEndereco

@@ -143,7 +143,22 @@ router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
 
 router.get('/tecnica/perfil', function (req, res, next) {
     if (req.session.loggedin) {
-        db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id}`, function(err, rows, fields){
+        let query = `Select F.NR_Codigo                 as codigo
+                           ,F.DS_Email                  as email
+                           ,Case F.FL_Habilitado
+                                When 1 Then 'Ativo'
+                                Else 'Inativo'
+                            End                         as habilitado
+                           ,D.DS_Departamento           as departamento
+                           ,C.DS_Cargo                  as cargo
+                        From Funcionario F
+                        Inner Join Departamento D
+                            On F.ID_Departamento = D.ID_Departamento
+                        Inner Join Cargo C
+                            On F.ID_Cargo = C.ID_Cargo
+                        Where ID_Funcionario = ${req.session.user_id}`
+
+        db.query(query, function(err, rows, fields){
             if (err) throw err;
 
             req.session.funcionario = rows[0]
