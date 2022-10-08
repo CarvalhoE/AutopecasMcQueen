@@ -36,19 +36,19 @@ router.get('/comercial/cadastraCliente', function (req, res) {
 router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
-    
+
     db.query(`Select * From Cliente Where ID_Cliente = ${id}`, function (err, rows, fields) {
       if (err) throw err;
 
       req.session.cliente = rows[0]
-    
+
       res.render('comercial/alteraCliente', {
         name: req.session.name,
         cliente: req.session.cliente,
         id: id
       });
     });
-    
+
   } else {
     req.flash('message', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
@@ -58,24 +58,24 @@ router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
 router.post('/alteraCliente/(:id)', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
-  // console.log(id);
-  let data = {
-    "NM_Nome": req.body.nome,
-    "NR_CPF": req.body.cpf,
-    "DS_Email": req.body.email,
-    "NR_Telefone": req.body.telefone,
-    "DT_Nascimento": req.body.nascimento,
-    "DT_Cadastro": Date.now
-  }
-  db.query(`Update Cliente Set ? Where ID_Cliente = ${id}`, [data], (err, ret) => {
-    if (err) {
-      req.flash('error', err)
-      res.redirect('/comercial/clientes')
-    } else {
-      req.flash('success', 'Cliente alterado com sucesso! id = ' + id)
-      res.redirect('/comercial/clientes')
+    // console.log(id);
+    let data = {
+      "NM_Nome": req.body.nome,
+      "NR_CPF": req.body.cpf,
+      "DS_Email": req.body.email,
+      "NR_Telefone": req.body.telefone,
+      "DT_Nascimento": req.body.nascimento,
+      "DT_Cadastro": Date.now
     }
-  });
+    db.query(`Update Cliente Set ? Where ID_Cliente = ${id}`, [data], (err, ret) => {
+      if (err) {
+        req.flash('error', err)
+        res.redirect('/comercial/clientes')
+      } else {
+        req.flash('success', 'Cliente alterado com sucesso! id = ' + id)
+        res.redirect('/comercial/clientes')
+      }
+    });
   } else {
     req.flash('message', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
@@ -93,10 +93,10 @@ router.post('/cadastrarCliente', (req, res, next) => {
       "DT_Nascimento": req.body.nascimento,
       "DT_Cadastro": Date.now
     }
-  
+
     db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
       if (err) throw err;
-  
+
       console.log(`Cliente ${ret.insertId} cadastrado com sucesso!`)
       res.redirect('/comercial/clientes');
     });
@@ -160,9 +160,14 @@ router.get('/comercial/vendas', function (req, res) {
 
 router.get('/comercial/VendasNovaVenda', function (req, res) {
   if (req.session.loggedin) {
-    res.render('comercial/VendasNovaVenda', {
-      name: req.session.name
-    });
+    db.query('Select * From Produto Where FL_Disponivel = 1', (err, rows, fields) => {
+      req.session.produtos = rows;
+
+      res.render('comercial/VendasNovaVenda', {
+        name: req.session.name,
+        values: req.session.produtos
+      });
+    })
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
@@ -212,5 +217,23 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
     res.redirect('/login')
   }
 });
+
+router.get('/novaVenda/adicionaProduto', (req, res) => {
+  if (req.session.loggedin) {
+    var select = document.getElementById('produtoNovaVenda');
+    var option = select.options[select.selectedIndex];
+
+    console.log(option.value);
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+  // if (req.session.arrayProdutos == 0) {
+  //   let arrayProdutos = new Array();
+  //   arrayProdutos.push()
+  // }
+
+  // console.log('ooi');
+})
 
 module.exports = router;
