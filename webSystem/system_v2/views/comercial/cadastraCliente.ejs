@@ -26,14 +26,14 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;"
+              <input type="text" id="form6Example1" class="form-control" maxlength="64" style="width: 760px; margin-top: 10px;"
                 name="nome" required />
               <label class="form-label" for="form6Example1">Nome Completo</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;"
+              <input type="text" id="cpf" class="form-control" maxlength="14" autocomplete="off" style="width: 140px; margin-top: 10px;"
                 name="cpf" required />
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
@@ -42,20 +42,20 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="date" id="form6Example2" class="form-control" style="width: 140px;" name="nascimento"
+              <input type="date" id="form6Example2" class="form-control" style="width: 150px;" name="nascimento"
                 required />
               <label class="form-label" for="form6Example2">Data de Nascimento</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 140px;" name="telefone" />
+              <input type="text" id="tel" class="form-control input-phone" maxlength="11" autocomplete="off" style="width: 140px;" name="telefone" />
               <label class="form-label" for="form6Example2">Telefone</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="email" id="form6Example1" class="form-control" style="width: 520px;" name="email" required />
+              <input type="email" id="form6Example1" class="form-control" maxlenght="32" style="width: 520px;" name="email" required />
               <label class="form-label" for="form6Example1">E-mail</label>
             </div>
           </div>
@@ -74,6 +74,19 @@
   <!-- Scripts -->
   <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../public/js/index.js"></script>
+  <script src="../../public/js/cleave-phone.i18n.js"></script>
+  <script src="../../public/js/cleave.min.js"></script>
+  <script>
+    let cleaveCPF = new Cleave('#cpf', {
+      delimiters: ['.','.','-'],
+      blocks: [3,3,3,2],
+      uppercase: true
+    });
+    let CleavePhone = new Cleave('#tel', {
+      phone: true,
+      phoneRegionCode:'BR'
+    });
+</script>
 </body>
 
 </html>

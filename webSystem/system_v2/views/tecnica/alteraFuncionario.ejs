@@ -34,7 +34,7 @@
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control"
+              <input type="text" id="cpf" class="form-control"
                 style="width: 140px; margin-top: 10px; margin-left: -5px;" name="cpfFuncionario" required />
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
@@ -43,7 +43,7 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example2" class="form-control" style="width: 140px;" name="telefoneFuncionario" />
+              <input type="text" id="tel" class="form-control" style="width: 140px;" name="telefoneFuncionario" />
               <label class="form-label" for="form6Example2">Telefone</label>
             </div>
           </div>
@@ -188,6 +188,14 @@
   <!-- Scripts -->
   <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../public/js/index.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+  <script>
+    new Cleave('#cpf', {
+      delimiters: ['.','.','-'],
+      blocks: [3,3,3,2],
+      uppercase: true
+    });
+</script> -->
 </body>
 
 </html>

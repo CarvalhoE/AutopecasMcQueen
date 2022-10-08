@@ -174,7 +174,7 @@ router.get('/tecnica/perfil', function (req, res, next) {
     }
 });
 
-//Cadastrar Funcionario (problema no cadastro de tabela dependente)
+//Cadastrar Funcionario (Concluido)
 router.post('/cadastroUsuario', (req, res, next) => {
 
     let data = {
@@ -248,7 +248,7 @@ router.get('/tecnica/funcionarios', function (req, res, next) {
     }
 });
 
-//Alterar Funcionario (Problema em alterar tabela dependente)
+//Alterar Funcionario (Concluido)
 router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
     if (req.session.loggedin) {
         let id = req.params.id
@@ -298,7 +298,7 @@ router.post('/alteraFuncionario/(:id)', (req, res, next)=>{
         db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err, ret) => {
             if (err) throw err;
         });
-        // Não foi possivel alterar tabela parente.
+        
         let dataEndereco = {
             "DS_Logradouro": req.body.logradouroFuncionario,
             "DS_Numero": req.body.numeroFuncionario,
