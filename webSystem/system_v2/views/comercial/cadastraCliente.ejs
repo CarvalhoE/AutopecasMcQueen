@@ -1,92 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Autopeças McQueen</title>
+        <link
+            rel="canonical"
+            href="https://getbootstrap.com/docs/5.2/examples/sidebars/"
+        />
+        <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+        <link
+            rel="stylesheet"
+            href="../../public/assets/dist/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="../../public/assets/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Autopeças McQueen</title>
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
-  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
-  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../public/assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <body>
+        <%- include('_lateral-bar.ejs') %>
 
-<body>
-
-  <%- include('_lateral-bar.ejs') %>
-
-  <main>
-    <div class="header">
-      <h1>Cadastro de Clientes</h1>
-    </div>
-
-    <div class="container-cadastroC" style="margin-left: auto; margin-right: auto;">
-      <form action="/cadastrarCliente" method="post">
-        <div class="row mb-4">
-          <div class="col">
-            <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" maxlength="64" style="width: 760px; margin-top: 10px;"
-                name="nome" required />
-              <label class="form-label" for="form6Example1">Nome Completo</label>
+        <main>
+            <div class="header">
+                <h1>Cadastro de Clientes</h1>
             </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="text" id="cpf" class="form-control" maxlength="14" autocomplete="off" style="width: 140px; margin-top: 10px;"
-                name="cpf" required />
-              <label class="form-label" for="form6Example1">CPF</label>
-            </div>
-          </div>
-        </div>
-        <div class="row mb-4">
-          <div class="col">
-            <div class="form-outline">
-              <input type="date" id="form6Example2" class="form-control" style="width: 150px;" name="nascimento"
-                required />
-              <label class="form-label" for="form6Example2">Data de Nascimento</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="text" id="tel" class="form-control input-phone" maxlength="11" autocomplete="off" style="width: 140px;" name="telefone" />
-              <label class="form-label" for="form6Example2">Telefone</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="email" id="form6Example1" class="form-control" maxlenght="32" style="width: 520px;" name="email" required />
-              <label class="form-label" for="form6Example1">E-mail</label>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar
-          cadastro</button>
-        <a href="/comercial/clientes">
-          <input value="Cancelar" class="btn btn-primary btn-block mb-4"
-            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
-        </a>
-      </form>
-    </div>
 
-  </main>
+            <div
+                class="container-cadastroC"
+                style="margin-left: auto; margin-right: auto"
+            >
+                <form action="/cadastrarCliente" method="post">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    id="form6Example1"
+                                    class="form-control"
+                                    maxlength="64"
+                                    style="width: 760px; margin-top: 10px"
+                                    name="nome"
+                                    required
+                                />
+                                <label class="form-label" for="form6Example1"
+                                    >Nome Completo</label
+                                >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    id="cpf"
+                                    class="form-control"
+                                    maxlength="14"
+                                    autocomplete="off"
+                                    style="width: 140px; margin-top: 10px"
+                                    name="cpf"
+                                    required
+                                />
+                                <label class="form-label" for="form6Example1"
+                                    >CPF</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="date"
+                                    id="form6Example2"
+                                    class="form-control"
+                                    style="width: 150px"
+                                    name="nascimento"
+                                    required
+                                />
+                                <label class="form-label" for="form6Example2"
+                                    >Data de Nascimento</label
+                                >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="text"
+                                    id="tel"
+                                    class="form-control input-phone"
+                                    maxlength="15"
+                                    autocomplete="off"
+                                    style="width: 140px"
+                                    name="telefone"
+                                />
+                                <label class="form-label" for="form6Example2"
+                                    >Telefone</label
+                                >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="email"
+                                    id="form6Example1"
+                                    class="form-control"
+                                    maxlenght="32"
+                                    style="width: 520px"
+                                    name="email"
+                                    required
+                                />
+                                <label class="form-label" for="form6Example1"
+                                    >E-mail</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block mb-4"
+                        style="margin-left: 10px"
+                    >
+                        Efetuar cadastro
+                    </button>
+                    <a href="/comercial/clientes">
+                        <input
+                            value="Cancelar"
+                            class="btn btn-primary btn-block mb-4"
+                            style="
+                                margin-left: 10px;
+                                background-color: #343a40;
+                                border-color: #343a40;
+                                width: 100px;
+                            "
+                        />
+                    </a>
+                </form>
+            </div>
+        </main>
 
-  <!-- Scripts -->
-  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../public/js/index.js"></script>
-  <script src="../../public/js/cleave-phone.i18n.js"></script>
-  <script src="../../public/js/cleave.min.js"></script>
-  <script>
-    let cleaveCPF = new Cleave('#cpf', {
-      delimiters: ['.','.','-'],
-      blocks: [3,3,3,2],
-      uppercase: true
-    });
-    let CleavePhone = new Cleave('#tel', {
-      phone: true,
-      phoneRegionCode:'BR'
-    });
-</script>
-</body>
-
+        <!-- Scripts -->
+        <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../../public/js/index.js"></script>
+        <script src="../../public/js/cleave-phone.i18n.js"></script>
+        <script src="../../public/js/cleave.min.js"></script>
+        <script>
+            let cleaveCPF = new Cleave("#cpf", {
+                delimiters: [".", ".", "-"],
+                blocks: [3, 3, 3, 2]
+            });
+            let CleavePhone = new Cleave("#tel", {
+                delimiters: ["(", ")", " ", "-"],
+                blocks: [0, 2, 0, 5, 4]
+            });
+        </script>
+    </body>
 </html>
