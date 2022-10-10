@@ -104,7 +104,7 @@
                             <div class="form-outline">
                                 <input
                                     type="email"
-                                    id="form6Example1"
+                                    id="email"
                                     class="form-control"
                                     maxlenght="32"
                                     style="width: 520px"
@@ -148,11 +148,11 @@
         <script>
             let cleaveCPF = new Cleave("#cpf", {
                 delimiters: [".", ".", "-"],
-                blocks: [3, 3, 3, 2]
+                blocks: [3, 3, 3, 2],
             });
             let CleavePhone = new Cleave("#tel", {
                 delimiters: ["(", ")", " ", "-"],
-                blocks: [0, 2, 0, 5, 4]
+                blocks: [0, 2, 0, 5, 4],
             });
         </script>
     </body>

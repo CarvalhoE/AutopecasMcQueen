@@ -87,7 +87,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
   if (req.session.loggedin) {
     let data = {
       "NM_Nome": req.body.nome,
-      "NR_CPF": req.body.cpf,
+      "NR_CPF": (req.body.cpf).replace(".", ""),
       "DS_Email": req.body.email,
       "NR_Telefone": req.body.telefone,
       "DT_Nascimento": req.body.nascimento,
@@ -97,7 +97,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
     db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
       if (err) throw err;
 
-      console.log(`Cliente ${ret.insertId} cadastrado com sucesso!`)
+      console.log(`${data.NM_Nome} foi cadastrado com sucesso!`)
       res.redirect('/comercial/clientes');
     });
   } else {
