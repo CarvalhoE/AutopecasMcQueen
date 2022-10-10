@@ -137,6 +137,23 @@ p{
   float: left;
   height: 100vh;
 }
+.cScroll{
+  overflow-y:scroll;
+  overflow-x: hidden;
+}
+
+.cScroll::-webkit-scrollbar{
+  width: 8px;
+}
+.cScroll::-webkit-scrollbar-track{
+  background-color: #343a40;
+}
+.cScroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ffb367;
+  border: 3px solid #343a40;
+  height: 2px;
+}
 
 .dropdown{
   margin-left: auto;

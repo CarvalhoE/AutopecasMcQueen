@@ -68,7 +68,7 @@
 
               <td><%= values[i].ID_Cliente %></td>
               <td><%= values[i].NM_Nome %></td>
-              <td><%= values[i].NR_Telefone %></td>
+              <td class="phone"><%= values[i].NR_Telefone %></td>
               <td><%= values[i].DS_Email %></td>
             </tr>
             <% } %>
@@ -83,6 +83,9 @@
   <!-- Scripts -->
   <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../public/js/index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+  <script src="../../public/js/mask.js"></script>
 </body>
 
 </html>
