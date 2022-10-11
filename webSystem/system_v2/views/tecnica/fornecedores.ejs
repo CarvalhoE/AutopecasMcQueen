@@ -64,7 +64,7 @@
                 </td>
                 <td><%= values[i].ID_Fornecedor %></td>
                 <td><%= values[i].NM_Empresa %></td>
-                <td><%= values[i].NR_Telefone %></td>
+                <td class="phone"><%= values[i].NR_Telefone %></td>
                 <td><%= values[i].DS_Email %></td>
               </tr>
               <% } %>
@@ -77,8 +77,7 @@
   </main>
 
   <!-- Scripts -->
-  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../public/js/index.js"></script>
+  <%- include('_scripts.ejs') %>
 </body>
 
 </html>

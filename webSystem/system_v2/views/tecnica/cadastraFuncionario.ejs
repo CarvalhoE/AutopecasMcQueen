@@ -34,8 +34,8 @@
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="cpf" class="form-control"
-                style="width: 140px; margin-top: 10px; margin-left: -5px;" name="cpfFuncionario" required />
+              <input type="text" class="form-control cpf"
+                style="width: 140px; margin-top: 10px; margin-left: -5px;" maxlength="14" autocomplete="off" name="cpfFuncionario" required />
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
           </div>
@@ -43,7 +43,7 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="tel" class="form-control" style="width: 140px;" name="telefoneFuncionario" />
+              <input type="text" class="form-control phone" maxlength="9" style="width: 140px;" name="telefoneFuncionario" />
               <label class="form-label" for="form6Example2">Telefone</label>
             </div>
           </div>
@@ -103,7 +103,7 @@
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="number" id="form6Example2" class="form-control" name="cepFuncionario" required />
+              <input type="text" class="form-control cep" name="cepFuncionario" required />
               <label class="form-label" for="form6Example2">CEP</label>
             </div>
           </div>
@@ -186,18 +186,7 @@
   </main>
 
   <!-- Scripts -->
-  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../public/js/index.js"></script>
-  
-  
-  <!-- <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
-  <script>
-    new Cleave('#cpf', {
-      delimiters: ['.','.','-'],
-      blocks: [3,3,3,2],
-      uppercase: true
-    });
-</script> -->
+  <%- include('_scripts.ejs') %>
 </body>
 
 </html>

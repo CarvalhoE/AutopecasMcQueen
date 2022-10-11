@@ -25,7 +25,6 @@
           Clientes
         </button>
       </div>
-
       <div class="table-top">
         <div class="extras">
           <a href="/comercial/cadastraCliente"><button class="extra-n" id="btnNovoCliente">
@@ -33,7 +32,6 @@
             </button></a>
           <input type="text" class="extra-s" placeholder="Pesquisa por Nome">
         </div>
-
         <table class="table">
             <% if (values.length <= 0) { %>
             <tr>
@@ -81,11 +79,7 @@
   </main>
 
   <!-- Scripts -->
-  <script src="../../public/assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../public/js/index.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
-  <script src="../../public/js/mask.js"></script>
+  <%- include('_scripts.ejs') %>
 </body>
 
 </html>

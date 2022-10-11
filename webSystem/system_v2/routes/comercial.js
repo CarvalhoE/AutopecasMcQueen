@@ -1,4 +1,5 @@
 let express = require('express');
+const flash = require('express-flash');
 let router = express.Router();
 
 let db = require('../database');
@@ -8,7 +9,6 @@ router.get('/comercial/clientes', function (req, res, next) {
   if (req.session.loggedin) {
     db.query('Select * From Cliente', function (err, rows, fields) {
       if (err) throw err;
-
       req.session.clientes = rows;
       res.render('comercial/clientes', {
         name: req.session.name,
@@ -87,7 +87,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
   if (req.session.loggedin) {
     let data = {
       "NM_Nome": req.body.nome,
-      "NR_CPF": (req.body.cpf).replace(".", ""),
+      "NR_CPF": req.body.cpf,
       "DS_Email": req.body.email,
       "NR_Telefone": req.body.telefone,
       "DT_Nascimento": req.body.nascimento,
@@ -96,7 +96,8 @@ router.post('/cadastrarCliente', (req, res, next) => {
 
     db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
       if (err) throw err;
-
+      
+      req.flash('message', 'Cadastrado com sucesso!');
       console.log(`${data.NM_Nome} foi cadastrado com sucesso!`)
       res.redirect('/comercial/clientes');
     });
