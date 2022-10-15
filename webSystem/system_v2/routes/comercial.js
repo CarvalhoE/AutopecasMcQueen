@@ -96,7 +96,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
 
     db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
       if (err) throw err;
-      
+
       req.flash('message', 'Cadastrado com sucesso!');
       console.log(`${data.NM_Nome} foi cadastrado com sucesso!`)
       res.redirect('/comercial/clientes');
@@ -161,12 +161,25 @@ router.get('/comercial/vendas', function (req, res) {
 
 router.get('/comercial/VendasNovaVenda', function (req, res) {
   if (req.session.loggedin) {
-    db.query('Select * From Produto Where FL_Disponivel = 1', (err, rows, fields) => {
-      req.session.produtos = rows;
+    db.query(`Select * From Funcionario;
+              Select * From Cliente;
+              Select * From PedidoStatus;
+              Select * From FormaPagamento;
+              Select * From Produto Where FL_Disponivel = 1`, (err, rows, fields) => {
+
+      req.session.funcionario = rows[0];
+      req.session.cliente = rows[1];
+      req.session.situacao = rows[2];
+      req.session.formaPagamento = rows[3];
+      req.session.produto = rows[4];
 
       res.render('comercial/VendasNovaVenda', {
         name: req.session.name,
-        values: req.session.produtos
+        funcionario: req.session.funcionario,
+        cliente: req.session.cliente,
+        situacao: req.session.situacao,
+        formaPagamento: req.session.formaPagamento,
+        produto: req.session.produto
       });
     })
   } else {
