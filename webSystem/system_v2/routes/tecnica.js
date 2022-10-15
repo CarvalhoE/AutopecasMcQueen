@@ -22,6 +22,7 @@ router.get("/tecnica/fornecedor", function (req, res, next) {
         res.redirect("/login");
     }
 });
+//Produtos
 
 router.get("/tecnica/produtos", function (req, res, next) {
     if (req.session.loggedin) {
@@ -57,7 +58,6 @@ router.get("/tecnica/produtos", function (req, res, next) {
     }
 });
 
-//Configurar Rota
 router.get("/tecnica/novoProduto", function (req, res, next) {
     if (req.session.loggedin) {
         db.query(
@@ -83,6 +83,23 @@ router.get("/tecnica/novoProduto", function (req, res, next) {
             "É necessário estar logado para acessar esta página"
         );
         res.redirect("/login");
+    }
+});
+
+//cadastrar produto (Incompleto)
+router.post("/cadastroProduto", function (req, res, next){
+    if(req.session.loggedin){
+        let data = {
+            NM_Produto: req.body.nmProduto,
+            DS_Descricao: req.body.dsDescicao,
+            VL_Preco: req.body.vlPreco,
+            NR_SKU: req.body.nrSKU,
+            DS_Marca: req.body.dsMarca,
+            FL_Disponivel: req.body.flDisponivel,
+
+        }
+    }else{
+
     }
 });
 
@@ -208,43 +225,51 @@ router.get("/tecnica/perfil", function (req, res, next) {
 
 //Cadastrar Funcionario (Concluido)
 router.post("/cadastroUsuario", (req, res, next) => {
-    let data = {
-        NM_Nome: req.body.nomeFuncionario,
-        NR_CPF: req.body.cpfFuncionario,
-        NR_Telefone: req.body.telefoneFuncionario,
-        DS_Email: req.body.emailFuncionario,
-        DT_Nascimento: req.body.dtNascimentoFuncionario,
-        NR_Codigo: req.body.codigoFuncionario,
-        DS_Login: req.body.loginFuncionario,
-        NR_Senha: req.body.senhaFuncionario,
-        ID_Departamento: req.body.departamentoFuncionario,
-        ID_Cargo: req.body.cargoFuncionario,
-        ID_Perfil: req.body.perfilFuncionario,
-        FL_Habilitado: req.body.flHabilitadoFuncionario,
-        DT_Admissao: req.body.dtAdmissaoFuncionario,
-    };
-
-    db.query("Insert Into Funcionario Set ?", [data], (err, result, fields) => {
-        if (err) throw err;
-    });
-
-    let query = `Insert Into FuncionarioEndereco Set 
-    ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
-    DS_Logradouro   = '${req.body.logradouroFuncionario}',
-    DS_Numero       = '${req.body.numeroFuncionario}',
-    DS_Complemento  = '${req.body.complementoFuncionario}',
-    DS_CEP          = '${req.body.cepFuncionario}',
-    DS_Bairro       = '${req.body.bairroFuncionario}',
-    DS_Cidade       = '${req.body.cidadeFuncionario}',
-    DS_UF           = '${req.body.ufFuncionario}'
-    `;
-
-    db.query(query, (err, ret) => {
-        if (err) throw err;
-
-        req.flash("sucess", "Funcionário Inserido com sucesso!");
-        res.redirect("/tecnica/funcionarios");
-    });
+    if(req.session.loggedin){
+        let data = {
+            NM_Nome: req.body.nomeFuncionario,
+            NR_CPF: req.body.cpfFuncionario,
+            NR_Telefone: req.body.telefoneFuncionario,
+            DS_Email: req.body.emailFuncionario,
+            DT_Nascimento: req.body.dtNascimentoFuncionario,
+            NR_Codigo: req.body.codigoFuncionario,
+            DS_Login: req.body.loginFuncionario,
+            NR_Senha: req.body.senhaFuncionario,
+            ID_Departamento: req.body.departamentoFuncionario,
+            ID_Cargo: req.body.cargoFuncionario,
+            ID_Perfil: req.body.perfilFuncionario,
+            FL_Habilitado: req.body.flHabilitadoFuncionario,
+            DT_Admissao: req.body.dtAdmissaoFuncionario,
+        };
+    
+        db.query("Insert Into Funcionario Set ?", [data], (err, result, fields) => {
+            if (err) throw err;
+        });
+    
+        let query = `Insert Into FuncionarioEndereco Set 
+        ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
+        DS_Logradouro   = '${req.body.logradouroFuncionario}',
+        DS_Numero       = '${req.body.numeroFuncionario}',
+        DS_Complemento  = '${req.body.complementoFuncionario}',
+        DS_CEP          = '${req.body.cepFuncionario}',
+        DS_Bairro       = '${req.body.bairroFuncionario}',
+        DS_Cidade       = '${req.body.cidadeFuncionario}',
+        DS_UF           = '${req.body.ufFuncionario}'
+        `;
+    
+        db.query(query, (err, ret) => {
+            if (err) throw err;
+    
+            req.flash("sucess", "Funcionário Inserido com sucesso!");
+            res.redirect("/tecnica/funcionarios");
+        });
+    }else{
+        req.flash(
+            "sucess",
+            "É necessário estar logado para acessar esta página"
+        );
+        res.redirect("/login");
+    }
 });
 
 //Funcionarios
