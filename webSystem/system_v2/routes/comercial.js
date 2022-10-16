@@ -58,14 +58,12 @@ router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
 router.post('/alteraCliente/(:id)', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
-    // console.log(id);
     let data = {
       "NM_Nome": req.body.nome,
       "NR_CPF": req.body.cpf,
       "DS_Email": req.body.email,
       "NR_Telefone": req.body.telefone,
-      "DT_Nascimento": req.body.nascimento,
-      "DT_Cadastro": Date.now
+      "DT_Nascimento": req.body.nascimento
     }
     db.query(`Update Cliente Set ? Where ID_Cliente = ${id}`, [data], (err, ret) => {
       if (err) {
@@ -91,7 +89,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
       "DS_Email": req.body.email,
       "NR_Telefone": req.body.telefone,
       "DT_Nascimento": req.body.nascimento,
-      "DT_Cadastro": Date.now
+      "DT_Cadastro": new Date()
     }
 
     db.query('Insert Into Cliente Set ?', [data], (err, ret) => {
