@@ -21,57 +21,73 @@
       <h1>Produtos - Novo Produto</h1>
     </div>
     <div class="container-cadastroC">
-        <form>
+        <form action="/cadastroProduto" method="post">
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <input type="text" id="form6Example1" class="form-control" maxlength="128" style="width: 750px; margin-top: 10px;" name="nmProduto" required/>
+                <label class="form-label" for="form6Example1">Nome</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" maxlength="64" class="form-control" style="width: 140px; margin-top: 10px;" name="dsMarca" required/>
+                <label class="form-label" for="form6Example1">Marca</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" maxlength="256" style="width: 750px; margin-top: 10px;" name="dsDescricao" required/>
                 <label class="form-label" for="form6Example1">Descrição</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline" >
-                <input type="number" id="form6Example1" class="form-control" style="width: 140px; margin-top: 10px;"required/>
+                <input type="text" id="form6Example1" class="form-control money" style="width: 140px; margin-top: 10px;" name="vlPreco" required/>
                 <label class="form-label" for="form6Example1">Valor Unitario</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline" >
-                <input type="number" id="form6Example1" class="form-control" style="width: 80px; margin-left: 5px;"required/>
+                <input type="number" id="form6Example1" class="form-control" style="width: 80px;" name="qtdProd" required/>
                 <label class="form-label" for="form6Example1">Quantidade</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline" >
-                <input type="text" id="form6Example1" class="form-control" style="width: 150px;"required/>
+                <input type="text" id="form6Example1" class="form-control sku" style="width: 150px;" name="nrSKU" required/>
                 <label class="form-label" for="form6Example1">SKU</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required/>
+                <input type="date" id="form6Example2" class="form-control" style="width: 148px;" name="dtProduto"  required/>
                 <label class="form-label" for="form6Example2">Data</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
-                  <option value="1">Efetivado</option>
-                  <option value="2">Cancelado</option>
-                  <option value="3">Pendente</option>
-                  <option value="4">Em Atraso</option>
-                  <option value="5">Estornado</option>
+                <select name="flDisponivel" class="form-control" style="width: 140px;">
+                  <option value="0">Disponivel</option>
+                  <option value="1">Não Disponivel</option>
                 </select>
                 <label class="form-label" for="form6Example1">Situação</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
-                  <option value="">Debito</option>
-                  <option value="">Credito</option>
+                <select id="categoria" name="categoria" class="form-control" style="width: 140px;">
+                  <option value="1">Acessório</option>
+                  <option value="2">Elétrica</option>
+                  <option value="3">Mecânica</option>
                 </select>
-                <label class="form-label" for="form6Example1">Tipo de Pagamento</label>
+                <label class="form-label" for="form6Example1">Categoria</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="file" id="form6Example2" class="form-control" style="width: 250px;" name="imgProduto"/>
+                <label class="form-label" for="form6Example2">Imagem do Produto</label>
               </div>
             </div>
             <div>

@@ -27,14 +27,18 @@
           <div class="col">
             <select id="vendedor" class="form-control"
               style="width: 100px; margin-top:10px; margin-left: 20px;">
-              <option value="1">Vendedor</option>
+              <% for (let i = 0; i < funcionario.length; i++) { %>
+              <option value="<%= funcionario[i].ID_Funcionario %>"><%= funcionario[i].NM_Nome %></option>
+              <% } %>
             </select>
             <label class="form-label" for="form6Example1" style="margin-left: 20px;">Vendedor</label>
           </div>
 
           <div class="col">
             <select id="cliente" class="form-control" style="width: 100px; margin-top:10px;">
-              <option value="1">Cliente</option>
+              <% for (let i = 0; i < cliente.length; i++) { %>
+              <option value="<%= cliente[i].ID_Cliente %>"><%= cliente[i].NM_Nome %></option>
+              <% } %>
             </select>
             <label class="form-label" for="form6Example1">Cliente</label>
           </div>
@@ -44,8 +48,8 @@
 
           <div class="col">
             <select id="produtoNovaVenda" name="produto" class="form-control" style="width: 500px; margin-left: 20px;">
-              <% for (let i = 0; i < values.length; i++) { %>
-              <option value="<%= values[i].ID_Produto %>"><%= values[i].NR_SKU %> | <%= values[i].NM_Produto %></option>
+              <% for (let i = 0; i < produto.length; i++) { %>
+              <option value="<%= produto[i].ID_Produto %>"><%= produto[i].NR_SKU %> | <%= produto[i].NM_Produto %></option>
               <% } %>
             </select>
             <label class="form-label" for="form6Example1" style="margin-left: 20px;">Produto</label>
@@ -89,11 +93,13 @@
                 <td>@mdo</td>
                 <td>@mdo</td>
                 <td>@mdo</td>
+                <td>Otto</td>
               </tr>
               <tr>
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+                <td>Otto</td>
                 <td>Otto</td>
                 <td>Otto</td>
               </tr>
@@ -111,12 +117,10 @@
 
           <div class="col">
             <div class="form-outline">
-              <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
-                <option value="1">Efetivado</option>
-                <option value="2">Cancelado</option>
-                <option value="3">Pendente</option>
-                <option value="4">Em Atraso</option>
-                <option value="5">Estornado</option>
+              <select id="situacao" name="situacao" class="form-control" style="width: 100px;">
+                <% for (let i = 0; i < situacao.length; i++) { %>
+                <option value="<%= situacao[i].ID_PedidoStatus %>"><%= situacao[i].DS_Status %></option>
+                <% } %>
               </select>
               <label class="form-label" for="form6Example1">Situação</label>
             </div>
