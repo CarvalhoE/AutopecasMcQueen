@@ -1,5 +1,6 @@
 const mysql = require('mysql2')
 
+//servidor Hospedado
 const connection = mysql.createPool({
     connectionLimit: 2,
     host: 'lrocode.mysql.dbaas.com.br',
@@ -7,6 +8,17 @@ const connection = mysql.createPool({
     database: 'lrocode',
     user: 'lrocode',
     password: 'WTyL8lCfO#',
+    multipleStatements: true
+});
+
+//Localhost
+const connectionLocal = mysql.createPool({
+    connectionLimit: 2,
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    port: '3307',
+    database: 'autopecas',
     multipleStatements: true
 });
 
