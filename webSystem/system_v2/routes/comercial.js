@@ -58,7 +58,7 @@ router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
 router.post('/alteraCliente/(:id)', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
-    // console.log(id);
+    
     let data = {
       "NM_Nome": req.body.nome,
       "NR_CPF": req.body.cpf,

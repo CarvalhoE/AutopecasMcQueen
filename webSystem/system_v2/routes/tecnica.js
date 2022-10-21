@@ -1,30 +1,26 @@
-let express = require("express");
+let express = require('express');
 let router = express.Router();
 
-let db = require("../database");
+let db = require('../database');
 
-router.get("/tecnica/fornecedor", function (req, res, next) {
+router.get('/tecnica/fornecedor', function (req, res, next) {
     if (req.session.loggedin) {
-        db.query("Select * From Fornecedor", function (err, rows, fields) {
+        db.query('Select * From Fornecedor', function (err, rows, fields) {
             if (err) throw err;
 
             req.session.fornecedores = rows;
-            res.render("tecnica/fornecedores", {
+            res.render('tecnica/fornecedores', {
                 name: req.session.name,
-                values: req.session.fornecedores,
+                values: req.session.fornecedores
             });
         });
     } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
 });
-//Produtos
 
-router.get("/tecnica/produtos", function (req, res, next) {
+router.get('/tecnica/produtos', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Produto
                            ,NR_SKU
@@ -38,242 +34,177 @@ router.get("/tecnica/produtos", function (req, res, next) {
                             End as FL_Disponivel
                         From Produto P
                         Inner Join Categoria C
-                            On P.ID_Categoria = C.ID_Categoria`;
+                            On P.ID_Categoria = C.ID_Categoria`
         db.query(query, function (err, rows, fields) {
             if (err) throw err;
 
             req.session.produtos = rows;
 
-            res.render("tecnica/produtos", {
+            res.render('tecnica/produtos', {
                 name: req.session.name,
-                values: req.session.produtos,
+                values: req.session.produtos
             });
         });
     } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
 });
 
-router.get("/tecnica/novoProduto", function (req, res, next) {
+//Configurar Rota
+router.get('/tecnica/novoProduto', function (req, res, next) {
     if (req.session.loggedin) {
-        db.query(
-            "Select * From Produto; Select * From Estoque; Select * From Funcionario;",
-            function (err, rows, fields) {
-                if (err) throw err;
-
-                req.session.produto = rows[0];
-                req.session.estoque = rows[1];
-                req.session.funcionario = rows[2];
-
-                res.render("tecnica/novoProduto", {
-                    name: req.session.name,
-                    valuesProduto: req.session.produto,
-                    valuesEstoque: req.session.estoque,
-                    valuesFuncionario: req.session.funcionario,
-                });
-            }
-        );
-    } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
-    }
-});
-
-//cadastrar produto (Incompleto)
-router.post("/cadastroProduto", function (req, res, next){
-    if(req.session.loggedin){
-        let data = {
-            NM_Produto: req.body.nmProduto,
-            DS_Descricao: req.body.dsDescicao,
-            VL_Preco: req.body.vlPreco,
-            NR_SKU: req.body.nrSKU,
-            DS_Marca: req.body.dsMarca,
-            FL_Disponivel: req.body.flDisponivel,
-
-        }
-    }else{
-
-    }
-});
-
-router.get("/tecnica/relatorios", function (req, res, next) {
-    if (req.session.loggedin) {
-        res.render("tecnica/relatorios", {
-            name: req.session.name,
-        });
-    } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
-    }
-});
-
-router.get("/tecnica/notas", function (req, res, next) {
-    if (req.session.loggedin) {
-        res.render("tecnica/nfe", {
-            name: req.session.name,
-        });
-    } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
-    }
-});
-
-router.get("/tecnica/configuracoes", function (req, res, next) {
-    if (req.session.loggedin) {
-        res.render("tecnica/configuracoes", {
-            name: req.session.name,
-        });
-    } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
-    }
-});
-
-router.get("/tecnica/cadastraFornecedor", function (req, res, next) {
-    if (req.session.loggedin) {
-        res.render("tecnica/cadastraFornecedor", {
-            name: req.session.name,
-        });
-    } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
-    }
-});
-
-router.get("/tecnica/cadastraFuncionario", function (req, res, next) {
-    if (req.session.loggedin) {
-        db.query(
-            "Select * From Departamento; Select * From Cargo; Select * From Perfil;",
-            function (err, rows, fields) {
-                if (err) throw err;
-
-                req.session.depto = rows[0];
-                req.session.cargo = rows[1];
-                req.session.perfil = rows[2];
-
-                res.render("tecnica/cadastraFuncionario", {
-                    name: req.session.name,
-                    valuesDepto: req.session.depto,
-                    valuesCargo: req.session.cargo,
-                    valuesPerfil: req.session.perfil,
-                });
-            }
-        );
-    } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
-    }
-});
-
-router.get("/tecnica/perfil", function (req, res, next) {
-    if (req.session.loggedin) {
-        let query = `Select F.NR_Codigo                 as codigo
-                           ,F.DS_Email                  as email
-                           ,Case F.FL_Habilitado
-                                When 1 Then 'Ativo'
-                                Else 'Inativo'
-                            End                         as habilitado
-                           ,D.DS_Departamento           as departamento
-                           ,C.DS_Cargo                  as cargo
-                        From Funcionario F
-                        Inner Join Departamento D
-                            On F.ID_Departamento = D.ID_Departamento
-                        Inner Join Cargo C
-                            On F.ID_Cargo = C.ID_Cargo
-                        Where ID_Funcionario = ${req.session.user_id}`;
-
-        db.query(query, function (err, rows, fields) {
+        db.query('Select * From Produto; Select * From Estoque; Select * From Funcionario;', function (err, rows, fields) {
             if (err) throw err;
 
-            req.session.funcionario = rows[0];
+            req.session.produto = rows[0];
+            req.session.estoque = rows[1];
+            req.session.funcionario = rows[2];
 
-            res.render("tecnica/perfil", {
+            res.render('tecnica/novoProduto', {
                 name: req.session.name,
-                values: req.session.funcionario,
+                valuesProduto: req.session.produto,
+                valuesEstoque: req.session.estoque,
+                valuesFuncionario: req.session.funcionario
             });
         });
     } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
 });
 
-//Cadastrar Funcionario (Concluido)
-router.post("/cadastroUsuario", (req, res, next) => {
-    if(req.session.loggedin){
-        let data = {
-            NM_Nome: req.body.nomeFuncionario,
-            NR_CPF: req.body.cpfFuncionario,
-            NR_Telefone: req.body.telefoneFuncionario,
-            DS_Email: req.body.emailFuncionario,
-            DT_Nascimento: req.body.dtNascimentoFuncionario,
-            NR_Codigo: req.body.codigoFuncionario,
-            DS_Login: req.body.loginFuncionario,
-            NR_Senha: req.body.senhaFuncionario,
-            ID_Departamento: req.body.departamentoFuncionario,
-            ID_Cargo: req.body.cargoFuncionario,
-            ID_Perfil: req.body.perfilFuncionario,
-            FL_Habilitado: req.body.flHabilitadoFuncionario,
-            DT_Admissao: req.body.dtAdmissaoFuncionario,
-        };
-    
-        db.query("Insert Into Funcionario Set ?", [data], (err, result, fields) => {
-            if (err) throw err;
+router.get('/tecnica/relatorios', function (req, res, next) {
+    if (req.session.loggedin) {
+        res.render('tecnica/relatorios', {
+            name: req.session.name
         });
-    
-        let query = `Insert Into FuncionarioEndereco Set 
-        ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
-        DS_Logradouro   = '${req.body.logradouroFuncionario}',
-        DS_Numero       = '${req.body.numeroFuncionario}',
-        DS_Complemento  = '${req.body.complementoFuncionario}',
-        DS_CEP          = '${req.body.cepFuncionario}',
-        DS_Bairro       = '${req.body.bairroFuncionario}',
-        DS_Cidade       = '${req.body.cidadeFuncionario}',
-        DS_UF           = '${req.body.ufFuncionario}'
-        `;
-    
-        db.query(query, (err, ret) => {
-            if (err) throw err;
-    
-            req.flash("sucess", "Funcionário Inserido com sucesso!");
-            res.redirect("/tecnica/funcionarios");
-        });
-    }else{
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
 });
 
-//Funcionarios
-router.get("/tecnica/funcionarios", function (req, res, next) {
+router.get('/tecnica/notas', function (req, res, next) {
+    if (req.session.loggedin) {
+        res.render('tecnica/nfe', {
+            name: req.session.name
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/configuracoes', function (req, res, next) {
+    if (req.session.loggedin) {
+        res.render('tecnica/configuracoes', {
+            name: req.session.name
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/cadastraFornecedor', function (req, res, next) {
+    if (req.session.loggedin) {
+        res.render('tecnica/cadastraFornecedor', {
+            name: req.session.name
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
+    if (req.session.loggedin) {
+        
+        db.query('Select * From Departamento; Select * From Cargo; Select * From Perfil;', function (err, rows, fields) {
+            if (err) throw err;
+
+            req.session.depto = rows[0];
+            req.session.cargo = rows[1];''
+            req.session.perfil = rows[2];
+
+            res.render('tecnica/cadastraFuncionario', {
+                name: req.session.name,
+                valuesDepto: req.session.depto,
+                valuesCargo: req.session.cargo,
+                valuesPerfil: req.session.perfil
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/perfil', function (req, res, next) {
+    if (req.session.loggedin) {
+        db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id}`, function(err, rows, fields){
+            if (err) throw err;
+
+            req.session.funcionario = rows[0]
+
+            res.render('tecnica/perfil', {
+                name: req.session.name,
+                values: req.session.funcionario
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+//Cadastrar Funcionario (problema no cadastro de tabela dependente)
+router.post('/cadastroUsuario', (req, res, next) => {
+
+    let data = {
+        "NM_Nome": req.body.nomeFuncionario,
+        "NR_CPF": req.body.cpfFuncionario,
+        "NR_Telefone": req.body.telefoneFuncionario,
+        "DS_Email": req.body.emailFuncionario,
+        "DT_Nascimento": req.body.dtNascimentoFuncionario,
+        "NR_Codigo": req.body.codigoFuncionario,
+        "DS_Login": req.body.loginFuncionario,
+        "NR_Senha": req.body.senhaFuncionario,
+        "ID_Departamento": req.body.departamentoFuncionario,
+        "ID_Cargo": req.body.cargoFuncionario,
+        "ID_Perfil": req.body.perfilFuncionario,
+        "FL_Habilitado": req.body.flHabilitadoFuncionario,
+        "DT_Admissao": req.body.dtAdmissaoFuncionario
+    }
+
+    db.query('Insert Into Funcionario Set ?', [data], (err, result ,fields) => {
+        if (err) throw err;
+    });
+
+    let query = `Insert Into FuncionarioEndereco Set 
+    ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
+    DS_Logradouro   = '${req.body.logradouroFuncionario}',
+    DS_Numero       = '${req.body.numeroFuncionario}',
+    DS_Complemento  = '${req.body.complementoFuncionario}',
+    DS_CEP          = '${req.body.cepFuncionario}',
+    DS_Bairro       = '${req.body.bairroFuncionario}',
+    DS_Cidade       = '${req.body.cidadeFuncionario}',
+    DS_UF           = '${req.body.ufFuncionario}'
+    `;
+
+    db.query(query, (err, ret) => {
+        if (err) throw err;
+        
+        req.flash('sucess', "Funcionário Inserido com sucesso!")
+        res.redirect('/tecnica/funcionarios');
+    });
+});
+
+
+
+//Funcionarios 
+router.get('/tecnica/funcionarios', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Funcionario
                            ,NR_Codigo
@@ -286,112 +217,93 @@ router.get("/tecnica/funcionarios", function (req, res, next) {
                        Inner Join Departamento D
                            On F.ID_Departamento = D.ID_Departamento
                        Inner Join Cargo C
-                           On F.ID_Cargo = C.ID_Cargo`;
+                           On F.ID_Cargo = C.ID_Cargo`
         db.query(query, function (err, rows, fields) {
             if (err) throw err;
 
             req.session.funcionarios = rows;
-            res.render("tecnica/funcionarios", {
+            res.render('tecnica/funcionarios', {
                 name: req.session.name,
-                values: req.session.funcionarios,
+                values: req.session.funcionarios
             });
         });
     } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
 });
 
-//Alterar Funcionario (Concluido)
-router.get("/tecnica/alteraFuncionario/(:id)", (req, res, next) => {
+//Alterar Funcionario (Problema em alterar tabela dependente)
+router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
     if (req.session.loggedin) {
-        let id = req.params.id;
+        let id = req.params.id
+        
+        db.query(`Select * From Departamento; Select * From Cargo; Select * From Perfil; Select * From Funcionario Where ID_Funcionario = ${id};`, function (err, rows, fields) {
+            if (err) throw err;
 
-        db.query(
-            `Select * From Departamento; Select * From Cargo; Select * From Perfil; Select * From Funcionario Where ID_Funcionario = ${id};`,
-            function (err, rows, fields) {
-                if (err) throw err;
+            req.session.depto = rows[0];
+            req.session.cargo = rows[1];
+            req.session.perfil = rows[2];
+            req.session.funcionario = rows[3];
 
-                req.session.depto = rows[0];
-                req.session.cargo = rows[1];
-                req.session.perfil = rows[2];
-                req.session.funcionario = rows[3];
-
-                res.render("tecnica/alteraFuncionario", {
-                    name: req.session.name,
-                    valuesDepto: req.session.depto,
-                    valuesCargo: req.session.cargo,
-                    valuesPerfil: req.session.perfil,
-                    funcionario: req.session.funcionario,
-                    id: id,
-                });
-            }
-        );
+            res.render('tecnica/alteraFuncionario', {
+                name: req.session.name,
+                valuesDepto: req.session.depto,
+                valuesCargo: req.session.cargo,
+                valuesPerfil: req.session.perfil,
+                funcionario: req.session.funcionario,
+                id: id
+            });
+        });
     } else {
-        req.flash(
-            "sucess",
-            "É necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
 });
 
-router.post("/alteraFuncionario/(:id)", (req, res, next) => {
-    if (req.session.loggedin) {
-        let id = req.params.id;
+router.post('/alteraFuncionario/(:id)', (req, res, next)=>{
+    if(req.session.loggedin){
+        let id = req.params.id
 
         let data = {
-            NM_Nome: req.body.nomeFuncionario,
-            NR_CPF: req.body.cpfFuncionario,
-            NR_Telefone: req.body.telefoneFuncionario,
-            DS_Email: req.body.emailFuncionario,
-            DT_Nascimento: req.body.dtNascimentoFuncionario,
-            NR_Codigo: req.body.codigoFuncionario,
-            DS_Login: req.body.loginFuncionario,
-            NR_Senha: req.body.senhaFuncionario,
-            ID_Departamento: req.body.departamentoFuncionario,
-            ID_Cargo: req.body.cargoFuncionario,
-            ID_Perfil: req.body.perfilFuncionario,
-            FL_Habilitado: req.body.flHabilitadoFuncionario,
-            DT_Admissao: req.body.dtAdmissaoFuncionario,
-        };
-        db.query(
-            `Update Funcionario Set ? Where ID_Funcionario = ${id}`,
-            [data],
-            (err, ret) => {
-                if (err) throw err;
-            }
-        );
-
+            "NM_Nome": req.body.nomeFuncionario,
+            "NR_CPF": req.body.cpfFuncionario,
+            "NR_Telefone": req.body.telefoneFuncionario,
+            "DS_Email": req.body.emailFuncionario,
+            "DT_Nascimento": req.body.dtNascimentoFuncionario,
+            "NR_Codigo": req.body.codigoFuncionario,
+            "DS_Login": req.body.loginFuncionario,
+            "NR_Senha": req.body.senhaFuncionario,
+            "ID_Departamento": req.body.departamentoFuncionario,
+            "ID_Cargo": req.body.cargoFuncionario,
+            "ID_Perfil": req.body.perfilFuncionario,
+            "FL_Habilitado": req.body.flHabilitadoFuncionario,
+            "DT_Admissao": req.body.dtAdmissaoFuncionario
+        }
+        db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err, ret) => {
+            if (err) throw err;
+        });
+        // Não foi possivel alterar tabela parente.
         let dataEndereco = {
-            DS_Logradouro: req.body.logradouroFuncionario,
-            DS_Numero: req.body.numeroFuncionario,
-            DS_Complemento: req.body.complementoFuncionario,
-            DS_CEP: req.body.cepFuncionario,
-            DS_Bairro: req.body.bairroFuncionario,
-            DS_Cidade: req.body.cidadeFuncionario,
-            DS_UF: req.body.ufFuncionario,
-        };
+            "DS_Logradouro": req.body.logradouroFuncionario,
+            "DS_Numero": req.body.numeroFuncionario,
+            "DS_Complemento": req.body.complementoFuncionario,
+            "DS_CEP": req.body.cepFuncionario,
+            "DS_Bairro": req.body.bairroFuncionario,
+            "DS_Cidade": req.body.cidadeFuncionario,
+            "DS_UF": req.body.ufFuncionario
+        }
+    
+        db.query(`Update FuncionarioEndereco Set ? Where ID_Funcionario = ${id}`, [dataEndereco], (err, ret) => {
+            if (err) throw err;
+            
+            req.flash('sucess', "Funcionário Inserido com sucesso!")
+            res.redirect('/tecnica/funcionarios');
+        });
 
-        db.query(
-            `Update FuncionarioEndereco Set ? Where ID_Funcionario = ${id}`,
-            [dataEndereco],
-            (err, ret) => {
-                if (err) throw err;
-
-                req.flash("sucess", "Funcionário Inserido com sucesso!");
-                res.redirect("/tecnica/funcionarios");
-            }
-        );
-    } else {
-        req.flash(
-            "message",
-            "é necessário estar logado para acessar esta página"
-        );
-        res.redirect("/login");
+    }else{
+        req.flash('message', 'é necessário estar logado para acessar esta página');
+        res.redirect('/login');
     }
 });
 module.exports = router;
