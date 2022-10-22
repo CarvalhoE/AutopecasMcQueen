@@ -125,7 +125,7 @@ router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
             if (err) throw err;
 
             req.session.depto = rows[0];
-            req.session.cargo = rows[1];''
+            req.session.cargo = rows[1];
             req.session.perfil = rows[2];
 
             res.render('tecnica/cadastraFuncionario', {
@@ -233,18 +233,26 @@ router.get('/tecnica/funcionarios', function (req, res, next) {
     }
 });
 
-//Alterar Funcionario (Problema em alterar tabela dependente)
+//Alterar Funcionario
 router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
     if (req.session.loggedin) {
         let id = req.params.id
         
-        db.query(`Select * From Departamento; Select * From Cargo; Select * From Perfil; Select * From Funcionario Where ID_Funcionario = ${id};`, function (err, rows, fields) {
+        db.query(`
+            Select * From Departamento; 
+            Select * From Cargo; 
+            Select * From Perfil; 
+            Select * From Funcionario 
+                Where ID_Funcionario = ${id};
+            Select * From FuncionarioEndereco
+                Where ID_Funcionario = ${id};`, function (err, rows, fields) {
             if (err) throw err;
 
             req.session.depto = rows[0];
             req.session.cargo = rows[1];
             req.session.perfil = rows[2];
             req.session.funcionario = rows[3];
+            req.session.funcionarioEndereco = rows[4];
 
             res.render('tecnica/alteraFuncionario', {
                 name: req.session.name,
@@ -252,6 +260,7 @@ router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
                 valuesCargo: req.session.cargo,
                 valuesPerfil: req.session.perfil,
                 funcionario: req.session.funcionario,
+                funcionarioEndereco: req.session.funcionarioEndereco,
                 id: id
             });
         });
@@ -267,23 +276,18 @@ router.post('/alteraFuncionario/(:id)', (req, res, next)=>{
 
         let data = {
             "NM_Nome": req.body.nomeFuncionario,
-            "NR_CPF": req.body.cpfFuncionario,
             "NR_Telefone": req.body.telefoneFuncionario,
             "DS_Email": req.body.emailFuncionario,
-            "DT_Nascimento": req.body.dtNascimentoFuncionario,
-            "NR_Codigo": req.body.codigoFuncionario,
-            "DS_Login": req.body.loginFuncionario,
             "NR_Senha": req.body.senhaFuncionario,
             "ID_Departamento": req.body.departamentoFuncionario,
             "ID_Cargo": req.body.cargoFuncionario,
             "ID_Perfil": req.body.perfilFuncionario,
-            "FL_Habilitado": req.body.flHabilitadoFuncionario,
-            "DT_Admissao": req.body.dtAdmissaoFuncionario
+            "FL_Habilitado": req.body.flHabilitadoFuncionario
         }
         db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err, ret) => {
             if (err) throw err;
         });
-        // Não foi possivel alterar tabela parente.
+        
         let dataEndereco = {
             "DS_Logradouro": req.body.logradouroFuncionario,
             "DS_Numero": req.body.numeroFuncionario,
