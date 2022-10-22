@@ -56,7 +56,7 @@
           <div class="col">
             <select id="produtoNovaVenda" name="produto" class="form-control" style="width: 470px; margin-left: 20px;">
               <% for (let i = 0; i < produto.length; i++) { %>
-              <option value="<%= produto[i].ID_Produto %>"><%= produto[i].NR_SKU %> | <%= produto[i].NM_Produto %>
+              <option value="<%= produto[i].NR_SKU %>"><%= produto[i].NR_SKU %> - <%= produto[i].NM_Produto %>
               </option>
               <% } %>
             </select>
@@ -87,28 +87,8 @@
                 <th scope="col">Valor Total por Produto</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>Otto</td>
-              </tr>
+            <tbody id="tableBody">
+
             </tbody>
           </table>
         </div>
@@ -246,9 +226,44 @@
     const produtosSelecionados = new Array();
 
     let adicionaProduto = () => {
-          produtosSelecionados.push(json)
-          console.log(produtosSelecionados);
+      let produtoSelecionado = document.getElementById('produtoNovaVenda').value;
+      let quantidadeProduto = Number(document.getElementById('quantidade').value);
+
+      if (produtosSelecionados.length == 0) {
+        produtosSelecionados.push({
+          sku: produtoSelecionado,
+          quantidade: quantidadeProduto
+        })
+      } else {
+        for (let i = 0; i < produtosSelecionados.length; i++) {
+          if (produtosSelecionados[i].sku == produtoSelecionado) {
+            produtosSelecionados[i].quantidade += quantidadeProduto
+          } else {
+            produtosSelecionados.push({
+              sku: produtoSelecionado,
+              quantidade: quantidadeProduto
+            })
+          }
+        }
+          produtoSelecionado = null
+          quantidade = 0
       }
+      console.log(produtosSelecionados);
+
+      let tableBody = document.getElementById('tableBody');
+      let tableReturn = ""
+      for (let i = 0; i < produtosSelecionados.length; i++) {
+        tableReturn += `<tr>
+                          <td>${produtosSelecionados[i].sku}</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td>${produtosSelecionados[i].quantidade}</td>
+                          <td>Otto</td>
+                        </tr>`
+      }
+      console.log(tableReturn)
+      tableBody.innerHTML = tableReturn
+    }
   </script>
 </body>
 
