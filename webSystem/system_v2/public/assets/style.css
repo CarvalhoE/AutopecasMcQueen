@@ -191,7 +191,7 @@ p{
 .container-cadastroC{
   margin: 50px;
   border-radius: 5px;
-  width: 970px;
+  width: 890px;
   max-height: 500px;
   box-shadow: #343a40 1px 1px 10px 0px;
   overflow-y:scroll;
@@ -251,7 +251,7 @@ p{
 
 .table-container{
   padding: 50px;
-  width: 1024px;
+  width: 990px;
 }
 
 .extras{

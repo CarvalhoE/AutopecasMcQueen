@@ -26,7 +26,7 @@
 
           <div class="col">
             <select id="vendedor" class="form-control"
-              style="width: 100px; margin-top:10px; margin-left: 20px;">
+              style="width: 420px; margin-top:10px; margin-left: 20px;">
               <% for (let i = 0; i < funcionario.length; i++) { %>
               <option value="<%= funcionario[i].ID_Funcionario %>"><%= funcionario[i].NM_Nome %></option>
               <% } %>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="col">
-            <select id="cliente" class="form-control" style="width: 100px; margin-top:10px;">
+            <select id="cliente" class="form-control" style="width: 420px; margin-top:10px;">
               <% for (let i = 0; i < cliente.length; i++) { %>
               <option value="<%= cliente[i].ID_Cliente %>"><%= cliente[i].NM_Nome %></option>
               <% } %>

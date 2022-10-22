@@ -18,7 +18,8 @@ router.post('/authentication', function (req, res, next) {
     } else {
       if(rows[0].FL_Habilitado == 1){
         req.session.loggedin = true;
-        req.session.name = rows[0].NM_Nome;
+        req.session.name = rows[0].DS_Login;
+        req.session.namef = rows[0].NM_Nome;
         req.session.user_id = rows[0].ID_Funcionario;
 
         res.redirect('/home');
@@ -42,7 +43,8 @@ router.get('/logout', function (req, res) {
 router.get('/', function (req, res, next) {
   if (req.session.loggedin) {
     res.render('home', {
-      name: req.session.name
+      name: req.session.name,
+      namef: req.session.namef
     });
   } else {
     res.render('login', {

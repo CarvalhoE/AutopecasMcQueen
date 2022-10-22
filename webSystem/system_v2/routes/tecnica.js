@@ -150,6 +150,7 @@ router.get('/tecnica/perfil', function (req, res, next) {
 
             res.render('tecnica/perfil', {
                 name: req.session.name,
+                namef: req.session.namef,
                 values: req.session.funcionario
             });
         });
