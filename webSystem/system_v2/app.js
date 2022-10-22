@@ -6,6 +6,7 @@ let logger = require('morgan');
 let expressValidator = require('express-validator');
 let flash = require('express-flash');
 let session = require('express-session');
+// let nodemon = require('nodemon');
 
 const bodyParser = require('body-parser');
 
@@ -29,6 +30,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(nodemon({script: 'app.js', ext: 'js json'}))
+
+// nodemon.on('start', () => {
+//   console.log('Aplicação iniciada');
+// }).on('quit', () => {
+//   console.log('Aplicação finalizada');
+//   process.exit;
+// }).on('restart', () => {
+//   console.log('Aplicação reiniciada: ', files);
+// });
 
 app.use(session({
   secret: 'autopecas',

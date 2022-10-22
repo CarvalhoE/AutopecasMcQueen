@@ -78,7 +78,7 @@
                                     class="form-control"
                                     style="width: 150px"
                                     name="nascimento"
-                                    value="<%= cliente.DT_Nascimento.getDate() + '/' + cliente.DT_Nascimento.getMonth() + '/' + cliente.DT_Nascimento.getFullYear() %>"
+                                    value="<%= cliente.DT_Nascimento.getDate() + '/' + (cliente.DT_Nascimento.getMonth() + 1) + '/' + cliente.DT_Nascimento.getFullYear() %>"
                                     readonly
                                 />
                                 <label class="form-label" for="form6Example2"

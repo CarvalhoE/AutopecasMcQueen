@@ -17,16 +17,16 @@ const connectionLocal = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    port: '3307',
+    port: '3306',
     database: 'autopecas',
     multipleStatements: true
 });
 
-connection.getConnection((err, connection) => {
+connectionLocal.getConnection((err, connection) => {
     if (err) throw err;
 
     console.log('MySQL conectado com sucesso!')
     connection.release();
 });
 
-module.exports = connection;
+module.exports = connectionLocal;

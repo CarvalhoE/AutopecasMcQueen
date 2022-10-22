@@ -33,15 +33,15 @@ router.get('/comercial/cadastraCliente', function (req, res) {
 });
 
 //Alterar (Concluído) - Clientes
-router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
+router.get('/comercial/alteraCliente/:id', (req, res, next) => {
   if (req.session.loggedin) {
-    let id = req.params.id
+    let id = req.params.id;
 
     db.query(`Select * From Cliente Where ID_Cliente = ${id}`, function (err, rows, fields) {
       if (err) throw err;
 
       req.session.cliente = rows[0]
-
+      
       res.render('comercial/alteraCliente', {
         name: req.session.name,
         cliente: req.session.cliente,
@@ -55,16 +55,14 @@ router.get('/comercial/alteraCliente/(:id)', (req, res, next) => {
   }
 });
 
-router.post('/alteraCliente/(:id)', (req, res, next) => {
+router.post('/alteraCliente/:id', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
     
     let data = {
       "NM_Nome": req.body.nome,
-      "NR_CPF": req.body.cpf,
       "DS_Email": req.body.email,
       "NR_Telefone": req.body.telefone,
-      "DT_Nascimento": req.body.nascimento
     }
     db.query(`Update Cliente Set ? Where ID_Cliente = ${id}`, [data], (err, ret) => {
       if (err) {
