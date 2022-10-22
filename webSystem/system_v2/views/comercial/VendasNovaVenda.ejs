@@ -26,7 +26,7 @@
 
           <div class="col">
             <select id="vendedor" class="form-control"
-              style="width: 420px; margin-top:10px; margin-left: 20px;">
+              style="width: 350px; margin-top:10px; margin-left: 20px;">
               <% for (let i = 0; i < funcionario.length; i++) { %>
               <option value="<%= funcionario[i].ID_Funcionario %>"><%= funcionario[i].NM_Nome %></option>
               <% } %>
@@ -35,33 +35,43 @@
           </div>
 
           <div class="col">
-            <select id="cliente" class="form-control" style="width: 420px; margin-top:10px;">
+            <select id="cliente" class="form-control" style="width: 350px; margin-top:10px;">
               <% for (let i = 0; i < cliente.length; i++) { %>
               <option value="<%= cliente[i].ID_Cliente %>"><%= cliente[i].NM_Nome %></option>
               <% } %>
             </select>
             <label class="form-label" for="form6Example1">Cliente</label>
           </div>
+
+          <div class="col">
+            <input type="date" id="form6Example2" class="form-control" style="width: 150px; margin-top:10px;"
+              readonly />
+            <label class="form-label" for="form6Example2">Data do Pedido</label>
+          </div>
+
         </div>
 
         <div class="row mb-4">
 
           <div class="col">
-            <select id="produtoNovaVenda" name="produto" class="form-control" style="width: 500px; margin-left: 20px;">
+            <select id="produtoNovaVenda" name="produto" class="form-control" style="width: 470px; margin-left: 20px;">
               <% for (let i = 0; i < produto.length; i++) { %>
-              <option value="<%= produto[i].ID_Produto %>"><%= produto[i].NR_SKU %> | <%= produto[i].NM_Produto %></option>
+              <option value="<%= produto[i].NR_SKU %>"><%= produto[i].NR_SKU %> - <%= produto[i].NM_Produto %>
+              </option>
               <% } %>
             </select>
             <label class="form-label" for="form6Example1" style="margin-left: 20px;">Produto</label>
           </div>
 
           <div class="col">
-            <input type="number" id="quantidade" name="quantidade" class="form-control" style="width: 100px;" required />
+            <input type="number" id="quantidade" name="quantidade" class="form-control" style="width: 100px;"
+              required />
             <label class="form-label" for="form6Example1">Quantidade</label>
           </div>
 
           <div class=" col">
-            <a href="/novaVenda/adicionaProduto"><input type="button" value="Adicionar produto" class="form-control" style="width:150px" id="addProduct"></a>
+            <input type="button" value="Adicionar produto" class="form-control" style="width:150px" id="addProduct"
+              onclick="adicionaProduto()">
           </div>
 
         </div>
@@ -75,37 +85,100 @@
                 <th scope="col">Valor Unitario</th>
                 <th scope="col">QTD. Produto</th>
                 <th scope="col">Valor Total por Produto</th>
-                <th scope="col">Valor Total da venda</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td>Otto</td>
-              </tr>
+            <tbody id="tableBody">
+
             </tbody>
           </table>
         </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+
+          <div class="col">
+            <div class="form-outline">
+              <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+              <label class="form-label" for="form6Example2">Data</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
+            <label class="form-label" for="form6Example2">Data</label>
+          </div>
+        </div>
+
+
 
         <div class="row mb-4">
           <div class="col">
@@ -148,6 +221,50 @@
 
   <!-- Scripts -->
   <%- include('_scripts.ejs') %>
+
+  <script>
+    const produtosSelecionados = new Array();
+
+    let adicionaProduto = () => {
+      let produtoSelecionado = document.getElementById('produtoNovaVenda').value;
+      let quantidadeProduto = Number(document.getElementById('quantidade').value);
+
+      if (produtosSelecionados.length == 0) {
+        produtosSelecionados.push({
+          sku: produtoSelecionado,
+          quantidade: quantidadeProduto
+        })
+      } else {
+        for (let i = 0; i < produtosSelecionados.length; i++) {
+          if (produtosSelecionados[i].sku == produtoSelecionado) {
+            produtosSelecionados[i].quantidade += quantidadeProduto
+          } else {
+            produtosSelecionados.push({
+              sku: produtoSelecionado,
+              quantidade: quantidadeProduto
+            })
+          }
+        }
+          produtoSelecionado = null
+          quantidade = 0
+      }
+      console.log(produtosSelecionados);
+
+      let tableBody = document.getElementById('tableBody');
+      let tableReturn = ""
+      for (let i = 0; i < produtosSelecionados.length; i++) {
+        tableReturn += `<tr>
+                          <td>${produtosSelecionados[i].sku}</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td>${produtosSelecionados[i].quantidade}</td>
+                          <td>Otto</td>
+                        </tr>`
+      }
+      console.log(tableReturn)
+      tableBody.innerHTML = tableReturn
+    }
+  </script>
 </body>
 
 </html>

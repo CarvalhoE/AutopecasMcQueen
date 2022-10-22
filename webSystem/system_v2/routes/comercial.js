@@ -231,10 +231,8 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
 
 router.get('/novaVenda/adicionaProduto', (req, res) => {
   if (req.session.loggedin) {
-    var select = document.getElementById('produtoNovaVenda');
-    var option = select.options[select.selectedIndex];
 
-    console.log(option.value);
+
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
