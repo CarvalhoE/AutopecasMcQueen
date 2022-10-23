@@ -71,15 +71,17 @@
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <th scope="row">
-                  <button class="extra-d" value="<%= values[i].ID_Cobranca %>">
-                    <i class="fa fa-pencil-square-o"></i>
-                  </button>
+                  <a href="/financeiro/finAlteraRecebimento/<%= values[i].ID_Cobranca %>">
+                    <button class="extra-d" value="<%= values[i].ID_Cobranca %>">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </a>
                 </th>
                 <td><%= values[i].ID_Cobranca %></td>
                 <td><%= values[i].DS_Descricao %></td>
                 <td><%= values[i].DT_Registro %></td>
                 <td><%= values[i].DS_SituacaoCobranca %></td>
-                <td><%= values[i].VL_Valor %></td>
+                <td>R$ <%= values[i].VL_Valor %></td>
               </tr>
               <% } %>
               <% } %>
