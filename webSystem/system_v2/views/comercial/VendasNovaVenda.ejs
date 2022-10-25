@@ -428,37 +428,26 @@
               let tamanho = produtos.length;
 
               if (tamanho == 0) {
-                produtosSelecionados.push({sku: produtoSelecionado, quantidade: quantidadeProduto})
+                produtos.push({sku: produtoSelecionado, quantidade: quantidadeProduto})
               } else {
-                produtos.map(sku => produtos.find(sku))
+                let index = produtos.findIndex(obj => obj.sku == produtoSelecionado)
+                if (index >= 0) {
+                  produtos[index].quantidade += quantidadeProduto;
+                } else {
+                produtos.push({sku: produtoSelecionado, quantidade: quantidadeProduto})
+                }
               }
               produtoSelecionado = null;
               quantidadeProduto = 0;
 
-                } else {
-                    for (let i = 0; i < produtosSelecionados.length; i++) {
-                        if (produtosSelecionados[i].sku == produtoSelecionado) {
-                            produtosSelecionados.splice([i], 1, {
-                                sku: produtoSelecionado,
-                                quantidade: (produtosSelecionados[i].quantidade += quantidadeProduto),
-                            });
-                        } else {
-                            produtosSelecionados.push({
-                                sku: produtoSelecionado,
-                                quantidade: quantidadeProduto,
-                            });
-                        }
-                    }
-                }
-
                 let tableBody = document.getElementById("tableBody");
                 let tableReturn = "";
-                for (let i = 0; i < produtosSelecionados.length; i++) {
+                for (let i = 0; i < produtos.length; i++) {
                     tableReturn += `<tr>
-                          <td>${produtosSelecionados[i].sku}</td>
+                          <td>${produtos[i].sku}</td>
                           <td>Otto</td>
                           <td>@mdo</td>
-                          <td>${produtosSelecionados[i].quantidade}</td>
+                          <td>${produtos[i].quantidade}</td>
                           <td>Otto</td>
                         </tr>`;
                 }
