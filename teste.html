@@ -9,11 +9,16 @@
     <body>
         <script>
             var arr1 = [
-                { id: 0, produto: "bicicleta" },
-                { id: 1, produto: "patins" },
+                { id: 0, quantidade: 23 },
+                { id: 1, quantidade: 12 },
+                { id: 2, quantidade: 10 },
             ];
 
-            console.log(arr1.map(obj => obj.produto === 'bicicleta'));
+            let indexObject = arr1.findIndex(obj => obj.id == 1)
+            console.log(arr1[indexObject]);
+
+            arr1[indexObject].quantidade += 10;
+
         </script>
     </body>
 </html>
