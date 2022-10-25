@@ -23,7 +23,7 @@ router.get('/financeiro/recebimentos', function (req, res) {
         });
     });
   } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    req.flash('success', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
 });
@@ -49,7 +49,7 @@ router.get('/financeiro/pagamentos', function (req, res) {
         });
     });
   } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    req.flash('success', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
 });
@@ -60,7 +60,7 @@ router.get('/financeiro/novoPagamento', function (req, res, next) {
       name: req.session.name
     });
   } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    req.flash('success', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
 });
@@ -80,7 +80,7 @@ router.get('/financeiro/novoRecebimento', function (req, res, next) {
       });
     });
   } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    req.flash('success', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
   }
 });
@@ -92,7 +92,8 @@ router.post('/novoRecebimento', function (req, res, next) {
       "DT_Registro":req.body.dataCobranca,
       "ID_TipoCobranca":req.body.tipoCobranca,
       "VL_Valor":req.body.valorCobranca,
-      "ID_SituacaoCobranca": req.body.situacaoCobranca
+      "ID_SituacaoCobranca": req.body.situacaoCobranca,
+      "DT_Alteracao": new Date()
     }
 
     db.query('Insert Into Cobranca Set ?',[data],(err, result, fields) =>{
@@ -108,22 +109,38 @@ router.post('/novoRecebimento', function (req, res, next) {
     res.redirect('/login')
   }
 });
+
 //Alterar Recebimento
 router.get('/financeiro/finAlteraRecebimento/:id', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id;
+    const query = `Select DS_Descricao
+                         ,C.ID_SituacaoCobranca
+                         ,C.ID_TipoCobranca
+                         ,VL_Valor
+                         ,DT_Registro
+                         ,DS_SituacaoCobranca
+                         ,DS_TipoCobranca
+                      From Cobranca C
+                      Inner Join TipoCobranca TC
+                        On C.ID_TipoCobranca = TC.ID_TipoCobranca
+                      Inner Join SituacaoCobranca SC
+                        On C.ID_SituacaoCobranca = SC.ID_SituacaoCobranca
+                      Where C.ID_Cobranca = ${id}`
 
-    db.query(`Select * From Cobranca Where ID_Cobranca = ${id}`, function (err, rows, fields) {
+    db.query(`${query}; Select * From SituacaoCobranca; Select * From TipoCobranca;`, function (err, rows, fields) {
       if (err) throw err;
 
       req.session.cobranca = rows[0];
+      req.session.situacaoCobranca = rows[1];
+      req.session.tipoCobranca = rows[2];
 
       res.render('financeiro/finAlteraRecebimento', {
         name: req.session.name,
+        id: id,
         cobranca: req.session.cobranca,
-        valuesS: req.session.situacao,
-        valuesT: req.session.tipo,
-        id: id
+        situacaoCobranca: req.session.situacaoCobranca,
+        tipoCobranca: req.session.tipoCobranca
       });
     });
 
@@ -133,21 +150,20 @@ router.get('/financeiro/finAlteraRecebimento/:id', (req, res, next) => {
   }
 });
 
-router.post('/finAlteraRecebimento/(:id)', (req, res, next)=>{
+router.post('/finAlteraRecebimento/:id', (req, res, next)=>{
   if(req.session.loggedin){
     let id = req.params.id
 
     let data = {
       "DS_Descricao":req.body.dsCobranca,
-      "DT_Registro":req.body.dataCobranca,
-      "ID_TipoCobranca":req.body.tipoCobranca,
       "VL_Valor":req.body.valorCobranca,
-      "ID_SituacaoCobranca": req.body.situacaoCobranca
+      "ID_SituacaoCobranca": req.body.situacaoCobranca,
+      "DT_Alteracao": new Date()
     }
     db.query(`Update Cobranca Set ? Where ID_Cobranca = ${id}`, [data], (err, ret) => {
         if (err) throw err;
-        req.flash('sucess', "Recebimento Alterado com sucesso!")
-        res.redirect('financeiro/finRecebimentos');
+        req.flash('success', "Recebimento Alterado com sucesso!")
+        res.redirect('/financeiro/recebimentos');
     });
 
   }else{

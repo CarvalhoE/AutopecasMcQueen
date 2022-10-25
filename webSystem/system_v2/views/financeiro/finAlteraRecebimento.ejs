@@ -43,7 +43,7 @@
                                     maxlength="64"
                                     style="width: 760px; margin-top: 10px"
                                     name="dsCobranca"
-                                    value="<%= cobranca.DS_Descricao %>"
+                                    value="<%= cobranca[0].DS_Descricao %>"
                                     required
                                 />
                                 <label class="form-label" for="form6Example1"
@@ -61,7 +61,7 @@
                                         autocomplete="off"
                                         style="width: 140px;"
                                         name="valorCobranca"
-                                        value="<%= cobranca.VL_Valor %>"
+                                        value="<%= cobranca[0].VL_Valor %>"
                                         required
                                     />
                                     <label class="form-label" for="form6Example1"
@@ -77,12 +77,34 @@
                                         class="form-control"
                                         style="width: 150px"
                                         name="dataCobranca"
-                                        value="<%= cobranca.DT_Registro.getDate() + '/' + (cobranca.DT_Registro.getMonth() + 1) + '/' + cobranca.DT_Registro.getFullYear() %>"
+                                        value="<%= cobranca[0].DT_Registro.getDate() + '/' + (cobranca[0].DT_Registro.getMonth() + 1) + '/' + cobranca[0].DT_Registro.getFullYear() %>"
                                         readonly
                                     />
                                     <label class="form-label" for="form6Example2"
                                         >Data</label
                                     >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-outline">
+                                    <select id="situacao" name="situacaoCobranca" class="form-control" style="width: 100px;">
+                                    <% for (let i = 0; i < situacaoCobranca.length; i++) { %>
+                                        <option value="<%= situacaoCobranca[i].ID_SituacaoCobranca %>" <% if (situacaoCobranca[i].ID_SituacaoCobranca == cobranca[0].ID_SituacaoCobranca) { %> Selected <% } %>><%= situacaoCobranca[i].DS_SituacaoCobranca %></option>
+                                    <% } %>
+                                    </select>
+                                    <label class="form-label" for="form6Example1">Situação</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-outline">
+                                    <select id="tipo" name="tipoCobranca" class="form-control" style="width: 100px;">
+                                    <% for (let i = 0; i < tipoCobranca.length; i++) { %>
+                                        <option value="<%= tipoCobranca[i].ID_TipoCobranca %>" <% if (tipoCobranca[i].ID_TipoCobranca == cobranca[0].ID_TipoCobranca) { %> Selected <% } %>><%= tipoCobranca[i].DS_TipoCobranca %></option>
+                                    <% } %>
+                                    </select>
+                                    <label class="form-label" for="form6Example1">Tipo</label>
                                 </div>
                             </div>
                         </div>

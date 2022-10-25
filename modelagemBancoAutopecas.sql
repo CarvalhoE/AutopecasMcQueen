@@ -340,6 +340,7 @@ Create Table Cobranca
    ,ID_TipoCobranca				int				Not Null
    ,VL_Valor					Numeric(16,2)	Not Null
    ,ID_SituacaoCobranca			int				Not Null
+   ,DT_Alteracao              DateTime       Not Null
    ,Constraint PK_ID_Cobranca							Primary Key (ID_Cobranca)
    ,Constraint FK_ID_TipoCobranca_TipoCobranca			foreign key (ID_TipoCobranca) References TipoCobranca (ID_TipoCobranca)
    ,Constraint FK_ID_SituacaoCobranca_SituacaoCobranca	foreign key (ID_SituacaoCobranca) References SituacaoCobranca (ID_SituacaoCobranca)

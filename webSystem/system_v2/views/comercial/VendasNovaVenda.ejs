@@ -1,270 +1,469 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Autopeças McQueen</title>
+        <link
+            rel="canonical"
+            href="https://getbootstrap.com/docs/5.2/examples/sidebars/"
+        />
+        <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+        <link
+            rel="stylesheet"
+            href="../../public/assets/dist/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="../../public/assets/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Autopeças McQueen</title>
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
-  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
-  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../public/assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <body>
+        <%- include('_lateral-bar.ejs') %>
 
-<body>
-
-  <%- include('_lateral-bar.ejs') %>
-
-  <main>
-    <div class="header">
-      <h1>Vendas - Nova Venda</h1>
-    </div>
-    <div class="container-cadastroC">
-      <form>
-        <div class="row mb-4">
-
-          <div class="col">
-            <select id="vendedor" class="form-control"
-              style="width: 350px; margin-top:10px; margin-left: 20px;">
-              <% for (let i = 0; i < funcionario.length; i++) { %>
-              <option value="<%= funcionario[i].ID_Funcionario %>"><%= funcionario[i].NM_Nome %></option>
-              <% } %>
-            </select>
-            <label class="form-label" for="form6Example1" style="margin-left: 20px;">Vendedor</label>
-          </div>
-
-          <div class="col">
-            <select id="cliente" class="form-control" style="width: 350px; margin-top:10px;">
-              <% for (let i = 0; i < cliente.length; i++) { %>
-              <option value="<%= cliente[i].ID_Cliente %>"><%= cliente[i].NM_Nome %></option>
-              <% } %>
-            </select>
-            <label class="form-label" for="form6Example1">Cliente</label>
-          </div>
-
-          <div class="col">
-            <input type="date" id="form6Example2" class="form-control" style="width: 150px; margin-top:10px;"
-              readonly />
-            <label class="form-label" for="form6Example2">Data do Pedido</label>
-          </div>
-
-        </div>
-
-        <div class="row mb-4">
-
-          <div class="col">
-            <select id="produtoNovaVenda" name="produto" class="form-control" style="width: 470px; margin-left: 20px;">
-              <% for (let i = 0; i < produto.length; i++) { %>
-              <option value="<%= produto[i].NR_SKU %>"><%= produto[i].NR_SKU %> - <%= produto[i].NM_Produto %>
-              </option>
-              <% } %>
-            </select>
-            <label class="form-label" for="form6Example1" style="margin-left: 20px;">Produto</label>
-          </div>
-
-          <div class="col">
-            <input type="number" id="quantidade" name="quantidade" class="form-control" style="width: 100px;"
-              required />
-            <label class="form-label" for="form6Example1">Quantidade</label>
-          </div>
-
-          <div class=" col">
-            <input type="button" value="Adicionar produto" class="form-control" style="width:150px" id="addProduct"
-              onclick="adicionaProduto()">
-          </div>
-
-        </div>
-
-        <div class="row mb-4" style="width: 100%; margin-left: 10px;">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">SKU</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Valor Unitario</th>
-                <th scope="col">QTD. Produto</th>
-                <th scope="col">Valor Total por Produto</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-
-            </tbody>
-          </table>
-        </div>
-
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-
-          <div class="col">
-            <div class="form-outline">
-              <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-              <label class="form-label" for="form6Example2">Data</label>
+        <main>
+            <div class="header">
+                <h1>Vendas - Nova Venda</h1>
             </div>
-          </div>
+            <div class="container-cadastroC">
+                <form>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <select
+                                id="vendedor"
+                                class="form-control"
+                                style="
+                                    width: 350px;
+                                    margin-top: 10px;
+                                    margin-left: 20px;
+                                "
+                            >
+                                <% for (let i = 0; i < funcionario.length; i++)
+                                { %>
+                                <option
+                                    value="<%= funcionario[i].ID_Funcionario %>"
+                                >
+                                    <%= funcionario[i].NM_Nome %>
+                                </option>
+                                <% } %>
+                            </select>
+                            <label
+                                class="form-label"
+                                for="form6Example1"
+                                style="margin-left: 20px"
+                                >Vendedor</label
+                            >
+                        </div>
 
-        </div>
+                        <div class="col">
+                            <select
+                                id="cliente"
+                                class="form-control"
+                                style="width: 350px; margin-top: 10px"
+                            >
+                                <% for (let i = 0; i < cliente.length; i++) { %>
+                                <option value="<%= cliente[i].ID_Cliente %>">
+                                    <%= cliente[i].NM_Nome %>
+                                </option>
+                                <% } %>
+                            </select>
+                            <label class="form-label" for="form6Example1"
+                                >Cliente</label
+                            >
+                        </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                        <div class="col">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 150px; margin-top: 10px"
+                                readonly
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data do Pedido</label
+                            >
+                        </div>
+                    </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <select
+                                id="produtoNovaVenda"
+                                name="produto"
+                                class="form-control"
+                                style="width: 470px; margin-left: 20px"
+                            >
+                                <% for (let i = 0; i < produto.length; i++) { %>
+                                <option value="<%= produto[i].NR_SKU %>">
+                                    <%= produto[i].NR_SKU %> - <%=
+                                    produto[i].NM_Produto %>
+                                </option>
+                                <% } %>
+                            </select>
+                            <label
+                                class="form-label"
+                                for="form6Example1"
+                                style="margin-left: 20px"
+                                >Produto</label
+                            >
+                        </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                        <div class="col">
+                            <input
+                                type="number"
+                                id="quantidade"
+                                name="quantidade"
+                                class="form-control"
+                                style="width: 100px"
+                                min="1"
+                                required
+                            />
+                            <label class="form-label" for="form6Example1"
+                                >Quantidade</label
+                            >
+                        </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                        <div class="col">
+                            <input
+                                type="button"
+                                value="Adicionar produto"
+                                class="form-control"
+                                style="width: 150px"
+                                id="addProduct"
+                                onclick="adicionaProduto()"
+                            />
+                        </div>
+                    </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                    <div
+                        class="row mb-4"
+                        style="width: 100%; margin-left: 10px"
+                    >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SKU</th>
+                                    <th scope="col">Produto</th>
+                                    <th scope="col">Valor Unitario</th>
+                                    <th scope="col">QTD. Produto</th>
+                                    <th scope="col">Valor Total por Produto</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="date"
+                                    id="form6Example2"
+                                    class="form-control"
+                                    style="width: 148px"
+                                    required
+                                />
+                                <label class="form-label" for="form6Example2"
+                                    >Data</label
+                                >
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
 
-        <div class="col">
-          <div class="form-outline">
-            <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-            <label class="form-label" for="form6Example2">Data</label>
-          </div>
-        </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
 
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
 
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
 
-        <div class="row mb-4">
-          <div class="col">
-            <div class="form-outline">
-              <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required />
-              <label class="form-label" for="form6Example2">Data</label>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-outline">
+                            <input
+                                type="date"
+                                id="form6Example2"
+                                class="form-control"
+                                style="width: 148px"
+                                required
+                            />
+                            <label class="form-label" for="form6Example2"
+                                >Data</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input
+                                    type="date"
+                                    id="form6Example2"
+                                    class="form-control"
+                                    style="width: 148px"
+                                    required
+                                />
+                                <label class="form-label" for="form6Example2"
+                                    >Data</label
+                                >
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-outline">
+                                <select
+                                    id="situacao"
+                                    name="situacao"
+                                    class="form-control"
+                                    style="width: 100px"
+                                >
+                                    <% for (let i = 0; i < situacao.length; i++)
+                                    { %>
+                                    <option
+                                        value="<%= situacao[i].ID_PedidoStatus %>"
+                                    >
+                                        <%= situacao[i].DS_Status %>
+                                    </option>
+                                    <% } %>
+                                </select>
+                                <label class="form-label" for="form6Example1"
+                                    >Situação</label
+                                >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <select
+                                    id="cargo"
+                                    name="cargo"
+                                    class="form-control"
+                                    style="width: 100px"
+                                >
+                                    <option value="">Debito</option>
+                                    <option value="">Credito</option>
+                                </select>
+                                <label class="form-label" for="form6Example1"
+                                    >Tipo de Pagamento</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block mb-4"
+                        style="margin-left: 10px"
+                    >
+                        Efetuar cadastro
+                    </button>
+                    <a href="/comercial/vendas">
+                        <input
+                            value="Cancelar"
+                            class="btn btn-primary btn-block mb-4"
+                            style="
+                                margin-left: 10px;
+                                background-color: #343a40;
+                                border-color: #343a40;
+                                width: 100px;
+                            "
+                        />
+                    </a>
+                </form>
             </div>
-          </div>
+        </main>
 
-          <div class="col">
-            <div class="form-outline">
-              <select id="situacao" name="situacao" class="form-control" style="width: 100px;">
-                <% for (let i = 0; i < situacao.length; i++) { %>
-                <option value="<%= situacao[i].ID_PedidoStatus %>"><%= situacao[i].DS_Status %></option>
-                <% } %>
-              </select>
-              <label class="form-label" for="form6Example1">Situação</label>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <select id="cargo" name="cargo" class="form-control" style="width: 100px;">
-                <option value="">Debito</option>
-                <option value="">Credito</option>
-              </select>
-              <label class="form-label" for="form6Example1">Tipo de Pagamento</label>
-            </div>
-          </div>
-        </div>
+        <!-- Scripts -->
+        <%- include('_scripts.ejs') %>
 
-        <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar
-          cadastro</button>
-        <a href="/comercial/vendas">
-          <input value="Cancelar" class="btn btn-primary btn-block mb-4"
-            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
-        </a>
-      </form>
-    </div>
-  </main>
+        <script>
+            const produtos = new Array();
 
-  <!-- Scripts -->
-  <%- include('_scripts.ejs') %>
+            let adicionaProduto = () => {
+              let produtoSelecionado = document.getElementById("produtoNovaVenda").value;
+              let quantidadeProduto = Number(document.getElementById("quantidade").value);
 
-  <script>
-    const produtosSelecionados = new Array();
+              let tamanho = produtos.length;
 
-    let adicionaProduto = () => {
-      let produtoSelecionado = document.getElementById('produtoNovaVenda').value;
-      let quantidadeProduto = Number(document.getElementById('quantidade').value);
+              if (tamanho == 0) {
+                produtosSelecionados.push({sku: produtoSelecionado, quantidade: quantidadeProduto})
+              } else {
+                produtos.map(sku => produtos.find(sku))
+              }
+              produtoSelecionado = null;
+              quantidadeProduto = 0;
 
-      if (produtosSelecionados.length == 0) {
-        produtosSelecionados.push({
-          sku: produtoSelecionado,
-          quantidade: quantidadeProduto
-        })
-      } else {
-        for (let i = 0; i < produtosSelecionados.length; i++) {
-          if (produtosSelecionados[i].sku == produtoSelecionado) {
-            produtosSelecionados[i].quantidade += quantidadeProduto
-          } else {
-            produtosSelecionados.push({
-              sku: produtoSelecionado,
-              quantidade: quantidadeProduto
-            })
-          }
-        }
-          produtoSelecionado = null
-          quantidade = 0
-      }
-      console.log(produtosSelecionados);
+                } else {
+                    for (let i = 0; i < produtosSelecionados.length; i++) {
+                        if (produtosSelecionados[i].sku == produtoSelecionado) {
+                            produtosSelecionados.splice([i], 1, {
+                                sku: produtoSelecionado,
+                                quantidade: (produtosSelecionados[i].quantidade += quantidadeProduto),
+                            });
+                        } else {
+                            produtosSelecionados.push({
+                                sku: produtoSelecionado,
+                                quantidade: quantidadeProduto,
+                            });
+                        }
+                    }
+                }
 
-      let tableBody = document.getElementById('tableBody');
-      let tableReturn = ""
-      for (let i = 0; i < produtosSelecionados.length; i++) {
-        tableReturn += `<tr>
+                let tableBody = document.getElementById("tableBody");
+                let tableReturn = "";
+                for (let i = 0; i < produtosSelecionados.length; i++) {
+                    tableReturn += `<tr>
                           <td>${produtosSelecionados[i].sku}</td>
                           <td>Otto</td>
                           <td>@mdo</td>
                           <td>${produtosSelecionados[i].quantidade}</td>
                           <td>Otto</td>
-                        </tr>`
-      }
-      console.log(tableReturn)
-      tableBody.innerHTML = tableReturn
-    }
-  </script>
-</body>
-
+                        </tr>`;
+                }
+                tableBody.innerHTML = tableReturn;
+            };
+        </script>
+    </body>
 </html>
