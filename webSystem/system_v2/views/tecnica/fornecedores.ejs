@@ -59,8 +59,8 @@
                     <i class="fa fa-pencil-square-o"></i>
                   </button>
 
-                  <form action="/tecnica/removeFornecedor/<%= values[i].ID_Fornecedor %>" method="post">
-                    <button class="extra-d" value="<%= values[i].ID_Fornecedor %>" onclick="return confirm('Você tem certeza que deseja remover este Fornecedor?')">
+                  <form action="/tecnica/fornecedor/<%= values[i].ID_Fornecedor %>" method="post">
+                    <button type="submit" class="extra-d" name="ID_Fornecedor" value="<%= values[i].ID_Fornecedor %>" onclick="return confirm('Você tem certeza que deseja remover este Fornecedor?')">
                       <i class="fa fa-trash"></i>
                     </button>
                   </form>
