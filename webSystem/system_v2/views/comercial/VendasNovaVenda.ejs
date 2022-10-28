@@ -96,6 +96,13 @@
                         </thead>
                         <tbody id="tableBody"></tbody>
                     </table>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
+                            <label class="form-label" for="form6Example2">Desconto</label>
+                        </div>
+                    </div>
+                    <label id="lValorTotal" for="form6Example2" style="font-size: 14pt; font-weight: bold; text-align: right;"></label>
                 </div>
 
                 <div class="col">
@@ -109,69 +116,6 @@
                             <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
                             <label class="form-label" for="form6Example2">Data</label>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" style="width: 148px" required />
-                        <label class="form-label" for="form6Example2">Data</label>
                     </div>
                 </div>
 
@@ -273,6 +217,9 @@
             quantidadeProduto = 0;
 
             let tableBody = document.getElementById("tableBody");
+            let valorTotal = document.getElementById("lValorTotal");
+            let somaValorTotal = 0;
+
             let tableReturn = "";
             for (let i = 0; i < produtos.length; i++) {
                 tableReturn += `<tr>
@@ -282,8 +229,11 @@
                           <td>${produtos[i].quantidade}</td>
                           <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(produtos[i].valorTotal)}</td>
                         </tr>`;
+
+                somaValorTotal += produtos[i].valorTotal;
             }
             tableBody.innerHTML = tableReturn;
+            valorTotal.innerHTML = `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`
         };
     </script>
 </body>
