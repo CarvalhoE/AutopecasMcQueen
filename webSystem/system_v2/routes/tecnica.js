@@ -43,11 +43,11 @@ router.post('/tecnica/novoFornecedor', function (req,res, next){
     });
 });
 
-//Remover Fornecedor (Incompleto)
-router.post('/tecnica/fornecedor/(:id)', function (req, res, next){
+//Remover Fornecedor
+router.post('/tecnica/removeFornecedor/:id', function (req, res, next){
     if (req.session.loggedin) {
-        let id = req.body.ID_Fornecedor;
-        db.query(`Delete From Fornecedor Where ID_Fornecedor = ?`, id, (err, ret) => {
+        let id = req.params.id;
+            db.query(`Delete From Fornecedor Where ID_Fornecedor = ${id}`, (err, ret) => {
         if (err) {
         req.flash('error', err)
         res.redirect('/tecnica/fornecedor')

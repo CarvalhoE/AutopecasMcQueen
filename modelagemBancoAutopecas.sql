@@ -274,18 +274,18 @@ Insert Into PedidoStatus (DS_Status)
 Create Table Pedido
 (
 	ID_Pedido 				Int 			auto_increment
+   ,ID_Funcionario 			Int 			Not Null
+   ,ID_Cliente 				Int 			Not Null
+   ,DT_Pedido 				DateTime	 	Not Null
    ,VL_Valor	 			Numeric(12,2) 	Not Null
    ,PC_Desconto				Numeric(5,2)	Null
    ,VL_Final				Numeric(12,2)	Not Null
-   ,DT_Pedido 				DateTime	 	Not Null
    ,DT_Efetivacao			DateTime		Null
    ,ID_PedidoStatus 		Int 			Not Null
-   ,DS_MotivoCancelamento 	VarChar(128)	Null
    ,DT_Status				DateTime		Null
+   ,DS_MotivoCancelamento 	VarChar(128)	Null
    ,FL_Parcelado			char(1)			Not Null
    ,NR_QtdParcelas			int				Null
-   ,ID_Cliente 				Int 			Not Null
-   ,ID_Funcionario 			Int 			Not Null
    ,ID_FormaPagamento 		Int 			Not Null
    ,Constraint PK_ID_Pedido 					Primary Key (ID_Pedido)
    ,Constraint FK_ID_PedidoStatus_PedidoStatus 	Foreign Key (ID_PedidoStatus) 	References PedidoStatus (ID_PedidoStatus)
@@ -340,7 +340,6 @@ Create Table Cobranca
    ,ID_TipoCobranca				int				Not Null
    ,VL_Valor					Numeric(16,2)	Not Null
    ,ID_SituacaoCobranca			int				Not Null
-   ,DT_Alteracao              DateTime       Not Null
    ,Constraint PK_ID_Cobranca							Primary Key (ID_Cobranca)
    ,Constraint FK_ID_TipoCobranca_TipoCobranca			foreign key (ID_TipoCobranca) References TipoCobranca (ID_TipoCobranca)
    ,Constraint FK_ID_SituacaoCobranca_SituacaoCobranca	foreign key (ID_SituacaoCobranca) References SituacaoCobranca (ID_SituacaoCobranca)
