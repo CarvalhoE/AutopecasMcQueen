@@ -4,6 +4,7 @@ $(document).ready(function(){
     $(  '.cep'    ).inputmask(  '99999-999',            {removeMaskOnSubmit: true}  );
     $(  '.phone'  ).inputmask(  '(99) 99999-9999',      {removeMaskOnSubmit: true}  );
     $(  '.cpf'    ).inputmask(  '999.999.999-99',       {removeMaskOnSubmit: true}  );
+    $(  '.cnpj'    ).inputmask(  '99.999.999/9999-99',       {removeMaskOnSubmit: true}  );
     $(  '.sku'    ).inputmask(    'AA-99999999',        {removeMaskOnSubmit: true}  );
     $(  '.money'  ).inputmask(  'decimal', {
         'alias': 'numeric',

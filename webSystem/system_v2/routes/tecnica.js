@@ -20,6 +20,48 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
     }
 });
 
+//Cadastra Fornecedor
+router.post('/tecnica/novoFornecedor', function (req,res, next){
+    let data = {
+        "NM_Empresa"    : req.body.nomeFornecedor,
+        "NR_CNPJ"       : req.body.nrCnpjCpf,
+        "DS_Logradouro" : req.body.dsEndereco,
+        "DS_Bairro"     : req.body.dsBairro,
+        "DS_Cidade"     : req.body.dsCidade,
+        "DS_CEP"        : req.body.dsCep,
+        "NR_Telefone"   : req.body.nrTelefone,
+        "DS_Email"      : req.body.dsEmail,
+        "NR_Banco"      : req.body.nrBanco,
+        "NR_Agencia"    : req.body.nrAgencia,
+        "NR_Conta"      : req.body.nrConta
+    }
+
+    db.query('Insert Into Fornecedor Set ?', [data], (err, result ,fields) => {
+        if (err) throw err;
+        req.flash('success', "Fornecedor Inserido com sucesso!")
+        res.redirect('/tecnica/fornecedor');
+    });
+});
+
+//Remover Fornecedor (Incompleto)
+router.post('/tecnica/fornecedor/(:id)', function (req, res, next){
+    if (req.session.loggedin) {
+        let id = req.body.ID_Fornecedor;
+        db.query(`Delete From Fornecedor Where ID_Fornecedor = ?`, id, (err, ret) => {
+        if (err) {
+        req.flash('error', err)
+        res.redirect('/tecnica/fornecedor')
+        } else {
+        req.flash('success', 'Fornecedor removido com sucesso! id = ' + id)
+        res.redirect('/tecnica/fornecedor')
+        }
+        });
+    } else {
+    req.flash('message', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+    }
+});
+
 router.get('/tecnica/produtos', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Produto
