@@ -55,12 +55,13 @@
             <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row" style="display: flex;">
-                  <button class="extra-d" value="<%= values[i].ID_Fornecedor %>" style="margin-right: 5px;">
-                    <i class="fa fa-pencil-square-o"></i>
-                  </button>
-
+                  <a href="/tecnica/alteraFornecedor/<%= values[i].ID_Fornecedor %>">
+                    <button type="submit" class="extra-d tags" gloss="Alterar Fornecedor" value="<%= values[i].ID_Fornecedor %>" style="margin-right: 5px;">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </a>
                   <form action="/tecnica/fornecedor/<%= values[i].ID_Fornecedor %>" method="post">
-                    <button type="submit" class="extra-d" name="ID_Fornecedor" value="<%= values[i].ID_Fornecedor %>" onclick="return confirm('Você tem certeza que deseja remover este Fornecedor?')">
+                    <button type="submit" class="extra-d tags" gloss="Remover Fornecedor" name="ID_Fornecedor" value="<%= values[i].ID_Fornecedor %>" onclick="return confirm('Você tem certeza que deseja remover este Fornecedor?')">
                       <i class="fa fa-trash"></i>
                     </button>
                   </form>

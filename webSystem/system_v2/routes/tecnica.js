@@ -22,25 +22,30 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
 
 //Cadastra Fornecedor
 router.post('/tecnica/novoFornecedor', function (req,res, next){
-    let data = {
-        "NM_Empresa"    : req.body.nomeFornecedor,
-        "NR_CNPJ"       : req.body.nrCnpjCpf,
-        "DS_Logradouro" : req.body.dsEndereco,
-        "DS_Bairro"     : req.body.dsBairro,
-        "DS_Cidade"     : req.body.dsCidade,
-        "DS_CEP"        : req.body.dsCep,
-        "NR_Telefone"   : req.body.nrTelefone,
-        "DS_Email"      : req.body.dsEmail,
-        "NR_Banco"      : req.body.nrBanco,
-        "NR_Agencia"    : req.body.nrAgencia,
-        "NR_Conta"      : req.body.nrConta
-    }
+    if (req.session.loggedin){
+        let data = {
+            "NM_Empresa"    : req.body.nomeFornecedor,
+            "NR_CNPJ"       : req.body.nrCnpjCpf,
+            "DS_Logradouro" : req.body.dsEndereco,
+            "DS_Bairro"     : req.body.dsBairro,
+            "DS_Cidade"     : req.body.dsCidade,
+            "DS_CEP"        : req.body.dsCep,
+            "NR_Telefone"   : req.body.nrTelefone,
+            "DS_Email"      : req.body.dsEmail,
+            "NR_Banco"      : req.body.nrBanco,
+            "NR_Agencia"    : req.body.nrAgencia,
+            "NR_Conta"      : req.body.nrConta
+        }
 
-    db.query('Insert Into Fornecedor Set ?', [data], (err, result ,fields) => {
-        if (err) throw err;
-        req.flash('success', "Fornecedor Inserido com sucesso!")
-        res.redirect('/tecnica/fornecedor');
-    });
+        db.query('Insert Into Fornecedor Set ?', [data], (err, result ,fields) => {
+            if (err) throw err;
+            req.flash('success', "Fornecedor Inserido com sucesso!")
+            res.redirect('/tecnica/fornecedor');
+        });
+    }else{
+        req.flash('message', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
 });
 
 //Remover Fornecedor
@@ -62,6 +67,58 @@ router.post('/tecnica/fornecedor/(:id)', function (req, res, next){
     }
 });
 
+//Alterar fornecedor
+router.get('/tecnica/alteraFornecedor/(:id)', (req, res, next) => {
+    if (req.session.loggedin) {
+      let id = req.params.id;
+  
+      db.query(`Select * From Fornecedor Where ID_Fornecedor = ${id}`, function (err, rows, fields) {
+        if (err) throw err;
+  
+        req.session.fornecedor = rows[0];
+        
+        res.render('tecnica/alteraFornecedor', {
+          name: req.session.name,
+          fornecedor: req.session.fornecedor,
+          id: id
+        });
+      });
+  
+    } else {
+      req.flash('message', 'É necessário estar logado para acessar esta página');
+      res.redirect('/login')
+    }
+  });
+
+router.post('/alteraFornecedor/:id', (req, res, next) => {
+    if (req.session.loggedin) {
+        let id = req.params.id;
+
+        let data = {
+            "NM_Empresa"    : req.body.nomeFornecedor,
+            "NR_CNPJ"       : req.body.nrCnpjCpf,
+            "DS_Logradouro" : req.body.dsEndereco,
+            "DS_Bairro"     : req.body.dsBairro,
+            "DS_Cidade"     : req.body.dsCidade,
+            "DS_CEP"        : req.body.dsCep,
+            "NR_Telefone"   : req.body.nrTelefone,
+            "DS_Email"      : req.body.dsEmail,
+            "NR_Banco"      : req.body.nrBanco,
+            "NR_Agencia"    : req.body.nrAgencia,
+            "NR_Conta"      : req.body.nrConta
+        }
+
+        db.query(`Update Fornecedor Set ? Where ID_Fornecedor = ${id}`, [data], (err, result ,fields) => {
+            if (err) throw err;
+            req.flash('success', "Fornecedor Inserido com sucesso!")
+            res.redirect('/tecnica/fornecedor');
+        });
+    }   else {
+
+    }
+});
+
+  //Produtos
 router.get('/tecnica/produtos', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Produto
@@ -93,7 +150,6 @@ router.get('/tecnica/produtos', function (req, res, next) {
     }
 });
 
-//Configurar Rota
 router.get('/tecnica/novoProduto', function (req, res, next) {
     if (req.session.loggedin) {
         db.query('Select * From Produto; Select * From Estoque; Select * From Funcionario;', function (err, rows, fields) {
@@ -115,6 +171,46 @@ router.get('/tecnica/novoProduto', function (req, res, next) {
         res.redirect('/login')
     }
 });
+//Cadastro de Produto (não funcionando)
+router.post('/tecnica/cadastroProduto', function (req,res, next){
+    if(req.session.loggedin){
+        let data = {
+            "NM_Produto"    : req.body.nmProduto,
+            "DS_Descricao"  : req.body.dsDescricao,
+            "NR_SKU"        : req.body.nrSKU,
+            "VL_Preco"      : req.body.vlPreco,
+            "FL_Disponivel" : req.body.flDisponivel,
+            "DS_Marca"      : req.body.dsMarca,
+            "ID_Categoria"  : req.body.categoria
+        }
+
+        db.query('Insert Into Produto Set ?', [data], (err, result ,fields) => {
+            if (err) throw err;
+            console.log(err);
+            req.flash('success', "Produto Inserido com sucesso!")
+            res.redirect('/tecnica/produtos');
+        });
+
+        let query = `Insert Into Estoque Set 
+        ID_Funcionario          = (Select max(ID_Produto) From Produto),
+        NR_Quantidade           = '${req.body.qtdProd}',
+        FL_Disponivel           = '${req.body.flDisponivel}',
+        DT_UltimaAtualizacao    = '${req.body.dtProduto}'
+        `;
+
+        db.query(query, (err, ret) => {
+            if (err) throw err;
+            console.log(err);
+            req.flash('sucess', "Funcionário Inserido com sucesso!")
+            res.redirect('/tecnica/funcionarios');
+        });
+    }else{
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+//Detalhe Produto
 
 router.get('/tecnica/relatorios', function (req, res, next) {
     if (req.session.loggedin) {
@@ -185,15 +281,31 @@ router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
 
 router.get('/tecnica/perfil', function (req, res, next) {
     if (req.session.loggedin) {
-        db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id}`, function(err, rows, fields){
+        db.query(`Select ID_Funcionario
+                    ,NM_Nome
+                    ,NR_Codigo
+                    ,NR_Telefone
+                    ,DS_Email
+                    ,DS_Departamento
+                    ,DS_Cargo
+                    ,Date_Format(DT_Admissao, '%d/%m/%Y') as DT_Admissao
+                From Funcionario F
+                Inner Join Departamento D
+                    On F.ID_Departamento = D.ID_Departamento
+                Inner Join Cargo C
+                    On F.ID_Cargo = C.ID_Cargo
+                Where ID_Funcionario = ${req.session.user_id};
+
+                Select * From FuncionarioEndereco Where ID_FuncionarioEndereco = ${req.session.user_id};
+                `, function(err, rows, fields){
             if (err) throw err;
 
-            req.session.funcionario = rows[0]
-
+            req.session.funcionarioL = rows[0];
+            req.session.funcionarioE = rows[1];
             res.render('tecnica/perfil', {
                 name: req.session.name,
-                namef: req.session.namef,
-                values: req.session.funcionario
+                funcionarioL: req.session.funcionarioL,
+                funcionarioE: req.session.funcionarioE
             });
         });
     } else {
@@ -204,44 +316,49 @@ router.get('/tecnica/perfil', function (req, res, next) {
 
 //Cadastrar Funcionario (problema no cadastro de tabela dependente)
 router.post('/cadastroUsuario', (req, res, next) => {
-
-    let data = {
-        "NM_Nome": req.body.nomeFuncionario,
-        "NR_CPF": req.body.cpfFuncionario,
-        "NR_Telefone": req.body.telefoneFuncionario,
-        "DS_Email": req.body.emailFuncionario,
-        "DT_Nascimento": req.body.dtNascimentoFuncionario,
-        "NR_Codigo": req.body.codigoFuncionario,
-        "DS_Login": req.body.loginFuncionario,
-        "NR_Senha": req.body.senhaFuncionario,
-        "ID_Departamento": req.body.departamentoFuncionario,
-        "ID_Cargo": req.body.cargoFuncionario,
-        "ID_Perfil": req.body.perfilFuncionario,
-        "FL_Habilitado": req.body.flHabilitadoFuncionario,
-        "DT_Admissao": req.body.dtAdmissaoFuncionario
+    if (req.session.loggedin){
+        let data = {
+            "NM_Nome": req.body.nomeFuncionario,
+            "NR_CPF": req.body.cpfFuncionario,
+            "NR_Telefone": req.body.telefoneFuncionario,
+            "DS_Email": req.body.emailFuncionario,
+            "DT_Nascimento": req.body.dtNascimentoFuncionario,
+            "NR_Codigo": req.body.codigoFuncionario,
+            "DS_Login": req.body.loginFuncionario,
+            "NR_Senha": req.body.senhaFuncionario,
+            "ID_Departamento": req.body.departamentoFuncionario,
+            "ID_Cargo": req.body.cargoFuncionario,
+            "ID_Perfil": req.body.perfilFuncionario,
+            "FL_Habilitado": req.body.flHabilitadoFuncionario,
+            "DT_Admissao": req.body.dtAdmissaoFuncionario
+        }
+    
+        db.query('Insert Into Funcionario Set ?', [data], (err, result ,fields) => {
+            if (err) throw err;
+        });
+    
+        let query = `Insert Into FuncionarioEndereco Set 
+        ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
+        DS_Logradouro   = '${req.body.logradouroFuncionario}',
+        DS_Numero       = '${req.body.numeroFuncionario}',
+        DS_Complemento  = '${req.body.complementoFuncionario}',
+        DS_CEP          = '${req.body.cepFuncionario}',
+        DS_Bairro       = '${req.body.bairroFuncionario}',
+        DS_Cidade       = '${req.body.cidadeFuncionario}',
+        DS_UF           = '${req.body.ufFuncionario}'
+        `;
+    
+        db.query(query, (err, ret) => {
+            if (err) throw err;
+            
+            req.flash('sucess', "Funcionário Inserido com sucesso!")
+            res.redirect('/tecnica/funcionarios');
+        });
+    }else{
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
     }
-
-    db.query('Insert Into Funcionario Set ?', [data], (err, result ,fields) => {
-        if (err) throw err;
-    });
-
-    let query = `Insert Into FuncionarioEndereco Set 
-    ID_Funcionario  = (Select max(ID_Funcionario) From Funcionario),
-    DS_Logradouro   = '${req.body.logradouroFuncionario}',
-    DS_Numero       = '${req.body.numeroFuncionario}',
-    DS_Complemento  = '${req.body.complementoFuncionario}',
-    DS_CEP          = '${req.body.cepFuncionario}',
-    DS_Bairro       = '${req.body.bairroFuncionario}',
-    DS_Cidade       = '${req.body.cidadeFuncionario}',
-    DS_UF           = '${req.body.ufFuncionario}'
-    `;
-
-    db.query(query, (err, ret) => {
-        if (err) throw err;
-        
-        req.flash('sucess', "Funcionário Inserido com sucesso!")
-        res.redirect('/tecnica/funcionarios');
-    });
+    
 });
 
 
@@ -271,7 +388,7 @@ router.get('/tecnica/funcionarios', function (req, res, next) {
             });
         });
     } else {
-        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        req.flash('error', 'É necessário estar logado para acessar esta página');
         res.redirect('/login')
     }
 });

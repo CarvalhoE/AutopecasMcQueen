@@ -18,21 +18,21 @@
   
   <main>
     <div class="header">
-      <h1>Cadastro de Fornecedores</h1>
+      <h1>Alterar dados - Fornecedores</h1>
     </div>
 
     <div class="container-cadastroC" style="margin-left: auto; margin-right: auto;">
-        <form action="/tecnica/novoFornecedor" method="POST">
+        <form action="/alteraFornecedor/<%= id %>" method="POST">
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nomeFornecedor" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <input type="text" value="<%= fornecedor.NM_Empresa %>" name="nomeFornecedor" class="form-control" style="width: 760px; margin-top: 10px;" required/>
                 <label class="form-label" for="form6Example1">Nome da Empresa</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline" >
-                <input type="text" name="nrCnpjCpf" class="form-control cnpj" style="width: 140px; margin-top: 10px;" required/>
+                <input type="text" value="<%= fornecedor.NR_CNPJ %>" name="nrCnpjCpf" class="form-control cnpj" style="width: 140px; margin-top: 10px;" required/>
                 <label class="form-label" for="form6Example1">CNPJ/CPF</label>
               </div>
             </div>
@@ -40,37 +40,37 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="dsEndereco" class="form-control" style="width: 520px;" required/>
+                <input type="text" value="<%= fornecedor.DS_Logradouro %>" name="dsEndereco" class="form-control" style="width: 520px;" required/>
                 <label class="form-label" for="form6Example2">Endereço</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="dsBairro" class="form-control" style="width: 140px;" required/>
+                <input type="text" value="<%= fornecedor.DS_Bairro %>" name="dsBairro" class="form-control" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Bairro</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="dsCidade" class="form-control" style="width: 100px;" required/>
+                <input type="text" value="<%= fornecedor.DS_Cidade %>" name="dsCidade" class="form-control" style="width: 100px;" required/>
                 <label class="form-label" for="form6Example2">Município</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="dsCep" class="form-control cep" style="width: 110px;" required/>
+                <input type="text" value="<%= fornecedor.DS_CEP %>" name="dsCep" class="form-control cep" style="width: 110px;" required/>
                 <label class="form-label" for="form6Example2">CEP</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrTelefone" class="form-control phone" style="width: 140px;" required/>
+                <input type="text" value="<%= fornecedor.NR_Telefone %>" name="nrTelefone" class="form-control phone" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Telefone</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="email" name="dsEmail" class="form-control" style="width: 520px;" />
+                <input type="email" value="<%= fornecedor.DS_Email %>" name="dsEmail" class="form-control" style="width: 520px;" />
                 <label class="form-label" for="form6Example1">E-mail</label>
               </div>
             </div>
@@ -79,19 +79,19 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrBanco" class="form-control" maxlength="5" style="width: 140px;" required/>
+                <input type="text" value="<%= fornecedor.NR_Banco %>" name="nrBanco" class="form-control" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Banco</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrAgencia" class="form-control" maxlength="5" style="width: 140px;" required/>
+                <input type="text" value="<%= fornecedor.NR_Agencia %>" name="nrAgencia" class="form-control" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Agência</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrConta" class="form-control" maxlength="10" style="width: 140px;" required/>
+                <input type="text" value="<%= fornecedor.NR_Conta %>" name="nrConta" class="form-control" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Nr. Conta</label>
               </div>
             </div>
