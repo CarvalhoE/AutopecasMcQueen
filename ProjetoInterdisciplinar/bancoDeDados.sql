@@ -67,9 +67,7 @@ Create Table FormaPagamento
 Insert Into	FormaPagamento (DS_FormaPagamento) 
 	Values ('Cartão de Crédito')
 	      ,('Cartão de Débito')
-          ,('Dinheiro')
-          ,('Boleto')
-          ,('PIX');
+          ,('Dinheiro');
 
 Create Table Cliente
 (
@@ -107,8 +105,6 @@ Create Table Pedido
    ,ID_Cliente 				Int 			Not Null
    ,DT_Pedido 				DateTime	 	Not Null
    ,VL_Valor	 			Numeric(12,2) 	Not Null
-   ,PC_Desconto				Numeric(5,2)	Null
-   ,VL_Final				Numeric(12,2)	Not Null
    ,DT_Efetivacao			DateTime		Null
    ,ID_PedidoStatus 		Int 			Not Null
    ,DT_Status				DateTime		Null

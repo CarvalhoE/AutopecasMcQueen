@@ -164,19 +164,8 @@ router.get('/tecnica/relatorios', function (req, res, next) {
 router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
     if (req.session.loggedin) {
 
-        db.query('Select * From Departamento; Select * From Cargo; Select * From Perfil;', function (err, rows, fields) {
-            if (err) throw err;
-
-            req.session.depto = rows[0];
-            req.session.cargo = rows[1];
-            req.session.perfil = rows[2];
-
-            res.render('tecnica/cadastraFuncionario', {
-                name: req.session.name,
-                valuesDepto: req.session.depto,
-                valuesCargo: req.session.cargo,
-                valuesPerfil: req.session.perfil
-            });
+        res.render('tecnica/cadastraFuncionario', {
+            name: req.session.name
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -284,29 +273,14 @@ router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
     if (req.session.loggedin) {
         let id = req.params.id
 
-        db.query(`
-            Select * From Departamento; 
-            Select * From Cargo; 
-            Select * From Perfil; 
-            Select * From Funcionario 
-                Where ID_Funcionario = ${id};
-            Select * From FuncionarioEndereco
-                Where ID_Funcionario = ${id};`, function (err, rows, fields) {
+        db.query(`Select * From Funcionario Where ID_Funcionario = ${id};`, function (err, rows, fields) {
             if (err) throw err;
 
-            req.session.depto = rows[0];
-            req.session.cargo = rows[1];
-            req.session.perfil = rows[2];
-            req.session.funcionario = rows[3];
-            req.session.funcionarioEndereco = rows[4];
+            req.session.funcionario = rows[0];
 
             res.render('tecnica/alteraFuncionario', {
                 name: req.session.name,
-                valuesDepto: req.session.depto,
-                valuesCargo: req.session.cargo,
-                valuesPerfil: req.session.perfil,
                 funcionario: req.session.funcionario,
-                funcionarioEndereco: req.session.funcionarioEndereco,
                 id: id
             });
         });

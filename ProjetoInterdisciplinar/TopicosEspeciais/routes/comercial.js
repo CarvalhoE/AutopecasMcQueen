@@ -133,7 +133,7 @@ router.get('/comercial/vendas', function (req, res) {
                        ,P.DT_Efetivacao
                        ,P.NR_QtdParcelas
                        ,PS.DS_Status
-                       ,P.VL_Final
+                       ,P.VL_Valor
                      From Pedido P
                      Inner Join PedidoStatus PS
                          On P.ID_PedidoStatus = PS.ID_PedidoStatus
@@ -171,6 +171,35 @@ router.get('/comercial/VendasNovaVenda', function (req, res) {
       req.session.produto = rows[4];
 
       res.render('comercial/VendasNovaVenda', {
+        name: req.session.name,
+        funcionario: req.session.funcionario,
+        cliente: req.session.cliente,
+        situacao: req.session.situacao,
+        formaPagamento: req.session.formaPagamento,
+        produto: req.session.produto
+      });
+    })
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.get('/efetivaNovaVenda', function (req, res) {
+  if (req.session.loggedin) {
+    let data = {
+      ID_Funcionario: req.body.vendedor,
+      ID_Cliente: req.body.cliente,
+      DT_Pedido: new Date(),
+      VL_Valor: Number(req.body.valorTotal),
+      ID_PedidoStatus: req.body.cliente,
+      ID_Cliente: req.body.cliente,
+      ID_Cliente: req.body.cliente,
+      ID_Cliente: req.body.cliente,
+    }
+    db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
+
+      res.redirect('/comercial/vendas', {
         name: req.session.name,
         funcionario: req.session.funcionario,
         cliente: req.session.cliente,

@@ -20,14 +20,11 @@
             <h1>Vendas - Nova Venda</h1>
         </div>
         <div class="container-cadastroC">
-            <form>
+            <form action="/efetivaNovaVenda" method="post">
                 <div class="row mb-4">
                     <div class="col">
-                        <select id="vendedor" class="form-control" style="
-                                    width: 345px;
-                                    margin-top: 10px;
-                                    margin-left: 20px;
-                                " disabled required>
+                        <select id="vendedor" class="form-control" name="vendedor"
+                            style="width: 415px;margin-top: 10px;margin-left: 20px;" disabled required>
                             <% for (let i = 0; i < funcionario.length; i++) { %>
                             <option value="<%= funcionario[i].ID_Funcionario %>">
                                 <%= funcionario[i].NM_Nome %>
@@ -38,7 +35,8 @@
                     </div>
 
                     <div class="col">
-                        <select id="cliente" class="form-control" style="width: 345px; margin-top: 10px" required>
+                        <select id="cliente" class="form-control" name="cliente" style="width: 415px; margin-top: 10px"
+                            required>
                             <% for (let i = 0; i < cliente.length; i++) { %>
                             <option value="<%= cliente[i].ID_Cliente %>">
                                 <%= cliente[i].NM_Nome %>
@@ -46,12 +44,6 @@
                             <% } %>
                         </select>
                         <label class="form-label" for="form6Example1">Cliente</label>
-                    </div>
-
-                    <div class="col">
-                        <input type="date" id="form6Example2" class="form-control"
-                            style="width: 150px; margin-top: 10px" disabled required />
-                        <label class="form-label" for="form6Example2">Data do Pedido</label>
                     </div>
                 </div>
 
@@ -107,7 +99,7 @@
                     <div class="col">
                         <select id="formaPagamento" name="formaPagamento" class="form-control" style="width: 350px"
                             required>
-                            <option value="">Selecione uma opção</option>
+                            <option value="" selected>Selecione uma opção</option>
                             <% for (let i = 0; i < formaPagamento.length; i++) { %>
                             <option value="<%= formaPagamento[i].ID_FormaPagamento %>">
                                 <%= formaPagamento[i].DS_FormaPagamento %>
@@ -116,8 +108,8 @@
                         </select>
                         <label class="form-label" for="form6Example1">Forma de Pagamento</label>
                     </div>
-                    <div class="col" id="numeroParcelas" style="display: none;">
-                        <select id="numeroParcelas" name="numeroParcelas" class="form-control" style="width: 150px">
+                    <div class="col" id="numeroParcelas" style="visibility: hidden;">
+                        <select name="numeroParcelas" class="form-control" style="width: 210px">
                             <% for (let i = 1; i <= 12; i++) { %>
                             <option value="<%= i %>">
                                 <%= i %>x
@@ -128,7 +120,7 @@
                     </div>
                     <div class="col">
                         <select id="situacao" name="situacao" class="form-control" style="width: 210px" required>
-                            <option value="">Selecione uma opção</option>
+                            <option value="" selected>Selecione uma opção</option>
                             <% for (let i = 0; i < situacao.length; i++) { %>
                             <option value="<%= situacao[i].ID_PedidoStatus %>">
                                 <%= situacao[i].DS_Status %>
@@ -152,6 +144,7 @@
                 </a>
             </form>
         </div>
+        <input type="hidden" name="valorTotal" id="valorTotal">
     </main>
 
     <!-- Scripts -->
@@ -199,6 +192,7 @@
 
             let tableBody = document.getElementById("tableBody");
             let valorTotal = document.getElementById("lValorTotal");
+            let inputValorTotal = document.getElementById("valorTotal");
             let somaValorTotal = 0;
 
             let tableReturn = "";
@@ -216,14 +210,18 @@
             tableBody.innerHTML = tableReturn;
             valorTotal.innerHTML =
                 `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`
+            inputValorTotal.value = somaValorTotal
         };
 
-        let formaPagamento = document.getElementById('formaPagamento').addEventListener('change', () => {
-            let divParcelas = document.getElementById('numeroParcelas');
-            if (formaPagamento.value == 1) {
-                divParcelas.style.display = block
+        let formaPagamento = document.getElementById('formaPagamento');
+        let numeroParcelas = document.getElementById('numeroParcelas');
+        formaPagamento.addEventListener('change', () => {
+            console.log(new Date())
+            if (formaPagamento.value == "1") {
+                numeroParcelas.style.visibility = "visible"
+            } else {
+                numeroParcelas.style.visibility = "hidden"
             }
-
         });
     </script>
 </body>
