@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Produtos</h1>
+    </div>
+
+    <div class="container">
+
+      <div class="table-container">
+        <div>
+          <button class="aba-active" id="btnCompras">
+            <i class="fa fa-archive"></i>
+            Produtos
+          </button>
+        </div>
+
+        <div class="table-top">
+          <div class="extras">
+            <a href="/tecnica/novoProduto">
+              <button class="extra-n">
+                <i class="fa fa-plus-square"> Novo</i>
+              </button>
+            </a>
+          </div>
+
+          <table class="table">
+            <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
+            <thead>
+              <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Valor Unitario</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Categoria</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < values.length; i++) { %>
+              <tr>
+                <td scope="row" style="display: flex;">
+
+                  <a href="/tecnica/alteraProduto/<%= values[i].ID_Produto %>" style="margin-right: 5px;">
+                    <button class="extra-d tags" style="margin-right: 5px;" gloss="Alterar Produto">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </a>
+
+                  <a href="/tecnica/produtoDetalhe/<%= values[i].ID_Produto %>" style="margin-right: 5px;">
+                    <button class="myBtn extra-d tags" gloss="Detalhe do Produto">
+                      <i class="fa fa-file-text-o"></i>
+                    </button>
+                  </a>
+
+                </td>
+                <td class="sku"><%= values[i].NR_SKU %></td>
+                <td><%= values[i].NM_Produto %></td>
+                <td>R$ <%= values[i].VL_Preco %></td>
+                <td><%= values[i].DS_Marca %></td>
+                <td><%= values[i].DS_Categoria %></td>
+              </tr>
+              <% } %>
+            </tbody>
+            <% } %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

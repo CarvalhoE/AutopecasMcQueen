@@ -1,24 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body>
-        <script>
-            var arr1 = [
-                { id: 0, quantidade: 23 },
-                { id: 1, quantidade: 12 },
-                { id: 2, quantidade: 10 },
-            ];
 
-            let indexObject = arr1.findIndex(obj => obj.id == 1)
-            console.log(arr1[indexObject]);
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
 
-            arr1[indexObject].quantidade += 10;
+<body>
+    <h1>Orders</h1>
 
-        </script>
-    </body>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-toggle="modal" data-id="1" data-target="#orderModal">
+                <td>1</td>
+                <td>24234234</td>
+                <td>A</td>
+            </tr>
+            <tr data-toggle="modal" data-id="2" data-target="#orderModal">
+                <td>2</td>
+                <td>24234234</td>
+                <td>A</td>
+            </tr>
+            <tr data-toggle="modal" data-id="3" data-target="#orderModal">
+                <td>3</td>
+                <td>24234234</td>
+                <td>A</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="orderModal" class="modal hide fade" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h3>Order</h3>
+
+        </div>
+        <div id="orderDetails" class="modal-body"></div>
+        <div id="orderItems" class="modal-body"></div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+        $(function () {
+            $('#orderModal').modal({
+                keyboard: true,
+                backdrop: "static",
+                show: false,
+
+            }).on('show', function () {
+                var getIdFromRow = $(event.target).closest('tr').data('id');
+                //make your ajax call populate items or what even you need
+                $(this).find('#orderDetails').html($('<b> Order Id selected: ' + getIdFromRow + '</b>'))
+            });
+        });
+    </script>
+</body>
+
 </html>

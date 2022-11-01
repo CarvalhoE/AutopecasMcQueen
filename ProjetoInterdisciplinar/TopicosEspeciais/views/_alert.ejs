@@ -1,0 +1,9 @@
+<% if (message.length > 0 && status == 'error') { %>
+    <div class="alert alert-danger">
+        <%= message %>
+    </div>
+<% } else if (message.length > 0 && status == 'success') { %>
+    <div class="alert alert-success">
+        <%= message %>
+    </div>
+<% } %>

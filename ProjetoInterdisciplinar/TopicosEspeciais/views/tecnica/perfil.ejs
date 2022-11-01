@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Perfil do Usuário</h1>
+    </div>
+
+    <div class="container-cadastroC">
+      <section style="background-color: #eee;" class="containerP">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3"><%= funcionario.NM_Nome %></h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Nome</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= funcionario.NM_Nome %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= funcionario.DS_Email ?? "Não Informado" %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Telefone | Celular</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0 phone"><%= funcionario.NR_Telefone %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Código de Usuário</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= funcionario.NR_Codigo %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>
