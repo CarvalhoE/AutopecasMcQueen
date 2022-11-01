@@ -105,9 +105,9 @@ router.post('/cadastrarCliente', (req, res, next) => {
 });
 
 //Deletar (Concluido) - Clientes
-router.post('/comercial/clientes/(:id)', function (req, res, next) {
+router.post('/comercial/clientes/:id', function (req, res, next) {
   if (req.session.loggedin) {
-    let id = req.body.ID_Cliente;
+    let id = req.params.id;
     db.query(`Delete From Cliente Where ID_Cliente = ?`, id, (err, ret) => {
       if (err) {
         req.flash('error', err)
