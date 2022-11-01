@@ -1,18 +1,7 @@
 const mysql = require('mysql2')
 
-//servidor Hospedado
-const connection = mysql.createPool({
-    connectionLimit: 2,
-    host: 'lrocode.mysql.dbaas.com.br',
-    port: '3306',
-    database: 'lrocode',
-    user: 'lrocode',
-    password: 'WTyL8lCfO#',
-    multipleStatements: true
-});
-
 //Localhost
-const connectionLocal = mysql.createPool({
+const connection = mysql.createPool({
     connectionLimit: 2,
     host: 'localhost',
     user: 'root',
@@ -22,11 +11,11 @@ const connectionLocal = mysql.createPool({
     multipleStatements: true
 });
 
-connectionLocal.getConnection((err, connection) => {
+connection.getConnection((err, connection) => {
     if (err) throw err;
 
     console.log('MySQL conectado com sucesso!')
     connection.release();
 });
 
-module.exports = connectionLocal;
+module.exports = connection;

@@ -116,15 +116,22 @@ Create Table Pedido
    ,Constraint FK_ID_FormaPagamento 			Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
 );
 
+Insert Into Pedido (ID_Funcionario, ID_Cliente, DT_Pedido, VL_Valor, DT_Efetivacao, ID_PedidoStatus, DT_Status, NR_QtdParcelas, ID_FormaPagamento) 
+	Values (1, 1, '2022-11-01', 2454.90, '2022-11-01', 2, '2022-11-01', Null, 3);
+
 Create Table PedidoDetalhe
 (
 	ID_PedidoDetalhe 	Int 			auto_increment
    ,ID_Pedido 			Int 			Not Null
    ,ID_Produto 			Int 			Not Null
    ,NR_Quantidade 		Int 			Not Null
-   ,VL_Unitario 		Numeric(5,2) 	Not Null
-   ,VL_Total 			Numeric(5,2) 	Not Null
+   ,VL_Unitario 		Numeric(10,2) 	Not Null
+   ,VL_Total 			Numeric(10,2) 	Not Null
    ,Constraint PK_ID_PedidoDetalhe 			Primary Key (ID_PedidoDetalhe)
    ,Constraint FK_ID_Pedido_Pedido 			Foreign Key (ID_Pedido) 	References Pedido (ID_Pedido)
    ,Constraint FK_ID_PedidoProduto_Produto 	Foreign Key (ID_Produto)	References Produto (ID_Produto)
 );
+
+Insert Into PedidoDetalhe (ID_Pedido, ID_Produto, NR_Quantidade, VL_Unitario, VL_Total)
+	Values (1, 2, 2, 1200.00, 2400.00)
+          ,(1, 1, 1, 14.90, 14.90);
