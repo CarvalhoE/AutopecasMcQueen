@@ -25,15 +25,22 @@
       <div class="container-rel">
 
         <button class="abaRD" id="btnRel1">
-          <p>Relatório de Clientes</p>
+          <p>Relatório de Clientes (XML)</p>
           <i class="fa fa-file-text-o"></i>
         </button>
 
-        <button class="abaRV" id="btnRel2">
-          <p>Relatório de Vendas</p>
-          <i class="fa fa-file-text-o"></i>
-        </button>
+        <a href="/geraRelatorioJson">
+          <button class="abaRV" id="btnRel2">
+            <p>Relatório de Vendas (JSON)</p>
+            <i class="fa fa-file-text-o"></i>
+          </button>
+        </a>
       </div>
+      <% //if (report.length > 0) { %>
+        <div>
+          <%= //session.report.length %> 
+        </div>
+      <% //} %> 
   </main>
 
   <!-- Scripts -->

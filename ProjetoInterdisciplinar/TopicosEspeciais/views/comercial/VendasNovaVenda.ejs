@@ -23,13 +23,11 @@
             <form action="/efetivaNovaVenda" method="post">
                 <div class="row mb-4">
                     <div class="col">
-                        <select id="vendedor" class="form-control" name="vendedor"
-                            style="width: 415px;margin-top: 10px;margin-left: 20px;" disabled required>
-                            <% for (let i = 0; i < funcionario.length; i++) { %>
-                            <option value="<%= funcionario[i].ID_Funcionario %>">
-                                <%= funcionario[i].NM_Nome %>
+                        <select id="vendedor" name="vendedor" class="form-control"
+                            style="width: 415px;margin-top: 10px;margin-left: 20px;" required>
+                            <option value="<%= funcionario[0].ID_Funcionario %>">
+                                <%= funcionario[0].NM_Nome %>
                             </option>
-                            <% } %>
                         </select>
                         <label class="form-label" for="form6Example1" style="margin-left: 20px">Vendedor</label>
                     </div>
@@ -144,7 +142,7 @@
                 </a>
             </form>
         </div>
-        <input type="hidden" name="valorTotal" id="valorTotal">
+        <input type="text" name="valorTotal" id="valorTotal">
     </main>
 
     <!-- Scripts -->
@@ -209,8 +207,8 @@
             }
             tableBody.innerHTML = tableReturn;
             valorTotal.innerHTML =
-                `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`
-            inputValorTotal.value = somaValorTotal
+                `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`;
+            inputValorTotal.value = somaValorTotal;
         };
 
         let formaPagamento = document.getElementById('formaPagamento');

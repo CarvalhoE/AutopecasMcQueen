@@ -95,8 +95,7 @@ Create Table PedidoStatus
 Insert Into PedidoStatus (DS_Status) 
 	Values ('Pedido Em Aberto')
 	      ,('Pagamento Efetuado')
-          ,('Pagamento Rejeitado')
-          ,('Pedido Cancelado');
+          ,('Pagamento Rejeitado');
 
 Create Table Pedido
 (
@@ -108,8 +107,6 @@ Create Table Pedido
    ,DT_Efetivacao			DateTime		Null
    ,ID_PedidoStatus 		Int 			Not Null
    ,DT_Status				DateTime		Null
-   ,DS_MotivoCancelamento 	VarChar(128)	Null
-   ,FL_Parcelado			char(1)			Not Null
    ,NR_QtdParcelas			int				Null
    ,ID_FormaPagamento 		Int 			Not Null
    ,Constraint PK_ID_Pedido 					Primary Key (ID_Pedido)
@@ -117,7 +114,6 @@ Create Table Pedido
    ,Constraint FK_ID_Cliente_Cliente 			Foreign Key (ID_Cliente) 		References Cliente (ID_Cliente)
    ,Constraint FK_ID_Funcionario2_Funcionario 	Foreign Key (ID_Funcionario) 	References Funcionario (ID_Funcionario)
    ,Constraint FK_ID_FormaPagamento 			Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
-   ,Constraint CK_FL_Parcelado 					Check (FL_Parcelado In (0,1))
 );
 
 Create Table PedidoDetalhe

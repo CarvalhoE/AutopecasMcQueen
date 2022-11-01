@@ -158,7 +158,7 @@ router.get('/comercial/vendas', function (req, res) {
 
 router.get('/comercial/VendasNovaVenda', function (req, res) {
   if (req.session.loggedin) {
-    db.query(`Select * From Funcionario;
+    db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id};
               Select * From Cliente;
               Select * From PedidoStatus;
               Select * From FormaPagamento;
@@ -185,28 +185,24 @@ router.get('/comercial/VendasNovaVenda', function (req, res) {
   }
 });
 
-router.get('/efetivaNovaVenda', function (req, res) {
+router.post('/efetivaNovaVenda', function (req, res) {
   if (req.session.loggedin) {
     let data = {
       ID_Funcionario: req.body.vendedor,
       ID_Cliente: req.body.cliente,
       DT_Pedido: new Date(),
-      VL_Valor: Number(req.body.valorTotal),
-      ID_PedidoStatus: req.body.cliente,
-      ID_Cliente: req.body.cliente,
-      ID_Cliente: req.body.cliente,
-      ID_Cliente: req.body.cliente,
+      VL_Valor: req.body.valorTotal,
+      ID_PedidoStatus: req.body.situacao,
+      DT_Status: new Date(),
+      NR_QtdParcelas: req.body.formaPagamento == "1" ? req.body.numeroParcelas : null,
+      ID_FormaPagamento: req.body.formaPagamento
     }
+    console.log(data.ID_Funcionario)
     db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
+      if (err) throw err;
 
-      res.redirect('/comercial/vendas', {
-        name: req.session.name,
-        funcionario: req.session.funcionario,
-        cliente: req.session.cliente,
-        situacao: req.session.situacao,
-        formaPagamento: req.session.formaPagamento,
-        produto: req.session.produto
-      });
+      req.flash('message', 'Venda cadastrada com sucesso!');
+      res.redirect('/comercial/vendas');
     })
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
