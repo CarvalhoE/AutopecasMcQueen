@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Detalhes de Produto</h1>
+    </div>
+
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <td class="fw-bold">Nome do Produto</td>
+          <td><%= produto.NM_Produto %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Código do Produto (SKU)</td>
+          <td><%= produto.NR_SKU %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Categoria do Produto</td>
+          <td><%= produto.DS_Categoria %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Marca do Produto</td>
+          <td><%= produto.DS_Marca %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Valor do Produto</td>
+          <td>R$ <%= produto.VL_Preco %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Descrição do Produto</td>
+          <td><%= produto.DS_Descricao %></td>
+        </tr>
+      </table>
+      <a href="/tecnica/produtos">
+        <input value="Voltar" class="btn btn-primary btn-block mb-4"
+            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+    </a>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

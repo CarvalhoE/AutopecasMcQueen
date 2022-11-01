@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Produtos - Alterar Produto</h1>
+    </div>
+    <div class="container-cadastroC">
+      <form action="/alteraProduto/<%= id %>" method="post">
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control" maxlength="128"
+                style="width: 640px; margin-top: 10px;" name="nmProduto" value="<%= produto.NM_Produto %>" required />
+              <label class="form-label" for="form6Example1">Nome</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" maxlength="64" class="form-control"
+                style="width: 180px; margin-top: 10px;" name="dsMarca" value="<%= produto.DS_Marca %>" required />
+              <label class="form-label" for="form6Example1">Marca</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control money" style="width: 240px;" name="vlPreco"
+                value="<%= produto.VL_Preco %>" required />
+              <label class="form-label" for="form6Example1">Valor Unitario</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control sku" style="width: 240px;" name="nrSKU"
+                value="<%= produto.NR_SKU %>" readonly />
+              <label class="form-label" for="form6Example1">SKU</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control" style="width: 240px;" name="categoria"
+                value="<%= produto.DS_Categoria %>" readonly />
+              <label class="form-label" for="form6Example1">Categoria</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <textarea id="form6Example1" class="form-control" maxlength="256" style="width: 870px; margin-top: 10px;"
+                name="dsDescricao" required><%= produto.DS_Descricao %></textarea>
+              <label class="form-label" for="form6Example1">Descrição</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar
+            Alteração</button>
+          <a href="/tecnica/produtos">
+            <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+              style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+          </a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

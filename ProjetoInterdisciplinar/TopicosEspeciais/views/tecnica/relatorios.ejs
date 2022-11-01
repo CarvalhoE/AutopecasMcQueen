@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Relatórios</h1>
+    </div>
+
+    <div class="container">
+      <div class="container-rel">
+
+        <button class="abaRD" id="btnRel1">
+          <p>Relatório de Clientes (XML)</p>
+          <i class="fa fa-file-text-o"></i>
+        </button>
+
+        <a href="/geraRelatorioJson">
+          <button class="abaRV" id="btnRel2">
+            <p>Relatório de Vendas (JSON)</p>
+            <i class="fa fa-file-text-o"></i>
+          </button>
+        </a>
+      </div>
+      <% //if (report.length > 0) { %>
+        <div>
+          <%= //session.report.length %> 
+        </div>
+      <% //} %> 
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

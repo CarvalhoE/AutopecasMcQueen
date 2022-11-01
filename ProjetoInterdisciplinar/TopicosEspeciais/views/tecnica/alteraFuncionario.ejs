@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <%- include('_lateral-bar.ejs') %>
+
+  <main class="cadastroFunc">
+    <div class="header">
+      <h1>Alteração de dados - Funcionarios</h1>
+    </div>
+
+    <div class="container-cadastroC">
+
+      <form action="/alteraFuncionario/<%= id %>" method="post">
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" class="form-control" style="width: 650px; margin-top: 10px;" name="nomeFuncionario"
+                value="<%= funcionario.NM_Nome %>" required />
+              <label class="form-label" for="form6Example1">Nome Completo</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" class="form-control cpf" style="width: 160px; margin-top: 10px; margin-left: -5px;"
+                maxlength="14" autocomplete="off" name="cpfFuncionario" value="<%= funcionario.NR_CPF %>" disabled required />
+              <label class="form-label" for="form6Example1">CPF</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" class="form-control phone" maxlength="15" autocomplete="off" style="width: 170px;"
+                name="telefoneFuncionario" value="<%= funcionario.NR_Telefone %>" />
+              <label class="form-label" for="form6Example2">Telefone</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="datePickerId" class="form-control" style="width: 170px;"
+                name="dtNascimentoFuncionario" value="<%= funcionario.DT_Nascimento.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %>" disabled />
+              <label class="form-label" for="form6Example2">Data de Nascimento</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" class="form-control" style="width: 170px;" name="codigoFuncionario" value="<%= funcionario.NR_Codigo %>" disabled />
+              <label class="form-label" for="form6Example2">Código</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <select id="funcionarioHabilitado" name="flHabilitadoFuncionario" class="form-control"
+                style="width: 170px;">
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+              </select>
+              <label class="form-label" for="form6Example1">Habilitado</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="email" class="form-control" style="width: 450px;" name="emailFuncionario" value="<%= funcionario.DS_Email %>" />
+              <label class="form-label" for="form6Example1">E-mail</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" class="form-control" style="width: 170px;" name="loginFuncionario" value="<%= funcionario.DS_Login %>" disabled />
+              <label class="form-label" for="form6Example2">Login</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="password" class="form-control" style="width: 148px;" name="senhaFuncionario" value="<%= funcionario.NR_Senha %>" required />
+              <label class="form-label" for="form6Example2">Senha</label>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Confirmar
+          Alteração</button>
+        <a href="/tecnica/Funcionarios">
+          <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
+        </a>
+      </form>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

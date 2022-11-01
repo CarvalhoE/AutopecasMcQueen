@@ -1,0 +1,93 @@
+<div class="menu-lateral">
+    <nav class="d-flex flex-nowrap" id="menu">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark cScroll" style="width: 250px; ">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi pe-none me-2" width="40" height="32">
+                    <img src="../../public/image/logo.png" alt="Logo Autopeças" id="logo">
+                </svg>
+            </a>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://www.w3schools.com/howto/img_avatar.png"
+                        alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong><%= name %></strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="/tecnica/perfil">Perfil</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                </ul>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="/home" class="nav-link text-white" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <i class="fa fa-home"></i>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a href="/comercial/clientes" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <i class="fa fa-user"></i>
+                        </svg>
+                        Clientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tecnica/produtos" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <i class="fa fa-inbox"></i>
+                        </svg>
+                        Produtos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/comercial/vendas" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <i class="fa fa-shopping-cart"></i>
+                        </svg>
+                        Vendas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tecnica/funcionarios" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <i class="fa fa-user"></i>
+                        </svg>
+                        Funcionários
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tecnica/relatorios" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <i class="fa fa-bar-chart"></i>
+                        </svg>
+                        Relatórios
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--Abas Ativas-->
+<script type="text/javascript">
+    const currentLocation = location.href;
+    const menuItem = document.querySelectorAll('.nav-item a');
+    const menuLength = menuItem.length;
+
+    for(let i = 0; i<menuLength; i++){
+        if(menuItem[i].href === currentLocation){
+            menuItem[i].className = "nav-link text-white active"
+        }
+    }
+
+</script> 

@@ -52,16 +52,20 @@
             <tr>
               <td scope="row" style="display: flex;" >
                 <a href="/comercial/alteraCliente/<%= values[i].ID_Cliente %>" style="margin-right: 5px;">
-                  <button type="submit" class="extra-d" name="ID_Cliente" value="<%= values[i].ID_Cliente %>">
+                  <button type="submit" class="extra-d tags" name="ID_Cliente" value="<%= values[i].ID_Cliente %>" gloss="Alterar Cliente">
                     <i class="fa fa-pencil-square-o"></i>
                   </button>
                 </a>
                 
                 <form action="/comercial/clientes/<%= values[i].ID_Cliente %>" method="post">
-                  <button type="submit" class="extra-d" name="ID_Cliente" value="<%= values[i].ID_Cliente %>" onclick="return confirm('Você tem certeza que deseja deletar este cliente ?')">
+                  <button type="submit" class="extra-d tags" name="ID_Cliente" style="margin-right: 5px;" value="<%= values[i].ID_Cliente %>" onclick="return confirm('Você tem certeza que deseja deletar este cliente ?')" gloss="Remover Cliente">
                     <i class="fa fa-trash"></i>
                   </button>
                 </form>
+
+                <button class="myBtn extra-d tags" value="<%= values[i].ID_Cliente %>" gloss="Detalhe do Cliente">
+                  <i class="fa fa-file-text-o"></i>
+                </button>
               </td>
 
               <td><%= values[i].ID_Cliente %></td>

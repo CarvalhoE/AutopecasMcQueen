@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Vendas</h1>
+    </div>
+
+    <div class="container">
+
+      <div class="table-container cSCroll">
+        <div>
+          <button class="aba-active" id="btnVendas">
+            <i class="fa fa-credit-card-alt"></i>
+            Vendas
+          </button>
+        </div>
+
+        <div class="table-top">
+          <div class="extras">
+            <a href="/comercial/VendasNovaVenda">
+              <button class="extra-n">
+                <i class="fa fa-plus-square"> Novo</i>
+              </button>
+            </a>
+          </div>
+
+          <table class="table">
+            <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
+            <thead>
+              <tr>
+                <th scope="col">Ações</th>
+                <th scope="col">Cod</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Vendedor</th>
+                <th scope="col">Data do Pedido</th>
+                <th scope="col">Data de Pagamento</th>
+                <th scope="col">QTD. Parcelas</th>
+                <th scope="col">Situação</th>
+                <th scope="col">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < values.length; i++) { %>
+              <tr>
+                <td scope="row" class="extraButtons">
+                  <a href="">
+                    <button class="extra-d" value="<%= values[i].ID_Pedido %>">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </a>
+
+                  <a href="/comercial/vendaDetalhe/<%= values[i].ID_Pedido %>" style="margin-right: 5px;">
+                    <button class="myBtn extra-d tags" gloss="Detalhe do Produto">
+                      <i class="fa fa-file-text-o"></i>
+                    </button>
+                  </a>
+                </td>
+                <td><a href="#"><%= values[i].ID_Pedido %></a></td>
+                <td class="extraButtons"><%= values[i].NM_Cliente %></td>
+                <td class="extraButtons"><%= values[i].NM_Vendedor %></td>
+                <td><%= values[i].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+                <td><%= values[i].DT_Efetivacao %></td>
+                <td><%= values[i].NR_QtdParcelas %></td>
+                <td><%= values[i].DS_Status %></td>
+                <td class="extraButtons">R$ <%= values[i].VL_Valor %></td>
+              </tr>
+              <% } %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>
