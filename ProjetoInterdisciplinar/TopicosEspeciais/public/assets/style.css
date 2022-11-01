@@ -508,3 +508,9 @@ span.tags{
   text-decoration: none;
   cursor: pointer;
 }
+
+/*Detalhe*/
+.card-body{
+  width: 50%;
+  padding: 5px;
+}

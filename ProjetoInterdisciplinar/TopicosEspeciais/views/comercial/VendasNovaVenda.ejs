@@ -140,9 +140,9 @@
                                 width: 100px;
                             " />
                 </a>
+                <input type="hidden" name="valorTotal" id="valorTotal">
             </form>
         </div>
-        <input type="text" name="valorTotal" id="valorTotal">
     </main>
 
     <!-- Scripts -->
@@ -208,7 +208,7 @@
             tableBody.innerHTML = tableReturn;
             valorTotal.innerHTML =
                 `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`;
-            inputValorTotal.value = somaValorTotal;
+            $('#valorTotal').val(somaValorTotal).change();
         };
 
         let formaPagamento = document.getElementById('formaPagamento');

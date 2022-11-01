@@ -18,17 +18,36 @@
 
   <main>
     <div class="header">
-      <h1>Detalhes do Produto - <%= nomeProduto %></h1>
+      <h1>Detalhes do Produto : <%= nomeProduto %></h1>
     </div>
-    <div class="container-cadastroC">
-      <ul>
-        <li>Nome do Produto: <%= produto.NM_Produto %></li>
-        <li>Código do Produto: <%= produto.NR_SKU %></li>
-        <li>Categoria do Produto: <%= produto.DS_Categoria %></li>
-        <li>Marca do Produto: <%= produto.DS_Marca %></li>
-        <li>Valor do Produto: <%= produto.VL_Preco %></li>
-        <li>Descrição do Produto: <%= produto.DS_Descricao %></li>
-      </ul>
+
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <td class="fw-bold">Nome do Produto</td>
+          <td><%= produto.NM_Produto %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Código do Produto (SKU)</td>
+          <td><%= produto.NR_SKU %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Categoria do Produto</td>
+          <td><%= produto.DS_Categoria %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Marca do Produto</td>
+          <td><%= produto.DS_Marca %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Valor do Produto</td>
+          <td><%= produto.VL_Preco %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Descrição do Produto</td>
+          <td><%= produto.DS_Descricao %></td>
+        </tr>
+      </table>
     </div>
   </main>
 

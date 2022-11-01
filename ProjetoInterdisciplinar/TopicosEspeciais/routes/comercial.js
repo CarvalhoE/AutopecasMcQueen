@@ -197,7 +197,6 @@ router.post('/efetivaNovaVenda', function (req, res) {
       NR_QtdParcelas: req.body.formaPagamento == "1" ? req.body.numeroParcelas : null,
       ID_FormaPagamento: req.body.formaPagamento
     }
-    console.log(data.ID_Funcionario)
     db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
       if (err) throw err;
 
