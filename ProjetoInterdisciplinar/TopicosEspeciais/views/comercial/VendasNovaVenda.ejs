@@ -51,7 +51,7 @@
                             style="width: 470px; margin-left: 20px">
                             <% for (let i = 0; i < produto.length; i++) { %>
                             <option
-                                value="<%= produto[i].NR_SKU %>|<%= produto[i].NM_Produto %>|<%= produto[i].VL_Preco %>">
+                                value="<%= produto[i].NR_SKU %>|<%= produto[i].NM_Produto %>|<%= produto[i].VL_Preco %>|<%= produto[i].ID_Produto %>">
                                 <%= produto[i].NR_SKU %> - <%=
                                     produto[i].NM_Produto %>
                             </option>
@@ -135,7 +135,8 @@
                 <a href="/comercial/vendas">
                     <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
                 </a>
-                <input type="hidden" name="valorTotal" id="valorTotal" required>
+                <input type="hidden" name="valorTotal" id="valorTotal">
+                <input type="hidden" name="produtos" id="produtos">
             </form>
         </div>
     </main>
@@ -154,6 +155,7 @@
             let skuProduto = produto[0]
             let nomeProduto = produto[1]
             let valorProduto = Number(produto[2])
+            let idProduto = produto[3]
 
             let tamanho = produtos.length;
 
@@ -163,7 +165,8 @@
                     nome: nomeProduto,
                     valor: valorProduto,
                     quantidade: quantidadeProduto,
-                    valorTotal: (quantidadeProduto * valorProduto)
+                    valorTotal: (quantidadeProduto * valorProduto),
+                    idProduto: idProduto
                 })
             } else {
                 let index = produtos.findIndex(obj => obj.sku == skuProduto)
@@ -176,7 +179,8 @@
                         nome: nomeProduto,
                         valor: valorProduto,
                         quantidade: quantidadeProduto,
-                        valorTotal: (quantidadeProduto * valorProduto)
+                        valorTotal: (quantidadeProduto * valorProduto),
+                        idProduto: idProduto
                     })
                 }
             }
@@ -186,6 +190,7 @@
             let tableBody = document.getElementById("tableBody");
             let valorTotal = document.getElementById("lValorTotal");
             let inputValorTotal = document.getElementById("valorTotal");
+            let inputProdutos = document.getElementById("produtos");
             let somaValorTotal = 0;
 
             let tableReturn = "";
@@ -204,6 +209,7 @@
             valorTotal.innerHTML =
                 `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`;
             $('#valorTotal').val(somaValorTotal).change();
+            $('#produtos').val(JSON.stringify(produtos).replace("[","").replace("]","").replace("},","}|")).change();
         };
 
         let formaPagamento = document.getElementById('formaPagamento');

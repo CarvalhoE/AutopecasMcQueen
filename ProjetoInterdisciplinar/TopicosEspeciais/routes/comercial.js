@@ -197,15 +197,34 @@ router.post('/efetivaNovaVenda', function (req, res) {
       NR_QtdParcelas: req.body.formaPagamento == "1" ? req.body.numeroParcelas : null,
       ID_FormaPagamento: req.body.formaPagamento
     }
+
     db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
       if (err) throw err;
 
+      let insertId = rows.insertId;
+      let details = req.body.produtos.split("|");
+      details.forEach((obj) => {
+        let row = JSON.stringify(obj);
+        console.log(row);
+        let detail = {
+          ID_Pedido: insertId,
+          ID_Produto: row.idProduto,
+          NR_Quantidade: row.quantidade,
+          VL_Unitario: row.valor,
+          VL_Total: row.valorTotal,
+        }
+
+        db.query('Insert Into PedidoDetalhe Set ?', detail, (err, rows, fields) => {
+          if (err) throw err;
+        });
+      });
+
       req.flash('message', 'Venda cadastrada com sucesso!');
       res.redirect('/comercial/vendas');
-    })
+    });
   } else {
     req.flash('sucess', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
+    res.redirect('/login');
   }
 });
 
