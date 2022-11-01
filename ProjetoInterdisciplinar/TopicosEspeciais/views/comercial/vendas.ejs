@@ -13,9 +13,9 @@
 </head>
 
 <body>
-  
+
   <%- include('_lateral-bar.ejs') %>
-  
+
   <main>
     <div class="header">
       <h1>Vendas</h1>
@@ -23,7 +23,7 @@
 
     <div class="container">
 
-      <div class="table-container">
+      <div class="table-container cSCroll">
         <div>
           <button class="aba-active" id="btnVendas">
             <i class="fa fa-credit-card-alt"></i>
@@ -38,44 +38,52 @@
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
             </a>
-          </div> 
+          </div>
 
           <table class="table">
             <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
+            <thead>
               <tr>
-                <td>Não há registros para serem mostrados!</td>
+                <th scope="col">Ações</th>
+                <th scope="col">Cod</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Vendedor</th>
+                <th scope="col">Data do Pedido</th>
+                <th scope="col">Data de Pagamento</th>
+                <th scope="col">QTD. Parcelas</th>
+                <th scope="col">Situação</th>
+                <th scope="col">Valor</th>
               </tr>
-              <% } else {%>
-                <thead>
-                  <tr>
-                  <th scope="col">Ações</th>
-                  <th scope="col">Cod</th>
-                  <th scope="col">Cliente</th>
-                  <th scope="col">Vendedor</th>
-                  <th scope="col">Data do Pedido</th>
-                  <th scope="col">Data de Pagamento</th>
-                  <th scope="col">QTD. Parcelas</th>
-                  <th scope="col">Situação</th>
-                  <th scope="col">Valor</th>
-                  </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
-                <tr>
-                  <td scope="row">
+              <tr>
+                <td scope="row" class="extraButtons">
+                  <a href="">
                     <button class="extra-d" value="<%= values[i].ID_Pedido %>">
                       <i class="fa fa-pencil-square-o"></i>
                     </button>
-                  </td>
-                  <td><a href="#"><%= values[i].ID_Pedido %></a></td>
-                  <td><%= values[i].NM_Cliente %></td>
-                  <td><%= values[i].NM_Vendedor %></td>
-                  <td><%= values[i].DT_Pedido %></td>
-                  <td><%= values[i].DT_Efetivacao %></td>
-                  <td><%= values[i].NR_QtdParcelas %></td>
-                  <td><%= values[i].DS_Status %></td>
-                  <td><%= values[i].VL_Valor %></td>
-                </tr>
+                  </a>
+
+                  <a href="/comercial/vendaDetalhe/<%= values[i].ID_Pedido %>" style="margin-right: 5px;">
+                    <button class="myBtn extra-d tags" gloss="Detalhe do Produto">
+                      <i class="fa fa-file-text-o"></i>
+                    </button>
+                  </a>
+                </td>
+                <td><a href="#"><%= values[i].ID_Pedido %></a></td>
+                <td class="extraButtons"><%= values[i].NM_Cliente %></td>
+                <td class="extraButtons"><%= values[i].NM_Vendedor %></td>
+                <td><%= values[i].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+                <td><%= values[i].DT_Efetivacao %></td>
+                <td><%= values[i].NR_QtdParcelas %></td>
+                <td><%= values[i].DS_Status %></td>
+                <td class="extraButtons">R$ <%= values[i].VL_Valor %></td>
+              </tr>
               <% } %>
               <% } %>
             </tbody>

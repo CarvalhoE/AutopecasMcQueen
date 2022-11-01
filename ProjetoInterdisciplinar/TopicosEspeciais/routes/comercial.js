@@ -238,4 +238,43 @@ router.get('/novaVenda/adicionaProduto', (req, res) => {
   }
 })
 
+router.get('/comercial/vendaDetalhe/(:id)', (req, res, next) => {
+  if (req.session.loggedin) {
+    let id = req.params.id;
+
+    let query = `
+      Select P.*
+      ,S.DS_Status
+      ,F.DS_FormaPagamento
+      ,U.NM_Nome as NM_NomeFuncionario
+      ,C.NM_Nome as NM_NomeCliente
+      From Pedido P
+      Inner Join PedidoStatus S
+        On P.ID_PedidoStatus = S.ID_PedidoStatus
+      Inner Join FormaPagamento F
+        On P.ID_FormaPagamento = F.ID_FormaPagamento
+      Left Join PedidoDetalhe D
+        On P.ID_Pedido = D.ID_Pedido
+      Inner Join funcionario U 
+        On P.ID_Funcionario = U.ID_Funcionario
+      Inner Join Cliente C 
+        On P.ID_Cliente = C.ID_Cliente
+      Where P.ID_Pedido = ${id}`
+
+    db.query(query, function (err, rows, fields) {
+      if (err) throw err;
+
+      req.session.venda = rows[0];
+
+      res.render('comercial/vendaDetalhe', {
+        name: req.session.name,
+        venda: req.session.venda
+      });
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
 module.exports = router;
