@@ -18,7 +18,7 @@
 
   <main>
     <div class="header">
-      <h1>Detalhes do Produto : <%= nomeProduto %></h1>
+      <h1>Detalhes de Produto</h1>
     </div>
 
     <div class="card-body">
@@ -41,13 +41,17 @@
         </tr>
         <tr>
           <td class="fw-bold">Valor do Produto</td>
-          <td><%= produto.VL_Preco %></td>
+          <td>R$ <%= produto.VL_Preco %></td>
         </tr>
         <tr>
           <td class="fw-bold">Descrição do Produto</td>
           <td><%= produto.DS_Descricao %></td>
         </tr>
       </table>
+      <a href="/tecnica/produtos">
+        <input value="Voltar" class="btn btn-primary btn-block mb-4"
+            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+    </a>
     </div>
   </main>
 
