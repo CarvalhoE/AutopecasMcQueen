@@ -181,7 +181,9 @@ p{
   margin: 0;
   float: left;
 }
-
+.containerCompras{
+  width: 890px;
+}
 /* Formularios de cadastro */
 .form-outline{
   margin-left: 15px;
