@@ -10,20 +10,21 @@
   <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../public/assets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
 
   <%- include('_lateral-bar.ejs') %>
 
-  <main>
+  <main class="main-scroller">
     <div class="header">
       <h1>Vendas</h1>
     </div>
 
     <div class="container">
 
-      <div class="table-container cSCroll">
+      <div class="table-container">
         <div>
           <button class="aba-active" id="btnVendas">
             <i class="fa fa-credit-card-alt"></i>
@@ -40,7 +41,7 @@
             </a>
           </div>
 
-          <table class="table">
+          <table class="table" id="example">
             <% if (values.length <= 0) { %>
             <tr>
               <td>Não há registros para serem mostrados!</td>
@@ -64,13 +65,13 @@
               <tr>
                 <td scope="row" class="extraButtons">
                   <a href="">
-                    <button class="extra-d" value="<%= values[i].ID_Pedido %>">
+                    <button class="extra-d tags" gloss="Alterar Venda" value="<%= values[i].ID_Pedido %>">
                       <i class="fa fa-pencil-square-o"></i>
                     </button>
                   </a>
 
                   <a href="/comercial/vendaDetalhe/<%= values[i].ID_Pedido %>" style="margin-right: 5px;">
-                    <button class="myBtn extra-d tags" gloss="Detalhe do Produto">
+                    <button class="myBtn extra-d tags" gloss="Detalhe de Venda">
                       <i class="fa fa-file-text-o"></i>
                     </button>
                   </a>
@@ -94,6 +95,29 @@
 
   <!-- Scripts -->
   <%- include('_scripts.ejs') %>
+  <script>
+    $(document).ready(function () {
+      $('#example').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ dados por página",
+            "zeroRecords": "Nada Encontrado",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "search": "Procurar:",
+            "infoFiltered": "(filtrado de _MAX_ registros totais)",
+            "paginate": {
+              "first":"Primeiro",
+              "last":"Último",
+              "next":"Próximo",
+              "previous":"Anterior"
+            },
+            "loadingRecords": "Carregando...",
+            "processing": "Processando...",
+            "emptyTable": "Tabela Vazia"
+        },
+        lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+      });
+    });
+  </script>
 </body>
 
 </html>

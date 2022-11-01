@@ -16,7 +16,6 @@ html {
 
 main {
   height: 100vh;
-  height: -webkit-fill-available;
   max-height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
@@ -137,6 +136,7 @@ p{
   float: left;
   height: 100vh;
 }
+
 .cScroll{
   overflow-y:scroll;
   overflow-x: hidden;
@@ -149,6 +149,24 @@ p{
   background-color: #343a40;
 }
 .cScroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ffb367;
+  border: 3px solid #343a40;
+  height: 2px;
+}
+
+.main-scroller{
+  overflow-y:scroll;
+  overflow-x: auto;
+}
+
+.main-scroller::-webkit-scrollbar{
+  width: 8px;
+}
+.main-scroller::-webkit-scrollbar-track{
+  background-color: #343a40;
+}
+.main-scroller::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #ffb367;
   border: 3px solid #343a40;
@@ -243,7 +261,9 @@ p{
   border-style: none;
   color: #fff;
 }
-
+.dataTables_wrapper{
+  padding: 15px;
+}
 .table-top{
   box-shadow: #343a40 1px 1px 10px 0px;
   border-top: 2px solid #ffb367;
@@ -251,7 +271,6 @@ p{
 
 .table-container{
   padding: 50px;
-  width: 990px;
 }
 
 .extras{

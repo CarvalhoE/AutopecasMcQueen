@@ -224,22 +224,24 @@ router.get('/comercial/vendaDetalhe/(:id)', (req, res, next) => {
     let id = req.params.id;
 
     let query = `
-      Select P.*
+    Select P.*
       ,S.DS_Status
       ,F.DS_FormaPagamento
       ,U.NM_Nome as NM_NomeFuncionario
       ,C.NM_Nome as NM_NomeCliente
+      ,D.NR_Quantidade
+      ,D.VL_Total
       From Pedido P
       Inner Join PedidoStatus S
-        On P.ID_PedidoStatus = S.ID_PedidoStatus
+      On P.ID_PedidoStatus = S.ID_PedidoStatus
       Inner Join FormaPagamento F
-        On P.ID_FormaPagamento = F.ID_FormaPagamento
-      Left Join PedidoDetalhe D
-        On P.ID_Pedido = D.ID_Pedido
+      On P.ID_FormaPagamento = F.ID_FormaPagamento
+      Inner Join PedidoDetalhe D
+      On P.ID_Pedido = D.ID_Pedido
       Inner Join funcionario U 
-        On P.ID_Funcionario = U.ID_Funcionario
+      On P.ID_Funcionario = U.ID_Funcionario
       Inner Join Cliente C 
-        On P.ID_Cliente = C.ID_Cliente
+      On P.ID_Cliente = C.ID_Cliente
       Where P.ID_Pedido = ${id}`
 
     db.query(query, function (err, rows, fields) {
