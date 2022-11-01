@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../public/assets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -40,7 +41,7 @@
             </a>
           </div>
 
-          <table class="table">
+          <table class="table" id="example">
             <% if (values.length <= 0) { %>
             <tr>
               <td>Não há registros para serem mostrados!</td>
