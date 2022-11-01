@@ -122,6 +122,7 @@ Create Table PedidoDetalhe
    ,ID_Pedido 			Int 			Not Null
    ,ID_Produto 			Int 			Not Null
    ,NR_Quantidade 		Int 			Not Null
+   ,VL_Unitario 		Numeric(5,2) 	Not Null
    ,VL_Total 			Numeric(5,2) 	Not Null
    ,Constraint PK_ID_PedidoDetalhe 			Primary Key (ID_PedidoDetalhe)
    ,Constraint FK_ID_Pedido_Pedido 			Foreign Key (ID_Pedido) 	References Pedido (ID_Pedido)
