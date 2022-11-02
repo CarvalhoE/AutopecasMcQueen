@@ -33,7 +33,7 @@ router.get('/comercial/cadastraCliente', function (req, res) {
 });
 
 //Alterar (Concluído) - Clientes
-router.get('/comercial/alteraCliente/:id', (req, res, next) => {
+router.get('/comercial/alteraCliente/:id', (req, res) => {
   if (req.session.loggedin) {
     let id = req.params.id;
 
