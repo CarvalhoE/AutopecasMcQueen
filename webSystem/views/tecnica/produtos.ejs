@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../public/assets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -40,7 +41,7 @@
             </a>
           </div>
 
-          <table class="table" id="example">
+          <table class="table" id="tabelaS">
             <% if (values.length <= 0) { %>
             <tr>
               <td>Não há registros para serem mostrados!</td>
@@ -91,6 +92,55 @@
 
   <!-- Scripts -->
   <%- include('_scripts.ejs') %>
+  <script>
+
+    // Get the modal
+      let modal = document.getElementsByClassName("modal")[0];
+      // Get the button that opens the modal
+      let btn = document.getElementsByClassName("myBtn")[0];
+      // Get the <span> element that closes the modal
+      let span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on the button, open the modal
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('#tabelaS').DataTable({
+        "language": {
+          "lengthMenu": "Mostrar _MENU_ dados por página",
+          "zeroRecords": "Nada Encontrado",
+          "info": "Mostrando página _PAGE_ de _PAGES_",
+          "search": "Procurar:",
+          "infoFiltered": "(filtrado de _MAX_ registros totais)",
+          "paginate": {
+            "first": "Primeiro",
+            "last": "Último",
+            "next": "Próximo",
+            "previous": "Anterior"
+          },
+          "loadingRecords": "Carregando...",
+          "processing": "Processando...",
+          "emptyTable": "Tabela Vazia"
+        },
+        lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+      });
+    });
+  </script>
 </body>
 
 </html>
