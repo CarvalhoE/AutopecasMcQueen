@@ -45,7 +45,7 @@
                 style="width: 140px; margin-top: 10px; margin-left: -5px;" 
                 name="cpfFuncionario" 
                 value="<%= funcionario[0].NR_CPF %>"
-                readonly
+                disabled
               />
               <label class="form-label" for="form6Example1">CPF</label>
             </div>
@@ -73,7 +73,7 @@
                 style="width: 148px;" 
                 name="dtNascimentoFuncionario" 
                 value="<%= funcionario[0].DT_Nascimento.getDate() + '/' + (funcionario[0].DT_Nascimento.getMonth() + 1) + '/' + funcionario[0].DT_Nascimento.getFullYear() %>"
-                readonly 
+                disabled 
               />
               <label class="form-label" for="form6Example2">Data de Nascimento</label>
             </div>
@@ -87,7 +87,7 @@
                 style="width: 148px;" 
                 name="codigoFuncionario" 
                 value="<%= funcionario[0].NR_Codigo %>"
-                readonly 
+                disabled 
               />
               <label class="form-label" for="form6Example2">Código</label>
             </div>
@@ -101,7 +101,7 @@
                 style="width: 148px;" 
                 name="loginFuncionario"
                 value="<%= funcionario[0].DS_Login %>"
-                readonly 
+                disabled 
               />
               <label class="form-label" for="form6Example2">Login</label>
             </div>
@@ -287,7 +287,7 @@
                 style =  "width: 148px;" 
                 name  =  "dtAdmissaoFuncionario" 
                 value =  "<%= funcionario[0].DT_Admissao.getDate() + '/' + (funcionario[0].DT_Admissao.getMonth() + 1) + '/' + funcionario[0].DT_Admissao.getFullYear() %>"
-                readonly
+                disabled
                 />
               <label class="form-label" for="form6Example2">Data de Admissão</label>
             </div>

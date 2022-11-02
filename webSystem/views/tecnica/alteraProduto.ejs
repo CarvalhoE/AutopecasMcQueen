@@ -18,22 +18,22 @@
   
   <main>
     <div class="header">
-      <h1>Produtos - Novo Produto</h1>
+      <h1>Produtos - Alterar Produto</h1>
     </div>
     <div class="container-cadastroC">
-      <form action="/cadastraProduto" method="post">
+      <form action="/alteraProduto/<%= id %>" method="post">
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example1" class="form-control" maxlength="128"
-                style="width: 640px; margin-top: 10px;" name="nmProduto"  required />
+                style="width: 640px; margin-top: 10px;" name="nmProduto" value="<%= produto.NM_Produto %>" required />
               <label class="form-label" for="form6Example1">Nome</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example1" maxlength="64" class="form-control"
-                style="width: 180px; margin-top: 10px;" name="dsMarca" required />
+                style="width: 180px; margin-top: 10px;" name="dsMarca" value="<%= produto.DS_Marca %>" required />
               <label class="form-label" for="form6Example1">Marca</label>
             </div>
           </div>
@@ -42,25 +42,21 @@
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example1" class="form-control money" style="width: 240px;" name="vlPreco"
-                required />
+                value="<%= produto.VL_Preco %>" required />
               <label class="form-label" for="form6Example1">Valor Unitario</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
               <input type="text" id="form6Example1" class="form-control sku" style="width: 240px;" name="nrSKU"
-                required />
+                value="<%= produto.NR_SKU %>" disabled />
               <label class="form-label" for="form6Example1">SKU</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <select id="categoria" name="categoria" class="form-control" style="width: 280px;" required>
-                <option value="" selected>Selecione a categoria</option>
-                <% for (let i = 0; i < categorias.length; i++) { %>
-                <option value="<%= categorias[i].ID_Categoria %>"><%= categorias[i].DS_Categoria %></option>
-                <% } %>
-              </select>
+              <input type="text" id="form6Example1" class="form-control" style="width: 240px;" name="categoria"
+                value="<%= produto.DS_Categoria %>" disabled />
               <label class="form-label" for="form6Example1">Categoria</label>
             </div>
           </div>
@@ -69,14 +65,14 @@
           <div class="col">
             <div class="form-outline">
               <textarea id="form6Example1" class="form-control" maxlength="256" style="width: 870px; margin-top: 10px;"
-                name="dsDescricao" required></textarea>
+                name="dsDescricao" required><%= produto.DS_Descricao %></textarea>
               <label class="form-label" for="form6Example1">Descrição</label>
             </div>
           </div>
         </div>
         <div>
           <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar
-            cadastro</button>
+            Alteração</button>
           <a href="/tecnica/produtos">
             <input value="Cancelar" class="btn btn-primary btn-block mb-4"
               style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">

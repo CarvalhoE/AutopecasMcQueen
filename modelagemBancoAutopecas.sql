@@ -1,6 +1,5 @@
 Drop Table if exists PedidoDetalhe;
 Drop Table if exists Pedido;
-Drop Table if exists Estoque;
 Drop Table if exists Cliente;
 Drop Table if exists PedidoStatus;
 Drop Table if exists Cobranca;
@@ -40,6 +39,7 @@ Create Table Produto
    ,NR_SKU			VarChar(14)		Not Null
    ,VL_Preco 		Numeric(10,2) 	Not Null
    ,FL_Disponivel	Char(1)			Not Null
+   ,NR_Quantidade	Int				Not Null
    ,DS_Marca 		VarChar(64) 	Not Null
    ,ID_Categoria 	Int 			Not Null
    ,Constraint PK_ID_Produto 				Primary Key (ID_Produto)
@@ -47,26 +47,10 @@ Create Table Produto
    ,Constraint CK_FL_ProdutoDisponivel 		Check (FL_Disponivel In (0,1))
 );
 
-Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_Preco, FL_Disponivel, DS_Marca, ID_Categoria)
-	Values ('Cheirinho', 'Bom cheiro para carros', '34560002987564', '14.90', 1, 'CheiroBom', 1)
-          ,('Bateria', 'Bateria para carros', '34511129875641', '1200.00', 1, 'Moura', 2)
-          ,('Amortecedor', 'Amortecedor para carros', '34560002988468', '99.90', 0, 'Nike', 3);
-
-Create Table Estoque
-(
-	ID_Produto 				Int			Not Null
-   ,NR_Quantidade 			Int 		Not Null
-   ,FL_Disponivel 			Char(1) 	Not Null
-   ,DT_UltimaAtualizacao 	DateTime 	Not Null
-   ,Constraint PK_ID_Produto 			Primary Key (ID_Produto)
-   ,Constraint FK_ID_Produto_Produto 	Foreign Key (ID_Produto) References Produto (ID_Produto)
-   ,Constraint CK_FL_Disponivel 		Check (FL_Disponivel In (0,1))
-);
-
-Insert Into Estoque (ID_Produto, NR_Quantidade, FL_Disponivel, DT_UltimaAtualizacao)
-	Values (1, 38, 1, '2021-09-10')
-          ,(2, 200, 1, '2022-01-01')
-          ,(3, 0, 0, '2022-10-05');
+Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_Preco, FL_Disponivel, NR_Quantidade, DS_Marca, ID_Categoria)
+	Values ('Cheirinho', 'Bom cheiro para carros', 'CA12907221', '14.90', 1, 0, 'CheiroBom', 1)
+          ,('Bateria', 'Bateria para carros', 'CE12444643', '1200.00', 1, 0, 'Moura', 2)
+          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', '99.90', 0, 0, 'Nike', 3);
 
 Create Table FormaPagamento
 (
@@ -278,13 +262,9 @@ Create Table Pedido
    ,ID_Cliente 				Int 			Not Null
    ,DT_Pedido 				DateTime	 	Not Null
    ,VL_Valor	 			Numeric(12,2) 	Not Null
-   ,PC_Desconto				Numeric(5,2)	Null
-   ,VL_Final				Numeric(12,2)	Not Null
    ,DT_Efetivacao			DateTime		Null
    ,ID_PedidoStatus 		Int 			Not Null
    ,DT_Status				DateTime		Null
-   ,DS_MotivoCancelamento 	VarChar(128)	Null
-   ,FL_Parcelado			char(1)			Not Null
    ,NR_QtdParcelas			int				Null
    ,ID_FormaPagamento 		Int 			Not Null
    ,Constraint PK_ID_Pedido 					Primary Key (ID_Pedido)
@@ -292,8 +272,10 @@ Create Table Pedido
    ,Constraint FK_ID_Cliente_Cliente 			Foreign Key (ID_Cliente) 		References Cliente (ID_Cliente)
    ,Constraint FK_ID_Funcionario2_Funcionario 	Foreign Key (ID_Funcionario) 	References Funcionario (ID_Funcionario)
    ,Constraint FK_ID_FormaPagamento 			Foreign Key (ID_FormaPagamento) References FormaPagamento (ID_FormaPagamento)
-   ,Constraint CK_FL_Parcelado 					Check (FL_Parcelado In (0,1))
 );
+
+Insert Into Pedido (ID_Funcionario, ID_Cliente, DT_Pedido, VL_Valor, DT_Efetivacao, ID_PedidoStatus, DT_Status, NR_QtdParcelas, ID_FormaPagamento) 
+	Values (1, 1, '2022-11-01', 2454.90, '2022-11-01', 2, '2022-11-01', Null, 3);
 
 Create Table PedidoDetalhe
 (
@@ -301,11 +283,16 @@ Create Table PedidoDetalhe
    ,ID_Pedido 			Int 			Not Null
    ,ID_Produto 			Int 			Not Null
    ,NR_Quantidade 		Int 			Not Null
-   ,VL_Total 			Numeric(5,2) 	Not Null
+   ,VL_Unitario			Numeric(10,2) 	Not Null
+   ,VL_Total 			Numeric(10,2) 	Not Null
    ,Constraint PK_ID_PedidoDetalhe 			Primary Key (ID_PedidoDetalhe)
    ,Constraint FK_ID_Pedido_Pedido 			Foreign Key (ID_Pedido) 	References Pedido (ID_Pedido)
    ,Constraint FK_ID_PedidoProduto_Produto 	Foreign Key (ID_Produto)	References Produto (ID_Produto)
 );
+
+Insert Into PedidoDetalhe (ID_Pedido, ID_Produto, NR_Quantidade, VL_Unitario, VL_Total)
+	Values (1, 2, 2, 1200.00, 2400.00)
+          ,(1, 1, 1, 14.90, 14.90);
 
 Create Table TipoCobranca
 (

@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../public/assets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 
 <body>
   
   <%- include('_lateral-bar.ejs') %>
   
-  <main>
+  <main class="main-scroller">
     <div class="header">
       <h1>Vendas</h1>
     </div>
@@ -38,47 +39,48 @@
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
             </a>
-            
-            <input type="text" class="extra-s" placeholder="Pesquisa por COD">
-            <input type="month" id="month" class="extra-m">
-          </div> 
+          </div>
 
-          <table class="table">
+          <table class="table" id="tabelaS">
             <% if (values.length <= 0) { %>
+            <tr>
+              <td>Não há registros para serem mostrados!</td>
+            </tr>
+            <% } else {%>
+            <thead>
               <tr>
-                <td>Não há registros para serem mostrados!</td>
+                <th scope="col">Ações</th>
+                <th scope="col">Cód</th>
+                <th scope="col">Vendedor</th>
+                <th scope="col">Dt Pedido</th>
+                <th scope="col">Dt Pagamento</th>
+                <th scope="col">Status</th>
+                <th scope="col">Valor</th>
               </tr>
-              <% } else {%>
-                <thead>
-                  <tr>
-                  <th scope="col">Ações</th>
-                  <th scope="col">Cod</th>
-                  <th scope="col">Cliente</th>
-                  <th scope="col">Vendedor</th>
-                  <th scope="col">Data do Pedido</th>
-                  <th scope="col">Data de Pagamento</th>
-                  <th scope="col">QTD. Parcelas</th>
-                  <th scope="col">Situação</th>
-                  <th scope="col">Valor</th>
-                  </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
-                <tr>
-                  <td scope="row">
-                    <button class="extra-d" value="<%= values[i].ID_Pedido %>">
+              <tr>
+                <td scope="row" class="extraButtons">
+                  <a href="">
+                    <button class="extra-d tags" gloss="Alterar Venda" value="<%= values[i].ID_Pedido %>">
                       <i class="fa fa-pencil-square-o"></i>
                     </button>
-                  </td>
-                  <td><a href="#"><%= values[i].ID_Pedido %></a></td>
-                  <td><%= values[i].NM_Cliente %></td>
-                  <td><%= values[i].NM_Vendedor %></td>
-                  <td><%= values[i].DT_Pedido %></td>
-                  <td><%= values[i].DT_Efetivacao %></td>
-                  <td><%= values[i].NR_QtdParcelas %></td>
-                  <td><%= values[i].DS_Status %></td>
-                  <td><%= values[i].VL_Final %></td>
-                </tr>
+                  </a>
+
+                  <a href="/comercial/vendaDetalhe/<%= values[i].ID_Pedido %>" style="margin-right: 5px;">
+                    <button class="myBtn extra-d tags" gloss="Detalhe de Venda">
+                      <i class="fa fa-file-text-o"></i>
+                    </button>
+                  </a>
+                </td>
+                <td><a href="#"><%= values[i].ID_Pedido %></a></td>
+                <td class="extraButtons"><%= values[i].NM_Vendedor %></td>
+                <td><%= values[i].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+                <td><%= values[i].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) ?? "Em Aberto" %></td>
+                <td><%= values[i].DS_Status %></td>
+                <td class="extraButtons">R$ <%= values[i].VL_Valor %></td>
+              </tr>
               <% } %>
               <% } %>
             </tbody>
@@ -89,6 +91,29 @@
 
   <!-- Scripts -->
   <%- include('_scripts.ejs') %>
+  <script>
+    $(document).ready(function () {
+      $('#tabelaS').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ dados por página",
+            "zeroRecords": "Nada Encontrado",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "search": "Procurar:",
+            "infoFiltered": "(filtrado de _MAX_ registros totais)",
+            "paginate": {
+              "first":"Primeiro",
+              "last":"Último",
+              "next":"Próximo",
+              "previous":"Anterior"
+            },
+            "loadingRecords": "Carregando...",
+            "processing": "Processando...",
+            "emptyTable": "Tabela Vazia"
+        },
+        lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+      });
+    });
+  </script>
 </body>
 
 </html>

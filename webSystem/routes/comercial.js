@@ -133,7 +133,6 @@ router.get('/comercial/vendas', function (req, res) {
                        ,P.DT_Efetivacao
                        ,P.NR_QtdParcelas
                        ,PS.DS_Status
-                       ,P.VL_Final
                      From Pedido P
                      Inner Join PedidoStatus PS
                          On P.ID_PedidoStatus = PS.ID_PedidoStatus
