@@ -28,11 +28,12 @@
       </div>
       <div class="table-top">
         <div class="extras">
-          <a href="/comercial/cadastraCliente"><button class="extra-n" id="btnNovoCliente">
+          <a href="/comercial/cadastraCliente">
+            <button class="extra-n" id="btnNovoCliente">
               <i class="fa fa-plus-square"> Novo</i>
             </button></a>
         </div>
-        <table class="table" id="example">
+        <table class="table" id="tabelaS">
           <% if (values.length <= 0) { %>
           <tr>
             <td>Não há registros para serem mostrados!</td>
@@ -84,7 +85,7 @@
   <%- include('_scripts.ejs') %>
   <script>
     $(document).ready(function () {
-      $('#example').DataTable({
+      $('#tabelaS').DataTable({
         "language": {
           "lengthMenu": "Mostrar _MENU_ dados por página",
           "zeroRecords": "Nada Encontrado",
