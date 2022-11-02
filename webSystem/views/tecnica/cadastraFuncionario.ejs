@@ -187,6 +187,9 @@
 
   <!-- Scripts -->
   <%- include('_scripts.ejs') %>
+  <script>
+    datePickerId.max = new Date().toISOString().split("T")[0];
+  </script>
 </body>
 
 </html>
