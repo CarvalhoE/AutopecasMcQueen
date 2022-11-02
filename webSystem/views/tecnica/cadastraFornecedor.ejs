@@ -26,36 +26,18 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nomeFornecedor" class="form-control" style="width: 760px; margin-top: 10px;" required/>
+                <input type="text" name="nomeFornecedor" class="form-control" maxlength="32" style="width: 640px; margin-top: 10px;" required/>
                 <label class="form-label" for="form6Example1">Nome da Empresa</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline" >
-                <input type="text" name="nrCnpjCpf" class="form-control cnpj" style="width: 140px; margin-top: 10px;" required/>
-                <label class="form-label" for="form6Example1">CNPJ/CPF</label>
+                <input type="text" name="nrCnpjCpf" class="form-control cnpj" style="width: 180px; margin-top: 10px;" required/>
+                <label class="form-label" for="form6Example1">CNPJ</label>
               </div>
             </div>
           </div>
           <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" name="dsEndereco" class="form-control" style="width: 520px;" required/>
-                <label class="form-label" for="form6Example2">Endereço</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" name="dsBairro" class="form-control" style="width: 140px;" required/>
-                <label class="form-label" for="form6Example2">Bairro</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" name="dsCidade" class="form-control" style="width: 100px;" required/>
-                <label class="form-label" for="form6Example2">Município</label>
-              </div>
-            </div>
             <div class="col">
               <div class="form-outline">
                 <input type="text" name="dsCep" class="form-control cep" style="width: 110px;" required/>
@@ -64,13 +46,31 @@
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrTelefone" class="form-control phone" style="width: 140px;" required/>
+                <input type="text" name="dsEndereco" class="form-control" maxlength="100" style="width: 510px;" required/>
+                <label class="form-label" for="form6Example2">Endereço</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" name="dsBairro" class="form-control" maxlength="40" style="width: 160px;" required/>
+                <label class="form-label" for="form6Example2">Bairro</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" name="dsCidade" class="form-control" maxlength="40" style="width: 100px;" required/>
+                <label class="form-label" for="form6Example2">Município</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" name="nrTelefone" class="form-control landline" style="width: 140px;" required/>
                 <label class="form-label" for="form6Example2">Telefone</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="email" name="dsEmail" class="form-control" style="width: 520px;" />
+                <input type="email" name="dsEmail" class="form-control" maxlength="64" style="width: 520px;" />
                 <label class="form-label" for="form6Example1">E-mail</label>
               </div>
             </div>
@@ -79,19 +79,19 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrBanco" class="form-control" maxlength="5" style="width: 140px;" required/>
+                <input type="text" name="nrBanco" class="form-control" maxlength="5" style="width: 220px;" required/>
                 <label class="form-label" for="form6Example2">Banco</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrAgencia" class="form-control" maxlength="5" style="width: 140px;" required/>
+                <input type="text" name="nrAgencia" class="form-control" maxlength="5" style="width: 220px;" required/>
                 <label class="form-label" for="form6Example2">Agência</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" name="nrConta" class="form-control" maxlength="10" style="width: 140px;" required/>
+                <input type="text" name="nrConta" class="form-control" maxlength="10" style="width: 220px;" required/>
                 <label class="form-label" for="form6Example2">Nr. Conta</label>
               </div>
             </div>
