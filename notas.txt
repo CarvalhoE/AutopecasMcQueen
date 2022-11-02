@@ -1,8 +1,0 @@
-Para criar uma aplicação de login
-
-1 -> npm install -g express-generator
-2 -> npx express --view=ejs
-3 -> npm install
-4 -> npm install mysql2
-5 -> criar arquivo de conexão (database.js)
-6 -> npm install express-session --save (criando sessão)
