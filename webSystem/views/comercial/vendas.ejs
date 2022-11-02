@@ -75,11 +75,11 @@
                   </a>
                 </td>
                 <td><a href="#"><%= values[i].ID_Pedido %></a></td>
-                <td class="extraButtons"><%= values[i].NM_Vendedor %></td>
+                <td><%= values[i].NM_Vendedor %></td>
                 <td><%= values[i].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
                 <td><%= values[i].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) ?? "Em Aberto" %></td>
                 <td><%= values[i].DS_Status %></td>
-                <td class="extraButtons">R$ <%= values[i].VL_Valor %></td>
+                <td>R$ <%= values[i].VL_Valor %></td>
               </tr>
               <% } %>
               <% } %>
