@@ -11,6 +11,9 @@ $(document).ready(function () {
     $('.phone').inputmask('(99) 99999-9999', {
         removeMaskOnSubmit: true
     });
+    $('.landline').inputmask('(99) 9999-9999', {
+        removeMaskOnSubmit: true
+    });
     $('.cpf').inputmask('999.999.999-99', {
         removeMaskOnSubmit: true
     });
