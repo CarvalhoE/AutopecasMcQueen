@@ -185,6 +185,49 @@ router.get('/comercial/VendasNovaVenda', function (req, res) {
   }
 });
 
+router.post('/efetivaNovaVenda', function (req, res) {
+  if (req.session.loggedin) {
+    let data = {
+      ID_Funcionario: req.body.vendedor,
+      ID_Cliente: req.body.cliente,
+      DT_Pedido: new Date(),
+      VL_Valor: req.body.valorTotal,
+      ID_PedidoStatus: req.body.situacao,
+      DT_Status: new Date(),
+      NR_QtdParcelas: req.body.formaPagamento == "1" ? req.body.numeroParcelas : null,
+      ID_FormaPagamento: req.body.formaPagamento
+    }
+
+    db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
+      if (err) throw err;
+
+      let insertId = rows.insertId;
+      let details = req.body.produtos.split("|");
+      // details.forEach((obj) => {
+      //   let row = JSON.stringify(obj);
+      //   console.log(row);
+      //   let detail = {
+      //     ID_Pedido: insertId,
+      //     ID_Produto: row.idProduto,
+      //     NR_Quantidade: row.quantidade,
+      //     VL_Unitario: row.valor,
+      //     VL_Total: row.valorTotal,
+      //   }
+
+      //   db.query('Insert Into PedidoDetalhe Set ?', detail, (err, rows, fields) => {
+      //     if (err) throw err;
+      //   });
+      // });
+
+      req.flash('message', 'Venda cadastrada com sucesso!');
+      res.redirect('/comercial/vendas');
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login');
+  }
+});
+
 router.get('/comercial/compras', function (req, res) {
   if (req.session.loggedin) {
     let query = `Select C.ID_Compra
@@ -228,21 +271,5 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
     res.redirect('/login')
   }
 });
-
-router.get('/novaVenda/adicionaProduto', (req, res) => {
-  if (req.session.loggedin) {
-
-
-  } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
-  }
-  // if (req.session.arrayProdutos == 0) {
-  //   let arrayProdutos = new Array();
-  //   arrayProdutos.push()
-  // }
-
-  // console.log('ooi');
-})
 
 module.exports = router;

@@ -210,8 +210,6 @@
             valorTotal.innerHTML =
                 `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`;
             $('#valorTotal').val(somaValorTotal).change();
-            $('#produtos').val(JSON.stringify(produtos).replace("[", "").replace("]", "").replace("},", "}|"))
-                .change();
         };
 
         let formaPagamento = document.getElementById('formaPagamento');
