@@ -20,19 +20,32 @@
     <div class="header">
       <h1>Relatórios</h1>
     </div>
+    <div class="container" style="height: 100vh;">
+      <div class="container-rel" style="display: flex;">
+        
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle abaRD" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <p>Relatório Financeiro</p>
+            <i class="fa fa-file-text-o"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">DFC (Demonstrativo de Fluxo de Caixa).</a></li>
+            <li><a class="dropdown-item" href="#">DRE (Demonstrativo de Resultado de Exercício).</a></li>
+            <li><a class="dropdown-item" href="#">Relatório de contas a pagar e a receber.</a></li>
+          </ul>
+        </div>
 
-    <div class="container">
-      <div class="container-rel">
-
-        <button class="abaRD" id="btnRel1">
-          <p>Relatório Financeiro</p>
-          <i class="fa fa-file-text-o"></i>
-        </button>
-
-        <button class="abaRV" id="btnRel2">
-          <p>Relatório Comercial</p>
-          <i class="fa fa-file-text-o"></i>
-        </button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle abaRV" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            <p>Relatório Comercial</p>
+            <i class="fa fa-file-text-o"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton2">
+            <li><a class="dropdown-item" href="#">Relatório de vendas.</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+          </ul>
+        </div>
       </div>
   </main>
 
