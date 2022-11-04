@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autopeças McQueen</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/" />
+    <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+    <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../public/assets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <%- include('_lateral-bar.ejs') %>
+
+    <main>
+        <div class="header">
+            <h1>Compras - Alterar Compra</h1>
+        </div>
+        <div class="container-cadastroC">
+            <form action="/alteraCompra/<%= compra[0].ID_Compra %> " method="post">
+                <div class="row mb-4">
+                    <div class="col">
+                        <select id="responsavel" name="responsavel" class="form-control"
+                            style="width: 415px;margin-top: 10px;margin-left: 20px;" disabled>
+                            <option value="<%= compra[0].ID_Funcionario %>" selected>
+                                <%= compra[0].NM_Funcionario %>
+                            </option>
+                        </select>
+                        <label class="form-label" for="form6Example1" style="margin-left: 20px">Responsável</label>
+                    </div>
+
+                    <div class="col">
+                        <select id="fornecedor" class="form-control" name="fornecedor" style="width: 415px; margin-top: 10px"
+                        disabled>
+                            <option value="<%= compra[0].ID_Fornecedor %>" selected>
+                                <%= compra[0].NM_Fornecedor %>
+                            </option>
+                        </select>
+                        <label class="form-label" for="form6Example1">Fornecedor</label>
+                    </div>
+                </div>
+
+                <div class="row mb-4" style="width: 100%; margin-left: 10px">
+                    <div class="col">
+                        <select id="formaPagamento" name="formaPagamento" class="form-control" style="width: 350px"
+                            required>
+                            <option value="" selected>Selecione uma opção</option>
+                            <% for (let i = 0; i < formaPagamento.length; i++) { %>
+                            <option value="<%= formaPagamento[i].ID_FormaPagamento %>" <% if (compra[0].ID_FormaPagamento == formaPagamento[i].ID_FormaPagamento) { %> selected <% } %>>
+                                <%= formaPagamento[i].DS_FormaPagamento %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label class="form-label" for="form6Example1">Forma de Pagamento</label>
+                    </div>
+                    <div class="col">
+                        <select id="situacao" name="situacao" class="form-control" style="width: 350px" required>
+                            <option value="">Selecione uma opção</option>
+                            <% for (let i = 0; i < situacao.length; i++) { %>
+                            <option value="<%= situacao[i].ID_CompraSituacao %>" <% if (compra[0].ID_CompraSituacao == situacao[i].ID_CompraSituacao) { %> selected <% } %>>
+                                <%= situacao[i].DS_Situacao %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label class="form-label" for="form6Example1">Situação</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px">
+                    Efetuar Alteração
+                </button>
+                <a href="/comercial/compras">
+                    <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+                        style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+                </a>
+            </form>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <%- include('_scripts.ejs') %>
+</body>
+
+</html>

@@ -1,7 +1,5 @@
 let express = require('express');
-const flash = require('express-flash');
 let router = express.Router();
-
 let db = require('../database');
 
 //#region Clientes
@@ -229,52 +227,6 @@ router.post('/efetivaNovaVenda', function (req, res) {
   }
 });
 
-router.get('/comercial/compras', function (req, res) {
-  if (req.session.loggedin) {
-    let query = `Select C.ID_Compra
-                       ,F.NM_Nome as NM_Funcionario
-                       ,FO.NM_Empresa
-                       ,Date_Format(DT_Compra, '%d/%m/%Y') as DT_Compra
-                       ,FP.DS_FormaPagamento
-                       ,CS.DS_Situacao
-                       ,C.VL_ValorTotal
-                     From Compra as C
-                       Inner Join CompraSituacao as CS
-                       On C.ID_CompraSituacao = CS.ID_CompraSituacao
-                     Inner Join Funcionario as F
-                       On C.ID_Funcionario = F.ID_Funcionario
-                     Inner Join Fornecedor as FO
-                       On C.ID_Fornecedor = FO.ID_Fornecedor
-                     Inner Join FormaPagamento as FP
-                       On C.ID_FormaPagamento = FP.ID_FormaPagamento`
-    db.query(query, function (err, rows, fields) {
-      if (err) throw err;
-
-      req.session.compras = rows;
-      res.render('comercial/compras', {
-        name: req.session.name,
-        values: req.session.compras
-      });
-    });
-  } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
-  }
-});
-
-router.get('/comercial/comprasNovaCompra', function (req, res) {
-  if (req.session.loggedin) {
-    res.render('comercial/comprasNovaCompra', {
-      name: req.session.name
-    });
-  } else {
-    req.flash('sucess', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
-  }
-});
-
-
-
 router.get('/comercial/alteraVenda/(:id)', function (req, res) {
   if (req.session.loggedin) {
     const id = req.params.id;
@@ -392,4 +344,218 @@ router.get('/comercial/vendaDetalhe/(:id)', (req, res) => {
   }
 });
 //#endregion
+
+//#region Compras
+router.get('/comercial/compras', function (req, res) {
+  if (req.session.loggedin) {
+    let query = `Select C.ID_Compra
+                       ,F.NM_Nome as NM_Funcionario
+                       ,FO.NM_Empresa
+                       ,Date_Format(DT_Compra, '%d/%m/%Y') as DT_Compra
+                       ,FP.DS_FormaPagamento
+                       ,CS.DS_Situacao
+                       ,C.VL_ValorTotal
+                     From Compra as C
+                       Inner Join CompraSituacao as CS
+                       On C.ID_CompraSituacao = CS.ID_CompraSituacao
+                     Inner Join Funcionario as F
+                       On C.ID_Funcionario = F.ID_Funcionario
+                     Inner Join Fornecedor as FO
+                       On C.ID_Fornecedor = FO.ID_Fornecedor
+                     Inner Join FormaPagamento as FP
+                       On C.ID_FormaPagamento = FP.ID_FormaPagamento`
+    db.query(query, function (err, rows, fields) {
+      if (err) throw err;
+
+      req.session.compras = rows;
+      res.render('comercial/compras', {
+        name: req.session.name,
+        values: req.session.compras
+      });
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.get('/comercial/comprasNovaCompra', function (req, res) {
+  if (req.session.loggedin) {
+    db.query(`Select * From Funcionario;
+              Select * From Fornecedor;
+              Select * From CompraSituacao;
+              Select * From FormaPagamento;
+              Select * From Produto Where FL_Disponivel = 1`, (err, rows, fields) => {
+
+      req.session.funcionario = rows[0];
+      req.session.fornecedor = rows[1];
+      req.session.situacao = rows[2];
+      req.session.formaPagamento = rows[3];
+      req.session.produto = rows[4];
+
+      res.render('comercial/comprasNovaCompra', {
+        name: req.session.name,
+        funcionario: req.session.funcionario,
+        fornecedor: req.session.fornecedor,
+        situacao: req.session.situacao,
+        formaPagamento: req.session.formaPagamento,
+        produto: req.session.produto
+      });
+    })
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.post('/novaCompra', function (req, res) {
+  if (req.session.loggedin) {
+    let data = {
+      VL_ValorTotal: req.body.valorTotal,
+      ID_CompraSituacao: req.body.situacao,
+      DT_Compra: new Date(),
+      ID_Funcionario: req.body.responsavel,
+      ID_Fornecedor: req.body.fornecedor,
+      ID_FormaPagamento: req.body.formaPagamento
+    }
+
+    db.query('Insert Into Compra Set ?', data, (err, rows, fields) => {
+      if (err) throw err;
+
+      let insertId = rows.insertId;
+      let details = JSON.parse(req.body.produtos);
+
+      details.forEach(item => {
+        let detail = {
+          ID_Compra: insertId,
+          ID_Produto: item.id,
+          NR_Quantidade: item.quantidade,
+          VL_ValorUnitario: item.valor,
+          VL_Total: item.valorTotal,
+        }
+
+        db.query('Insert Into CompraDetalhe Set ?;', detail, (error, results, data) => {
+          if (error) throw error;
+        });
+      });
+      req.flash('message', 'Compra efetuada com sucesso!');
+      res.redirect('/comercial/compras');
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login');
+  }
+});
+
+router.get('/comercial/alteraCompra/(:id)', function (req, res) {
+  if (req.session.loggedin) {
+    const id = req.params.id;
+    let query = `Select C.*
+                       ,F.NM_Nome as NM_Funcionario
+                       ,FO.NM_Empresa as NM_Fornecedor
+                     From Compra C
+                     Inner Join Funcionario F
+                         On C.ID_Funcionario = F.ID_Funcionario
+                     Inner Join Fornecedor FO
+                         On C.ID_Fornecedor = FO.ID_Fornecedor
+                     Where C.ID_Compra = ${id};
+                     Select * From CompraSituacao;
+                     Select * From FormaPagamento;`
+
+    db.query(query, (err, rows, fields) => {
+      req.session.compra = rows[0];
+      req.session.situacao = rows[1];
+      req.session.formaPagamento = rows[2];
+
+      res.render('comercial/alteraCompra', {
+        name: req.session.name,
+        compra: req.session.compra,
+        situacao: req.session.situacao,
+        formaPagamento: req.session.formaPagamento
+      });
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.post('/alteraCompra/(:id)', function (req, res) {
+  if (req.session.loggedin) {
+    const id = req.params.id;
+    db.query(`Select * From Compra C Where C.ID_Compra = ${id};`, (err, rows, fields) => {
+      let data = {
+        ID_FormaPagamento: req.body.formaPagamento,
+        ID_CompraSituacao: req.body.situacao,
+        DT_Compra: rows[0].DT_Compra,
+      }
+  
+
+      if (rows[0].ID_CompraSituacao != data.ID_CompraSituacao && (data.ID_CompraSituacao == 1 || data.ID_CompraSituacao == 3)) {
+        data.DT_Compra = new Date();
+      }
+
+      db.query(`Update Compra Set ? Where ID_Compra = ${id}`, [data], (error, ret) => {
+        if (error) {
+          req.flash('error', error)
+        } else {
+          req.flash('success', 'Compra alterada');
+        }
+        data = null;
+        res.redirect('/comercial/compras');
+      });
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.get('/comercial/compraDetalhe/(:id)', (req, res) => {
+  if (req.session.loggedin) {
+    const id = req.params.id;
+    let query = `Select C.*
+                ,U.NM_Nome as NM_Funcionario
+                ,S.DS_Situacao
+                ,G.DS_FormaPagamento
+                ,F.NM_Empresa
+                From Compra C
+                Inner Join Funcionario U
+                  On C.ID_Funcionario = U.ID_Funcionario
+                Inner Join CompraSituacao S
+                  On C.ID_CompraSituacao = S.ID_CompraSituacao
+                Inner Join FormaPagamento G
+                  On C.ID_FormaPagamento = G.ID_FormaPagamento
+                Inner Join Fornecedor F
+                  On C.ID_Fornecedor = F.ID_Fornecedor
+                Where C.ID_Compra = ${id};
+              
+                Select D.NR_Quantidade
+                      ,D.ID_Produto
+                      ,D.VL_Total
+                      ,D.VL_ValorUnitario
+                      ,R.NM_Produto
+                      ,NR_SKU
+                From CompraDetalhe D
+                Inner Join Produto R
+                  On D.ID_Produto = R.ID_Produto
+                Where D.ID_Compra = ${id}`
+    db.query(query, (err, rows, fields) => {
+      req.session.values = rows[0];
+      req.session.values2 = rows[1];
+
+      res.render('comercial/detalheCompra', {
+        name: req.session.name,
+        values: req.session.values,
+        values2: req.session.values2,
+        id: id
+      });
+    });
+  } else {
+    req.flash('sucess', 'Ë necessário estar logado para acessar esta página');
+    res.redirect('/login');
+  }
+});
+//#endregion
+
 module.exports = router;

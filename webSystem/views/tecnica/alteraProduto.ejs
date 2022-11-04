@@ -41,21 +41,28 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control money" style="width: 240px;" name="vlPreco"
+              <input type="text" id="form6Example1" class="form-control money" style="width: 160px;" name="vlCompra"
+                value="<%= produto.VL_BaseDeCompra %>" required />
+              <label class="form-label" for="form6Example1">Base de Compra</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control money" style="width: 160px;" name="vlPreco"
                 value="<%= produto.VL_Preco %>" required />
               <label class="form-label" for="form6Example1">Valor Unitario</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control sku" style="width: 240px;" name="nrSKU"
+              <input type="text" id="form6Example1" class="form-control sku" style="width: 130px;" name="nrSKU"
                 value="<%= produto.NR_SKU %>" disabled />
               <label class="form-label" for="form6Example1">SKU</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control" style="width: 240px;" name="categoria"
+              <input type="text" id="form6Example1" class="form-control" style="width: 220px;" name="categoria"
                 value="<%= produto.DS_Categoria %>" disabled />
               <label class="form-label" for="form6Example1">Categoria</label>
             </div>

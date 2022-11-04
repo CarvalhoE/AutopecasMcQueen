@@ -190,14 +190,15 @@ router.get('/tecnica/novoProduto', function (req, res, next) {
 router.post('/cadastraProduto', function (req, res, next) {
     if (req.session.loggedin) {
         let data = {
-            "NM_Produto": req.body.nmProduto,
-            "DS_Descricao": req.body.dsDescricao,
-            "NR_SKU": req.body.nrSKU,
-            "VL_Preco": req.body.vlPreco,
-            "FL_Disponivel": true,
-            "NR_Quantidade": 0,
-            "DS_Marca": req.body.dsMarca,
-            "ID_Categoria": req.body.categoria,
+            NM_Produto: req.body.nmProduto,
+            DS_Descricao: req.body.dsDescricao,
+            NR_SKU: req.body.nrSKU,
+            VL_Preco: req.body.vlPreco,
+            VL_BaseDeCompra: req.body.vlCompra,
+            FL_Disponivel: true,
+            NR_Quantidade: 0,
+            DS_Marca: req.body.dsMarca,
+            ID_Categoria: req.body.categoria,
         }
 
         db.query('Insert Into Produto Set ?', data, (err, result, fields) => {
@@ -247,6 +248,7 @@ router.post('/alteraProduto/(:id)', function (req, res, next) {
             NM_Produto: req.body.nmProduto,
             DS_Marca: req.body.dsMarca,
             VL_Preco: req.body.vlPreco,
+            VL_BaseDeCompra: req.body.vlCompra,
             DS_Descricao: req.body.dsDescricao
         }
 

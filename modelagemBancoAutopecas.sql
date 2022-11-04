@@ -37,6 +37,7 @@ Create Table Produto
    ,DS_Descricao	VarChar(256)	Not Null
    ,IM_Foto			varChar(256)	Null
    ,NR_SKU			VarChar(14)		Not Null
+   ,VL_BaseDeCompra Numeric(10,2) 	Not Null
    ,VL_Preco 		Numeric(10,2) 	Not Null
    ,FL_Disponivel	Char(1)			Not Null
    ,NR_Quantidade	Int				Not Null
@@ -47,10 +48,10 @@ Create Table Produto
    ,Constraint CK_FL_ProdutoDisponivel 		Check (FL_Disponivel In (0,1))
 );
 
-Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_Preco, FL_Disponivel, NR_Quantidade, DS_Marca, ID_Categoria)
-	Values ('Cheirinho', 'Bom cheiro para carros', 'CA12907221', '14.90', 1, 0, 'CheiroBom', 1)
-          ,('Bateria', 'Bateria para carros', 'CE12444643', '1200.00', 1, 0, 'Moura', 2)
-          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', '99.90', 0, 0, 'Nike', 3);
+Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_BaseDeCompra, VL_Preco, FL_Disponivel, NR_Quantidade, DS_Marca, ID_Categoria)
+	Values ('Cheirinho', 'Bom cheiro para carros', 'CA12907221', 10.00, 14.90, 1, 0, 'CheiroBom', 1)
+          ,('Bateria', 'Bateria para carros', 'CE12444643', 1000.00 1200.00, 1, 0, 'Moura', 2)
+          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', 80.00, 99.90, 0, 0, 'Nike', 3);
 
 Create Table FormaPagamento
 (

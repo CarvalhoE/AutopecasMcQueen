@@ -1,131 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Autopeças McQueen</title>
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
-  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
-  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../public/assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autopeças McQueen</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/" />
+    <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+    <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../public/assets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
-  
-  <%- include('_lateral-bar.ejs') %>
-  
-  <main>
-    <div class="header">
-      <h1>Compras - Nova compra</h1>
-    </div>
-    <div class="container-cadastroC">
-        <form>
-          <div class="row mb-4">
+    <%- include('_lateral-bar.ejs') %>
 
-            <div class="col">
-              <select id="departamento" name="Funcionario" class="form-control" style="width: 190px; margin-top:10px; margin-left: 20px;">
-                <option value="1">Funcionario</option>
-              </select>
-              <label class="form-label" for="form6Example1" style="margin-left: 20px;">Funcionario</label>
-            </div>
+    <main>
+        <div class="header">
+            <h1>Compras - Nova Compra</h1>
+        </div>
+        <div class="container-cadastroC">
+            <form action="/novaCompra" method="post">
+                <div class="row mb-4">
+                    <div class="col">
+                        <select id="responsavel" name="responsavel" class="form-control"
+                            style="width: 415px;margin-top: 10px;margin-left: 20px;" required>
+                            <option value="<%= funcionario[0].ID_Funcionario %>">
+                                <%= funcionario[0].NM_Nome %>
+                            </option>
+                        </select>
+                        <label class="form-label" for="form6Example1" style="margin-left: 20px">Responsável</label>
+                    </div>
 
-            <div class="col">
-                <select id="departamento" name="Fornecedor" class="form-control" style="width: 190px; margin-top:10px; margin-left: 20px;">
-                  <option value="1">Fornecedor</option>
-                </select>
-                <label class="form-label" for="form6Example1" style="margin-left: 20px;">Fornecedor</label>
-            </div>
-          </div>
-          
-          <div class="row mb-4">
-            <div class="col">
-              <select id="departamento" name="vendedor" class="form-control" style="width: 500px; margin-left: 20px;">
-                <option value="1">SKU | Produto</option>
-              </select>
-              <label class="form-label" for="form6Example1" style="margin-left: 20px;">Produto</label>
-            </div>
-
-            <div class="col">
-              <select id="departamento" name="vendedor" class="form-control" style="width: 100px; ">
-                <option value="1">QTD</option>
-              </select>
-              <label class="form-label" for="form6Example1">Quantidade</label>
-            </div>
-
-            <div class=" col">
-              <input type="button" value="Adicionar produto" class="form-control" style="width:150px" id="addProduct">
-            </div>
-
-          </div>
-
-          <div class="row mb-4" style="width: 100%; margin-left: 10px;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">SKU</th>
-                  <th scope="col">Produto</th>
-                  <th scope="col">Valor Unitario</th>
-                  <th scope="col">QTD. Produto</th>
-                  <th scope="col">Valor Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Mark</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Otto</td>
-                </tr>
-                <tr>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Otto</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="date" id="form6Example2" class="form-control" style="width: 148px;" required/>
-                <label class="form-label" for="form6Example2">Data</label>
-              </div>
-            </div>
-
-            <div class="col">
-                <div class="form-outline">
-                  <select id="departamento" name="departamento" class="form-control" style="width: 100px;">
-                    <option value="1">Pendente</option>
-                    <option value="2">Cancelado</option>
-                    <option value="4">Em Atraso</option>
-                    <option value="5">Estornado</option>
-                  </select>
-                  <label class="form-label" for="form6Example1">Situação</label>
+                    <div class="col">
+                        <select id="fornecedor" class="form-control" name="fornecedor" style="width: 415px; margin-top: 10px"
+                            required>
+                            <% for (let i = 0; i < fornecedor.length; i++) { %>
+                            <option value="<%= fornecedor[i].ID_Fornecedor %>">
+                                <%= fornecedor[i].NM_Empresa %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label class="form-label" for="form6Example1">Fornecedor</label>
+                    </div>
                 </div>
-              </div>
-          </div>
 
-          <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px;">Efetuar cadastro</button>
-          <a href="/comercial/compras">
-            <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;">
-          </a>
-        </form>
-    </div>
-  </main>
+                <div class="row mb-4">
+                    <div class="col">
+                        <select id="produtoNovaCompra" name="produto" class="form-control"
+                            style="width: 470px; margin-left: 20px">
+                            <% for (let i = 0; i < produto.length; i++) { %>
+                            <option
+                                value="<%= produto[i].NR_SKU %>|<%= produto[i].NM_Produto %>|<%= produto[i].VL_BaseDeCompra %>|<%= produto[i].ID_Produto %>">
+                                <%= produto[i].NR_SKU %> - <%=
+                                    produto[i].NM_Produto %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label class="form-label" for="form6Example1" style="margin-left: 20px">Produto</label>
+                    </div>
 
-  <!-- Scripts -->
-  <%- include('_scripts.ejs') %>
+                    <div class="col">
+                        <input type="number" id="quantidade" name="quantidade" class="form-control" style="width: 100px"
+                            min="1" value="1" required />
+                        <label class="form-label" for="form6Example1">Quantidade</label>
+                    </div>
+
+                    <div class="col">
+                        <input type="button" value="Adicionar produto" class="form-control" style="width: 150px"
+                            id="addProduct" onclick="add_OnClick()" />
+                    </div>
+                </div>
+
+                <div class="row mb-4" style="width: 100%; margin-left: 10px">
+                    <table class="table" id="tableProdutos">
+                        <thead>
+                            <tr>
+                                <th scope="col">SKU</th>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Valor de Compra</th>
+                                <th scope="col">QTD. Produto</th>
+                                <th scope="col">Valor Total por Produto</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                    <div class="col">
+                        <div class="form-outline" style="text-align: right;">
+                            <label id="lValorTotal" for="form6Example2"
+                                style="font-size: 14pt; font-weight: bold;"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4" style="width: 100%; margin-left: 10px">
+                    <div class="col">
+                        <select id="formaPagamento" name="formaPagamento" class="form-control" style="width: 350px"
+                            required>
+                            <option value="" selected>Selecione uma opção</option>
+                            <% for (let i = 0; i < formaPagamento.length; i++) { %>
+                            <option value="<%= formaPagamento[i].ID_FormaPagamento %>">
+                                <%= formaPagamento[i].DS_FormaPagamento %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label class="form-label" for="form6Example1">Forma de Pagamento</label>
+                    </div>
+                    <div class="col">
+                        <select id="situacao" name="situacao" class="form-control" style="width: 350px" required>
+                            <option value="" selected>Selecione uma opção</option>
+                            <% for (let i = 0; i < situacao.length; i++) { %>
+                            <option value="<%= situacao[i].ID_CompraSituacao %>">
+                                <%= situacao[i].DS_Situacao %>
+                            </option>
+                            <% } %>
+                        </select>
+                        <label class="form-label" for="form6Example1">Situação</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px">
+                    Efetuar cadastro
+                </button>
+                <a href="/comercial/compras">
+                    <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+                        style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+                </a>
+                <input type="hidden" name="valorTotal" id="valorTotal">
+                <input type="hidden" name="produtos" id="produtos">
+            </form>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <%- include('_scripts.ejs') %>
+    <script src="../../public/js/compras.js"></script>
 </body>
 
 </html>

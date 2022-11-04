@@ -34,7 +34,7 @@
             <td><%= values[0].NM_Cliente %></td>
           </tr>
           <tr>
-            <td class="fw-bold">Data do pedido</td>
+            <td class="fw-bold">Data .toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %>do pedido</td>
             <td><%= values[0].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
           </tr>
           <tr>

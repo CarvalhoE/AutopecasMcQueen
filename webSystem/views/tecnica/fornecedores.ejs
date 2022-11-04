@@ -54,32 +54,35 @@
           </thead>
           <tbody>
             <% for (let i = 0; i < values.length; i++) { %>
-              <tr>
-                <td scope="row" style="display: flex;">
-                  <a href="/tecnica/alteraFornecedor/<%= values[i].ID_Fornecedor %>">
-                    <button type="submit" class="extra-d tags" gloss="Alterar Fornecedor" value="<%= values[i].ID_Fornecedor %>" style="margin-right: 5px;">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </button>
-                  </a>
-                  <form action="/tecnica/fornecedor/<%= values[i].ID_Fornecedor %>" method="post">
-                    <button type="submit" class="extra-d tags" gloss="Remover Fornecedor" style="margin-right: 5px;" name="ID_Fornecedor" value="<%= values[i].ID_Fornecedor %>" onclick="return confirm('Você tem certeza que deseja remover este Fornecedor?')">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </form>
-                  <a href="/tecnica/fornecedorDetalhe/<%= values[i].ID_Fornecedor %>">
-                  
-                  <button class="myBtn extra-d tags" value="<%= values[i].ID_Fornecedor %>" gloss="Detalhe do Fornecedor">
+            <tr>
+              <td scope="row" style="display: flex;">
+                <a href="/tecnica/alteraFornecedor/<%= values[i].ID_Fornecedor %>">
+                  <button type="submit" class="extra-d tags" gloss="Alterar Fornecedor"
+                    value="<%= values[i].ID_Fornecedor %>" style="margin-right: 5px;">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </button>
+                </a>
+                <form action="/tecnica/fornecedor/<%= values[i].ID_Fornecedor %>" method="post">
+                  <button type="submit" class="extra-d tags" gloss="Remover Fornecedor" style="margin-right: 5px;"
+                    name="ID_Fornecedor" value="<%= values[i].ID_Fornecedor %>"
+                    onclick="return confirm('Você tem certeza que deseja remover este Fornecedor?')">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </form>
+                <a href="/tecnica/fornecedorDetalhe/<%= values[i].ID_Fornecedor %>">
+                  <button class="myBtn extra-d tags" value="<%= values[i].ID_Fornecedor %>"
+                    gloss="Detalhe do Fornecedor">
                     <i class="fa fa-file-text-o"></i>
                   </button>
                 </a>
-                </td>
-                <td><%= values[i].ID_Fornecedor %></td>
-                <td><%= values[i].NM_Empresa %></td>
-                <td class="landline"><%= values[i].NR_Telefone %></td>
-                <td><%= values[i].DS_Email %></td>
-              </tr>
-              <% } %>
-              <% } %>
+              </td>
+              <td><%= values[i].ID_Fornecedor %></td>
+              <td><%= values[i].NM_Empresa %></td>
+              <td class="landline"><%= values[i].NR_Telefone %></td>
+              <td><%= values[i].DS_Email %></td>
+            </tr>
+            <% } %>
+            <% } %>
           </tbody>
         </table>
       </div>
@@ -108,7 +111,9 @@
           "emptyTable": "Tabela Vazia"
         },
         lengthMenu: [5, 8],
-        order: [[1,'asc']],
+        order: [
+          [1, 'asc']
+        ],
       });
     });
   </script>

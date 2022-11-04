@@ -41,21 +41,28 @@
         <div class="row mb-4">
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control money" style="width: 240px;" name="vlPreco"
+              <input type="text" id="form6Example1" class="form-control money" style="width: 160px;" name="vlCompra"
+                required />
+              <label class="form-label" for="form6Example1">Base de Compra</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="form6Example1" class="form-control money" style="width: 160px;" name="vlPreco"
                 required />
               <label class="form-label" for="form6Example1">Valor Unitario</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <input type="text" id="form6Example1" class="form-control sku" style="width: 240px;" name="nrSKU"
+              <input type="text" id="form6Example1" class="form-control sku" style="width: 130px;" name="nrSKU"
                 required />
               <label class="form-label" for="form6Example1">SKU</label>
             </div>
           </div>
           <div class="col">
             <div class="form-outline">
-              <select id="categoria" name="categoria" class="form-control" style="width: 280px;" required>
+              <select id="categoria" name="categoria" class="form-control" style="width: 220px;" required>
                 <option value="" selected>Selecione a categoria</option>
                 <% for (let i = 0; i < categorias.length; i++) { %>
                 <option value="<%= categorias[i].ID_Categoria %>"><%= categorias[i].DS_Categoria %></option>

@@ -24,36 +24,44 @@
     <div class="card-body">
       <table class="table">
         <tr>
-          <td class="fw-bold">Nome do Produto</td>
-          <td><%= produto.NM_Produto %></td>
+          <td class="fw-bold">Nome do Fornecedor</td>
+          <td><%= fornecedor.NM_Empresa %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Código do Produto (SKU)</td>
-          <td class="sku"><%= produto.NR_SKU %></td>
+          <td class="fw-bold">CNPJ do Fornecedor</td>
+          <td class="cnpj"><%= fornecedor.NR_CNPJ %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Categoria do Produto</td>
-          <td><%= produto.DS_Categoria %></td>
+          <td class="fw-bold">Endereço do fornecedor</td>
+          <td><%= fornecedor.DS_Logradouro %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Marca do Produto</td>
-          <td><%= produto.DS_Marca %></td>
+          <td class="fw-bold">Bairro do fornecedor</td>
+          <td><%= fornecedor.DS_Bairro %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Valor do Produto</td>
-          <td>R$ <%= produto.VL_Preco %></td>
+          <td class="fw-bold">Cidade do fornecedor</td>
+          <td>R$ <%= fornecedor.DS_Cidade %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Descrição do Produto</td>
-          <td><%= produto.DS_Descricao %></td>
+          <td class="fw-bold">CEP do fornecedor</td>
+          <td class="cep"><%= fornecedor.DS_CEP %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Produto Disponível</td>
-          <td><%= produto.FL_Disponivel == 1 ? "Disponível" : "Indisponível" %></td>
+          <td class="fw-bold">Telefone do fornecedor</td>
+          <td class="landline"><%= fornecedor.NR_Telefone %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Quantidade em Estoque</td>
-          <td><%= produto.NR_Quantidade %></td>
+          <td class="fw-bold">E-mail do fornecedor</td>
+          <td><%= fornecedor.DS_Email %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Banco</td>
+          <td><%= fornecedor.NR_Banco %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Agência / Conta</td>
+          <td>Ag.: <%= fornecedor.NR_Agencia %> Cc.: <%= fornecedor.NR_Conta %></td>
         </tr>
       </table>
       <a href="/tecnica/produtos">

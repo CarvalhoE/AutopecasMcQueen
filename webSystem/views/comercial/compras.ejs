@@ -50,11 +50,10 @@
             <thead>
               <tr>
                 <th scope="row">Ações</th>
-                <th scope="col">Cod</th>
                 <th scope="col">Funcionario</th>
                 <th scope="col">Fornecedor</th>
-                <th scope="col">Data da Compra</th>
-                <th scope="col">Forma de Pagamento</th>
+                <th scope="col">Dt Compra</th>
+                <th scope="col">Pagamento</th>
                 <th scope="col">Situação</th>
                 <th scope="col">Valor</th>
               </tr>
@@ -63,14 +62,18 @@
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row" style="width: 100px;">
-                  <button class="extra-d tags" gloss="Alterar Compra" value="<%= values[i].ID_Compra %>">
-                    <i class="fa fa-pencil-square-o"></i>
-                  </button>
-                  <button class="myBtn extra-d tags" value="<%= values[i].ID_Compra%>" gloss="Detalhe da Compra">
-                    <i class="fa fa-file-text-o"></i>
-                  </button>
+                  <a href="/comercial/alteraCompra/<%= values[i].ID_Compra%>">
+                    <button class="extra-d tags" gloss="Alterar Compra" value="<%= values[i].ID_Compra %>">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </button>
+                  </a>
+
+                  <a href="/comercial/compraDetalhe/<%= values[i].ID_Compra%>">
+                    <button class="myBtn extra-d tags" gloss="Detalhe da Compra">
+                      <i class="fa fa-file-text-o"></i>
+                    </button>
+                  </a>
                 </td>
-                <td><a href="#"><%= values[i].ID_Compra %></a></td>
                 <td><%= values[i].NM_Funcionario %></td>
                 <td><%= values[i].NM_Empresa %></td>
                 <td><%= values[i].DT_Compra %></td>
