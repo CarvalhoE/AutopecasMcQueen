@@ -18,70 +18,72 @@
     <div class="header">
       <h1>Detalhes de Venda</h1>
     </div>
-    <div class="card-body" style="float: left;">
-      <table class="table">
-        <tr>
-          <td class="fw-bold">Código de venda</td>
-          <td><%= values[0].ID_Pedido %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Funcionario</td>
-          <td><%= values[0].NM_Funcionario %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Cliente</td>
-          <td><%= values[0].NM_Cliente %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Data do pedido</td>
-          <td><%= values[0].DT_Pedido %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Valor total do pedido</td>
-          <td><%= values[0].VL_Valor %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Situação do pedido</td>
-          <td><%= values[0].DS_Status %></td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Data de efetivação</td>
-            <td><%= values[0].DT_Efetivacao %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Forma de pagamento</td>
-          <td><%= values[0].DS_FormaPagamento %></td>
-        </tr>
-        <tr>
-          <td class="fw-bold">Quantidade de parcelas</td>
-          <td><%= values[0].NR_QtdParcelas ?? 'N/I' %></td>
-        </tr>
-      </table>
-      <a href="/comercial/vendas">
-        <input value="Voltar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
-        </a>
-    </div>
-    <div class="card-body" style="float: right;">
+    <div class="Container-Detail-Limiter">
+      <div class="card-body cardLimiter" style="float: left;">
         <table class="table">
-            <thead>
-                <tr>
-                    <th class="fw-bold"> Produtos do pedido      </th>
-                    <th class="fw-bold"> Quantidade              </th>
-                    <th class="fw-bold"> Valor unitario          </th>
-                    <th class="fw-bold"> Valor total por produto </th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (let i = 0; i < produtos.length; i++) { %>
-                <tr>
-                    <td><%= produtos[i].NM_Produto %></td>
-                    <td><%= produtos[i].NR_Quantidade %></td>
-                    <td><%= produtos[i].VL_Unitario %></td>
-                    <td><%= produtos[i].VL_Total %></td>
-                </tr>
-                <% } %>
-            </tbody>
-          </table>
+          <tr>
+            <td class="fw-bold">Código de venda</td>
+            <td><%= values[0].ID_Pedido %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Funcionario</td>
+            <td><%= values[0].NM_Funcionario %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Cliente</td>
+            <td><%= values[0].NM_Cliente %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Data do pedido</td>
+            <td><%= values[0].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Valor total do pedido</td>
+            <td class="money"><%= values[0].VL_Valor %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Situação do pedido</td>
+            <td><%= values[0].DS_Status %></td>
+          </tr>
+          <tr>
+              <td class="fw-bold">Data de efetivação</td>
+              <td><%= values[0].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Forma de pagamento</td>
+            <td><%= values[0].DS_FormaPagamento %></td>
+          </tr>
+          <tr>
+            <td class="fw-bold">Quantidade de parcelas</td>
+            <td><%= values[0].NR_QtdParcelas ?? 'N/I' %></td>
+          </tr>
+        </table>
+        <a href="/comercial/vendas">
+          <input value="Voltar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+          </a>
+      </div>
+      <div class="card-body cardLimiter" style="float: right;">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th class="fw-bold"> Produtos do pedido      </th>
+                      <th class="fw-bold"> Quantidade              </th>
+                      <th class="fw-bold"> Valor unitario          </th>
+                      <th class="fw-bold"> Valor total por produto </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% for (let i = 0; i < produtos.length; i++) { %>
+                  <tr>
+                      <td><%= produtos[i].NM_Produto %></td>
+                      <td><%= produtos[i].NR_Quantidade %></td>
+                      <td class="money"><%= produtos[i].VL_Unitario %></td>
+                      <td class="money"><%= produtos[i].VL_Total %></td>
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
+      </div>
     </div>
   </main>
   <!-- Scripts -->

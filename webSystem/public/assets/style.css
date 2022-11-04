@@ -514,11 +514,21 @@ span.tags{
   text-decoration: none;
   cursor: pointer;
 }
-
+/*Exclude items from sell*/
 .cancel{
   border: none;
   cursor: pointer;
 }
 .cancel:hover{
   color: #ffb367;
+}
+
+/*extras*/
+.cardLimiter{
+  border: 1px solid #ffb367;
+  width: 500px;
+}
+.Container-Detail-Limiter{
+  padding: 5px;
+  width: 1080px;
 }
