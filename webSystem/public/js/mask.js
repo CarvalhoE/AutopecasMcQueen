@@ -25,10 +25,10 @@ $(document).ready(function () {
     });
     $('.money').inputmask('decimal', {
         'alias': 'numeric',
-        'groupSeparator': ',',
+        'groupSeparator': '.',
         'autoGroup': true,
         'digits': 2,
-        'radixPoint': ".",
+        'radixPoint': ",",
         'digitsOptional': false,
         'allowMinus': false,
         'prefix': 'R$ ',

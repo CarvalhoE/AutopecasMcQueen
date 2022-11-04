@@ -66,9 +66,12 @@
                       <i class="fa fa-trash"></i>
                     </button>
                   </form>
+                  <a href="/tecnica/fornecedorDetalhe/<%= values[i].ID_Fornecedor %>">
+                  
                   <button class="myBtn extra-d tags" value="<%= values[i].ID_Fornecedor %>" gloss="Detalhe do Fornecedor">
                     <i class="fa fa-file-text-o"></i>
                   </button>
+                </a>
                 </td>
                 <td><%= values[i].ID_Fornecedor %></td>
                 <td><%= values[i].NM_Empresa %></td>
@@ -104,7 +107,8 @@
           "processing": "Processando...",
           "emptyTable": "Tabela Vazia"
         },
-        lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+        lengthMenu: [5, 8],
+        order: [[1,'asc']],
       });
     });
   </script>

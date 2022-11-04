@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <%- include('_lateral-bar.ejs') %>
+  <main>
+    <div class="header">
+      <h1>Detalhes de Venda</h1>
+    </div>
+    <div class="card-body" style="float: left;">
+      <table class="table">
+        <tr>
+          <td class="fw-bold">Código de venda</td>
+          <td><%= values[0].ID_Pedido %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Funcionario</td>
+          <td><%= values[0].NM_Funcionario %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Cliente</td>
+          <td><%= values[0].NM_Cliente %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Data do pedido</td>
+          <td><%= values[0].DT_Pedido %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Valor total do pedido</td>
+          <td><%= values[0].VL_Valor %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Situação do pedido</td>
+          <td><%= values[0].DS_Status %></td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Data de efetivação</td>
+            <td><%= values[0].DT_Efetivacao %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Forma de pagamento</td>
+          <td><%= values[0].DS_FormaPagamento %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Quantidade de parcelas</td>
+          <td><%= values[0].NR_QtdParcelas ?? 'N/I' %></td>
+        </tr>
+      </table>
+      <a href="/comercial/vendas">
+        <input value="Voltar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+        </a>
+    </div>
+    <div class="card-body" style="float: right;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="fw-bold"> Produtos do pedido      </th>
+                    <th class="fw-bold"> Quantidade              </th>
+                    <th class="fw-bold"> Valor unitario          </th>
+                    <th class="fw-bold"> Valor total por produto </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < produtos.length; i++) { %>
+                <tr>
+                    <td><%= produtos[i].NM_Produto %></td>
+                    <td><%= produtos[i].NR_Quantidade %></td>
+                    <td><%= produtos[i].VL_Unitario %></td>
+                    <td><%= produtos[i].VL_Total %></td>
+                </tr>
+                <% } %>
+            </tbody>
+          </table>
+    </div>
+  </main>
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

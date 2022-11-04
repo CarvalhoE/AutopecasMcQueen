@@ -55,14 +55,14 @@
                 <th scope="col">Dt Pedido</th>
                 <th scope="col">Dt Pagamento</th>
                 <th scope="col">Status</th>
-                <th scope="col">Valor</th>
+                <th scope="col" style="text-align: right;">Valor</th>
               </tr>
             </thead>
             <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row" class="extraButtons">
-                  <a href="">
+                  <a href="/comercial/alteraVenda/<%= values[i].ID_Pedido %>">
                     <button class="extra-d tags" gloss="Alterar Venda" value="<%= values[i].ID_Pedido %>">
                       <i class="fa fa-pencil-square-o"></i>
                     </button>
@@ -77,9 +77,9 @@
                 <td><a href="#"><%= values[i].ID_Pedido %></a></td>
                 <td><%= values[i].NM_Vendedor %></td>
                 <td><%= values[i].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
-                <td><%= values[i].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) ?? "Em Aberto" %></td>
+                <td><%= values[i].DT_Efetivacao == null ? "Em Aberto" : values[i].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"})%></td>
                 <td><%= values[i].DS_Status %></td>
-                <td>R$ <%= values[i].VL_Valor %></td>
+                <td class="money"><%= values[i].VL_Valor %></td>
               </tr>
               <% } %>
               <% } %>
@@ -110,7 +110,8 @@
             "processing": "Processando...",
             "emptyTable": "Tabela Vazia"
         },
-        lengthMenu: [5, 10, 20, 50, 100, 200, 500]
+        lengthMenu: [5, 8],
+        order: [[1,'desc']],
       });
     });
   </script>

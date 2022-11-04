@@ -20,13 +20,13 @@
             <h1>Vendas - Nova Venda</h1>
         </div>
         <div class="container-cadastroC">
-            <form action="/efetivaNovaVenda" method="post">
+            <form action="/alteraVenda/<%= pedido[0].ID_Pedido %>" method="post">
                 <div class="row mb-4">
                     <div class="col">
                         <select id="vendedor" name="vendedor" class="form-control"
-                            style="width: 415px;margin-top: 10px;margin-left: 20px;" required>
-                            <option value="<%= funcionario[0].ID_Funcionario %>">
-                                <%= funcionario[0].NM_Nome %>
+                            style="width: 415px;margin-top: 10px;margin-left: 20px;" disabled>
+                            <option value="<%= pedido[0].ID_Funcionario %>">
+                                <%= pedido[0].NM_Funcionario %>
                             </option>
                         </select>
                         <label class="form-label" for="form6Example1" style="margin-left: 20px">Vendedor</label>
@@ -34,63 +34,12 @@
 
                     <div class="col">
                         <select id="cliente" class="form-control" name="cliente" style="width: 415px; margin-top: 10px"
-                            required>
-                            <% for (let i = 0; i < cliente.length; i++) { %>
-                            <option value="<%= cliente[i].ID_Cliente %>">
-                                <%= cliente[i].NM_Nome %>
+                            disabled>
+                            <option value="<%= pedido[0].ID_Cliente %>">
+                                <%= pedido[0].NM_Cliente %>
                             </option>
-                            <% } %>
                         </select>
                         <label class="form-label" for="form6Example1">Cliente</label>
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col">
-                        <select id="produtoNovaVenda" name="produto" class="form-control"
-                            style="width: 470px; margin-left: 20px">
-                            <% for (let i = 0; i < produto.length; i++) { %>
-                            <option
-                                value="<%= produto[i].NR_SKU %>|<%= produto[i].NM_Produto %>|<%= produto[i].VL_Preco %>|<%= produto[i].ID_Produto %>">
-                                <%= produto[i].NR_SKU %> - <%=
-                                    produto[i].NM_Produto %>
-                            </option>
-                            <% } %>
-                        </select>
-                        <label class="form-label" for="form6Example1" style="margin-left: 20px">Produto</label>
-                    </div>
-
-                    <div class="col">
-                        <input type="number" id="quantidade" name="quantidade" class="form-control" style="width: 100px"
-                            min="1" value="1" required />
-                        <label class="form-label" for="form6Example1">Quantidade</label>
-                    </div>
-
-                    <div class="col">
-                        <input type="button" value="Adicionar produto" class="form-control" style="width: 150px"
-                            id="addProduct" onclick="add_OnClick()" />
-                    </div>
-                </div>
-
-                <div class="row mb-4" style="width: 100%; margin-left: 10px">
-                    <table class="table" id="tableProdutos">
-                        <thead>
-                            <tr>
-                                <th scope="col">SKU</th>
-                                <th scope="col">Produto</th>
-                                <th scope="col">Valor Unitario</th>
-                                <th scope="col">QTD. Produto</th>
-                                <th scope="col">Valor Total por Produto</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                    <div class="col">
-                        <div class="form-outline" style="text-align: right;">
-                            <label id="lValorTotal" for="form6Example2"
-                                style="font-size: 14pt; font-weight: bold;"></label>
-                        </div>
                     </div>
                 </div>
 
@@ -98,9 +47,9 @@
                     <div class="col">
                         <select id="formaPagamento" name="formaPagamento" class="form-control" style="width: 350px"
                             required>
-                            <option value="" selected>Selecione uma opção</option>
+                            <option value="">Selecione uma opção</option>
                             <% for (let i = 0; i < formaPagamento.length; i++) { %>
-                            <option value="<%= formaPagamento[i].ID_FormaPagamento %>">
+                            <option value="<%= formaPagamento[i].ID_FormaPagamento %>" <% if (pedido[0].ID_FormaPagamento == formaPagamento[i].ID_FormaPagamento) { %> selected <% } %>>
                                 <%= formaPagamento[i].DS_FormaPagamento %>
                             </option>
                             <% } %>
@@ -110,7 +59,7 @@
                     <div class="col" id="numeroParcelas" style="visibility: hidden;">
                         <select name="numeroParcelas" class="form-control" style="width: 210px">
                             <% for (let i = 1; i <= 12; i++) { %>
-                            <option value="<%= i %>">
+                            <option value="<%= i %>" <% if (pedido[0].NR_QtdParcelas == i) { %> selected <% } %>>
                                 <%= i %>x
                             </option>
                             <% } %>
@@ -119,10 +68,10 @@
                     </div>
                     <div class="col">
                         <select id="situacao" name="situacao" class="form-control" style="width: 210px" required>
-                            <option value="" selected>Selecione uma opção</option>
-                            <% for (let i = 0; i < situacao.length; i++) { %>
-                            <option value="<%= situacao[i].ID_PedidoStatus %>">
-                                <%= situacao[i].DS_Status %>
+                            <option value="">Selecione uma opção</option>
+                            <% for (let i = 0; i < status.length; i++) { %>
+                            <option value="<%= status[i].ID_PedidoStatus %>" <% if (pedido[0].ID_PedidoStatus == status[i].ID_PedidoStatus) { %> selected <% } %>>
+                                <%= status[i].DS_Status %>
                             </option>
                             <% } %>
                         </select>
@@ -131,7 +80,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px">
-                    Efetuar cadastro
+                    Efetuar alteração
                 </button>
                 <a href="/comercial/vendas">
                     <input value="Cancelar" class="btn btn-primary btn-block mb-4"
@@ -145,7 +94,15 @@
 
     <!-- Scripts -->
     <%- include('_scripts.ejs') %>
-    <script src="../../public/js/vendas.js"></script>
+    <script>
+        let formaPagamento = $('#formaPagamento');
+        let numeroParcelas = $('#numeroParcelas');
+        formaPagamento.val() == "1" ? numeroParcelas.css({'visibility':'visible'}) : numeroParcelas.css({'visibility':'hidden'})
+
+        formaPagamento.on('change', () => {
+            formaPagamento.val() == "1" ? numeroParcelas.css({'visibility':'visible'}) : numeroParcelas.css({'visibility':'hidden'})
+        });
+    </script>
 </body>
 
 </html>

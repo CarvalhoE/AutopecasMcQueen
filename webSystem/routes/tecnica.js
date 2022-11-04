@@ -20,6 +20,25 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
     }
 });
 
+router.get('/tecnica/fornecedorDetalhe/(:id)', function (req, res, next) {
+    if (req.session.loggedin) {
+        let id = req.params.id;
+        db.query(`Select * From Fornecedor Where ID_Fornecedor = ${id}`, function (err, rows, fields) {
+            if (err) throw err;
+
+            req.session.fornecedor = rows[0];
+
+            res.render('tecnica/fornecedorDetalhe', {
+                name: req.session.name,
+                fornecedor: req.session.fornecedor
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
 //Cadastra Fornecedor
 router.post('/tecnica/novoFornecedor', function (req, res, next) {
     if (req.session.loggedin) {

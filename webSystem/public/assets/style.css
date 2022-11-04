@@ -514,3 +514,11 @@ span.tags{
   text-decoration: none;
   cursor: pointer;
 }
+
+.cancel{
+  border: none;
+  cursor: pointer;
+}
+.cancel:hover{
+  color: #ffb367;
+}

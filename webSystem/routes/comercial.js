@@ -4,7 +4,7 @@ let router = express.Router();
 
 let db = require('../database');
 
-//Clientes
+//#region Clientes
 router.get('/comercial/clientes', function (req, res, next) {
   if (req.session.loggedin) {
     db.query('Select * From Cliente', function (err, rows, fields) {
@@ -21,6 +21,7 @@ router.get('/comercial/clientes', function (req, res, next) {
   }
 });
 
+//Cadastrar - Clientes
 router.get('/comercial/cadastraCliente', function (req, res) {
   if (req.session.loggedin) {
     res.render('comercial/cadastraCliente', {
@@ -32,7 +33,7 @@ router.get('/comercial/cadastraCliente', function (req, res) {
   }
 });
 
-//Alterar (Concluído) - Clientes
+//Alterar - clientes
 router.get('/comercial/alteraCliente/:id', (req, res) => {
   if (req.session.loggedin) {
     let id = req.params.id;
@@ -41,7 +42,7 @@ router.get('/comercial/alteraCliente/:id', (req, res) => {
       if (err) throw err;
 
       req.session.cliente = rows[0]
-      
+
       res.render('comercial/alteraCliente', {
         name: req.session.name,
         cliente: req.session.cliente,
@@ -55,10 +56,11 @@ router.get('/comercial/alteraCliente/:id', (req, res) => {
   }
 });
 
+//Alterar - Clientes
 router.post('/alteraCliente/:id', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id
-    
+
     let data = {
       "NM_Nome": req.body.nome,
       "DS_Email": req.body.email,
@@ -79,7 +81,7 @@ router.post('/alteraCliente/:id', (req, res, next) => {
   }
 });
 
-//Cadastrar (Concluido) - Clientes
+//Cadastrar - Clientes
 router.post('/cadastrarCliente', (req, res, next) => {
   if (req.session.loggedin) {
     let data = {
@@ -104,7 +106,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
   }
 });
 
-//Deletar (Concluido) - Clientes
+//Remover - Clientes
 router.post('/comercial/clientes/:id', function (req, res, next) {
   if (req.session.loggedin) {
     let id = req.params.id;
@@ -122,8 +124,9 @@ router.post('/comercial/clientes/:id', function (req, res, next) {
     res.redirect('/login')
   }
 });
+//#endregion
 
-//Vendas
+//#region Vendas
 router.get('/comercial/vendas', function (req, res) {
   if (req.session.loggedin) {
     let query = `Select P.ID_Pedido
@@ -202,23 +205,21 @@ router.post('/efetivaNovaVenda', function (req, res) {
       if (err) throw err;
 
       let insertId = rows.insertId;
-      let details = req.body.produtos.split("|");
-      // details.forEach((obj) => {
-      //   let row = JSON.stringify(obj);
-      //   console.log(row);
-      //   let detail = {
-      //     ID_Pedido: insertId,
-      //     ID_Produto: row.idProduto,
-      //     NR_Quantidade: row.quantidade,
-      //     VL_Unitario: row.valor,
-      //     VL_Total: row.valorTotal,
-      //   }
+      let details = JSON.parse(req.body.produtos);
 
-      //   db.query('Insert Into PedidoDetalhe Set ?', detail, (err, rows, fields) => {
-      //     if (err) throw err;
-      //   });
-      // });
+      details.forEach(item => {
+        let detail = {
+          ID_Pedido: insertId,
+          ID_Produto: item.id,
+          NR_Quantidade: item.quantidade,
+          VL_Unitario: item.valor,
+          VL_Total: item.valorTotal,
+        }
 
+        db.query('Insert Into PedidoDetalhe Set ?;', detail, (error, results, data) => {
+          if (error) throw error;
+        });
+      });
       req.flash('message', 'Venda cadastrada com sucesso!');
       res.redirect('/comercial/vendas');
     });
@@ -272,4 +273,123 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
   }
 });
 
+
+
+router.get('/comercial/alteraVenda/(:id)', function (req, res) {
+  if (req.session.loggedin) {
+    const id = req.params.id;
+    let query = `Select P.*
+                       ,F.NM_Nome as NM_Funcionario
+                       ,C.NM_Nome as NM_Cliente
+                     From Pedido P
+                     Inner Join Funcionario F
+                         On P.ID_Funcionario = F.ID_Funcionario
+                     Inner Join Cliente C
+                         On P.ID_Cliente = C.ID_Cliente
+                     Where P.ID_Pedido = ${id};
+                     Select * From PedidoStatus;
+                     Select * From FormaPagamento;`
+
+    db.query(query, (err, rows, fields) => {
+      req.session.pedido = rows[0];
+      req.session.status = rows[1];
+      req.session.formaPagamento = rows[2];
+
+      res.render('comercial/alteraVenda', {
+        name: req.session.name,
+        pedido: req.session.pedido,
+        status: req.session.status,
+        formaPagamento: req.session.formaPagamento
+      });
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.post('/alteraVenda/(:id)', function (req, res) {
+  if (req.session.loggedin) {
+    const id = req.params.id;
+
+    db.query(`Select * From Pedido P Where P.ID_Pedido = ${id};`, (err, rows, fields) => {
+      let data = {
+        ID_FormaPagamento: req.body.formaPagamento,
+        NR_QtdParcelas: req.body.numeroParcelas,
+        ID_PedidoStatus: req.body.situacao,
+        DT_Status: rows[0].DT_Status,
+        DT_Efetivacao: rows[0].DT_Efetivacao
+      }
+
+      if (rows[0].ID_PedidoStatus != data.ID_PedidoStatus) {
+        data.DT_Status = new Date();
+        if (data.ID_PedidoStatus == 2) {
+          data.DT_Efetivacao = new Date();
+        }
+      }
+
+      if (rows[0].ID_FormaPagamento != data.ID_FormaPagamento && data.ID_FormaPagamento != "1") {
+          data.NR_QtdParcelas = null;
+      }
+
+      db.query(`Update Pedido Set ? Where ID_Pedido = ${id}`, [data], (error, ret) => {
+        if (error) {
+          req.flash('error', error)
+        } else {
+          req.flash('success', 'Pedido alterado');
+        }
+        data = null;
+        res.redirect('/comercial/vendas');
+      });
+    });
+  } else {
+    req.flash('sucess', 'É necessário estar logado para acessar esta página');
+    res.redirect('/login')
+  }
+});
+
+router.get('/comercial/vendaDetalhe/(:id)', (req, res) => {
+  if (req.session.loggedin) {
+    const id = req.params.id;
+    let query = `Select P.*
+                ,F.NM_Nome as NM_Funcionario
+                ,C.NM_Nome as NM_Cliente
+                ,S.DS_Status
+                ,G.DS_FormaPagamento
+              From Pedido P
+              Inner Join Funcionario F
+                On P.ID_Funcionario = F.ID_Funcionario
+              Inner Join Cliente C
+                On P.ID_Cliente = C.ID_Cliente
+              Inner Join PedidoStatus S
+                On P.ID_PedidoStatus = S.ID_PedidoStatus
+              Inner Join FormaPagamento G
+                On P.ID_FormaPagamento = G.ID_FormaPagamento
+              Where P.ID_Pedido = ${id};
+              Select D.NR_Quantidade
+                    ,D.VL_Unitario
+                    ,D.VL_Total
+                    ,R.NM_Produto
+                    ,R.NR_SKU
+                From PedidoDetalhe D
+                Inner Join Produto R
+                    On D.ID_Produto = R.ID_Produto
+                Where ID_Pedido = ${id}`
+    db.query(query, (err, rows, fields) => {
+      req.session.values = rows[0];
+      req.session.produtos = rows[1];
+
+      res.render('comercial/detalheVenda', {
+        name: req.session.name,
+        values: req.session.values,
+        produtos: req.session.produtos,
+        id: id
+      });
+    });
+  } else {
+    req.flash('sucess', 'Ë necessário estar logado para acessar esta página');
+    res.redirect('/login');
+  }
+});
+//#endregion
 module.exports = router;
