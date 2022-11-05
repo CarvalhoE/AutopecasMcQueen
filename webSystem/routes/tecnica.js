@@ -448,14 +448,11 @@ router.get('/tecnica/funcionarios', function (req, res, next) {
     if (req.session.loggedin) {
         let query = `Select ID_Funcionario
                            ,NR_Codigo
-                           ,NM_Nome
-                           ,DS_Email
-                           ,DS_Departamento
+                           ,DS_Login
                            ,DS_Cargo
+                           ,FL_Habilitado
                            ,Date_Format(DT_Admissao, '%d/%m/%Y') as DT_Admissao
                        From Funcionario F
-                       Inner Join Departamento D
-                           On F.ID_Departamento = D.ID_Departamento
                        Inner Join Cargo C
                            On F.ID_Cargo = C.ID_Cargo`
         db.query(query, function (err, rows, fields) {

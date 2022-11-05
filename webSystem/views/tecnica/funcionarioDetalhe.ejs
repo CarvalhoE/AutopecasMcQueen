@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopeças McQueen</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+  <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../public/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <%- include('_lateral-bar.ejs') %>
+
+  <main>
+    <div class="header">
+      <h1>Detalhes de Fornecedor</h1>
+    </div>
+
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <td class="fw-bold">Nome do Fornecedor</td>
+          <td><%= fornecedor.NM_Empresa %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">CNPJ do Fornecedor</td>
+          <td class="cnpj"><%= fornecedor.NR_CNPJ %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Endereço do fornecedor</td>
+          <td><%= fornecedor.DS_Logradouro %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Bairro do fornecedor</td>
+          <td><%= fornecedor.DS_Bairro %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Cidade do fornecedor</td>
+          <td>R$ <%= fornecedor.DS_Cidade %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">CEP do fornecedor</td>
+          <td class="cep"><%= fornecedor.DS_CEP %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Telefone do fornecedor</td>
+          <td class="landline"><%= fornecedor.NR_Telefone %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">E-mail do fornecedor</td>
+          <td><%= fornecedor.DS_Email %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Banco</td>
+          <td><%= fornecedor.NR_Banco %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Agência / Conta</td>
+          <td>Ag.: <%= fornecedor.NR_Agencia %> Cc.: <%= fornecedor.NR_Conta %></td>
+        </tr>
+      </table>
+      <a href="/tecnica/produtos">
+        <input value="Voltar" class="btn btn-primary btn-block mb-4"
+            style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+    </a>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <%- include('_scripts.ejs') %>
+</body>
+
+</html>

@@ -62,19 +62,21 @@
               <tr>
                 <td scope="row" style="display: flex;">
                   <a href="/tecnica/alteraFuncionario/<%= values[i].ID_Funcionario %>">
-                    <button class="extra-d tags" gloss="Alterar Funcionario" value="<%= values[i].ID_Funcionario %>" style="margin-right: 5px;">
+                    <button class="extra-d tags" gloss="Alterar Funcionario" style="margin-right: 5px;">
                       <i class="fa fa-pencil-square-o"></i>
                     </button>
                   </a>
                   
-                  <button class="myBtn extra-d tags" value="<%= values[i].ID_Funcionario %>" gloss="Detalhe do Funcionario">
-                    <i class="fa fa-file-text-o"></i>
-                  </button>
+                  <a href="/tecnica/funcionarioDetalhe/<%= values[i].ID_Funcionario %>">
+                    <button class="myBtn extra-d tags" gloss="Detalhe do Funcionario">
+                      <i class="fa fa-file-text-o"></i>
+                    </button>
+                  </a>
                 </td>
                 <td><%= values[i].NR_Codigo %></td>
                 <td><%= values[i].DS_Login %></td>
                 <td><%= values[i].DS_Cargo %></td>
-                <td><%= values[i].FL_Habilitado %></td>
+                <td><%= values[i].FL_Habilitado == 0 ? 'Não' : 'Sim' %></td>
                 <td><%= values[i].DT_Admissao %></td>
               </tr>
               <% } %>
