@@ -306,6 +306,8 @@ router.get('/comercial/vendaDetalhe/(:id)', (req, res) => {
     let query = `Select P.*
                 ,F.NM_Nome as NM_Funcionario
                 ,C.NM_Nome as NM_Cliente
+                ,C.NR_Telefone as NR_TelefoneCliente
+                ,C.NR_CPF as NR_CPFCliente
                 ,S.DS_Status
                 ,G.DS_FormaPagamento
               From Pedido P
@@ -321,6 +323,7 @@ router.get('/comercial/vendaDetalhe/(:id)', (req, res) => {
               Select D.NR_Quantidade
                     ,D.VL_Unitario
                     ,D.VL_Total
+                    ,R.ID_Produto
                     ,R.NM_Produto
                     ,R.NR_SKU
                 From PedidoDetalhe D

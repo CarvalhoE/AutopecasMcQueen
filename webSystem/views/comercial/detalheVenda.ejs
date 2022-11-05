@@ -19,6 +19,28 @@
       <h1>Detalhes de Venda</h1>
     </div>
     <div class="Container-Detail-Limiter">
+      <div class="card-body cardLimiter" style="float: right;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="fw-bold"> Produtos do pedido      </th>
+                    <th class="fw-bold"> Quantidade              </th>
+                    <th class="fw-bold"> Valor unitario          </th>
+                    <th class="fw-bold"> Valor total por produto </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < produtos.length; i++) { %>
+                <tr>
+                    <td><%= produtos[i].NM_Produto %></td>
+                    <td><%= produtos[i].NR_Quantidade %></td>
+                    <td class="money"><%= produtos[i].VL_Unitario %></td>
+                    <td class="money"><%= produtos[i].VL_Total %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+      </div>  
       <div class="card-body cardLimiter" style="float: left;">
         <table class="table">
           <tr>
@@ -34,12 +56,12 @@
             <td><%= values[0].NM_Cliente %></td>
           </tr>
           <tr>
-            <td class="fw-bold">Data .toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %>do pedido</td>
+            <td class="fw-bold">Data do pedido</td>
             <td><%= values[0].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
           </tr>
           <tr>
             <td class="fw-bold">Valor total do pedido</td>
-            <td class="money"><%= values[0].VL_Valor %></td>
+            <td class="money" ><%= values[0].VL_Valor %></td>
           </tr>
           <tr>
             <td class="fw-bold">Situação do pedido</td>
@@ -47,7 +69,7 @@
           </tr>
           <tr>
               <td class="fw-bold">Data de efetivação</td>
-              <td><%= values[0].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+              <td><%= values[0].DT_Efetivacao == null ? "Em Aberto" : values[0].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"})%></td>
           </tr>
           <tr>
             <td class="fw-bold">Forma de pagamento</td>
@@ -59,30 +81,160 @@
           </tr>
         </table>
         <a href="/comercial/vendas">
-          <input value="Voltar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
-          </a>
-      </div>
-      <div class="card-body cardLimiter" style="float: right;">
-          <table class="table">
-              <thead>
-                  <tr>
-                      <th class="fw-bold"> Produtos do pedido      </th>
-                      <th class="fw-bold"> Quantidade              </th>
-                      <th class="fw-bold"> Valor unitario          </th>
-                      <th class="fw-bold"> Valor total por produto </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <% for (let i = 0; i < produtos.length; i++) { %>
-                  <tr>
-                      <td><%= produtos[i].NM_Produto %></td>
-                      <td><%= produtos[i].NR_Quantidade %></td>
-                      <td class="money"><%= produtos[i].VL_Unitario %></td>
-                      <td class="money"><%= produtos[i].VL_Total %></td>
-                  </tr>
-                  <% } %>
-              </tbody>
-            </table>
+          <input type="button" value="Voltar" class="btn btn-primary btn-block mb-4" style="margin-right: 10px; background-color: #343a40; border-color: #343a40; width: 100px; float: right;" />
+        </a>
+        <form action="http://www.webdanfe.com.br/danfe/GeraDanfe.php" name="one" enctype="multipart/form-data" target="_blank" method="post">
+        
+          <textarea name="arquivoXml" cols="150" rows="50" style="display:none; visibility: hidden; float: right; position: relative;" >
+            <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+            
+                <infNFe Id="NFe35080599999090910270550010000000015180051273" versao="1.10">
+                    <ide>
+                        <cUF>35</cUF>
+                        <cNF>518005127</cNF>
+                        <natOp>Venda a vista</natOp>
+                        <indPag>1</indPag>
+                        <mod>55</mod>
+                        <serie>1</serie>
+                        <nNF>1</nNF>
+                        <dEmi>DataAtual</dEmi>
+                        <dSaiEnt>DataAtual</dSaiEnt>
+                        <tpNF>0</tpNF>
+                        <cMunFG>3550308</cMunFG>
+                        <tpImp>1</tpImp>
+                        <tpEmis>1</tpEmis>
+                        <cDV>3</cDV>
+                        <tpAmb>2</tpAmb>
+                        <finNFe>1</finNFe>
+                        <procEmi>0</procEmi>
+                        <verProc>NF-eletronica.com</verProc> </ide>
+                    <emit>
+                        <CNPJ>99999090910270</CNPJ>
+                        <xNome>Autopeças McQueen</xNome>
+                        <xFant></xFant>
+                        <enderEmit>
+                            <xLgr>Av. Dr. Ussiel Cirilo</xLgr>
+                            <xBairro>Vila Jacuí</xBairro>
+                            <cMun>5030801</cMun>
+                            <xMun>São Paulo</xMun>
+                            <UF>SP</UF>
+                            <CEP>08060-070</CEP>
+                            <cPais>1058</cPais>
+                            <xPais>Brasil</xPais>
+                            <fone>(11) 2037-5700</fone> </enderEmit>
+                        <IE>123456789012</IE> </emit>
+                    <dest>
+                        <CPF><%= values[0].NR_CPFCliente %></CPF>
+                        <xNome><%= values[0].NM_Cliente %> </xNome>
+                        <enderDest>
+                            <cMun>5030801</cMun>
+                            <xMun>Sao Paulo</xMun>
+                            <UF>SP</UF>
+                            <cPais>1058</cPais>
+                            <xPais>BRASIL</xPais>
+                            <fone><%= values[0].NR_TelefoneCliente %></fone> </enderDest>
+                        <IE> </IE> </dest>
+                    <% for (let i = 0; i < produtos.length; i++) { %>
+                      <det nItem="<%i%>">
+                        <prod>
+                            <cProd><%= produtos[i].ID_Produto %></cProd>
+                            <cEAN></cEAN>
+                            <xProd><%= produtos[i].NM_Produto %> </xProd>
+                            <CFOP>5101</CFOP>
+                            <qCom><%= produtos[i].NR_Quantidade %> </qCom>
+                            <vUnCom><%= produtos[i].VL_Unitario %></vUnCom>
+                            <vProd><%= produtos[i].VL_Total %></vProd>
+                            <cEANTrib></cEANTrib>
+                            <uTrib>und</uTrib> </prod>
+                        <imposto>
+                            <ICMS>
+                                <ICMS00>
+                                    <orig></orig>
+                                    <CST></CST>
+                                    <modBC></modBC>
+                                    <vBC></vBC>
+                                    <pICMS></pICMS>
+                                    <vICMS></vICMS> </ICMS00> </ICMS>
+                            <PIS>
+                                <PISAliq>
+                                    <CST></CST>
+                                    <vBC></vBC>
+                                    <pPIS></pPIS>
+                                    <vPIS></vPIS> </PISAliq> </PIS>
+                            <COFINS>
+                                <COFINSAliq>
+                                    <CST></CST>
+                                    <vBC></vBC>
+                                    <pCOFINS></pCOFINS>
+                                    <vCOFINS></vCOFINS> </COFINSAliq> </COFINS> </imposto> </det>
+                      <% } %>
+                    <total>
+                        <ICMSTot>
+                            <vBC>0</vBC>
+                            <vICMS>0</vICMS>
+                            <vBCST>0</vBCST>
+                            <vST>0</vST>
+                            <vProd><%= values[0].VL_Valor %></vProd>
+                            <vFrete>0</vFrete>
+                            <vSeg>0</vSeg>
+                            <vDesc>0</vDesc>
+                            <vII>0</vII>
+                            <vIPI>0</vIPI>
+                            <vPIS>0</vPIS>
+                            <vCOFINS>0</vCOFINS>
+                            <vOutro>0</vOutro>
+                            <vNF><%= values[0].VL_Valor %></vNF> </ICMSTot> </total>
+                    <transp>
+                        <modFrete>0</modFrete>
+                        <transporta>
+                            <CNPJ></CNPJ>
+                            <xNome></xNome>
+                            <IE></IE>
+                            <xEnder></xEnder>
+                            <xMun></xMun>
+                            <UF></UF> </transporta>
+                        <veicTransp>
+                            <placa></placa>
+                            <UF></UF>
+                            <RNTC></RNTC> </veicTransp>
+                        <reboque>
+                            <placa></placa>
+                            <UF></UF>
+                            <RNTC></RNTC> </reboque>
+                        <vol>
+                            <qVol><%= produtos.length %></qVol>
+                            <esp></esp>
+                            <marca></marca>
+                            <nVol></nVol>
+                            <pesoL></pesoL>
+                            <pesoB></pesoB>
+                            <lacres>
+                                <nLacre></nLacre> </lacres> </vol> </transp>
+                    <infAdic>
+                        <infAdFisco>NF-eletronica.com</infAdFisco> </infAdic> </infNFe>
+            
+                <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+                    <SignedInfo>
+                        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></CanonicalizationMethod>
+                        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></SignatureMethod>
+                        <Reference URI="#NFe35080599999090910270550010000000015180051273">
+                            <Transforms>
+                                <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></Transform>
+                                <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></Transform> </Transforms>
+                            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></DigestMethod>
+                            <DigestValue>xhTSDMH61e9uqe04lnoHT4ZzLSY=</DigestValue> </Reference> </SignedInfo>
+                    <SignatureValue>Iz5Z3PLQbzZt9jnBtr6xsmHZMOu/3plXG9xxfFjRCQYGnD1rjlhzBGrqt026Ca2VHHM/bHNepi6FuFkAi595GScKVuHREUotzifE2OIjgavvTOrMwbXG7+0LYgkwPFiPCao2S33UpZe7MneaxcmKQGKQZw1fP8fsWmaQ4cczZT8=</SignatureValue>
+                    <KeyInfo>
+                        <X509Data>
+                            <X509Certificate>MIIEuzCCA6OgAwIBAgIDMTMxMA0GCSqGSIb3DQEBBQUAMIGSMQswCQYDVQQGEwJCUjELMAkGA1UECBMCUlMxFTATBgNVBAcTDFBvcnRvIEFsZWdyZTEdMBsGA1UEChMUVGVzdGUgUHJvamV0byBORmUgUlMxHTAbBgNVBAsTFFRlc3RlIFByb2pldG8gTkZlIFJTMSEwHwYDVQQDExhORmUgLSBBQyBJbnRlcm1lZGlhcmlhIDEwHhcNMDgwNDI4MDkwMTAyWhcNMDkwNDMwMjM1OTU5WjCBnjELMAkGA1UECBMCUlMxHTAbBgNVBAsTFFRlc3RlIFByb2pldG8gTkZlIFJTMR0wGwYDVQQKExRUZXN0ZSBQcm9qZXRvIE5GZSBSUzEVMBMGA1UEBxMMUE9SVE8gQUxFR1JFMQswCQYDVQQGEwJCUjEtMCsGA1UEAxMkTkZlIC0gQXNzb2NpYWNhbyBORi1lOjk5OTk5MDkwOTEwMjcwMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDh6RRv0bj4RYX+tDQrZRb5opa77LBVVs+6LphIfSF3TSWPfnKh0+xLlBFdmnB5YGgbbW9Uon6pZQTfaC8jZhRhI5eFRRofY/Ugoeo0NGt6PcIQNZQd6lLQ/ASd1qWwjqJoEa7udriKjy3h351Mf1bng1VxS1urqC3Dn39ZWIEwQIDAQABo4IBjjCCAYowIgYDVR0jAQEABBgwFoAUPT5TqhNWAm+ZpcVsvB7malDBjEQwDwYDVR0TAQH/BAUwAwEBADAPBgNVHQ8BAf8EBQMDAOAAMAwGA1UdIAEBAAQCMAAwgbwGA1UdEQEBAASBsTCBrqA4BgVgTAEDBKAvBC0wNzA4MTk1MTE1MTk0NTMxMDg3MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDCgHQYFYEwBAwKgFAQSRmVybmFuZG8gQ2FudG8gQWx0oBkGBWBMAQMDoBAEDjk5OTk5MDkwOTEwMjcwoBcGBWBMAQMHoA4EDDAwMDAwMDAwMDAwMIEfZmVybmFuZG8tYWx0QHByb2NlcmdzLnJzLmdvdi5icjAgBgNVHSUBAf8EFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwUwYDVR0fAQEABEkwRzBFoEOgQYY/aHR0cDovL25mZWNlcnRpZmljYWRvLnNlZmF6LnJzLmdvdi5ici9MQ1IvQUNJbnRlcm1lZGlhcmlhMzguY3JsMA0GCSqGSIb3DQEBBQUAA4IBAQCNPpaZ3Byu3/70nObXE8NiM53j1ddIFXsb+v2ghCVd4ffExv3hYc+/a3lfgV8H/WfQsdSCTzS2cHrd4Aasr/eXfclVDmf2hcWz+R7iysOHuT6B6r+DvV3JcMdJJCDdynR5REa+zViMnVZo1G3KuceQ7/y5X3WFNVq4kwHvonJ9oExsWyw8rTwUK5bsjz0A2yEwXkmkJIngnF41sP31+9jCImiqkXcmsesFhxzX7iurAQAQCZOm7iwMWxQKcAjXCZrgSZWRQy6mU224sX3HTArHahmLJ9Iw+WYAua5qBJsiN6PC7v5tfhrEQFpcG39yMnOecxvkkPolDUyBa7d7xwgm</X509Certificate> </X509Data> </KeyInfo> </Signature>
+            
+            </NFe> 
+            </textarea>
+            <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #ffb367; border-color: #ffb367; color: #fff; width: 150px; margin-left: 10px;">
+              <i class="fa fa-sign-out"></i>
+              Gerar NF-e
+            </button>
+        </form>
       </div>
     </div>
   </main>

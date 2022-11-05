@@ -33,6 +33,7 @@ $(document).ready(function () {
         'allowMinus': false,
         'prefix': 'R$ ',
         'placeholder': '',
+        'rightAlign': false,
         removeMaskOnSubmit: true
     });
 });

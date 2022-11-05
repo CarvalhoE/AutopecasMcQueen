@@ -3730,7 +3730,7 @@ fieldset:disabled .btn {
     --bs-dropdown-link-hover-color: #1e2125;
     --bs-dropdown-link-hover-bg: #e9ecef;
     --bs-dropdown-link-active-color: #fff;
-    --bs-dropdown-link-active-bg: #0d6efd;
+    --bs-dropdown-link-active-bg: #ffb367;
     --bs-dropdown-link-disabled-color: #adb5bd;
     --bs-dropdown-item-padding-x: 1rem;
     --bs-dropdown-item-padding-y: 0.25rem;
@@ -4034,7 +4034,7 @@ fieldset:disabled .btn {
     --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
     --bs-dropdown-link-hover-bg: rgba(255, 255, 255, 0.15);
     --bs-dropdown-link-active-color: #fff;
-    --bs-dropdown-link-active-bg: #0d6efd;
+    --bs-dropdown-link-active-bg: #ffb367;
     --bs-dropdown-link-disabled-color: #adb5bd;
     --bs-dropdown-header-color: #adb5bd
 }
