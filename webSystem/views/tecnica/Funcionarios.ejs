@@ -51,11 +51,10 @@
               <tr>
                 <th scope="row">Ações</th>
                 <th scope="col">Cod</th>
-                <th scope="col">Nome</th>
-                <th scope="col">E-Mail</th>
-                <th scope="col">Departamento</th>
+                <th scope="col">Login</th>
                 <th scope="col">Cargo</th>
-                <th scope="col">Data de Admissão</th>
+                <th scope="col">Habilitado</th>
+                <th scope="col">Dt Admissão</th>
               </tr>
             </thead>
             <tbody>
@@ -72,11 +71,10 @@
                     <i class="fa fa-file-text-o"></i>
                   </button>
                 </td>
-                <td><a href="#"><%= values[i].NR_Codigo %></a></td>
-                <td><%= values[i].NM_Nome %></td>
-                <td><%= values[i].DS_Email ?? "Não Possui" %></td>
-                <td><%= values[i].DS_Departamento %></td>
+                <td><%= values[i].NR_Codigo %></td>
+                <td><%= values[i].DS_Login %></td>
                 <td><%= values[i].DS_Cargo %></td>
+                <td><%= values[i].FL_Habilitado %></td>
                 <td><%= values[i].DT_Admissao %></td>
               </tr>
               <% } %>

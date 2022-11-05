@@ -116,7 +116,7 @@ Create Table Funcionario
    ,NR_Telefone			VarChar(11)		Null
    ,DS_Email			VarChar(64)		Null
    ,DT_Nascimento		Date			Not Null
-   ,NR_Codigo	 		VarChar(14)		Not Null
+   ,NR_Codigo	 		VarChar(8)		Not Null
    ,DS_Login         	VarChar(14)    	Not Null	Unique
    ,NR_Senha	 		VarChar(14)		Not Null
    ,ID_Departamento		Int				Not Null
@@ -142,10 +142,10 @@ Create Table FuncionarioEndereco
    ,ID_Funcionario				Int 			Not Null
    ,DS_Logradouro		 		VarChar(100)	Null
    ,DS_Numero		 			VarChar(5)		Null
-   ,DS_Complemento		 		VarChar(40)		Null
+   ,DS_Complemento		 		VarChar(20)		Null
    ,DS_CEP		 				VarChar(8)		Null
-   ,DS_Bairro		 			VarChar(40)		Null
-   ,DS_Cidade		 			VarChar(40)		Null
+   ,DS_Bairro		 			VarChar(20)		Null
+   ,DS_Cidade		 			VarChar(20)		Null
    ,DS_UF		 				VarChar(2)		Null
    ,Constraint PK_ID_FuncionarioEndereco 		Primary Key (ID_FuncionarioEndereco)
    ,Constraint FK_ID_Funcionario_Funcionario 	Foreign Key (ID_Funcionario) 	References Funcionario (ID_Funcionario)
