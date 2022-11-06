@@ -10,12 +10,11 @@
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://www.w3schools.com/howto/img_avatar.png"
-                        alt="" width="32" height="32" class="rounded-circle me-2">
+                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" width="32" height="32"
+                        class="rounded-circle me-2">
                     <strong><%= name %></strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="/comercial/vendas">Nova venda</a></li>
                     <li><a class="dropdown-item" href="/tecnica/perfil">Perfil</a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -34,91 +33,16 @@
                     </a>
                 </li>
                 <hr>
+                <% for (let i = 0; i < menus.length; i++) { %>
                 <li class="nav-item">
-                    <a href="/comercial/clientes" class="nav-link text-white">
+                    <a href="<%= menus[i].DS_Url %>" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-<%= menus[i].DS_Icon %>"></i>
                         </svg>
-                        Clientes
+                        <%= menus[i].NM_Descricao %>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/comercial/vendas" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-shopping-cart"></i>
-                        </svg>
-                        Vendas
-                    </a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a href="/tecnica/notas" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-file"></i>
-                        </svg>
-                        NF-e
-                    </a>
-                </li> -->
-                <li class="nav-item">
-                    <a href="/tecnica/produtos" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-inbox"></i>
-                        </svg>
-                        Produtos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/tecnica/fornecedor" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-truck"></i>
-                        </svg>
-                        Fornecedores
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/comercial/compras" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-truck"></i>
-                        </svg>
-                        Compras
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/tecnica/funcionarios" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-user"></i>
-                        </svg>
-                        Funcionários
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/financeiro/recebimentos" class="nav-link text-white" aria-current="page" id="financc">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-dollar"></i>
-                        </svg>
-                        Financeiro
-                    </a>
-                </li>
-                
-                
-                
-                
-                <li class="nav-item">
-                    <a href="/tecnica/relatorios" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-bar-chart"></i>
-                        </svg>
-                        Relatórios
-                    </a>
-                </li>
-                
-                <!-- <li class="nav-item">
-                    <a href="/tecnica/configuracoes" class="nav-link text-white">
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <i class="fa fa-cog"></i>
-                        </svg>
-                        Configurações
-                    </a>
-                </li> -->
+                <% } %>
             </ul>
         </div>
     </nav>
@@ -130,10 +54,9 @@
     const menuItem = document.querySelectorAll('.nav-item a');
     const menuLength = menuItem.length;
 
-    for(let i = 0; i<menuLength; i++){
-        if(menuItem[i].href === currentLocation){
+    for (let i = 0; i < menuLength; i++) {
+        if (menuItem[i].href === currentLocation) {
             menuItem[i].className = "nav-link text-white active"
         }
     }
-
-</script> 
+</script>

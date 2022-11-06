@@ -18,53 +18,75 @@
 
   <main>
     <div class="header">
-      <h1>Detalhes de Fornecedor</h1>
+      <h1>Detalhes de Funcionário</h1>
     </div>
 
     <div class="card-body">
       <table class="table">
         <tr>
-          <td class="fw-bold">Nome do Fornecedor</td>
-          <td><%= fornecedor.NM_Empresa %></td>
+          <td class="fw-bold">Código do Funcionário</td>
+          <td><%= funcionario[0].NR_Codigo %></td>
         </tr>
         <tr>
-          <td class="fw-bold">CNPJ do Fornecedor</td>
-          <td class="cnpj"><%= fornecedor.NR_CNPJ %></td>
+          <td class="fw-bold">Nome do Funcionário</td>
+          <td><%= funcionario[0].NM_Nome %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Endereço do fornecedor</td>
-          <td><%= fornecedor.DS_Logradouro %></td>
+          <td class="fw-bold">CPF do Funcionário</td>
+          <td class="cpf"><%= funcionario[0].NR_CPF %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Bairro do fornecedor</td>
-          <td><%= fornecedor.DS_Bairro %></td>
+          <td class="fw-bold">E-mail do Funcionário</td>
+          <td><%= (funcionario[0].DS_Email ?? "") == "" ? "Não Informado" : funcionario[0].DS_Email %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Cidade do fornecedor</td>
-          <td>R$ <%= fornecedor.DS_Cidade %></td>
+          <td class="fw-bold">Telefone do Funcionário</td>
+          <td class="phone"><%= funcionario[0].NR_Telefone %></td>
         </tr>
         <tr>
-          <td class="fw-bold">CEP do fornecedor</td>
-          <td class="cep"><%= fornecedor.DS_CEP %></td>
+          <td class="fw-bold">Data de Nascimento do Funcionário</td>
+          <td><%= funcionario[0].DataNascimento %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Telefone do fornecedor</td>
-          <td class="landline"><%= fornecedor.NR_Telefone %></td>
+          <td class="fw-bold">Departamento e Cargo do Funcionário</td>
+          <td><%= funcionario[0].DS_Departamento %> / <%= funcionario[0].DS_Cargo %></td>
         </tr>
         <tr>
-          <td class="fw-bold">E-mail do fornecedor</td>
-          <td><%= fornecedor.DS_Email %></td>
+          <td class="fw-bold">Data de Admissão do Funcionário</td>
+          <td><%= funcionario[0].DataAdmissao %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Banco</td>
-          <td><%= fornecedor.NR_Banco %></td>
+          <td class="fw-bold">Funcionário Habilitado</td>
+          <td><%= funcionario[0].FL_Habilitado == 1 ? "Habilitado" : "Desabilitado" %></td>
         </tr>
         <tr>
-          <td class="fw-bold">Agência / Conta</td>
-          <td>Ag.: <%= fornecedor.NR_Agencia %> Cc.: <%= fornecedor.NR_Conta %></td>
+          <td class="fw-bold">Data de Demissão do Funcionário</td>
+          <td><%= funcionario[0].DataDemissao ?? "Funcionário Ativo" %></td>
+        </tr>
+
+
+        <tr>
+          <td class="fw-bold">Endereço do Funcionário</td>
+          <td><%= funcionarioEndereco[0].DS_Logradouro %>, <%= funcionarioEndereco[0].DS_Numero %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Complemento</td>
+          <td><%= (funcionarioEndereco[0].DS_Complemento ?? "") == "" ? "Não Possui" : funcionarioEndereco[0].DS_Complemento %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">CEP</td>
+          <td class="cep"><%= funcionarioEndereco[0].DS_CEP %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Cidade / UF</td>
+          <td><%= funcionarioEndereco[0].DS_Cidade %> - <%= funcionarioEndereco[0].DS_UF %></td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Bairro</td>
+          <td><%= funcionarioEndereco[0].DS_Bairro %></td>
         </tr>
       </table>
-      <a href="/tecnica/produtos">
+      <a href="/tecnica/funcionarios">
         <input value="Voltar" class="btn btn-primary btn-block mb-4"
             style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
     </a>

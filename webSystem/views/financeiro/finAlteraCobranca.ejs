@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autopeças McQueen</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/" />
+    <link rel="icon" href="../../public/image/logo.png" type="image/png" />
+    <link rel="stylesheet" href="../../public/assets/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../public/assets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <%- include('_lateral-bar.ejs') %>
+
+    <main>
+        <div class="header">
+            <h1>Alteração de Pagamento - Financeiro</h1>
+        </div>
+
+        <div class="container-cadastroC">
+            <form action="/alteraCobranca/<%= id %>" method="POST">
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" id="form6Example1" class="form-control" maxlength="100"
+                                style="width: 860px; margin-top: 10px" name="dsCobranca"
+                                value="<%= cobranca[0].DS_Descricao %>" required />
+                            <label class="form-label" for="form6Example1">Descricão</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" class="form-control money" maxlength="14" autocomplete="off"
+                                style="width: 180px;" name="valorCobranca" value="<%= cobranca[0].VL_Valor %>"
+                                required />
+                            <label class="form-label" for="form6Example1">Valor</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <input type="text" id="form6Example2" class="form-control" style="width: 180px"
+                                name="dataCobranca"
+                                value="<%= cobranca[0].DT_Registro.getDate() + '/' + (cobranca[0].DT_Registro.getMonth() + 1) + '/' + cobranca[0].DT_Registro.getFullYear() %>"
+                                disabled />
+                            <label class="form-label" for="form6Example2">Data</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <select id="situacao" name="situacaoCobranca" class="form-control" style="width: 180px;">
+                                <% for (let i = 0; i < situacaoCobranca.length; i++) { %>
+                                <option value="<%= situacaoCobranca[i].ID_SituacaoCobranca %>"
+                                    <% if (situacaoCobranca[i].ID_SituacaoCobranca == cobranca[0].ID_SituacaoCobranca) { %>
+                                    Selected <% } %>><%= situacaoCobranca[i].DS_SituacaoCobranca %></option>
+                                <% } %>
+                            </select>
+                            <label class="form-label" for="form6Example1">Situação</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <select id="tipo" name="tipoCobranca" class="form-control" style="width: 180px;" disabled>
+                                <% for (let i = 0; i < tipoCobranca.length; i++) { %>
+                                <option value="<%= tipoCobranca[i].ID_TipoCobranca %>"
+                                    <% if (tipoCobranca[i].ID_TipoCobranca == cobranca[0].ID_TipoCobranca) { %> Selected
+                                    <% } %>><%= tipoCobranca[i].DS_TipoCobranca %></option>
+                                <% } %>
+                            </select>
+                            <label class="form-label" for="form6Example1">Tipo</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4" style="margin-left: 10px"> Efetuar
+                    Alteração </button>
+
+                <a href="/financeiro/Recebimentos">
+                    <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+                        style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+                </a>
+            </form>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <%- include('_scripts.ejs') %>
+</body>
+
+</html>

@@ -42,7 +42,7 @@
 
         <div class="table-top dynamic_link" id="link2">
           <div class="extras">
-            <a href="/financeiro/novoPagamento">
+            <a href="/financeiro/novaCobranca">
               <button class="extra-n">
                 <i class="fa fa-plus-square"> Novo</i>
               </button>
@@ -69,7 +69,7 @@
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
                 <td scope="row">
-                  <a href="/financeiro/finAlteraPagamento/<%= values[i].ID_Cobranca %>">
+                  <a href="/financeiro/finAlteraCobranca/<%= values[i].ID_Cobranca %>">
                     <button class="extra-d tags" gloss="Alterar Pagamento" value="<%= values[i].ID_Cobranca %>">
                       <i class="fa fa-pencil-square-o"></i>
                     </button>

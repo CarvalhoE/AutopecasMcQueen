@@ -10,6 +10,7 @@ router.get('/comercial/clientes', function (req, res, next) {
       req.session.clientes = rows;
       res.render('comercial/clientes', {
         name: req.session.name,
+        menus: req.session.menus,
         values: req.session.clientes
       });
     });
@@ -23,7 +24,8 @@ router.get('/comercial/clientes', function (req, res, next) {
 router.get('/comercial/cadastraCliente', function (req, res) {
   if (req.session.loggedin) {
     res.render('comercial/cadastraCliente', {
-      name: req.session.name
+      name: req.session.name,
+      menus: req.session.menus
     });
   } else {
     req.flash('message', 'É necessário estar logado para acessar esta página');
@@ -43,6 +45,7 @@ router.get('/comercial/alteraCliente/:id', (req, res) => {
 
       res.render('comercial/alteraCliente', {
         name: req.session.name,
+        menus: req.session.menus,
         cliente: req.session.cliente,
         id: id
       });
@@ -148,6 +151,7 @@ router.get('/comercial/vendas', function (req, res) {
       req.session.vendas = rows;
       res.render('comercial/vendas', {
         name: req.session.name,
+        menus: req.session.menus,
         values: req.session.vendas
       });
     });
@@ -173,6 +177,7 @@ router.get('/comercial/VendasNovaVenda', function (req, res) {
 
       res.render('comercial/VendasNovaVenda', {
         name: req.session.name,
+        menus: req.session.menus,
         funcionario: req.session.funcionario,
         cliente: req.session.cliente,
         situacao: req.session.situacao,
@@ -249,6 +254,7 @@ router.get('/comercial/alteraVenda/(:id)', function (req, res) {
 
       res.render('comercial/alteraVenda', {
         name: req.session.name,
+        menus: req.session.menus,
         pedido: req.session.pedido,
         status: req.session.status,
         formaPagamento: req.session.formaPagamento
@@ -336,6 +342,7 @@ router.get('/comercial/vendaDetalhe/(:id)', (req, res) => {
 
       res.render('comercial/detalheVenda', {
         name: req.session.name,
+        menus: req.session.menus,
         values: req.session.values,
         produtos: req.session.produtos,
         id: id
@@ -373,6 +380,7 @@ router.get('/comercial/compras', function (req, res) {
       req.session.compras = rows;
       res.render('comercial/compras', {
         name: req.session.name,
+        menus: req.session.menus,
         values: req.session.compras
       });
     });
@@ -398,6 +406,7 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
 
       res.render('comercial/comprasNovaCompra', {
         name: req.session.name,
+        menus: req.session.menus,
         funcionario: req.session.funcionario,
         fornecedor: req.session.fornecedor,
         situacao: req.session.situacao,
@@ -472,6 +481,7 @@ router.get('/comercial/alteraCompra/(:id)', function (req, res) {
 
       res.render('comercial/alteraCompra', {
         name: req.session.name,
+        menus: req.session.menus,
         compra: req.session.compra,
         situacao: req.session.situacao,
         formaPagamento: req.session.formaPagamento
@@ -549,6 +559,7 @@ router.get('/comercial/compraDetalhe/(:id)', (req, res) => {
 
       res.render('comercial/detalheCompra', {
         name: req.session.name,
+        menus: req.session.menus,
         values: req.session.values,
         values2: req.session.values2,
         id: id

@@ -20,6 +20,7 @@ router.get('/financeiro/recebimentos', function (req, res) {
         req.session.cobrancas = rows;
         res.render('financeiro/finRecebimentos', {
           name: req.session.name,
+          menus: req.session.menus,
           values: req.session.cobrancas
         });
     });
@@ -46,6 +47,7 @@ router.get('/financeiro/pagamentos', function (req, res) {
         req.session.cobrancas = rows;
         res.render('financeiro/finPagamentos', {
           name: req.session.name,
+          menus: req.session.menus,
           values: req.session.cobrancas
         });
     });
@@ -55,7 +57,7 @@ router.get('/financeiro/pagamentos', function (req, res) {
   }
 });
 
-router.get('/financeiro/novoPagamento', function (req, res, next) {
+router.get('/financeiro/novaCobranca', function (req, res, next) {
   if (req.session.loggedin) {
     db.query(`Select * From SituacaoCobranca; Select * From TipoCobranca;`, function (err, rows, fields){
       if(err) throw err;
@@ -63,8 +65,9 @@ router.get('/financeiro/novoPagamento', function (req, res, next) {
       req.session.situacao  = rows[0];
       req.session.tipo      = rows[1];
 
-      res.render('financeiro/finNovoPagamento', {
+      res.render('financeiro/finNovaCobranca', {
         name: req.session.name,
+        menus: req.session.menus,
         valuesS: req.session.situacao,
         valuesT: req.session.tipo
       });
@@ -76,7 +79,7 @@ router.get('/financeiro/novoPagamento', function (req, res, next) {
 });
 
 //Cadastrar Pagamentos
-router.post('/novoPagamento', function (req, res, next) {
+router.post('/novaCobranca', function (req, res, next) {
   if (req.session.loggedin) {
     let data = {
       "DS_Descricao":req.body.dsCobranca,
@@ -90,116 +93,8 @@ router.post('/novoPagamento', function (req, res, next) {
       if(err) throw err;
 
       req.flash('message', 'Cadastrado com sucesso!');
-      console.log(`${data.DS_Cobranca} foi cadastrado com sucesso!`)
-      res.redirect('financeiro/finPagamentos');
-    });
-  } else {
-    req.flash('message', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
-  }
-});
-
-//Alterar Recebimento
-router.get('/financeiro/finAlteraPagamento/:id', (req, res, next) => {
-  if (req.session.loggedin) {
-    let id = req.params.id;
-    const query = `Select DS_Descricao
-                         ,C.ID_SituacaoCobranca
-                         ,C.ID_TipoCobranca
-                         ,VL_Valor
-                         ,DT_Registro
-                         ,DS_SituacaoCobranca
-                         ,DS_TipoCobranca
-                      From Cobranca C
-                      Inner Join TipoCobranca TC
-                        On C.ID_TipoCobranca = TC.ID_TipoCobranca
-                      Inner Join SituacaoCobranca SC
-                        On C.ID_SituacaoCobranca = SC.ID_SituacaoCobranca
-                      Where C.ID_Cobranca = ${id}`
-
-    db.query(`${query}; Select * From SituacaoCobranca; Select * From TipoCobranca;`, function (err, rows, fields) {
-      if (err) throw err;
-
-      req.session.cobranca = rows[0];
-      req.session.situacaoCobranca = rows[1];
-      req.session.tipoCobranca = rows[2];
-
-      res.render('financeiro/finAlteraPagamento', {
-        name: req.session.name,
-        id: id,
-        cobranca: req.session.cobranca,
-        situacaoCobranca: req.session.situacaoCobranca,
-        tipoCobranca: req.session.tipoCobranca
-      });
-    });
-
-  } else {
-    req.flash('message', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
-  }
-});
-
-router.post('/finAlteraPagamento/:id', (req, res, next)=>{
-  if(req.session.loggedin){
-    let id = req.params.id
-
-    let data = {
-      "DS_Descricao":req.body.dsCobranca,
-      "VL_Valor":req.body.valorCobranca,
-      "ID_SituacaoCobranca": req.body.situacaoCobranca
-    }
-    db.query(`Update Cobranca Set ? Where ID_Cobranca = ${id}`, [data], (err, ret) => {
-        if (err) throw err;
-        req.flash('success', "Recebimento Alterado com sucesso!")
-        res.redirect('/financeiro/pagamentos');
-    });
-
-  }else{
-    req.flash('message', 'é necessário estar logado para acessar esta página');
-    res.redirect('/login');
-  }
-});
-
-// Recebimentos
-router.get('/financeiro/novoRecebimento', function (req, res, next) {
-  if (req.session.loggedin) {
-    db.query(`Select * From SituacaoCobranca; Select * From TipoCobranca;`, function (err, rows, fields){
-      if(err) throw err;
-
-      req.session.situacao  = rows[0];
-      req.session.tipo      = rows[1];
-
-      res.render('financeiro/finNovoRecebimento', {
-        name: req.session.name,
-        valuesS: req.session.situacao,
-        valuesT: req.session.tipo
-      });
-    });
-  } else {
-    req.flash('success', 'É necessário estar logado para acessar esta página');
-    res.redirect('/login')
-  }
-});
-
-//Cadastrar Recebimento
-router.post('/novoRecebimento', function (req, res, next) {
-  if (req.session.loggedin) {
-    let data = {
-      "DS_Descricao":req.body.dsCobranca,
-      "DT_Registro":req.body.dataCobranca,
-      "ID_TipoCobranca":req.body.tipoCobranca,
-      "VL_Valor":req.body.valorCobranca,
-      "ID_SituacaoCobranca": req.body.situacaoCobranca
-    }
-
-    db.query('Insert Into Cobranca Set ?',[data],(err, result, fields) =>{
-      if(err) throw err;
-
-      req.flash('message', 'Cadastrado com sucesso!');
-      console.log(`${data.DS_Cobranca} foi cadastrado com sucesso!`)
       res.redirect('financeiro/recebimentos');
     });
-
   } else {
     req.flash('message', 'É necessário estar logado para acessar esta página');
     res.redirect('/login')
@@ -207,7 +102,7 @@ router.post('/novoRecebimento', function (req, res, next) {
 });
 
 //Alterar Recebimento
-router.get('/financeiro/finAlteraRecebimento/:id', (req, res, next) => {
+router.get('/financeiro/finAlteraCobranca/:id', (req, res, next) => {
   if (req.session.loggedin) {
     let id = req.params.id;
     const query = `Select DS_Descricao
@@ -231,8 +126,9 @@ router.get('/financeiro/finAlteraRecebimento/:id', (req, res, next) => {
       req.session.situacaoCobranca = rows[1];
       req.session.tipoCobranca = rows[2];
 
-      res.render('financeiro/finAlteraRecebimento', {
+      res.render('financeiro/finAlteraCobranca', {
         name: req.session.name,
+        menus: req.session.menus,
         id: id,
         cobranca: req.session.cobranca,
         situacaoCobranca: req.session.situacaoCobranca,
@@ -246,7 +142,7 @@ router.get('/financeiro/finAlteraRecebimento/:id', (req, res, next) => {
   }
 });
 
-router.post('/finAlteraRecebimento/:id', (req, res, next)=>{
+router.post('/alteraCobranca/:id', (req, res, next)=>{
   if(req.session.loggedin){
     let id = req.params.id
 
@@ -257,7 +153,7 @@ router.post('/finAlteraRecebimento/:id', (req, res, next)=>{
     }
     db.query(`Update Cobranca Set ? Where ID_Cobranca = ${id}`, [data], (err, ret) => {
         if (err) throw err;
-        req.flash('success', "Recebimento Alterado com sucesso!")
+        req.flash('success', "Cobrança alterada com sucesso!")
         res.redirect('/financeiro/recebimentos');
     });
 

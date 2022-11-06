@@ -11,6 +11,7 @@ router.get('/tecnica/fornecedor', function (req, res, next) {
             req.session.fornecedores = rows;
             res.render('tecnica/fornecedores', {
                 name: req.session.name,
+                menus: req.session.menus,
                 values: req.session.fornecedores
             });
         });
@@ -30,6 +31,7 @@ router.get('/tecnica/fornecedorDetalhe/(:id)', function (req, res, next) {
 
             res.render('tecnica/fornecedorDetalhe', {
                 name: req.session.name,
+                menus: req.session.menus,
                 fornecedor: req.session.fornecedor
             });
         });
@@ -98,6 +100,7 @@ router.get('/tecnica/alteraFornecedor/(:id)', (req, res, next) => {
 
             res.render('tecnica/alteraFornecedor', {
                 name: req.session.name,
+                menus: req.session.menus,
                 fornecedor: req.session.fornecedor,
                 id: id
             });
@@ -160,6 +163,7 @@ router.get('/tecnica/produtos', function (req, res, next) {
 
             res.render('tecnica/produtos', {
                 name: req.session.name,
+                menus: req.session.menus,
                 values: req.session.produtos
             });
         });
@@ -178,6 +182,7 @@ router.get('/tecnica/novoProduto', function (req, res, next) {
 
             res.render('tecnica/novoProduto', {
                 name: req.session.name,
+                menus: req.session.menus,
                 categorias: req.session.categorias
             });
         });
@@ -230,6 +235,7 @@ router.get('/tecnica/alteraProduto/(:id)', function (req, res, next) {
 
             res.render('tecnica/alteraProduto', {
                 name: req.session.name,
+                menus: req.session.menus,
                 produto: req.session.produto,
                 id: id
             });
@@ -281,6 +287,7 @@ router.get('/tecnica/produtoDetalhe/(:id)', function (req, res, next) {
 
             res.render('tecnica/produtoDetalhe', {
                 name: req.session.name,
+                menus: req.session.menus,
                 produto: req.session.produto,
                 nomeProduto: req.session.produto.NM_Produto
             });
@@ -295,7 +302,8 @@ router.get('/tecnica/produtoDetalhe/(:id)', function (req, res, next) {
 router.get('/tecnica/relatorios', function (req, res, next) {
     if (req.session.loggedin) {
         res.render('tecnica/relatorios', {
-            name: req.session.name
+            name: req.session.name,
+            menus: req.session.menus
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -317,7 +325,8 @@ router.get('/tecnica/notas', function (req, res, next) {
 router.get('/tecnica/configuracoes', function (req, res, next) {
     if (req.session.loggedin) {
         res.render('tecnica/configuracoes', {
-            name: req.session.name
+            name: req.session.name,
+            menus: req.session.menus
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -328,7 +337,8 @@ router.get('/tecnica/configuracoes', function (req, res, next) {
 router.get('/tecnica/cadastraFornecedor', function (req, res, next) {
     if (req.session.loggedin) {
         res.render('tecnica/cadastraFornecedor', {
-            name: req.session.name
+            name: req.session.name,
+            menus: req.session.menus
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -348,6 +358,7 @@ router.get('/tecnica/cadastraFuncionario', function (req, res, next) {
 
             res.render('tecnica/cadastraFuncionario', {
                 name: req.session.name,
+                menus: req.session.menus,
                 valuesDepto: req.session.depto,
                 valuesCargo: req.session.cargo,
                 valuesPerfil: req.session.perfil
@@ -384,6 +395,7 @@ router.get('/tecnica/perfil', function (req, res, next) {
             req.session.funcionarioE = rows[1];
             res.render('tecnica/perfil', {
                 name: req.session.name,
+                menus: req.session.menus,
                 funcionarioL: req.session.funcionarioL,
                 funcionarioE: req.session.funcionarioE
             });
@@ -461,11 +473,46 @@ router.get('/tecnica/funcionarios', function (req, res, next) {
             req.session.funcionarios = rows;
             res.render('tecnica/funcionarios', {
                 name: req.session.name,
+                menus: req.session.menus,
                 values: req.session.funcionarios
             });
         });
     } else {
         req.flash('error', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/funcionarioDetalhe/(:id)', function (req, res, next) {
+    if (req.session.loggedin) {
+        let id = req.params.id;
+        let query = `Select F.*
+                           ,Date_Format(DT_Nascimento, '%d/%m/%Y') as DataNascimento
+                           ,Date_Format(DT_Admissao, '%d/%m/%Y') as DataAdmissao
+                           ,Date_Format(DT_Demissao, '%d/%m/%Y') as DataDemissao
+                           ,D.DS_Departamento
+                           ,C.DS_Cargo
+                         From Funcionario F
+                         Inner Join Departamento D
+                            On F.ID_Departamento = D.ID_Departamento
+                         Inner Join Cargo C
+                            On F.ID_Cargo = C.ID_Cargo
+                         Where ID_Funcionario = ${id}`;
+        db.query(`${query};Select * From FuncionarioEndereco Where ID_Funcionario = ${id};`, function (err, rows, fields) {
+            if (err) throw err;
+
+            req.session.funcionario = rows[0];
+            req.session.funcionarioEndereco = rows[1];
+
+            res.render('tecnica/funcionarioDetalhe', {
+                name: req.session.name,
+                menus: req.session.menus,
+                funcionario: req.session.funcionario,
+                funcionarioEndereco: req.session.funcionarioEndereco
+            });
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
         res.redirect('/login')
     }
 });
@@ -493,6 +540,7 @@ router.get('/tecnica/alteraFuncionario/(:id)', (req, res, next) => {
 
             res.render('tecnica/alteraFuncionario', {
                 name: req.session.name,
+                menus: req.session.menus,
                 valuesDepto: req.session.depto,
                 valuesCargo: req.session.cargo,
                 valuesPerfil: req.session.perfil,
@@ -511,35 +559,50 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
     if (req.session.loggedin) {
         let id = req.params.id
 
-        let data = {
-            "NM_Nome": req.body.nomeFuncionario,
-            "NR_Telefone": req.body.telefoneFuncionario,
-            "DS_Email": req.body.emailFuncionario,
-            "NR_Senha": req.body.senhaFuncionario,
-            "ID_Departamento": req.body.departamentoFuncionario,
-            "ID_Cargo": req.body.cargoFuncionario,
-            "ID_Perfil": req.body.perfilFuncionario,
-            "FL_Habilitado": req.body.flHabilitadoFuncionario
-        }
-        db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err, ret) => {
+        db.query(`Select * From Funcionario Where ID_Funcionario = ${id}`, (err, rows, fields) => {
             if (err) throw err;
-        });
+            
+            let dadosFuncionario = rows[0];
+            let data = {
+                "NM_Nome": req.body.nomeFuncionario,
+                "NR_Telefone": req.body.telefoneFuncionario,
+                "DS_Email": req.body.emailFuncionario,
+                "NR_Senha": req.body.senhaFuncionario,
+                "ID_Departamento": req.body.departamentoFuncionario,
+                "ID_Cargo": req.body.cargoFuncionario,
+                "ID_Perfil": req.body.perfilFuncionario,
+                "FL_Habilitado": req.body.flHabilitadoFuncionario,
+                "DT_Demissao": dadosFuncionario.DT_Demissao
+            }
+            let dataEndereco = {
+                "DS_Logradouro": req.body.logradouroFuncionario,
+                "DS_Numero": req.body.numeroFuncionario,
+                "DS_Complemento": req.body.complementoFuncionario,
+                "DS_CEP": req.body.cepFuncionario,
+                "DS_Bairro": req.body.bairroFuncionario,
+                "DS_Cidade": req.body.cidadeFuncionario,
+                "DS_UF": req.body.ufFuncionario
+            }
 
-        let dataEndereco = {
-            "DS_Logradouro": req.body.logradouroFuncionario,
-            "DS_Numero": req.body.numeroFuncionario,
-            "DS_Complemento": req.body.complementoFuncionario,
-            "DS_CEP": req.body.cepFuncionario,
-            "DS_Bairro": req.body.bairroFuncionario,
-            "DS_Cidade": req.body.cidadeFuncionario,
-            "DS_UF": req.body.ufFuncionario
-        }
+            if (dadosFuncionario.FL_Habilitado == 1 && data.FL_Habilitado == 0) {
+                data.DT_Demissao = new Date();
+            }
+            if (dadosFuncionario.FL_Habilitado == 0 && data.FL_Habilitado == 1) {
+                data.DT_Demissao = null;
+            }
 
-        db.query(`Update FuncionarioEndereco Set ? Where ID_Funcionario = ${id}`, [dataEndereco], (err, ret) => {
-            if (err) throw err;
+            db.query(`Update Funcionario Set ? Where ID_Funcionario = ${id}`, [data], (err1, ret) => {
+                if (err1) throw err1;
+            });
 
-            req.flash('sucess', "Funcionário Inserido com sucesso!")
-            res.redirect('/tecnica/funcionarios');
+            db.query(`Update FuncionarioEndereco Set ? Where ID_Funcionario = ${id}`, [dataEndereco], (err, ret) => {
+                if (err) throw err;
+    
+                req.flash('sucess', "Funcionário alterado com sucesso!")
+                res.redirect('/tecnica/funcionarios');
+            });
+
+
         });
 
     } else {

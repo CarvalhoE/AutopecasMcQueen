@@ -18,9 +18,9 @@ router.post('/authentication', function (req, res, next) {
     } else {
       if(rows[0].FL_Habilitado == 1){
         req.session.loggedin = true;
-        req.session.name = rows[0].DS_Login;
-        req.session.namef = rows[0].NM_Nome;
+        req.session.name = rows[0].NM_Nome;
         req.session.user_id = rows[0].ID_Funcionario;
+        req.session.perfil_id = rows[0].ID_Perfil;
 
         res.redirect('/home');
       }else{
@@ -44,6 +44,7 @@ router.get('/', function (req, res, next) {
   if (req.session.loggedin) {
     res.render('home', {
       name: req.session.name,
+      menus: req.session.menus,
       namef: req.session.namef
     });
   } else {

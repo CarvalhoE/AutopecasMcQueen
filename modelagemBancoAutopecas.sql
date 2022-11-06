@@ -17,6 +17,8 @@ Drop Table if exists Cargo;
 Drop Table if exists Perfil;
 Drop Table if exists CompraSituacao;
 Drop Table if exists Fornecedor;
+Drop Table if exists MenuPermissao;
+Drop Table if exists Menu;
 
 Create Table Categoria
 (
@@ -106,7 +108,8 @@ Insert Into	Perfil (DS_Perfil)
 	Values ('Gerente')
 	      ,('Comercial')
 		  ,('Financeiro')
-		  ,('RH');
+		  ,('RH')
+		  ,('Estoquista');
 
 Create Table Funcionario
 (
@@ -337,3 +340,52 @@ Insert Into Cobranca (DS_Descricao, DT_Registro, ID_TipoCobranca, VL_Valor, ID_S
 	Values ('Pagamento a colaboradores', '2022-09-10', 1, 2000.00, 1)
 		  ,('Reabastecimento de estoque', '2022-02-25', 1, 300056.00, 1)
           ,('Estorno de compra de produto', '2022-10-01', 2, 350.00, 1);
+
+Create Table Menu
+(
+	ID_Menu 				Int
+   ,NM_Descricao 			VarChar(100)
+   ,DS_Url					VarChar(100)
+   ,DS_Icon					VarChar(100)
+   ,Constraint PK_ID_Menu	Primary Key (ID_Menu)
+);
+
+Insert Into Menu
+	Values (2, 'Clientes', '/comercial/clientes', 'user')
+		  ,(3, 'Vendas', '/comercial/vendas', 'shopping-cart')
+		  ,(4, 'Produtos', '/tecnica/produtos', 'inbox')
+		  ,(5, 'Fornecedores', '/tecnica/fornecedor', 'truck')
+		  ,(6, 'Compras', '/comercial/compras', 'truck')
+		  ,(7, 'Funcionários', '/tecnica/funcionarios', 'user')
+		  ,(8, 'Financeiro', '/financeiro/recebimentos', 'dollar')
+		  ,(9, 'Relatórios', '/tecnica/relatorios', 'bar-chart');
+
+Create Table MenuPermissao
+(
+	ID_MenuPermissao		Int 	Auto_Increment
+   ,ID_Menu					Int 	Not Null
+   ,ID_Perfil				Int 	Not Null
+   ,Constraint PK_ID_MenuPermissao			Primary Key (ID_MenuPermissao)
+   ,Constraint FK_ID_MenuPermissao_Menu 	Foreign Key (ID_Menu)	References Menu (ID_Menu)
+   ,Constraint FK_ID_MenuPermissao_Perfil 	Foreign Key (ID_Perfil)	References Perfil (ID_Perfil)
+);
+
+Insert Into MenuPermissao (ID_Menu, ID_Perfil)
+	Values (2, 1)
+		  ,(3, 1)
+		  ,(4, 1)
+		  ,(5, 1)
+		  ,(6, 1)
+		  ,(7, 1)
+		  ,(8, 1)
+		  ,(9, 1)
+          ,(2, 2)
+		  ,(3, 2)
+		  ,(4, 2)
+          ,(6, 3)
+		  ,(8, 3)
+		  ,(9, 3)
+          ,(7, 4)
+          ,(4, 5)
+		  ,(5, 5)
+		  ,(6, 5);
