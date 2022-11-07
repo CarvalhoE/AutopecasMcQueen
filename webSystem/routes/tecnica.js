@@ -610,4 +610,17 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
         res.redirect('/login');
     }
 });
+router.get('/tecnica/relatorio/DFC', (req, res, next) => {
+    if (req.session.loggedin) {
+        
+    res.render('tecnica/relatorios', {
+        name: req.session.name,
+        menus: req.session.menus
+    });
+        
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
 module.exports = router;
