@@ -56,12 +56,12 @@ router.get('/tecnica/novoProduto', function (req, res, next) {
 router.post('/cadastraProduto', function (req, res, next) {
     if (req.session.loggedin) {
         let data = {
-            NM_Produto: req.body.nmProduto,
-            DS_Marca: req.body.dsMarca,
-            VL_Preco: req.body.vlPreco,
-            NR_SKU: req.body.nrSKU,
-            ID_Categoria: req.body.categoria,
-            DS_Descricao: req.body.dsDescricao
+            "NM_Produto": req.body.nmProduto,
+            "DS_Marca": req.body.dsMarca,
+            "VL_Preco": req.body.vlPreco,
+            "NR_SKU": req.body.nrSKU,
+            "ID_Categoria": req.body.categoria,
+            "DS_Descricao": req.body.dsDescricao
         }
 
         db.query('Insert Into Produto Set ?', data, (err, result, fields) => {
@@ -302,6 +302,7 @@ router.get('/tecnica/relatorios', function (req, res, next) {
 });
 
 router.get('/geraRelatorioJson', function (req, res, next) {
+    let path = require('path');
     if (req.session.loggedin) {
         const file = fs.createWriteStream('relatorio/vendas.json');
 

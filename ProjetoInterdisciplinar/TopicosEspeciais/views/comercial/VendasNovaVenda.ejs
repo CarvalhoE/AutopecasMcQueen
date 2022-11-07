@@ -68,12 +68,12 @@
 
                     <div class="col">
                         <input type="button" value="Adicionar produto" class="form-control" style="width: 150px"
-                            id="addProduct" onclick="adicionaProduto()" />
+                            id="addProduct" onclick="add_OnClick()" />
                     </div>
                 </div>
 
                 <div class="row mb-4" style="width: 100%; margin-left: 10px">
-                    <table class="table">
+                    <table class="table" id="tableProdutos">
                         <thead>
                             <tr>
                                 <th scope="col">SKU</th>
@@ -81,6 +81,7 @@
                                 <th scope="col">Valor Unitario</th>
                                 <th scope="col">QTD. Produto</th>
                                 <th scope="col">Valor Total por Produto</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody id="tableBody"></tbody>
@@ -133,7 +134,8 @@
                     Efetuar cadastro
                 </button>
                 <a href="/comercial/vendas">
-                    <input value="Cancelar" class="btn btn-primary btn-block mb-4" style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
+                    <input value="Cancelar" class="btn btn-primary btn-block mb-4"
+                        style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
                 </a>
                 <input type="hidden" name="valorTotal" id="valorTotal">
                 <input type="hidden" name="produtos" id="produtos">
@@ -143,86 +145,7 @@
 
     <!-- Scripts -->
     <%- include('_scripts.ejs') %>
-
-    <script>
-        const produtos = new Array();
-
-        let adicionaProduto = () => {
-            let produtoSelecionado = document.getElementById("produtoNovaVenda").value;
-            let quantidadeProduto = Number(document.getElementById("quantidade").value);
-
-            let produto = produtoSelecionado.split('|')
-            let skuProduto = produto[0]
-            let nomeProduto = produto[1]
-            let valorProduto = Number(produto[2])
-            let idProduto = produto[3]
-
-            let tamanho = produtos.length;
-
-            if (tamanho == 0) {
-                produtos.push({
-                    sku: skuProduto,
-                    nome: nomeProduto,
-                    valor: valorProduto,
-                    quantidade: quantidadeProduto,
-                    valorTotal: (quantidadeProduto * valorProduto),
-                    idProduto: idProduto
-                })
-            } else {
-                let index = produtos.findIndex(obj => obj.sku == skuProduto)
-                if (index >= 0) {
-                    produtos[index].quantidade += quantidadeProduto;
-                    produtos[index].valorTotal = (produtos[index].quantidade * valorProduto)
-                } else {
-                    produtos.push({
-                        sku: skuProduto,
-                        nome: nomeProduto,
-                        valor: valorProduto,
-                        quantidade: quantidadeProduto,
-                        valorTotal: (quantidadeProduto * valorProduto),
-                        idProduto: idProduto
-                    })
-                }
-            }
-            produtoSelecionado = null;
-            quantidadeProduto = 0;
-
-            let tableBody = document.getElementById("tableBody");
-            let valorTotal = document.getElementById("lValorTotal");
-            let inputValorTotal = document.getElementById("valorTotal");
-            let inputProdutos = document.getElementById("produtos");
-            let somaValorTotal = 0;
-
-            let tableReturn = "";
-            for (let i = 0; i < produtos.length; i++) {
-                tableReturn += `<tr>
-                          <td>${produtos[i].sku}</td>
-                          <td>${produtos[i].nome}</td>
-                          <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(produtos[i].valor)}</td>
-                          <td>${produtos[i].quantidade}</td>
-                          <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(produtos[i].valorTotal)}</td>
-                        </tr>`;
-
-                somaValorTotal += produtos[i].valorTotal;
-            }
-            tableBody.innerHTML = tableReturn;
-            valorTotal.innerHTML =
-                `Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(somaValorTotal)}`;
-            $('#valorTotal').val(somaValorTotal).change();
-            $('#produtos').val(JSON.stringify(produtos).replace("[","").replace("]","").replace("},","}|")).change();
-        };
-
-        let formaPagamento = document.getElementById('formaPagamento');
-        let numeroParcelas = document.getElementById('numeroParcelas');
-        formaPagamento.addEventListener('change', () => {
-            console.log(new Date())
-            if (formaPagamento.value == "1") {
-                numeroParcelas.style.visibility = "visible"
-            } else {
-                numeroParcelas.style.visibility = "hidden"
-            }
-        });
-    </script>
+    <script src="../../public/js/vendas.js"></script>
 </body>
 
 </html>
