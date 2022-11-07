@@ -17,6 +17,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
+    "xml2js": "^0.4.23",
     "xmlbuilder": "^15.1.1"
   }
 }

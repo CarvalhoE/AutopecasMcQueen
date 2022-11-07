@@ -2,7 +2,6 @@ let express = require('express');
 let router = express.Router();
 let fs = require('fs');
 let http = require('http');
-var builder = require('xmlbuilder');
 
 let db = require('../database');
 
@@ -301,12 +300,11 @@ router.get('/tecnica/relatorios', function (req, res, next) {
     }
 });
 
-router.get('/geraRelatorioJson', function (req, res, next) {
-    let path = require('path');
+router.get('/geraRelatorioJson', (req, res, next) => {
     if (req.session.loggedin) {
         const file = fs.createWriteStream('relatorio/vendas.json');
 
-        const request = http.get(`http://localhost:3000/capturaVendas`, (response) => {
+        http.get(`http://localhost:3000/capturaVendas`, (response) => {
             response.pipe(file);
 
             file.on('finish', () => {
@@ -314,14 +312,16 @@ router.get('/geraRelatorioJson', function (req, res, next) {
                 console.log('Download completed!')
             })
 
-            fs.readFile('relatorio/vendas.json', {encoding: 'utf-8'}, function(err,data){
-                if (!err) {
-                } else {
+            fs.readFile('relatorio/vendas.json', {
+                encoding: 'utf-8'
+            }, (err, data) => {
+                if (err) {
                     console.log(err);
+                    res.redirect('tecnica/relatorios');
+                } else {
+                    res.json(JSON.parse(data))
                 }
             });
-
-            // res.redirect('tecnica/relatorios')
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -329,14 +329,11 @@ router.get('/geraRelatorioJson', function (req, res, next) {
     }
 });
 
-router.get('/geraRelatorioXml', function (req, res, next) {
+router.get('/geraRelatorioXml', (req, res, next) => {
     if (req.session.loggedin) {
-        var xml = builder.create('bookstore');
-        var result = req.models
-
         const file = fs.createWriteStream('relatorio/clientes.xml');
 
-        const request = http.get(`http://localhost:3000/capturaClientes`, (response) => {
+        http.get(`http://localhost:3000/capturaClientes`, (response) => {
             response.pipe(file);
 
             file.on('finish', () => {
@@ -344,15 +341,21 @@ router.get('/geraRelatorioXml', function (req, res, next) {
                 console.log('Download completed!')
             })
 
-            fs.readFile('relatorio/clientes.xml', {encoding: 'utf-8'}, function(err,data){
-                if (!err) {
-                    res.send(XMLDocument.parse(data).ToString({ pretty: true }));
-                } else {
+            // fs.open('relatorio/clientes.xml', (err, data) => {
+            //     res.send(data)
+            // });
+
+            fs.readFile('relatorio/clientes.xml', {
+                encoding: 'utf-8'
+            }, (err, data) => {
+                if (err) {
                     console.log(err);
+                    res.redirect('tecnica/relatorios');
+                } else {
+                    console.log(data)
+                    res.send(data)
                 }
             });
-
-            // res.redirect('tecnica/relatorios')
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -368,7 +371,21 @@ router.get('/capturaVendas', (req, res) => {
 
 router.get('/capturaClientes', (req, res) => {
     db.query('Select * From Cliente', (err, rows, fields) => {
-        res.json(rows)
+        let xml = `<?xml version="1.1" encoding="UTF-8"?><clientes>`;
+        rows.forEach(item => {
+            xml += `<cliente>
+                        <Id>${item.ID_Cliente}</Id>
+                        <Nome>${item.NM_Nome}</Nome>
+                        <Cpf>${item.NR_CPF}</Cpf>
+                        <Email>${item.DS_Email}</Email>
+                        <Telefone>${item.NR_Telefone}</Telefone>
+                        <Nascimento>${item.DT_Nascimento.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"})}</Nascimento>
+                        <Cadastro>${item.DT_Cadastro}</Cadastro>
+                    </cliente>`
+        });
+        xml += "</clientes>"
+
+        res.send(xml);
     });
 });
 

@@ -1,1 +1,17 @@
-[{"ID_Cliente":1,"NM_Nome":"Karen","NR_CPF":"32095158830","DS_Email":"karenreis@gmail.com","NR_Telefone":"11989783289","DT_Nascimento":"1985-08-26T03:00:00.000Z","DT_Cadastro":"2022-09-17T03:00:00.000Z"},{"ID_Cliente":2,"NM_Nome":"Rodrigo Jose","NR_CPF":"30264851870","DS_Email":"rodrigojose@hotmail.com.br","NR_Telefone":"11232433333","DT_Nascimento":"1982-10-28T03:00:00.000Z","DT_Cadastro":"2022-10-05T03:00:00.000Z"}]
+<?xml version="1.1" encoding="UTF-8"?><clientes><cliente>
+                        <Id>1</Id>
+                        <Nome>Karen</Nome>
+                        <Cpf>32095158830</Cpf>
+                        <Email>karenreis@gmail.com</Email>
+                        <Telefone>11989783289</Telefone>
+                        <Nascimento>26/08/1985</Nascimento>
+                        <Cadastro>Sat Sep 17 2022 00:00:00 GMT-0300 (Brasilia Standard Time)</Cadastro>
+                    </cliente><cliente>
+                        <Id>2</Id>
+                        <Nome>Rodrigo Jose</Nome>
+                        <Cpf>30264851870</Cpf>
+                        <Email>rodrigojose@hotmail.com.br</Email>
+                        <Telefone>11232433333</Telefone>
+                        <Nascimento>28/10/1982</Nascimento>
+                        <Cadastro>Wed Oct 05 2022 00:00:00 GMT-0300 (Brasilia Standard Time)</Cadastro>
+                    </cliente></clientes>
