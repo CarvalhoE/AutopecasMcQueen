@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let fs = require('fs');
 let http = require('http');
+var builder = require('xmlbuilder');
 
 let db = require('../database');
 
@@ -311,8 +312,46 @@ router.get('/geraRelatorioJson', function (req, res, next) {
                 file.close();
                 console.log('Download completed!')
             })
-            
-            res.redirect('tecnica/relatorios')
+
+            fs.readFile('relatorio/vendas.json', {encoding: 'utf-8'}, function(err,data){
+                if (!err) {
+                } else {
+                    console.log(err);
+                }
+            });
+
+            // res.redirect('tecnica/relatorios')
+        });
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/geraRelatorioXml', function (req, res, next) {
+    if (req.session.loggedin) {
+        var xml = builder.create('bookstore');
+        var result = req.models
+
+        const file = fs.createWriteStream('relatorio/clientes.xml');
+
+        const request = http.get(`http://localhost:3000/capturaClientes`, (response) => {
+            response.pipe(file);
+
+            file.on('finish', () => {
+                file.close();
+                console.log('Download completed!')
+            })
+
+            fs.readFile('relatorio/clientes.xml', {encoding: 'utf-8'}, function(err,data){
+                if (!err) {
+                    res.send(XMLDocument.parse(data).ToString({ pretty: true }));
+                } else {
+                    console.log(err);
+                }
+            });
+
+            // res.redirect('tecnica/relatorios')
         });
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -321,7 +360,13 @@ router.get('/geraRelatorioJson', function (req, res, next) {
 });
 
 router.get('/capturaVendas', (req, res) => {
-    db.query('Select * From Funcionario', (err, rows, fields) => {
+    db.query('Select * From Pedido', (err, rows, fields) => {
+        res.json(rows)
+    });
+});
+
+router.get('/capturaClientes', (req, res) => {
+    db.query('Select * From Cliente', (err, rows, fields) => {
         res.json(rows)
     });
 });
