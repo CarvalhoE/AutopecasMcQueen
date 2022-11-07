@@ -1,5 +1,9 @@
 let express = require('express');
 let router = express.Router();
+const ExcelJS = require('exceljs');
+const {
+    faker
+} = require('@faker-js/faker');
 
 let db = require('../database');
 
@@ -561,7 +565,7 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
 
         db.query(`Select * From Funcionario Where ID_Funcionario = ${id}`, (err, rows, fields) => {
             if (err) throw err;
-            
+
             let dadosFuncionario = rows[0];
             let data = {
                 "NM_Nome": req.body.nomeFuncionario,
@@ -597,7 +601,7 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
 
             db.query(`Update FuncionarioEndereco Set ? Where ID_Funcionario = ${id}`, [dataEndereco], (err, ret) => {
                 if (err) throw err;
-    
+
                 req.flash('sucess', "Funcionário alterado com sucesso!")
                 res.redirect('/tecnica/funcionarios');
             });
@@ -612,15 +616,70 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
 });
 router.get('/tecnica/relatorio/DFC', (req, res, next) => {
     if (req.session.loggedin) {
-        
-    res.render('tecnica/relatorios', {
-        name: req.session.name,
-        menus: req.session.menus
-    });
-        
+        db.query(`Select C.*
+                        ,SC.DS_SituacaoCobranca
+                        ,TC.DS_TipoCobranca
+                      From Cobranca C
+                      Inner Join SituacaoCobranca SC
+                          On C.ID_SituacaoCobranca = SC.ID_SituacaoCobranca
+                      Inner Join TipoCobranca TC
+                          On C.ID_TipoCobranca = TC.ID_TipoCobranca`, (err, rows, fields) => {
+            const workbook = new ExcelJS.Workbook();
+            const sheet = workbook.addWorksheet('Demonstrativo de Fluxo de Caixa');
+
+            sheet.columns = [{
+                    header: 'Data',
+                    key: 'data'
+                },
+                {
+                    header: 'Descrição do Lançamento',
+                    key: 'descricao'
+                },
+                {
+                    header: 'Valor',
+                    key: 'valor'
+                },
+                {
+                    header: 'Tipo de Lançamento',
+                    key: 'tipo'
+                },
+                {
+                    header: 'Situação',
+                    key: 'situ'
+                },
+            ]
+
+            rows.forEach(item => {
+                sheet.addRow({
+                    data: item.DT_Registro,
+                    descricao: item.DS_Descricao,
+                    valor: item.VL_Valor,
+                    tipo: item.DS_TipoCobranca,
+                    situ: item.DS_SituacaoCobranca,
+                });
+            });
+
+            sheet.getRow(1).font = {
+                bold: true,
+            }
+
+            sheet.getRow(1).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: {
+                    argb: 'FFFB00'
+                }
+            }
+
+            sheet.workbook.xlsx.writeFile('Demonstrativo de Fluxo de Caixa.xlsx')
+        });
+
+        res.redirect('/tecnica/relatorios');
+
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
         res.redirect('/login')
     }
 });
+
 module.exports = router;

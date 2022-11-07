@@ -25,7 +25,7 @@ sheet.getRow(1).font = {
     color:{ argb: 'FFAD28'}
 }
 
-sheet.getRow(1).fil = {
+sheet.getRow(1).fill = {
     type: 'pattern',
     pattern: 'solid',
     bgColor: { argb: '143E64'}
