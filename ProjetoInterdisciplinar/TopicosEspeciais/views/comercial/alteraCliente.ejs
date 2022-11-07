@@ -20,7 +20,7 @@
             <h1>Alteração de Cadastro - Clientes</h1>
         </div>
 
-        <div class="container-cadastroC" style="margin-left: auto; margin-right: auto">
+        <div class="container-cadastroC">
             <form action="/alteraCliente/<%= id %>" method="post">
                 <div class="row mb-4">
                     <div class="col">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col">
                         <div class="form-outline">
-                            <input type="text" class="form-control cpf" maxlength="14" autocomplete="off"
+                            <input type="text" class="form-control cpf" autocomplete="off"
                                 style="width: 140px; margin-top: 10px" name="cpf" value="<%= cliente.NR_CPF %>" readonly />
                             <label class="form-label" for="form6Example1">CPF</label>
                         </div>
