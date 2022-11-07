@@ -72,7 +72,7 @@
                 <td><%= values[i].ID_Pedido %></td>
                 <td><%= values[i].NM_Vendedor %></td>
                 <td><%= values[i].DT_Pedido.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
-                <td><%= values[i].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
+                <td><%= values[i].DT_Efetivacao == null ? "Em Aberto" : values[i].DT_Efetivacao.toLocaleDateString('pt-BR', {year:"numeric", month:"numeric", day:"numeric"}) %></td>
                 <td><%= values[i].NR_QtdParcelas ?? "N/I" %></td>
                 <td><%= values[i].DS_Status %></td>
                 <td>R$ <%= values[i].VL_Valor %></td>

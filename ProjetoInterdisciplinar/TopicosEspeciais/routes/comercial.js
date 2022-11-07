@@ -201,24 +201,22 @@ router.post('/efetivaNovaVenda', function (req, res) {
     db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
       if (err) throw err;
 
-      // let insertId = rows.insertId;
-      // let details = req.body.produtos.split("|");
-      // details.forEach((obj) => {
-      //   let row = JSON.stringify(obj);
-      //   console.log(row);
-      //   let detail = {
-      //     ID_Pedido: insertId,
-      //     ID_Produto: row.idProduto,
-      //     NR_Quantidade: row.quantidade,
-      //     VL_Unitario: row.valor,
-      //     VL_Total: row.valorTotal,
-      //   }
+      let insertId = rows.insertId;
+      let details = JSON.parse(req.body.produtos);
 
-      //   db.query('Insert Into PedidoDetalhe Set ?', detail, (err, rows, fields) => {
-      //     if (err) throw err;
-      //   });
-      // });
+      details.forEach(item => {
+        let detail = {
+          ID_Pedido: insertId,
+          ID_Produto: item.id,
+          NR_Quantidade: item.quantidade,
+          VL_Unitario: item.valor,
+          VL_Total: item.valorTotal,
+        }
 
+        db.query('Insert Into PedidoDetalhe Set ?;', detail, (error, results, data) => {
+          if (error) throw error;
+        });
+      });
       req.flash('message', 'Venda cadastrada com sucesso!');
       res.redirect('/comercial/vendas');
     });
