@@ -163,7 +163,7 @@ router.get('/comercial/vendas', function (req, res) {
 
 router.get('/comercial/VendasNovaVenda', function (req, res) {
   if (req.session.loggedin) {
-    db.query(`Select * From Funcionario;
+    db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id};
               Select * From Cliente;
               Select * From PedidoStatus;
               Select * From FormaPagamento;

@@ -571,7 +571,6 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
                 "NM_Nome": req.body.nomeFuncionario,
                 "NR_Telefone": req.body.telefoneFuncionario,
                 "DS_Email": req.body.emailFuncionario,
-                "NR_Senha": req.body.senhaFuncionario,
                 "ID_Departamento": req.body.departamentoFuncionario,
                 "ID_Cargo": req.body.cargoFuncionario,
                 "ID_Perfil": req.body.perfilFuncionario,
@@ -614,9 +613,12 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
         res.redirect('/login');
     }
 });
+
 router.get('/tecnica/relatorio/RMF', (req, res, next) => {
     if (req.session.loggedin) {
-        db.query(`Select C.*
+        db.query(`Select C.DT_Registro
+                        ,C.DS_Descricao
+                        ,C.VL_Valor
                         ,SC.DS_SituacaoCobranca
                         ,TC.DS_TipoCobranca
                       From Cobranca C
@@ -672,6 +674,74 @@ router.get('/tecnica/relatorio/RMF', (req, res, next) => {
             }
             res.attachment('MovimentacaoFinanceira.xlsx');
             sheet.workbook.xlsx.writeFile('relatorios/MovimentacaoFinanceira.xlsx')
+            .then(() => {
+                res.end();
+            });
+        });
+
+        res.redirect('/tecnica/relatorios');
+
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/relatorio/RPV', (req, res, next) => {
+    if (req.session.loggedin) {
+        db.query(`Select F.NM_Nome
+                        ,P.DT_Pedido
+                        ,P.VL_Valor
+                        ,PS.DS_Status
+                      From Pedido P
+                      Inner Join Funcionario F
+                          On P.ID_Funcionario = F.ID_Funcionario
+                      Inner Join PedidoStatus PS
+                          On P.ID_PedidoStatus = PS.ID_PedidoStatus
+                      Where P.ID_PedidoStatus = 2;`, (err, rows, fields) => {
+            const workbook = new ExcelJS.Workbook();
+            const sheet = workbook.addWorksheet('Rendimento Por Vendedor');
+
+            sheet.columns = [{
+                    header: 'Vendedor',
+                    key: 'vendedor'
+                },
+                {
+                    header: 'Data',
+                    key: 'data'
+                },
+                {
+                    header: 'Valor',
+                    key: 'valor'
+                },
+                {
+                    header: 'Situação',
+                    key: 'situ'
+                },
+            ]
+
+            rows.forEach(item => {
+                sheet.addRow({
+                    vendedor: item.NM_Nome,
+                    data: item.DT_Pedido,
+                    valor: item.VL_Valor,
+                    situ: item.DS_Status,
+                });
+            });
+
+            sheet.getRow(1).font = {
+                bold: true,
+            }
+
+            sheet.getRow(1).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: {
+                    argb: 'FFFB00'
+                }
+            }
+            res.attachment('RendimentoPorVendedor.xlsx');
+            sheet.workbook.xlsx.writeFile('relatorios/RendimentoPorVendedor.xlsx')
             .then(() => {
                 res.end();
             });

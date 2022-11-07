@@ -22,4 +22,12 @@
                         <Telefone>11983430933</Telefone>
                         <Nascimento>09/04/2003</Nascimento>
                         <Cadastro>Mon Nov 07 2022 19:06:55 GMT-0300 (Horário Padrão de Brasília)</Cadastro>
+                    </cliente><cliente>
+                        <Id>5</Id>
+                        <Nome>Vera Forbeck</Nome>
+                        <Cpf>13234534864</Cpf>
+                        <Email>vera@cruzeiro.com</Email>
+                        <Telefone>11989789456</Telefone>
+                        <Nascimento>01/02/2018</Nascimento>
+                        <Cadastro>Mon Nov 07 2022 20:52:18 GMT-0300 (Horário Padrão de Brasília)</Cadastro>
                     </cliente></clientes>
