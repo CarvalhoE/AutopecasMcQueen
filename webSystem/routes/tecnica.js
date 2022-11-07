@@ -614,7 +614,7 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
         res.redirect('/login');
     }
 });
-router.get('/tecnica/relatorio/DFC', (req, res, next) => {
+router.get('/tecnica/relatorio/RMF', (req, res, next) => {
     if (req.session.loggedin) {
         db.query(`Select C.*
                         ,SC.DS_SituacaoCobranca
@@ -625,7 +625,7 @@ router.get('/tecnica/relatorio/DFC', (req, res, next) => {
                       Inner Join TipoCobranca TC
                           On C.ID_TipoCobranca = TC.ID_TipoCobranca`, (err, rows, fields) => {
             const workbook = new ExcelJS.Workbook();
-            const sheet = workbook.addWorksheet('Demonstrativo de Fluxo de Caixa');
+            const sheet = workbook.addWorksheet('Movimentação Financeira');
 
             sheet.columns = [{
                     header: 'Data',
@@ -670,8 +670,11 @@ router.get('/tecnica/relatorio/DFC', (req, res, next) => {
                     argb: 'FFFB00'
                 }
             }
-
-            sheet.workbook.xlsx.writeFile('Demonstrativo de Fluxo de Caixa.xlsx')
+            res.attachment('MovimentacaoFinanceira.xlsx');
+            sheet.workbook.xlsx.writeFile('relatorios/MovimentacaoFinanceira.xlsx')
+            .then(() => {
+                res.end();
+            });
         });
 
         res.redirect('/tecnica/relatorios');
