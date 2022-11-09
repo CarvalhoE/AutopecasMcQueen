@@ -199,9 +199,26 @@ router.post('/efetivaNovaVenda', function (req, res) {
       DT_Pedido: new Date(),
       VL_Valor: req.body.valorTotal,
       ID_PedidoStatus: req.body.situacao,
+      DT_Efetivacao: null,
       DT_Status: new Date(),
       NR_QtdParcelas: req.body.formaPagamento == "1" ? req.body.numeroParcelas : null,
       ID_FormaPagamento: req.body.formaPagamento
+    }
+
+    if (data.ID_PedidoStatus == 2) {
+      data.DT_Efetivacao = new Date();
+
+      //Atualização do controle financeiro
+      let financialData = {
+        DS_Descricao: "Realização de venda",
+        DT_Registro: data.DT_Pedido,
+        ID_TipoCobranca: 2,
+        VL_Valor: data.VL_Valor,
+        ID_SituacaoCobranca: 1
+      }
+      db.query(`Insert Into Cobranca Set ? `, financialData, (error, results, data) => {
+        if (error) throw error;
+      });
     }
 
     db.query('Insert Into Pedido Set ?', data, (err, rows, fields) => {
@@ -220,6 +237,16 @@ router.post('/efetivaNovaVenda', function (req, res) {
         }
 
         db.query('Insert Into PedidoDetalhe Set ?;', detail, (error, results, data) => {
+          if (error) throw error;
+        });
+
+        //Atualização do estoque
+        db.query(`Update Produto Set NR_Quantidade = NR_Quantidade - ${detail.NR_Quantidade}
+                                                    ,FL_Disponivel = Case 
+                                                                         When NR_Quantidade - ${detail.NR_Quantidade} <= 0 Then 0
+                                                                         Else 1
+                                                                     End
+                      Where ID_Produto = ${detail.ID_Produto};`, (error, results, data) => {
           if (error) throw error;
         });
       });
@@ -283,11 +310,23 @@ router.post('/alteraVenda/(:id)', function (req, res) {
         data.DT_Status = new Date();
         if (data.ID_PedidoStatus == 2) {
           data.DT_Efetivacao = new Date();
+
+          //Atualização do controle financeiro
+          let financialData = {
+            DS_Descricao: "Realização de venda",
+            DT_Registro: data.DT_Efetivacao,
+            ID_TipoCobranca: 2,
+            VL_Valor: rows[0].VL_Valor,
+            ID_SituacaoCobranca: 1
+          }
+          db.query(`Insert Into Cobranca Set ? `, financialData, (error, results, data) => {
+            if (error) throw error;
+          });
         }
       }
 
       if (rows[0].ID_FormaPagamento != data.ID_FormaPagamento && data.ID_FormaPagamento != "1") {
-          data.NR_QtdParcelas = null;
+        data.NR_QtdParcelas = null;
       }
 
       db.query(`Update Pedido Set ? Where ID_Pedido = ${id}`, [data], (error, ret) => {
@@ -396,7 +435,7 @@ router.get('/comercial/comprasNovaCompra', function (req, res) {
               Select * From Fornecedor;
               Select * From CompraSituacao;
               Select * From FormaPagamento;
-              Select * From Produto Where FL_Disponivel = 1`, (err, rows, fields) => {
+              Select * From Produto`, (err, rows, fields) => {
 
       req.session.funcionario = rows[0];
       req.session.fornecedor = rows[1];
@@ -434,6 +473,20 @@ router.post('/novaCompra', function (req, res) {
     db.query('Insert Into Compra Set ?', data, (err, rows, fields) => {
       if (err) throw err;
 
+      //Atualização do controle financeiro
+      if (data.ID_CompraSituacao == 1) {  
+        let financialData = {
+          DS_Descricao: "Reabastecimento de estoque",
+          DT_Registro: data.DT_Compra,
+          ID_TipoCobranca: 1,
+          VL_Valor: data.VL_ValorTotal,
+          ID_SituacaoCobranca: 1
+        }
+        db.query(`Insert Into Cobranca Set ? `, financialData, (error, results, data) => {
+          if (error) throw error;
+        });
+      }
+
       let insertId = rows.insertId;
       let details = JSON.parse(req.body.produtos);
 
@@ -447,6 +500,16 @@ router.post('/novaCompra', function (req, res) {
         }
 
         db.query('Insert Into CompraDetalhe Set ?;', detail, (error, results, data) => {
+          if (error) throw error;
+        });
+
+        //Atualização do estoque
+        db.query(`Update Produto Set NR_Quantidade = NR_Quantidade + ${detail.NR_Quantidade}
+                                                    ,FL_Disponivel = Case 
+                                                                         When NR_Quantidade + ${detail.NR_Quantidade} <= 0 Then 0
+                                                                         Else 1
+                                                                     End
+                      Where ID_Produto = ${detail.ID_Produto};`, (error, results, data) => {
           if (error) throw error;
         });
       });
@@ -502,10 +565,22 @@ router.post('/alteraCompra/(:id)', function (req, res) {
         ID_CompraSituacao: req.body.situacao,
         DT_Compra: rows[0].DT_Compra,
       }
-  
+
 
       if (rows[0].ID_CompraSituacao != data.ID_CompraSituacao && (data.ID_CompraSituacao == 1 || data.ID_CompraSituacao == 3)) {
         data.DT_Compra = new Date();
+        
+        //Atualização do controle financeiro
+        let financialData = {
+          DS_Descricao: "Reabastecimento de estoque",
+          DT_Registro: data.DT_Compra,
+          ID_TipoCobranca: 1,
+          VL_Valor: rows[0].VL_ValorTotal,
+          ID_SituacaoCobranca: 1
+        }
+        db.query(`Insert Into Cobranca Set ? `, financialData, (error, results, data) => {
+          if (error) throw error;
+        });
       }
 
       db.query(`Update Compra Set ? Where ID_Compra = ${id}`, [data], (error, ret) => {

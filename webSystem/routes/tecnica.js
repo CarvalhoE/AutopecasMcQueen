@@ -1,9 +1,7 @@
 let express = require('express');
 let router = express.Router();
 const ExcelJS = require('exceljs');
-const {
-    faker
-} = require('@faker-js/faker');
+const { Blob } = require('node:buffer');
 
 let db = require('../database');
 
@@ -153,10 +151,7 @@ router.get('/tecnica/produtos', function (req, res, next) {
                            ,VL_Preco
                            ,DS_Marca
                            ,C.DS_Categoria
-                           ,Case
-                                 When 1 Then 'SIM'
-                                 Else 'NÃO'
-                            End as FL_Disponivel
+                           ,FL_Disponivel
                         From Produto P
                         Inner Join Categoria C
                             On P.ID_Categoria = C.ID_Categoria`
@@ -614,7 +609,7 @@ router.post('/alteraFuncionario/(:id)', (req, res, next) => {
     }
 });
 
-router.get('/tecnica/relatorio/RMF', (req, res, next) => {
+router.get('/tecnica/relatorio/movimentacao-financeira', (req, res, next) => {
     if (req.session.loggedin) {
         db.query(`Select C.DT_Registro
                         ,C.DS_Descricao
@@ -672,14 +667,11 @@ router.get('/tecnica/relatorio/RMF', (req, res, next) => {
                     argb: 'FFFB00'
                 }
             }
-            res.attachment('MovimentacaoFinanceira.xlsx');
-            sheet.workbook.xlsx.writeFile('relatorios/MovimentacaoFinanceira.xlsx')
-            .then(() => {
-                res.end();
-            });
+            sheet.workbook.xlsx.writeFile('relatorios/RendimentoPorVendedor.xlsx');
         });
 
-        res.redirect('/tecnica/relatorios');
+        res.attachment('relatorios/MovimentacaoFinanceira.xlsx');
+        res.end();
 
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -687,7 +679,7 @@ router.get('/tecnica/relatorio/RMF', (req, res, next) => {
     }
 });
 
-router.get('/tecnica/relatorio/RPV', (req, res, next) => {
+router.get('/tecnica/relatorio/rendimento', (req, res, next) => {
     if (req.session.loggedin) {
         db.query(`Select F.NM_Nome
                         ,P.DT_Pedido
@@ -700,7 +692,7 @@ router.get('/tecnica/relatorio/RPV', (req, res, next) => {
                           On P.ID_PedidoStatus = PS.ID_PedidoStatus
                       Where P.ID_PedidoStatus = 2;`, (err, rows, fields) => {
             const workbook = new ExcelJS.Workbook();
-            const sheet = workbook.addWorksheet('Rendimento Por Vendedor');
+            const sheet = workbook.addWorksheet('Rendimento por Vendedor');
 
             sheet.columns = [{
                     header: 'Vendedor',
@@ -742,12 +734,86 @@ router.get('/tecnica/relatorio/RPV', (req, res, next) => {
             }
             res.attachment('RendimentoPorVendedor.xlsx');
             sheet.workbook.xlsx.writeFile('relatorios/RendimentoPorVendedor.xlsx')
-            .then(() => {
-                res.end();
-            });
+                .then(() => {
+                    res.end();
+                });
         });
 
-        res.redirect('/tecnica/relatorios');
+    } else {
+        req.flash('sucess', 'É necessário estar logado para acessar esta página');
+        res.redirect('/login')
+    }
+});
+
+router.get('/tecnica/relatorio/produtos', (req, res, next) => {
+    if (req.session.loggedin) {
+        db.query(`Select    P.NM_Produto
+                           ,P.NR_SKU
+                           ,P.VL_Preco as Valor_Unitario
+                           ,sum(P.ID_Produto) as Quantidade_de_Vendas_Geradas
+                           ,sum(D.NR_Quantidade) as Quantidade_Total_Vendido
+                           ,sum(D.VL_Total) as Valor_Total_Vendido
+                        From Produto P
+                        Left Join PedidoDetalhe D
+                            On P.ID_Produto = D.ID_Produto
+                        Group by P.NM_Produto, P.NR_SKU, P.VL_Preco;`, (err, rows, fields) => {
+            const workbook = new ExcelJS.Workbook();
+            const sheet = workbook.addWorksheet('Vendas por Produto');
+
+            sheet.columns = [{
+                    header: 'Produto',
+                    key: 'produto'
+                },
+                {
+                    header: 'SKU',
+                    key: 'sku'
+                },
+                {
+                    header: 'Valor unitario',
+                    key: 'valorU'
+                },
+                {
+                    header: 'Quantidade de vendas geradas',
+                    key: 'QTDVendasGeradas'
+                },
+                {
+                    header: 'Quantidade total vendido',
+                    key: 'QTDTotal'
+                },
+                {
+                    header: 'Valor total vendido',
+                    key: 'VLTotal'
+                },
+            ]
+
+            rows.forEach(item => {
+                sheet.addRow({
+                    produto: item.NM_Produto,
+                    sku: item.NR_SKU,
+                    valorU: item.Valor_Unitario,
+                    QTDVendasGeradas: item.Quantidade_de_Vendas_Geradas,
+                    QTDTotal: item.Quantidade_Total_Vendido,
+                    VLTotal: item.Valor_Total_Vendido,
+                });
+            });
+
+            sheet.getRow(1).font = {
+                bold: true,
+            }
+
+            sheet.getRow(1).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: {
+                    argb: 'FFFB00'
+                }
+            }
+            res.attachment('VendaPorProduto.xlsx');
+            sheet.workbook.xlsx.writeFile('relatorios/VendaPorProduto.xlsx')
+                .then(() => {
+                    res.end();
+                });
+        });
 
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');

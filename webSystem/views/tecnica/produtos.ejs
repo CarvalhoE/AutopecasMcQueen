@@ -54,7 +54,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Valor Unitario</th>
                 <th scope="col">Marca</th>
-                <th scope="col">Categoria</th>
+                <th scope="col">Situação</th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +79,7 @@
                 <td><%= values[i].NM_Produto %></td>
                 <td>R$ <%= values[i].VL_Preco %></td>
                 <td><%= values[i].DS_Marca %></td>
-                <td><%= values[i].DS_Categoria %></td>
+                <td><%= values[i].FL_Disponivel == 1 ? "Disponível" : "Indisponível" %></td>
               </tr>
               <% } %>
             </tbody>

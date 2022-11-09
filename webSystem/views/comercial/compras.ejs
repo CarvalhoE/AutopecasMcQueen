@@ -49,7 +49,8 @@
             <% } else {%>
             <thead>
               <tr>
-                <th scope="row">Ações</th>
+                <th scope="col">Ações</th>
+                <th scope="col" style="display: none;">Id</th>
                 <th scope="col">Funcionario</th>
                 <th scope="col">Fornecedor</th>
                 <th scope="col">Dt Compra</th>
@@ -61,7 +62,7 @@
             <tbody>
               <% for (let i = 0; i < values.length; i++) { %>
               <tr>
-                <td scope="row" style="width: 100px;">
+                <td scope="col" style="width: 100px;">
                   <a href="/comercial/alteraCompra/<%= values[i].ID_Compra%>">
                     <button class="extra-d tags" gloss="Alterar Compra" value="<%= values[i].ID_Compra %>">
                       <i class="fa fa-pencil-square-o"></i>
@@ -74,6 +75,7 @@
                     </button>
                   </a>
                 </td>
+                <td style="display: none;"><%= values[i].ID_Compra %></td>
                 <td><%= values[i].NM_Funcionario %></td>
                 <td><%= values[i].NM_Empresa %></td>
                 <td><%= values[i].DT_Compra %></td>

@@ -53,7 +53,7 @@ Create Table Produto
 Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_BaseDeCompra, VL_Preco, FL_Disponivel, NR_Quantidade, DS_Marca, ID_Categoria)
 	Values ('Cheirinho', 'Bom cheiro para carros', 'CA12907221', 10.00, 14.90, 1, 0, 'CheiroBom', 1)
           ,('Bateria', 'Bateria para carros', 'CE12444643', 1000.00, 1200.00, 1, 0, 'Moura', 2)
-          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', 80.00, 99.90, 0, 0, 'Nike', 3);
+          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', 80.00, 99.90, 0, 0, 'Pirelli', 3);
 
 Create Table FormaPagamento
 (
@@ -188,7 +188,6 @@ Create Table CompraSituacao
 Insert Into CompraSituacao (DS_Situacao) 
 	Values ('Efetivada')
 	      ,('Cancelada')
-          ,('Finalizada')
           ,('Pendente');
 
 Create Table Compra

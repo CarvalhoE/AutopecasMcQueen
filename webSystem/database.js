@@ -22,11 +22,11 @@ const connectionLocal = mysql.createPool({
     multipleStatements: true
 });
 
-connectionLocal.getConnection((err, connection) => {
+connection.getConnection((err, connection) => {
     if (err) throw err;
 
     console.log('MySQL conectado com sucesso!')
     connection.release();
 });
 
-module.exports = connectionLocal;
+module.exports = connection;
