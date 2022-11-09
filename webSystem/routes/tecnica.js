@@ -1,7 +1,10 @@
 let express = require('express');
 let router = express.Router();
 const ExcelJS = require('exceljs');
-const { Blob } = require('node:buffer');
+const {
+    Blob
+} = require('node:buffer');
+const FileSaver = require('file-saver');
 
 let db = require('../database');
 
@@ -667,11 +670,21 @@ router.get('/tecnica/relatorio/movimentacao-financeira', (req, res, next) => {
                     argb: 'FFFB00'
                 }
             }
-            sheet.workbook.xlsx.writeFile('relatorios/RendimentoPorVendedor.xlsx');
-        });
+            // sheet.workbook.xlsx.writeFile('relatorios/MovimentacaoFinanceira.xlsx');
 
-        res.attachment('relatorios/MovimentacaoFinanceira.xlsx');
-        res.end();
+            res.setHeader(
+                "Content-Type",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            );
+            res.setHeader(
+                "Content-Disposition",
+                "attachment; filename=" + "MovimentacaoFinanceira.xlsx"
+            );
+
+            return workbook.xlsx.write(res).then(function () {
+                res.status(200).end();
+            });
+        });
 
     } else {
         req.flash('sucess', 'É necessário estar logado para acessar esta página');
@@ -732,11 +745,18 @@ router.get('/tecnica/relatorio/rendimento', (req, res, next) => {
                     argb: 'FFFB00'
                 }
             }
-            res.attachment('RendimentoPorVendedor.xlsx');
-            sheet.workbook.xlsx.writeFile('relatorios/RendimentoPorVendedor.xlsx')
-                .then(() => {
-                    res.end();
-                });
+            res.setHeader(
+                "Content-Type",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            );
+            res.setHeader(
+                "Content-Disposition",
+                "attachment; filename=" + "RendimentoPorVendedor.xlsx"
+            );
+
+            return workbook.xlsx.write(res).then(function () {
+                res.status(200).end();
+            });
         });
 
     } else {
@@ -808,11 +828,19 @@ router.get('/tecnica/relatorio/produtos', (req, res, next) => {
                     argb: 'FFFB00'
                 }
             }
-            res.attachment('VendaPorProduto.xlsx');
-            sheet.workbook.xlsx.writeFile('relatorios/VendaPorProduto.xlsx')
-                .then(() => {
-                    res.end();
-                });
+
+            res.setHeader(
+                "Content-Type",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            );
+            res.setHeader(
+                "Content-Disposition",
+                "attachment; filename=" + "VendaPorProduto.xlsx"
+            );
+
+            return workbook.xlsx.write(res).then(function () {
+                res.status(200).end();
+            });
         });
 
     } else {
