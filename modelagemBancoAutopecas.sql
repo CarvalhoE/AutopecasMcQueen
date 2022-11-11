@@ -59,15 +59,17 @@ Create Table FormaPagamento
 (
 	ID_FormaPagamento 	Int 			auto_increment
    ,DS_FormaPagamento 	VarChar(32) 	Not Null
-   ,Constraint PK_ID_FormaPagamento Primary Key (ID_FormaPagamento)
+   ,FL_Ativo 			Char(1)			Not Null
+   ,Constraint PK_ID_FormaPagamento 	Primary Key (ID_FormaPagamento)
+   ,Constraint CK_FL_Ativo 				Check (FL_Ativo In (0,1))
 );
 
 Insert Into	FormaPagamento (DS_FormaPagamento) 
-	Values ('Cartão de Crédito')
-	      ,('Cartão de Débito')
-          ,('Dinheiro')
-          ,('Boleto')
-          ,('PIX');
+	Values ('Cartão de Crédito', 1)
+	      ,('Cartão de Débito', 1)
+          ,('Dinheiro', 1)
+          ,('Boleto', 0)
+          ,('PIX', 1);
 
 Create Table Departamento
 (
