@@ -166,7 +166,7 @@ router.get('/comercial/VendasNovaVenda', function (req, res) {
     db.query(`Select * From Funcionario Where ID_Funcionario = ${req.session.user_id};
               Select * From Cliente;
               Select * From PedidoStatus;
-              Select * From FormaPagamento;
+              Select * From FormaPagamento Where FL_Ativo = 1;
               Select * From Produto Where FL_Disponivel = 1`, (err, rows, fields) => {
 
       req.session.funcionario = rows[0];
@@ -272,7 +272,7 @@ router.get('/comercial/alteraVenda/(:id)', function (req, res) {
                          On P.ID_Cliente = C.ID_Cliente
                      Where P.ID_Pedido = ${id};
                      Select * From PedidoStatus;
-                     Select * From FormaPagamento;`
+                     Select * From FormaPagamento Where FL_Ativo = 1;`
 
     db.query(query, (err, rows, fields) => {
       req.session.pedido = rows[0];
