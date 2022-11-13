@@ -14,11 +14,11 @@ Drop Table if exists FuncionarioEndereco;
 Drop Table if exists Funcionario;
 Drop Table if exists Departamento;
 Drop Table if exists Cargo;
+Drop Table if exists MenuPermissao;
+Drop Table if exists Menu;
 Drop Table if exists Perfil;
 Drop Table if exists CompraSituacao;
 Drop Table if exists Fornecedor;
-Drop Table if exists MenuPermissao;
-Drop Table if exists Menu;
 
 Create Table Categoria
 (
@@ -51,9 +51,9 @@ Create Table Produto
 );
 
 Insert Into Produto (NM_Produto, DS_Descricao, NR_SKU, VL_BaseDeCompra, VL_Preco, FL_Disponivel, NR_Quantidade, DS_Marca, ID_Categoria)
-	Values ('Cheirinho', 'Bom cheiro para carros', 'CA12907221', 10.00, 14.90, 1, 0, 'CheiroBom', 1)
-          ,('Bateria', 'Bateria para carros', 'CE12444643', 1000.00, 1200.00, 1, 0, 'Moura', 2)
-          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', 80.00, 99.90, 0, 0, 'Pirelli', 3);
+	Values ('Cheirinho', 'Bom cheiro para carros', 'CA12907221', 10.00, 14.90, 1, 10, 'CheiroBom', 1)
+          ,('Bateria', 'Bateria para carros', 'CE12444643', 1000.00, 1200.00, 1, 10, 'Moura', 2)
+          ,('Amortecedor', 'Amortecedor para carros', 'CM12444234', 80.00, 99.90, 0, 10, 'Pirelli', 3);
 
 Create Table FormaPagamento
 (
@@ -64,7 +64,7 @@ Create Table FormaPagamento
    ,Constraint CK_FL_Ativo 				Check (FL_Ativo In (0,1))
 );
 
-Insert Into	FormaPagamento (DS_FormaPagamento) 
+Insert Into	FormaPagamento (DS_FormaPagamento, FL_Ativo) 
 	Values ('Cartão de Crédito', 1)
 	      ,('Cartão de Débito', 1)
           ,('Dinheiro', 1)
@@ -218,7 +218,7 @@ Create Table CompraDetalhe
    ,ID_Compra					Int				Not Null
    ,ID_Produto					int				Not Null
    ,NR_Quantidade 				Int 			Not Null
-   ,VL_ValorUnitario			Numeric(5,2)	Not Null
+   ,VL_ValorUnitario			Numeric(10,2)	Not Null
    ,VL_Total					Numeric(16,2)	Not Null
    ,Constraint PK_ID_CompraDetalhe 				Primary Key (ID_CompraDetalhe)
    ,Constraint FK_ID_Compra_Compra 				Foreign Key (ID_Compra) References Compra (ID_Compra)
@@ -280,7 +280,7 @@ Create Table Pedido
 );
 
 Insert Into Pedido (ID_Funcionario, ID_Cliente, DT_Pedido, VL_Valor, DT_Efetivacao, ID_PedidoStatus, DT_Status, NR_QtdParcelas, ID_FormaPagamento) 
-	Values (1, 1, '2022-11-01', 2454.90, '2022-11-01', 2, '2022-11-01', Null, 3);
+	Values (2, 1, '2022-11-01', 2454.90, '2022-11-01', 2, '2022-11-01', Null, 3);
 
 Create Table PedidoDetalhe
 (
