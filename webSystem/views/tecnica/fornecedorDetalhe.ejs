@@ -33,23 +33,23 @@
         </tr>
         <tr>
           <td class="fw-bold">Endereço do fornecedor</td>
-          <td><%= fornecedor.DS_Logradouro %></td>
+          <td><%= fornecedor.DS_Logradouro ?? "Não Informado" %></td>
         </tr>
         <tr>
           <td class="fw-bold">Bairro do fornecedor</td>
-          <td><%= fornecedor.DS_Bairro %></td>
+          <td><%= fornecedor.DS_Bairro ?? "Não Informado" %></td>
         </tr>
         <tr>
           <td class="fw-bold">Cidade do fornecedor</td>
-          <td>R$ <%= fornecedor.DS_Cidade %></td>
+          <td><%= fornecedor.DS_Cidade ?? "Não Informado" %></td>
         </tr>
         <tr>
           <td class="fw-bold">CEP do fornecedor</td>
-          <td class="cep"><%= fornecedor.DS_CEP %></td>
+          <td class="cep"><%= fornecedor.DS_CEP ?? "Não Informado" %></td>
         </tr>
         <tr>
           <td class="fw-bold">Telefone do fornecedor</td>
-          <td class="landline"><%= fornecedor.NR_Telefone %></td>
+          <td class="landline"><%= fornecedor.NR_Telefone ?? "Não Informado" %></td>
         </tr>
         <tr>
           <td class="fw-bold">E-mail do fornecedor</td>
@@ -65,7 +65,7 @@
         </tr>
       </table>
       <a href="/tecnica/fornecedor">
-        <input value="Voltar" class="btn btn-primary btn-block mb-4"
+        <input value="Voltar" class="btn btn-primary btn-block mb-4" readonly
             style="margin-left: 10px; background-color: #343a40; border-color: #343a40; width: 100px;" />
     </a>
     </div>
