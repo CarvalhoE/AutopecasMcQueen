@@ -29,4 +29,4 @@ connectionLocal.getConnection((err, connection) => {
     connection.release();
 });
 
-module.exports = connectionLocal;
+module.exports = connection;
